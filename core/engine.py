@@ -1,48 +1,53 @@
-from **future** import annotations
+```python
+from __future__ import annotations
 
-from collections.abc import Callable
+from dataclasses import dataclass
+from typing import Callable, Iterable, Optional
 
 from .state import State
 
-Rule = Callable[[State], State]
 
+Transition = Callable[[State], State]
+
+
+@dataclass
 class Engine:
-"""
-Minimal endogenous evolution engine.
+    """Minimal deterministic transition engine for GNOSIS/UROBOROS."""
 
-```
-The engine repeatedly applies internally defined rules to the
-current state.
-"""
+    transition: Optional[Transition] = None
 
-def __init__(self, rules: list[Rule] | None = None):
-    self.rules = list(rules or [])
+    def step(self, state: State) -> State:
+        """Apply one endogenous transition to the current state."""
+        if self.transition is None:
+            return state
 
-def add_rule(self, rule: Rule) -> None:
-    self.rules.append(rule)
+        next_state = self.transition(state)
 
-def step(self, state: State) -> State:
-    """
-    Perform one endogenous evolution step.
-    """
-    next_state = state
+        if not isinstance(next_state, State):
+            raise TypeError("transition must return a State instance")
 
-    for rule in self.rules:
-        next_state = rule(next_state)
+        return next_state
 
-    return next_state
+    def run(self, state: State, steps: int) -> State:
+        """Evolve a state for a finite number of steps."""
+        if steps < 0:
+            raise ValueError("steps must be non-negative")
 
-def run(self, state: State, steps: int) -> State:
-    """
-    Run the endogenous evolution cycle.
-    """
-    if steps < 0:
-        raise ValueError("steps must be non-negative")
+        current = state
 
-    current = state
+        for _ in range(steps):
+            current = self.step(current)
 
-    for _ in range(steps):
-        current = self.step(current)
+        return current
 
-    return current
+    def iterate(self, state: State, steps: int) -> Iterable[State]:
+        """Yield successive states without mutating the input state."""
+        if steps < 0:
+            raise ValueError("steps must be non-negative")
+
+        current = state
+
+        for _ in range(steps):
+            current = self.step(current)
+            yield current
 ```
