@@ -1,14 +1,13 @@
-from   future   import annotations
+from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
 
+
 @dataclass(frozen=True)
 class Relation:
-"""Minimal relation between two elements of a system."""
+    """Immutable relation between two states or system entities."""
 
-```
-source: Any
-target: Any
-value: Any = None
-```
+    source: Any
+    target: Any
+    kind: str = "relation"
