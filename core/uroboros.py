@@ -1,4 +1,4 @@
-from **future** import annotations
+from   future   import annotations
 
 from .engine import Engine
 from .state import State
@@ -6,8 +6,12 @@ from .state import State
 class Uroboros:
 """Recursive runtime for the GNOSIS/UROBOROS core."""
 
-```
-def __init__(self, initial_state: State, rules=None):
+
+def __init__(
+    self,
+    initial_state: State,
+    rules=None,
+):
     self.state = initial_state
     self.engine = Engine(rules)
 
@@ -25,4 +29,4 @@ def run(self, steps: int) -> State:
         self.step()
 
     return self.state
-```
+
