@@ -1,8 +1,7 @@
-from core import State, Uroboros
+from core import Engine, State, Uroboros
 
 
 def increment(state: State) -> State:
-    """Increment x by one."""
     value = state.values.get("x", 0)
 
     return state.evolve(
@@ -13,11 +12,15 @@ def increment(state: State) -> State:
     )
 
 
+engine = Engine(transition=increment)
+
 system = Uroboros(
-    initial_state=State(values={"x": 0}),
-    rules=[increment],
+    state=State(values={"x": 0}),
+    engine=engine,
 )
 
-result = system.run(steps=10)
+for _ in range(10):
+    system = system.step()
 
-print("Final state:", result.values)
+print("Final state:", system.state.values)
+
