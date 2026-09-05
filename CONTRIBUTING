@@ -1,0 +1,592 @@
+# CONTRIBUTING TO GNOSIS
+
+## GNOSIS — Universal Scientific Discovery & Intelligence Platform
+
+### UROBOROS — Ψ-Core v33
+
+**Copyright © 2026 Mikhail Kucheriavyi.**
+
+**Public Research Release: 3 September 2026**
+
+---
+
+# 1. Welcome
+
+GNOSIS is an open research project.
+
+Researchers, developers, engineers, students and independent investigators are welcome to:
+
+* study the architecture;
+* reproduce experiments;
+* test hypotheses;
+* identify weaknesses;
+* report bugs;
+* propose improvements;
+* develop alternative implementations;
+* contribute code;
+* contribute tests;
+* contribute documentation;
+* publish independent research.
+
+The project values scientific rigor over confirmation of the project's assumptions.
+
+---
+
+# 2. Core Principle
+
+GNOSIS follows the principle:
+
+$$
+\boxed{
+\text{Preserve the Baseline}
++
+\text{Encourage Independent Research}
+}
+$$
+
+The public **UROBOROS — Ψ-Core v33** baseline should remain identifiable and reproducible.
+
+Contributions should not silently redefine the original architecture.
+
+---
+
+# 3. Ψ-Core v33 Baseline
+
+Ψ-Core v33 represents the reference baseline of the public release dated:
+
+**3 September 2026**
+
+The baseline should remain reproducible.
+
+Changes that substantially alter the conceptual architecture should not simply overwrite the meaning of v33.
+
+Instead, they should be:
+
+* documented;
+* versioned;
+* identified as experimental;
+* or introduced as a later version.
+
+---
+
+# 4. Types of Contributions
+
+Contributions may include:
+
+### Code
+
+Bug fixes, optimizations, implementations and utilities.
+
+### Tests
+
+Unit tests, integration tests, stress tests and reproducibility tests.
+
+### Research
+
+Experiments, analyses, mathematical work and scientific investigations.
+
+### Documentation
+
+Corrections, explanations, examples and technical documentation.
+
+### Benchmarks
+
+Performance measurements and comparisons.
+
+### Security
+
+Identification and responsible reporting of security problems.
+
+### Alternative Implementations
+
+Independent implementations intended to test or reproduce the architecture.
+
+---
+
+# 5. Scientific Criticism
+
+Scientific criticism is explicitly welcome.
+
+Contributors may attempt to:
+
+* falsify assumptions;
+* identify contradictions;
+* construct counterexamples;
+* demonstrate failure modes;
+* compare alternative models;
+* challenge theoretical claims;
+* reproduce negative results.
+
+A contribution does not need to support the project's hypotheses to be valuable.
+
+---
+
+# 6. Research Contributions
+
+Research contributions should, where practical, identify:
+
+* hypothesis;
+* methodology;
+* implementation;
+* parameters;
+* data;
+* results;
+* limitations;
+* reproducibility information.
+
+Contributors should distinguish clearly between:
+
+**hypothesis**
+
+and
+
+**validated result**.
+
+---
+
+# 7. Code Contributions
+
+Code contributions should aim to be:
+
+* understandable;
+* reproducible;
+* maintainable;
+* testable;
+* minimal where possible;
+* consistent with the project's architecture.
+
+Avoid unnecessary complexity.
+
+When a simpler implementation provides equivalent behavior, the simpler implementation is generally preferred.
+
+---
+
+# 8. Core vs Experimental Code
+
+The repository should distinguish between:
+
+### Core
+
+Stable components belonging to the official GNOSIS architecture.
+
+### Experimental
+
+Research implementations that are not yet part of the stable architecture.
+
+### Benchmark
+
+Performance and comparison tooling.
+
+### Research
+
+Experimental scientific work.
+
+### Examples
+
+Educational and demonstration implementations.
+
+Experimental code should not be represented as stable core functionality without review.
+
+---
+
+# 9. Pull Requests
+
+Before submitting a pull request, contributors should:
+
+1. explain the purpose of the change;
+2. describe the affected components;
+3. provide tests where appropriate;
+4. document behavioral changes;
+5. identify performance implications;
+6. identify compatibility implications;
+7. identify whether the change affects Ψ-Core v33;
+8. distinguish implementation optimization from architectural modification.
+
+---
+
+# 10. Pull Request Description
+
+A useful pull request should answer:
+
+```text id="2m7j9e"
+What changed?
+
+Why was it changed?
+
+How was it tested?
+
+Does it change the behavior of the core?
+
+Does it change Ψ-Core v33?
+
+Is this an optimization, correction, experiment or architectural change?
+
+How can the result be reproduced?
+```
+
+---
+
+# 11. Preserving the Reference Architecture
+
+A contribution should not silently modify the conceptual definition of Ψ-Core v33.
+
+If a proposed change modifies the architecture rather than merely implementing or optimizing it, the change should be explicitly identified.
+
+Recommended labels include:
+
+* `core`
+* `optimization`
+* `bugfix`
+* `research`
+* `experimental`
+* `architecture`
+* `breaking`
+
+---
+
+# 12. Optimization
+
+Performance optimization is encouraged when it preserves intended behavior.
+
+Examples include:
+
+* computational optimization;
+* memory optimization;
+* algorithmic implementation improvements;
+* parallelization;
+* caching;
+* data-structure improvements;
+* hardware acceleration.
+
+An optimization should not be described as behavior-preserving if it changes the conceptual model.
+
+---
+
+# 13. Breaking Changes
+
+A breaking change must be clearly documented.
+
+Breaking changes should normally receive:
+
+* a version change;
+* a changelog entry;
+* migration information where appropriate.
+
+---
+
+# 14. Tests
+
+New functionality should include appropriate tests where practical.
+
+Tests may include:
+
+* unit tests;
+* integration tests;
+* regression tests;
+* stress tests;
+* property-based tests;
+* reproducibility tests;
+* benchmark tests.
+
+Research claims should be supported by reproducible computational procedures whenever possible.
+
+---
+
+# 15. Benchmarks
+
+Performance claims should include sufficient information to reproduce the measurement.
+
+Where practical, provide:
+
+* hardware;
+* software environment;
+* version;
+* configuration;
+* dataset;
+* number of repetitions;
+* measurement method.
+
+Avoid presenting isolated measurements as universal performance guarantees.
+
+---
+
+# 16. Scientific Results
+
+Contributors retain rights to original scientific works they create, subject to applicable law, agreements and project licenses.
+
+Contributing code to GNOSIS does not automatically transfer ownership of unrelated scientific discoveries or inventions.
+
+However, contributions to the GNOSIS software itself remain subject to the applicable contribution and licensing terms.
+
+---
+
+# 17. Intellectual Property
+
+Contributors must have the necessary rights to submit their contributions.
+
+Do not submit:
+
+* proprietary third-party code without permission;
+* confidential information;
+* copyrighted material without authorization;
+* trade secrets;
+* restricted datasets;
+* material whose redistribution violates another agreement.
+
+---
+
+# 18. Third-Party Dependencies
+
+New dependencies should be evaluated for:
+
+* license compatibility;
+* security;
+* maintenance;
+* reproducibility;
+* compatibility with project goals.
+
+Dependencies should not be introduced unnecessarily.
+
+---
+
+# 19. Attribution
+
+Contributors should receive appropriate recognition for substantive contributions.
+
+The project may record contributors through:
+
+* Git history;
+* release notes;
+* documentation;
+* contributor lists;
+* scientific citations.
+
+Scientific authorship and inventorship should be determined according to actual contribution and applicable standards.
+
+---
+
+# 20. Independent Research
+
+Researchers are free to create independent implementations, forks and experiments.
+
+They should clearly identify independent work as independent.
+
+Recommended wording:
+
+> Independent research implementation based on GNOSIS — UROBOROS Ψ-Core v33.
+
+---
+
+# 21. Forks
+
+Forks are permitted under the applicable license.
+
+Fork maintainers should preserve the original attribution and clearly distinguish the fork from the official GNOSIS repository.
+
+---
+
+# 22. Commercial Contributions
+
+Commercial organizations may contribute to the project.
+
+Contribution does not automatically grant commercial rights to the GNOSIS technology.
+
+Commercial deployment remains governed by:
+
+`COMMERCIAL-LICENSE.md`
+
+---
+
+# 23. Security Reports
+
+Security vulnerabilities should be reported responsibly.
+
+Do not publicly disclose an exploitable vulnerability before allowing reasonable time for investigation and remediation where responsible disclosure is appropriate.
+
+A future security policy may define the project's preferred reporting channel.
+
+---
+
+# 24. Code of Conduct
+
+Contributors are expected to maintain a professional research environment.
+
+The project encourages:
+
+* respectful discussion;
+* evidence-based criticism;
+* technical transparency;
+* good-faith disagreement;
+* reproducibility;
+* accurate attribution.
+
+Harassment, deliberate misinformation and malicious interference with the project are not acceptable.
+
+---
+
+# 25. Documentation Standards
+
+Documentation should distinguish between:
+
+### Established
+
+Supported by reproducible evidence.
+
+### Proposed
+
+A proposed mechanism or hypothesis.
+
+### Experimental
+
+An implementation or result requiring further investigation.
+
+### Speculative
+
+A theoretical possibility without sufficient validation.
+
+This distinction is particularly important for scientific claims.
+
+---
+
+# 26. Research Integrity
+
+Contributors should not:
+
+* fabricate results;
+* manipulate benchmarks;
+* conceal relevant negative results;
+* misrepresent hypotheses as established facts;
+* claim another person's discovery as their own;
+* intentionally obscure project provenance.
+
+---
+
+# 27. Contribution License
+
+Unless a separate written agreement states otherwise, contributions submitted to the project are intended to be distributed under the license applicable to the relevant project component.
+
+By submitting a contribution, the contributor represents that they have the right to submit it under those terms.
+
+Where a contribution introduces ambiguity concerning ownership or licensing, the project may request clarification before accepting it.
+
+---
+
+# 28. Review
+
+Contributions may be reviewed for:
+
+* correctness;
+* reproducibility;
+* security;
+* scientific validity;
+* maintainability;
+* licensing;
+* architectural compatibility.
+
+Acceptance of a contribution does not constitute scientific endorsement of every claim made by its author.
+
+---
+
+# 29. Maintainer Authority
+
+Project maintainers may:
+
+* request modifications;
+* reject contributions;
+* request additional tests;
+* request additional documentation;
+* classify contributions as experimental;
+* preserve the v33 baseline;
+* create new version branches.
+
+Maintainer decisions should prioritize reproducibility, project integrity and scientific usefulness.
+
+---
+
+# 30. Versioning
+
+Substantial architectural changes should receive an explicit version identifier.
+
+The project should preserve the historical identity of:
+
+**Ψ-Core v33 — Public Research Baseline — 3 September 2026**
+
+Later versions should not retroactively redefine what v33 represented.
+
+---
+
+# 31. Recommended Development Structure
+
+Where appropriate, future development may follow:
+
+```text
+main
+│
+├── stable
+│
+├── research
+│
+├── experimental
+│
+└── benchmarks
+```
+
+The exact repository structure may evolve as the project grows.
+
+---
+
+# 32. Reproducibility First
+
+When choosing between:
+
+* a highly complex implementation with marginal benefits;
+
+and
+
+* a simpler implementation that is easier to inspect and reproduce;
+
+the project generally favors the simpler implementation.
+
+The objective is not maximum code volume.
+
+The objective is maximum scientific and computational usefulness per unit of complexity.
+
+---
+
+# 33. Final Principle
+
+GNOSIS is intended to be built as a public scientific project.
+
+Its development should preserve three properties:
+
+$$
+\boxed{
+\text{Open Investigation}
++
+\text{Transparent Provenance}
++
+\text{Reproducible Development}
+}
+$$
+
+The project welcomes researchers who seek to prove it right, prove it wrong, improve it, replace parts of it or develop competing approaches.
+
+Scientific usefulness is more important than preserving assumptions.
+
+---
+
+# GNOSIS
+
+## UROBOROS — Ψ-Core v33
+
+**Open Research.**
+
+**Independent Investigation.**
+
+**Reproducible Development.**
+
+**Transparent Attribution.**
+
+**Copyright © 2026 Mikhail Kucheriavyi.**
+
+**Public Research Release — 3 September 2026.**
