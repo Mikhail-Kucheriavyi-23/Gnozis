@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -14,4 +13,3 @@ class State:
     def evolve(self, *, values: Mapping[str, Any]) -> "State":
         """Create a new state without modifying the current state."""
         return State(values=dict(values))
-
