@@ -1,8 +1,7 @@
-
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, Iterable, Optional
+from typing import Callable, Iterable
 
 from .state import State
 
@@ -12,26 +11,25 @@ Transition = Callable[[State], State]
 
 @dataclass
 class Engine:
-    """Minimal deterministic transition engine for GNOSIS/UROBOROS."""
+    """Deterministic state-transition engine for GNOSIS/UROBOROS."""
 
-    transition: Optional[Transition] = None
+    transition: Transition
 
     def step(self, state: State) -> State:
-        """Apply one endogenous transition to the current state."""
-        if self.transition is None:
-            return state
-
+        """Apply one transition to the current state."""
         next_state = self.transition(state)
 
         if not isinstance(next_state, State):
-            raise TypeError("transition must return a State instance")
+            raise TypeError(
+                "Engine transition must return a State instance."
+            )
 
         return next_state
 
     def run(self, state: State, steps: int) -> State:
-        """Evolve a state for a finite number of steps."""
+        """Apply the transition repeatedly for a finite number of steps."""
         if steps < 0:
-            raise ValueError("steps must be non-negative")
+            raise ValueError("steps must be non-negative.")
 
         current = state
 
@@ -40,14 +38,18 @@ class Engine:
 
         return current
 
-    def iterate(self, state: State, steps: int) -> Iterable[State]:
-        """Yield successive states without mutating the input state."""
+    def trajectory(
+        self,
+        state: State,
+        steps: int,
+    ) -> Iterable[State]:
+        """Yield the initial state followed by each subsequent state."""
         if steps < 0:
-            raise ValueError("steps must be non-negative")
+            raise ValueError("steps must be non-negative.")
 
         current = state
+        yield current
 
         for _ in range(steps):
             current = self.step(current)
             yield current
-
