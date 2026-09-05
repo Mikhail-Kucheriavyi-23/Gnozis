@@ -1,0 +1,203 @@
+# CHANGELOG
+
+All notable changes to GNOSIS are documented in this file.
+
+GNOSIS uses explicit versioning to preserve the public research history of the project.
+
+---
+
+# [v33.0.0] — 2026-09-03
+
+## GNOSIS Public Research Release
+
+### Core
+
+* Initial public release of the GNOSIS research platform.
+* Publication of the UROBOROS core.
+* Publication of the Ψ-Core v33 reference architecture.
+* Establishment of the initial public technical baseline.
+* Establishment of the public research release date: **3 September 2026**.
+
+### Architecture
+
+The v33 release establishes the reference conceptual architecture of the project.
+
+The core is intended to provide a minimal computational framework from which more complex behaviors can emerge through composition, recursion, adaptation and interaction.
+
+### Research Principles
+
+The release establishes the following research principles:
+
+* open scientific investigation;
+* reproducibility;
+* independent verification;
+* falsifiability;
+* transparent provenance;
+* autonomous system research;
+* recursive model evolution;
+* self-organizing processes;
+* autopoietic systems research.
+
+### Research Status
+
+Ψ-Core v33 is a research architecture.
+
+It should not be interpreted as a claim that every proposed mechanism or derived phenomenon has already been experimentally or scientifically validated.
+
+The project is intended to allow independent researchers to test, reproduce, criticize and falsify its assumptions.
+
+---
+
+# Versioning Policy
+
+GNOSIS uses version numbers to distinguish stable research baselines from later development.
+
+A version change may represent:
+
+* implementation changes;
+* performance improvements;
+* bug fixes;
+* API changes;
+* experimental modules;
+* documentation changes;
+* research extensions.
+
+Changes should be documented whenever they materially affect reproducibility.
+
+---
+
+# Ψ-Core v33 Baseline
+
+**Ψ-Core v33 is the reference baseline of the initial public release.**
+
+The conceptual identity of the v33 architecture should not be silently altered under the same version identifier.
+
+Implementation optimization is permitted when it preserves the defined behavior and research meaning of the reference architecture.
+
+Substantial architectural changes should receive a new version identifier.
+
+---
+
+# Future Releases
+
+Future releases may introduce:
+
+* optimized implementations;
+* additional modules;
+* new experiments;
+* benchmarks;
+* alternative implementations;
+* research extensions;
+* performance improvements;
+* improved documentation;
+* compatibility improvements.
+
+Such developments should preserve the distinction between:
+
+**the original v33 baseline**
+
+and
+
+**later research or engineering developments**.
+
+---
+
+# Change Classification
+
+Future entries may use the following categories:
+
+## Added
+
+New functionality, research modules or documentation.
+
+## Changed
+
+Changes to existing behavior or architecture.
+
+## Fixed
+
+Corrections to implementation or documentation errors.
+
+## Performance
+
+Optimization that improves efficiency without changing intended behavior.
+
+## Research
+
+New experiments, hypotheses, models or scientific investigations.
+
+## Security
+
+Security-related corrections or improvements.
+
+## Breaking
+
+Changes that intentionally alter an established interface or behavior.
+
+---
+
+# Reproducibility
+
+For scientifically significant releases, the project should record where practical:
+
+* version;
+* Git commit;
+* experiment configuration;
+* dependencies;
+* environment;
+* benchmark conditions;
+* relevant parameters.
+
+This allows independent researchers to reproduce results.
+
+---
+
+# Historical Record
+
+The Git repository history forms part of the public development record.
+
+Important releases should preferably be associated with Git tags.
+
+Recommended release tag format:
+
+```text
+v33.0.0
+```
+
+---
+
+# License History
+
+The initial public release is accompanied by:
+
+* `LICENSE-RESEARCH.md`
+* `COMMERCIAL-LICENSE.md`
+* `COPYRIGHT.md`
+* `TRADEMARKS.md`
+* `DISCOVERY-POLICY.md`
+
+These documents define the applicable research, commercial, attribution and provenance framework.
+
+---
+
+# Current Status
+
+**Current baseline: Ψ-Core v33**
+
+**Public research release: 3 September 2026**
+
+**Project: GNOSIS**
+
+**Core: UROBOROS**
+
+---
+
+# GNOSIS
+
+**Open Research.**
+
+**Transparent Development.**
+
+**Reproducible Science.**
+
+**UROBOROS — Ψ-Core v33**
