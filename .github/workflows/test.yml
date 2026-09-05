@@ -1,9 +1,11 @@
 name: GNOSIS Core Tests
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
-test:
-runs-on: ubuntu-latest
-steps:
-- run: echo "GNOSIS workflow OK"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo GNOSIS_WORKFLOW_OK
