@@ -10,7 +10,7 @@ class Relation:
 
     source: Any
     target: Any
-    relation_type: str
+    relation_type: str = "related"
 
     def __post_init__(self) -> None:
         if not isinstance(self.relation_type, str):
@@ -18,4 +18,5 @@ class Relation:
 
         if not self.relation_type:
             raise ValueError("relation_type must not be empty.")
+
 
