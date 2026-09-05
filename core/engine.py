@@ -1,3 +1,4 @@
+```python
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -53,3 +54,4 @@ class Engine:
         for _ in range(steps):
             current = self.step(current)
             yield current
+```
