@@ -1,0 +1,552 @@
+# GNOSIS COMMERCIAL LICENSE
+
+## GNOSIS — Universal Scientific Discovery & Intelligence Platform
+
+### UROBOROS — Ψ-Core v33
+
+**Copyright © 2026 Mikhail Kucheriaviy. All rights reserved.**
+
+**Public Research Release: 3 September 2026**
+
+---
+
+# 1. Purpose
+
+This Commercial License defines the terms under which GNOSIS, UROBOROS and associated components may be used for commercial purposes.
+
+GNOSIS is publicly available for research under the applicable Research License.
+
+Commercial exploitation is intentionally separated from research access.
+
+> **Open research access does not constitute unrestricted commercial authorization.**
+
+A commercial organization wishing to use GNOSIS commercially must obtain the appropriate commercial authorization before beginning Commercial Use.
+
+---
+
+# 2. Definitions
+
+For this License:
+
+### "GNOSIS"
+
+means the GNOSIS software project, source code, documentation, examples, research materials and associated components.
+
+### "UROBOROS"
+
+means the computational core developed as part of GNOSIS.
+
+### "Ψ-Core v33"
+
+means the reference architecture designated by the author as Ψ-Core version 33.
+
+### "Commercial Use"
+
+means any use of GNOSIS or UROBOROS primarily or materially intended to obtain commercial advantage, revenue, monetary compensation or business value.
+
+Commercial Use includes, without limitation:
+
+* commercial software;
+* commercial SaaS;
+* commercial APIs;
+* paid platforms;
+* enterprise deployments;
+* commercial cloud services;
+* commercial products;
+* paid applications;
+* commercial redistribution;
+* commercial integrations;
+* products or services substantially dependent on GNOSIS;
+* licensing GNOSIS-derived technology to third parties.
+
+---
+
+# 3. Requirement for Commercial Authorization
+
+Commercial Use requires a valid commercial license or other written authorization from the copyright holder or an authorized licensing entity.
+
+A commercial user must not rely solely on the public availability of the source repository as authorization for Commercial Use.
+
+---
+
+# 4. Commercial License Grant
+
+Subject to a valid commercial agreement, the copyright holder may grant one or more of the following rights:
+
+* commercial execution;
+* commercial modification;
+* commercial integration;
+* commercial deployment;
+* commercial distribution;
+* commercial SaaS operation;
+* commercial API operation;
+* enterprise use;
+* sublicensing where expressly authorized.
+
+The exact rights granted are determined by the applicable commercial agreement.
+
+---
+
+# 5. Scope of Commercial Authorization
+
+A commercial license may be:
+
+* organization-specific;
+* product-specific;
+* territory-specific;
+* time-limited;
+* perpetual;
+* subscription-based;
+* deployment-specific;
+* usage-based.
+
+The commercial agreement should define the applicable scope.
+
+---
+
+# 6. Commercial Products
+
+A commercial license may be required when GNOSIS or UROBOROS is incorporated into:
+
+* software products;
+* hardware products;
+* AI systems;
+* autonomous systems;
+* enterprise platforms;
+* cloud services;
+* SaaS products;
+* APIs;
+* research platforms;
+* engineering systems;
+* optimization systems;
+* commercial simulation systems.
+
+---
+
+# 7. Commercial SaaS
+
+Operating GNOSIS or UROBOROS as part of a paid hosted service constitutes Commercial Use.
+
+This includes services where users access functionality derived from GNOSIS without receiving the underlying source code.
+
+A valid commercial authorization is therefore required for such deployment.
+
+---
+
+# 8. Commercial API
+
+Providing GNOSIS-derived functionality through a paid or commercially operated API constitutes Commercial Use.
+
+The commercial license may define:
+
+* API limits;
+* number of users;
+* deployment locations;
+* revenue model;
+* permitted products;
+* geographic scope;
+* duration.
+
+---
+
+# 9. Enterprise Use
+
+Commercial organizations may require an enterprise license when GNOSIS is used internally for business purposes.
+
+Examples include:
+
+* internal AI systems;
+* corporate research;
+* optimization;
+* industrial modeling;
+* engineering;
+* product development;
+* automated decision-support systems;
+* enterprise simulation.
+
+Internal use that provides material commercial advantage may constitute Commercial Use even if the software is not directly sold to customers.
+
+---
+
+# 10. Commercial Redistribution
+
+Commercial redistribution of GNOSIS or substantial portions of its source code requires explicit authorization.
+
+This includes:
+
+* selling copies;
+* bundling GNOSIS into commercial software;
+* distributing GNOSIS as part of a paid product;
+* distributing modified commercial versions;
+* including GNOSIS in commercial hardware;
+* providing commercial binaries derived from GNOSIS.
+
+---
+
+# 11. Modification for Commercial Purposes
+
+Commercial modifications may be permitted under a commercial agreement.
+
+The agreement may specify whether modifications:
+
+* remain private;
+* must be disclosed;
+* may be redistributed;
+* require attribution;
+* require separate licensing.
+
+No commercial modification rights are implied by public access to the repository.
+
+---
+
+# 12. Derivative Commercial Systems
+
+A commercial system substantially based on GNOSIS or UROBOROS may require commercial authorization even when the resulting product contains substantial independent development.
+
+Determination of whether authorization is required depends on the actual use of the project, applicable license terms and applicable law.
+
+When uncertain, users should request a commercial licensing determination before deployment.
+
+---
+
+# 13. Independent Development
+
+This License does not automatically claim ownership of independently developed software, research, inventions or products.
+
+However, independent development does not automatically eliminate the licensing requirements applicable to GNOSIS components actually incorporated into a commercial system.
+
+Users are responsible for separating:
+
+* independently created intellectual property;
+* GNOSIS components;
+* third-party components;
+* proprietary modifications.
+
+---
+
+# 14. Scientific Discoveries and Commercialization
+
+GNOSIS may be used to conduct scientific research that results in new:
+
+* hypotheses;
+* models;
+* algorithms;
+* inventions;
+* engineering solutions;
+* scientific results;
+* technologies.
+
+The author does not automatically claim ownership of every independent scientific result generated through use of GNOSIS.
+
+However, commercial use of the GNOSIS software or UROBOROS technology itself remains subject to the applicable licensing requirements.
+
+Questions of patent ownership, inventorship and commercialization are governed by applicable law and the relevant agreements.
+
+---
+
+# 15. Patent Rights
+
+No patent rights are granted merely by obtaining access to the GNOSIS repository.
+
+A commercial agreement may expressly address patent rights where appropriate.
+
+No implied patent license should be assumed.
+
+---
+
+# 16. Trademark Rights
+
+Commercial use of the names:
+
+* GNOSIS;
+* UROBOROS;
+* Ψ-Core;
+* Ψ-Core v33;
+
+does not automatically constitute permission to use those names as commercial trademarks, product names or branding.
+
+Separate trademark authorization may be required.
+
+See:
+
+`TRADEMARKS.md`
+
+---
+
+# 17. Attribution
+
+Commercially authorized products may be required to provide attribution according to the applicable commercial agreement.
+
+A commercial license may specify:
+
+* attribution location;
+* wording;
+* visibility;
+* documentation requirements;
+* copyright notices.
+
+---
+
+# 18. No Endorsement
+
+Commercial authorization does not automatically imply:
+
+* endorsement;
+* certification;
+* partnership;
+* investment;
+* sponsorship;
+* scientific validation.
+
+Any such relationship must be established separately in writing.
+
+---
+
+# 19. Compliance
+
+Commercial users are responsible for ensuring that their deployment complies with:
+
+* applicable law;
+* regulatory requirements;
+* data-protection requirements;
+* export controls;
+* sector-specific requirements;
+* third-party licenses;
+* security obligations.
+
+The GNOSIS project does not guarantee regulatory compliance for any particular commercial application.
+
+---
+
+# 20. Security and Safety
+
+Commercial users are responsible for evaluating the security and safety of their deployment.
+
+This is particularly important for systems involving:
+
+* autonomous operation;
+* critical infrastructure;
+* medical applications;
+* industrial control;
+* financial systems;
+* transportation;
+* physical machinery;
+* high-consequence decision-making.
+
+GNOSIS should not be deployed in such environments without appropriate independent testing and professional review.
+
+---
+
+# 21. No Warranty
+
+GNOSIS and UROBOROS are research technologies.
+
+Except where expressly provided by a separate commercial agreement, the software is provided on an **"AS IS"** basis.
+
+No guarantee is made regarding:
+
+* correctness;
+* reliability;
+* performance;
+* scientific validity;
+* security;
+* commercial value;
+* fitness for a particular purpose;
+* regulatory compliance.
+
+---
+
+# 22. Limitation of Liability
+
+To the maximum extent permitted by applicable law, the copyright holder shall not be liable for losses arising from unauthorized or authorized use of GNOSIS or UROBOROS except to the extent expressly established by a separate commercial agreement.
+
+Nothing in this License excludes liability that cannot legally be excluded.
+
+---
+
+# 23. Commercial License Agreement
+
+A commercial license may contain additional terms covering:
+
+* licensing fees;
+* royalties;
+* subscription payments;
+* revenue share;
+* deployment limits;
+* user limits;
+* support;
+* maintenance;
+* updates;
+* warranties;
+* indemnification;
+* confidentiality;
+* security;
+* service levels;
+* territory;
+* duration;
+* termination.
+
+Those terms should be established in a separate written agreement where appropriate.
+
+---
+
+# 24. Pricing
+
+Commercial licensing terms are determined on a case-by-case basis unless an official public pricing schedule is published by the project.
+
+Possible licensing models include:
+
+### Subscription
+
+Recurring licensing fee.
+
+### Perpetual License
+
+One-time license subject to defined conditions.
+
+### Enterprise License
+
+Organization-wide or deployment-wide authorization.
+
+### Usage-Based License
+
+Fees based on usage, compute, API calls, users or another agreed metric.
+
+### Custom Agreement
+
+Negotiated terms for strategic or large-scale deployments.
+
+---
+
+# 25. Research-to-Commercial Transition
+
+A project may begin under the Research License and later become commercial.
+
+When a research project transitions into Commercial Use, the user must obtain the applicable commercial authorization before commercial deployment.
+
+Examples include:
+
+```text
+Research Prototype
+        ↓
+Validation
+        ↓
+Pilot
+        ↓
+Commercial Product
+```
+
+The transition point should be evaluated according to the actual nature of the use.
+
+---
+
+# 26. Public Research Does Not Create Commercial Permission
+
+The following principle is fundamental:
+
+$$
+\boxed{
+\text{Public Source}
+\neq
+\text{Commercial Permission}
+}
+$$
+
+Publication of GNOSIS is intended to maximize scientific accessibility.
+
+It does not waive commercial rights reserved by the copyright holder.
+
+---
+
+# 27. Reservation of Rights
+
+All rights not expressly granted are reserved.
+
+This includes, where applicable:
+
+* commercial licensing rights;
+* trademark rights;
+* patent rights;
+* commercial redistribution rights;
+* enterprise licensing rights;
+* commercial SaaS rights.
+
+---
+
+# 28. Violations
+
+Use outside the permissions granted by the applicable license may constitute unauthorized use.
+
+Where a commercial user is uncertain whether a proposed activity constitutes Commercial Use, the user should obtain written clarification before deployment.
+
+---
+
+# 29. Commercial Licensing Contact
+
+Commercial licensing inquiries should be directed through the official GNOSIS project contact channel.
+
+Recommended inquiry information:
+
+* organization;
+* intended application;
+* GNOSIS version;
+* UROBOROS / Ψ-Core version;
+* deployment type;
+* number of users;
+* expected commercial scope;
+* geographic scope;
+* expected distribution model.
+
+---
+
+# 30. Relationship to Research License
+
+The Research License remains applicable to qualifying Research Use.
+
+The Commercial License applies when Commercial Use is expressly authorized.
+
+Nothing in this document converts Research Use into Commercial Use.
+
+---
+
+# 31. Effective Date
+
+This Commercial License framework applies to GNOSIS materials to which it is explicitly attached or referenced.
+
+**Public Research Release: 3 September 2026**
+
+**Copyright © 2026 Mikhail Kucheriaviy.**
+
+---
+
+# 32. Final Principle
+
+GNOSIS is intended to remain open to the world for scientific investigation.
+
+The project follows a dual-access principle:
+
+$$
+\boxed{
+\text{Free Research}
++
+\text{Licensed Commercialization}
+}
+$$
+
+Researchers should be free to inspect, test, reproduce and challenge the technology.
+
+Organizations seeking to build commercial value on the technology should obtain the appropriate commercial authorization.
+
+---
+
+# GNOSIS
+
+## UROBOROS — Ψ-Core v33
+
+**Open for Research.**
+
+**Commercial Use Requires Appropriate Authorization.**
+
+**Copyright © 2026 Mikhail Kucheriaviy.**
+
+**All rights reserved except as expressly licensed.**
