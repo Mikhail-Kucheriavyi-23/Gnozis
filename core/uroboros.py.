@@ -1,0 +1,48 @@
+from **future** import annotations
+
+from .engine import Engine, Rule
+from .state import State
+
+class Uroboros:
+"""
+UROBOROS — recursive endogenous evolution core.
+
+```
+The system maintains a state and repeatedly transforms that state
+through internally defined rules.
+
+Core cycle:
+
+    State
+      ↓
+    Rules
+      ↓
+    Transformation
+      ↓
+    New State
+      ↓
+    Repeat
+"""
+
+def __init__(
+    self,
+    initial_state: State | None = None,
+    rules: list[Rule] | None = None,
+):
+    self.state = initial_state or State()
+    self.engine = Engine(rules)
+
+def add_rule(self, rule: Rule) -> None:
+    """Add an evolution rule to the system."""
+    self.engine.add_rule(rule)
+
+def step(self) -> State:
+    """Advance the system by one endogenous cycle."""
+    self.state = self.engine.step(self.state)
+    return self.state
+
+def run(self, steps: int) -> State:
+    """Execute multiple recursive evolution cycles."""
+    self.state = self.engine.run(self.state, steps)
+    return self.state
+```
