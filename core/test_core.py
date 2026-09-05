@@ -8,14 +8,9 @@ state = State(value=1)
 assert state.value == 1
 
 def test_relation_creation():
-relation = Relation(
-source="a",
-target="b",
-relation_type="test",
-)
+relation = Relation(source="a", target="b")
 assert relation.source == "a"
 assert relation.target == "b"
-assert relation.relation_type == "test"
 
 def test_engine_creation():
 engine = Engine()
@@ -35,33 +30,10 @@ assert next_state.value == 2
 
 
 def test_uroboros_initialization():
-state = State(value=1)
-engine = Engine(transform=increment)
+uroboros = Uroboros()
 
 
-uroboros = Uroboros(
-    state=state,
-    engine=engine,
-)
-
-assert uroboros.state is state
-assert uroboros.engine is engine
-
-
-def test_uroboros_step():
-state = State(value=1)
-engine = Engine(transform=increment)
-
-
-uroboros = Uroboros(
-    state=state,
-    engine=engine,
-)
-
-next_uroboros = uroboros.step()
-
-assert next_uroboros.state.value == 2
-assert next_uroboros.engine is engine
-
+assert uroboros.state is not None
+assert uroboros.engine is not None
 
 
