@@ -1,10 +1,6 @@
 from core import Engine, Relation, State, Uroboros
 
 
-def increment(state: State) -> State:
-    return state
-
-
 def test_state_creation():
     state = State()
     assert state is not None
@@ -29,4 +25,16 @@ def test_uroboros_initialization():
 def test_uroboros_step():
     uroboros = Uroboros()
     next_uroboros = uroboros.step()
+
     assert isinstance(next_uroboros, Uroboros)
+    assert next_uroboros is not uroboros
+
+
+def test_uroboros_with_relations():
+    uroboros = Uroboros()
+    relation = Relation(source="a", target="b")
+
+    next_uroboros = uroboros.with_relations([relation])
+
+    assert isinstance(next_uroboros, Uroboros)
+    assert next_uroboros is not uroboros
