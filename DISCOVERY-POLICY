@@ -1,0 +1,514 @@
+# GNOSIS DISCOVERY POLICY
+
+## Scientific Discovery, Attribution, Provenance & Commercialization
+
+### GNOSIS — Universal Scientific Discovery & Intelligence Platform
+
+### UROBOROS — Ψ-Core v33
+
+**Copyright © 2026 Mikhail Kucheriaviy.**
+
+**Public Research Release: 3 September 2026**
+
+---
+
+# 1. Purpose
+
+GNOSIS is designed as an open research platform for scientific investigation, computational experimentation, modeling, reasoning and discovery.
+
+This policy establishes a framework for:
+
+* scientific attribution;
+* research provenance;
+* reproducibility;
+* recognition of independent discoveries;
+* identification of GNOSIS-derived work;
+* distinction between the underlying architecture and new research results;
+* responsible commercialization.
+
+The purpose is to encourage discoveries while maintaining a transparent record of the technological foundation from which they may arise.
+
+---
+
+# 2. Fundamental Principle
+
+GNOSIS follows the principle:
+
+$$
+\boxed{
+\text{Open Research}
+\rightarrow
+\text{Independent Investigation}
+\rightarrow
+\text{New Results}
+}
+$$
+
+Publication of the platform is intended to allow researchers worldwide to investigate its architecture.
+
+The project does not automatically claim ownership of every result produced through its use.
+
+At the same time, use of the GNOSIS technology should not erase or obscure the provenance of the underlying architecture.
+
+---
+
+# 3. Public Research Release
+
+The public research release of the project is identified as:
+
+**3 September 2026**
+
+The corresponding public release is associated with:
+
+**GNOSIS**
+
+**UROBOROS**
+
+**Ψ-Core v33**
+
+The repository history, release tags and Git commits should be used to identify the exact technical state of a particular version.
+
+---
+
+# 4. Provenance
+
+Researchers are encouraged to record the exact GNOSIS version used in research.
+
+Where practical, research records should include:
+
+* GNOSIS version;
+* UROBOROS version;
+* Ψ-Core version;
+* Git commit hash;
+* experiment configuration;
+* relevant parameters;
+* data sources;
+* computational environment;
+* software dependencies.
+
+This allows independent researchers to reproduce and evaluate results.
+
+---
+
+# 5. What Counts as a GNOSIS-Derived Result?
+
+A result may be described as GNOSIS-derived when GNOSIS materially contributed to obtaining the result.
+
+Examples may include:
+
+* computational discoveries;
+* simulations;
+* generated hypotheses;
+* optimized solutions;
+* scientific models;
+* engineering solutions;
+* algorithmic results;
+* experimental predictions.
+
+The exact contribution should be described honestly.
+
+Use of GNOSIS as a general-purpose research instrument does not automatically mean that every resulting work is legally or scientifically "owned" by GNOSIS or its author.
+
+---
+
+# 6. Independent Scientific Work
+
+Researchers retain the rights they have under applicable law and agreements concerning original work they independently create.
+
+This may include:
+
+* scientific papers;
+* mathematical analyses;
+* algorithms;
+* datasets;
+* simulations;
+* software;
+* engineering designs;
+* inventions;
+* experimental results;
+* theoretical models.
+
+GNOSIS does not automatically transfer ownership of such independent work to the project author.
+
+---
+
+# 7. Attribution of the Underlying Technology
+
+When GNOSIS materially contributes to a published result, researchers are encouraged to acknowledge the technology.
+
+Recommended wording:
+
+> This work was conducted using GNOSIS — UROBOROS Ψ-Core v33, developed by Mikhail Kucheriaviy.
+
+Where relevant, researchers should provide the exact version or Git commit.
+
+---
+
+# 8. Scientific Priority
+
+The project maintains the public release date:
+
+**3 September 2026**
+
+as part of its technical provenance record.
+
+The repository history may provide evidence of when specific project materials became publicly available.
+
+However:
+
+> **A GitHub publication date is not, by itself, a universal legal determination of inventorship, patent priority or ownership.**
+
+Those questions depend on applicable law and the circumstances of the specific discovery.
+
+---
+
+# 9. New Discoveries After Public Release
+
+GNOSIS is intentionally published so that researchers can investigate new scientific and technological questions after the public release.
+
+A new result obtained after 3 September 2026 may be independently attributable to its actual discoverers, inventors or authors according to applicable law and scientific practice.
+
+Use of GNOSIS does not automatically transfer such rights to the project author.
+
+However, researchers should accurately disclose material use of GNOSIS where scientifically relevant.
+
+---
+
+# 10. Commercialization of New Results
+
+A researcher or organization may independently develop a commercial result using GNOSIS, subject to:
+
+1. the applicable GNOSIS software license;
+2. applicable intellectual-property law;
+3. third-party rights;
+4. contractual obligations;
+5. any applicable commercial license.
+
+Commercialization of an independent discovery is therefore distinct from commercial use of the GNOSIS software itself.
+
+---
+
+# 11. Two Separate Layers of Rights
+
+GNOSIS distinguishes between:
+
+### Layer A — Underlying Technology
+
+The GNOSIS software, UROBOROS core, Ψ-Core architecture, original documentation and associated project materials.
+
+These are governed by the applicable project licenses.
+
+### Layer B — New Research Results
+
+New scientific, mathematical, engineering or technological results created by researchers.
+
+These are governed by applicable law, agreements and the actual contributions of the relevant parties.
+
+The distinction can be represented as:
+
+$$
+\boxed{
+\text{GNOSIS Technology}
+\neq
+\text{Every Result Produced With GNOSIS}
+}
+$$
+
+---
+
+# 12. Commercial Use of GNOSIS
+
+If a new discovery is incorporated into a product that also commercially uses GNOSIS or UROBOROS, the commercial use of GNOSIS remains subject to:
+
+`COMMERCIAL-LICENSE.md`
+
+The existence of an independently developed discovery does not automatically eliminate the licensing requirements applicable to the underlying GNOSIS technology.
+
+---
+
+# 13. Independent Patents
+
+Researchers should independently evaluate whether a discovery may be:
+
+* patentable;
+* publishable;
+* protectable as a trade secret;
+* subject to third-party rights.
+
+Public disclosure can affect patent rights in some jurisdictions.
+
+Researchers should therefore seek appropriate professional advice before publicly disclosing potentially patentable inventions.
+
+---
+
+# 14. No Automatic Claim to Third-Party Discoveries
+
+GNOSIS does not automatically claim ownership of discoveries made by independent researchers.
+
+Likewise, researchers should not claim that GNOSIS, UROBOROS or Ψ-Core automatically belongs to them merely because they have used or modified the publicly available software.
+
+Each party's rights should be determined according to:
+
+* actual contribution;
+* applicable law;
+* applicable licenses;
+* written agreements;
+* scientific attribution.
+
+---
+
+# 15. Collaboration
+
+For collaborative research involving multiple parties, ownership and authorship should preferably be established before commercialization or publication.
+
+Collaborators should consider documenting:
+
+* individual contributions;
+* authorship;
+* inventorship;
+* ownership;
+* licensing;
+* confidentiality;
+* publication rights;
+* commercialization rights.
+
+GNOSIS does not replace a research collaboration agreement.
+
+---
+
+# 16. Reproducibility
+
+GNOSIS encourages reproducible research.
+
+Researchers should, where possible, preserve:
+
+* source code;
+* experiment configurations;
+* parameters;
+* datasets or dataset references;
+* environment information;
+* version identifiers;
+* random seeds;
+* relevant computational settings.
+
+This allows independent verification.
+
+---
+
+# 17. Negative Results
+
+Scientific criticism and negative results are explicitly welcome.
+
+Researchers may publish:
+
+* failed experiments;
+* contradictory results;
+* limitations;
+* counterexamples;
+* performance failures;
+* alternative explanations;
+* competing models.
+
+Such work is considered legitimate research.
+
+---
+
+# 18. Competing Implementations
+
+Researchers may develop alternative implementations or competing architectures.
+
+They may compare those systems against GNOSIS provided that comparisons are accurate and do not misrepresent the technology.
+
+Independent implementations should not be presented as official GNOSIS releases without authorization.
+
+---
+
+# 19. Derivative Research
+
+Researchers may create derivative research implementations according to the applicable Research License.
+
+Such work should identify significant modifications where appropriate.
+
+Recommended wording:
+
+> This research implementation is derived from GNOSIS and contains independent modifications.
+
+---
+
+# 20. Publication Ethics
+
+Researchers using GNOSIS should follow generally accepted principles of scientific integrity.
+
+This includes:
+
+* accurate attribution;
+* reproducibility where feasible;
+* disclosure of relevant methods;
+* avoidance of fabricated results;
+* distinction between hypothesis and established evidence;
+* disclosure of material limitations.
+
+GNOSIS does not guarantee the scientific validity of results generated with the platform.
+
+---
+
+# 21. Scientific Claims
+
+The existence of a computational result does not automatically establish a scientific discovery.
+
+A result should be independently evaluated according to the standards of the relevant scientific field.
+
+GNOSIS therefore distinguishes between:
+
+$$
+\text{Computational Output}
+\rightarrow
+\text{Hypothesis}
+\rightarrow
+\text{Validation}
+\rightarrow
+\text{Scientific Result}
+$$
+
+The project encourages this distinction throughout research.
+
+---
+
+# 22. Commercial Discovery Policy
+
+Where a GNOSIS-based research result becomes commercially valuable, the parties involved should determine separately:
+
+1. ownership of the new result;
+2. rights in GNOSIS;
+3. rights in UROBOROS;
+4. rights in third-party components;
+5. patent rights;
+6. trademark rights;
+7. copyright;
+8. commercialization rights.
+
+A commercial license for GNOSIS does not automatically determine ownership of unrelated intellectual property.
+
+---
+
+# 23. Attribution Is Not Ownership
+
+Attribution to GNOSIS or Mikhail Kucheriaviy does not automatically mean that the project author owns the resulting scientific discovery.
+
+Conversely, independent ownership of a new result does not automatically transfer ownership of GNOSIS.
+
+Attribution and ownership are separate concepts.
+
+---
+
+# 24. No Retroactive Ownership Claim
+
+Publication of GNOSIS does not establish an automatic claim over every future scientific discovery made using the platform.
+
+The project intentionally avoids such a blanket claim.
+
+The purpose of GNOSIS is to enable research rather than to prevent independent scientific progress.
+
+---
+
+# 25. Recognition of Contributors
+
+Where GNOSIS contributors materially assist in developing a research result, appropriate recognition should be determined according to their actual contribution and applicable scientific and legal standards.
+
+Contributors should not be omitted where their contribution meets the relevant criteria for authorship or inventorship.
+
+---
+
+# 26. Commercial Licensing Contact
+
+Organizations wishing to commercially deploy GNOSIS or UROBOROS should consult:
+
+`COMMERCIAL-LICENSE.md`
+
+Commercial licensing should be established before commercial deployment where required by the applicable license.
+
+---
+
+# 27. Transparency Principle
+
+GNOSIS follows the principle:
+
+$$
+\boxed{
+\text{Transparent Origin}
++
+\text{Open Research}
++
+\text{Independent Validation}
+}
+$$
+
+Researchers should be able to determine:
+
+* where the technology came from;
+* which version was used;
+* what was independently developed;
+* what was experimentally demonstrated;
+* what remains a hypothesis.
+
+---
+
+# 28. Public Scientific Record
+
+The GNOSIS repository is intended to maintain a public technical record.
+
+Important releases should preferably be preserved through:
+
+* Git commits;
+* version tags;
+* GitHub releases;
+* changelog entries;
+* archived documentation;
+* reproducible experiments.
+
+Researchers are encouraged to preserve their own research records independently.
+
+---
+
+# 29. Disclaimer
+
+This document expresses the project's research and attribution policy.
+
+It does not replace:
+
+* patent law;
+* copyright law;
+* trademark law;
+* employment agreements;
+* university policies;
+* research agreements;
+* collaboration agreements;
+* applicable national law.
+
+Where legal rights are at issue, applicable law and valid agreements govern.
+
+---
+
+# 30. Effective Date
+
+This Discovery Policy applies to the GNOSIS project materials to which it is explicitly attached or referenced.
+
+**Public Research Release: 3 September 2026**
+
+**Copyright © 2026 Mikhail Kucheriaviy.**
+
+---
+
+# GNOSIS
+
+## UROBOROS — Ψ-Core v33
+
+**Open Research.**
+
+**Transparent Provenance.**
+
+**Independent Discovery.**
+
+**Responsible Commercialization.**
+
+**Copyright © 2026 Mikhail Kucheriaviy.**
