@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gnosis-uroboros"
+version = "33.0.0"
+description = "GNOSIS — Universal Scientific Discovery & Intelligence Platform with the UROBOROS Ψ-Core."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+{ name = "Mikhail Kucheriavyi" }
+]
+license = { file = "LICENSE-RESEARCH.md" }
+
+keywords = [
+"scientific-discovery",
+"artificial-intelligence",
+"autonomous-systems",
+"recursive-systems",
+"autopoiesis",
+"complex-systems",
+"computational-modeling",
+"machine-reasoning",
+"uroboros",
+"gnosis"
+]
+
+classifiers = [
+"Development Status :: 3 - Alpha",
+"Intended Audience :: Science/Research",
+"Intended Audience :: Developers",
+"Topic :: Scientific/Engineering",
+"Topic :: Scientific/Engineering :: Artificial Intelligence",
+"Programming Language :: Python :: 3",
+"Programming Language :: Python :: 3 :: Only",
+"Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/Mikhail-Kucheriavyi-23/Gnozis/"
+Repository = "https://github.com/Mikhail-Kucheriavyi-23/Gnozis/"
+Issues = "https://github.com/Mikhail-Kucheriavyi-23/Gnozis/issues"
+
+[tool.setuptools]
+packages = ["core"]
