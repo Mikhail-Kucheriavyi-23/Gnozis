@@ -4,7 +4,7 @@
 
 ### UROBOROS — Ψ-Core v33
 
-**Copyright © 2026 Mikhail Kucheriaviy. All rights reserved.**
+**Copyright © 2026 Mikhail Kucheriavyi. All rights reserved.**
 
 **Public Research Release: 3 September 2026**
 
@@ -14,7 +14,7 @@
 
 This document describes the naming and trademark policy applicable to the GNOSIS project.
 
-The purpose of this policy is to allow researchers, developers and organizations to accurately identify and discuss the project while preventing misleading representations of unofficial products or services as official GNOSIS technology.
+The purpose of this policy is to allow researchers, developers and organizations to accurately identify and discuss the project while preventing misleading representations of unofficial products, implementations or services as official GNOSIS technology.
 
 ---
 
@@ -39,6 +39,8 @@ This document does not itself constitute a trademark registration.
 
 Trademark protection depends on applicable law, jurisdiction, actual use and, where applicable, registration.
 
+Nothing in this document should be interpreted as a representation that any particular trademark has been registered in any particular jurisdiction.
+
 ---
 
 # 4. Permitted Descriptive Use
@@ -53,7 +55,7 @@ Examples include:
 
 > "Our research evaluates Ψ-Core v33."
 
-Such use should not imply endorsement or official status where none exists.
+Such use should be accurate and should not imply endorsement, certification or official status where none exists.
 
 ---
 
@@ -75,14 +77,14 @@ Recommended citation:
 
 > GNOSIS — Universal Scientific Discovery & Intelligence Platform
 > UROBOROS — Ψ-Core v33
-> Mikhail Kucheriaviy
+> Mikhail Kucheriavyi
 > Public Research Release — 3 September 2026
 
 ---
 
 # 6. Official Project Identification
 
-The term **official GNOSIS** should only be used for releases, repositories or materials controlled by the project author or an explicitly authorized project organization.
+The term **official GNOSIS** should only be used for releases, repositories, implementations or materials controlled by the project author or an explicitly authorized project organization.
 
 Third-party implementations should not be represented as official GNOSIS releases unless authorized.
 
@@ -108,7 +110,7 @@ A modified implementation should not imply that it is the official GNOSIS releas
 
 # 8. Commercial Products
 
-Commercial products must not use GNOSIS, UROBOROS or Ψ-Core as their primary product or company identity in a manner that creates confusion about origin, sponsorship or endorsement without appropriate authorization.
+Commercial products must not use GNOSIS, UROBOROS or Ψ-Core as their primary product or company identity in a manner that creates confusion about origin, sponsorship, affiliation or endorsement without appropriate authorization.
 
 A commercial license to use the technology does not automatically constitute permission to use the project names as trademarks.
 
@@ -128,7 +130,7 @@ Without authorization, the project names should not be adopted as:
 * domain identities;
 * social-media identities;
 
-in a manner suggesting ownership or official affiliation with the GNOSIS project.
+in a manner suggesting official ownership, sponsorship, affiliation or endorsement by the GNOSIS project.
 
 ---
 
@@ -140,7 +142,7 @@ Registration of a domain containing:
 * UROBOROS;
 * Ψ-Core;
 
-does not create ownership of the project or its technology.
+does not create ownership of the project, its technology or its names.
 
 Unauthorized domain use that creates confusion regarding official project affiliation is not permitted.
 
@@ -162,7 +164,7 @@ Separate terms may apply to official project artwork.
 
 # 12. No Endorsement
 
-Use of the project names does not imply that Mikhail Kucheriaviy or the GNOSIS project:
+Use of the project names does not imply that Mikhail Kucheriavyi or the GNOSIS project:
 
 * endorses a product;
 * certifies an implementation;
@@ -170,6 +172,8 @@ Use of the project names does not imply that Mikhail Kucheriaviy or the GNOSIS p
 * sponsors an organization;
 * approves a commercial deployment;
 * validates a scientific conclusion.
+
+Any such relationship must be established separately in writing.
 
 ---
 
@@ -227,7 +231,9 @@ Attribution to GNOSIS and UROBOROS is encouraged when the technology is used in 
 Recommended form:
 
 > Based on GNOSIS — UROBOROS Ψ-Core v33
-> Mikhail Kucheriaviy
+> Mikhail Kucheriavyi
+
+Attribution does not imply endorsement or official affiliation.
 
 ---
 
@@ -239,6 +245,8 @@ Nothing in:
 * `LICENSE-RESEARCH.md`;
 * `COMMERCIAL-LICENSE.md`;
 * `COPYRIGHT.md`;
+* `DISCOVERY-POLICY.md`;
+* `CONTRIBUTING.md`;
 
 or the public availability of the repository should be interpreted as an automatic transfer or grant of trademark rights.
 
@@ -248,7 +256,7 @@ or the public availability of the repository should be interpreted as an automat
 
 All rights not expressly granted are reserved.
 
-The project reserves the right to protect its names and identity against unauthorized uses that create confusion, misrepresentation or false affiliation.
+The project reserves the right to protect its names and identity against unauthorized uses that create confusion, misrepresentation, false affiliation or false endorsement, subject to applicable law.
 
 ---
 
@@ -256,7 +264,7 @@ The project reserves the right to protect its names and identity against unautho
 
 The project may request modification or removal of uses that falsely represent an unofficial implementation, commercial product or organization as officially affiliated with GNOSIS.
 
-Nothing in this document limits rights available under applicable trademark or unfair-competition law.
+Nothing in this document limits rights available under applicable trademark, unfair-competition or other applicable law.
 
 ---
 
@@ -304,7 +312,7 @@ This policy applies to project materials to which it is explicitly attached or r
 
 **Public Research Release: 3 September 2026**
 
-**Copyright © 2026 Mikhail Kucheriaviy.**
+**Copyright © 2026 Mikhail Kucheriavyi.**
 
 ---
 
@@ -318,4 +326,4 @@ This policy applies to project materials to which it is explicitly attached or r
 
 **Official Identity Reserved.**
 
-**Copyright © 2026 Mikhail Kucheriaviy.**
+**Copyright © 2026 Mikhail Kucheriavyi.**
