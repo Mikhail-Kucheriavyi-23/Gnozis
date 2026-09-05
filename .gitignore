@@ -1,12 +1,34 @@
-# Byte-compiled / optimized / DLL files
+# ================================================================
+# GNOSIS
+# Universal Scientific Discovery & Intelligence Platform
+#
+# UROBOROS — Ψ-Core v33
+#
+# Purpose:
+# This file prevents local environments, secrets, temporary files,
+# generated research outputs and machine-specific artifacts from
+# being accidentally committed to the public GNOSIS repository.
+#
+# Public source code, tests, documentation, examples and reproducible
+# research materials SHOULD NOT be ignored unless they contain
+# confidential, private or generated information.
+#
+# Copyright © 2026 Mikhail Kucheriaviy.
+# All rights reserved except where expressly granted by the
+# applicable project license.
+# ================================================================
+
+
+# ----------------------------------------------------------------
+# Python
+# ----------------------------------------------------------------
+
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
-# C extensions
 *.so
 
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -14,205 +36,301 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# PyInstaller
-#   Usually these files are written by a python script from a template
-#   before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
+# Python packaging
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py.cover
-.hypothesis/
-.pytest_cache/
-cover/
 
-# Translations
-*.mo
-*.pot
+# ----------------------------------------------------------------
+# Virtual environments
+# ----------------------------------------------------------------
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-# Pipfile.lock
-
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-# uv.lock
-
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-# poetry.lock
-# poetry.toml
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
-#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
-# pdm.lock
-# pdm.toml
-.pdm-python
-.pdm-build/
-
-# pixi
-#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
-# pixi.lock
-#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
-#   in the .venv directory. It is recommended not to include this directory in version control.
-.pixi
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# Redis
-*.rdb
-*.aof
-*.pid
-
-# RabbitMQ
-mnesia/
-rabbitmq/
-rabbitmq-data/
-
-# ActiveMQ
-activemq-data/
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.envrc
-.venv
-env/
+.venv/
 venv/
+env/
 ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
 
-# Rope project settings
-.ropeproject
+# ----------------------------------------------------------------
+# Testing and coverage
+# ----------------------------------------------------------------
 
-# mkdocs documentation
-/site
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
 
-# mypy
+
+# ----------------------------------------------------------------
+# Type checking / static analysis
+# ----------------------------------------------------------------
+
 .mypy_cache/
 .dmypy.json
 dmypy.json
-
-# Pyre type checker
 .pyre/
-
-# pytype static type analyzer
 .pytype/
 
-# Cython debug symbols
-cython_debug/
 
-# PyCharm
-#   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#   and can be added to the global gitignore or merged into this file.  For a more nuclear
-#   option (not recommended) you can uncomment the following to ignore the entire idea folder.
-# .idea/
+# ----------------------------------------------------------------
+# Jupyter / notebooks
+# ----------------------------------------------------------------
 
-# Abstra
-#   Abstra is an AI-powered process automation framework.
-#   Ignore directories containing user credentials, local state, and settings.
-#   Learn more at https://abstra.io/docs
-.abstra/
+.ipynb_checkpoints/
 
-# Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
-#   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
-#   you could uncomment the following to ignore the entire vscode folder
-# .vscode/
-# Temporary file for partial code execution
-tempCodeRunnerFile.py
 
-# Ruff stuff:
-.ruff_cache/
+# ----------------------------------------------------------------
+# Environment variables and secrets
+# ----------------------------------------------------------------
 
-# PyPI configuration file
-.pypirc
+.env
+.env.*
+!.env.example
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+# Local credentials / authentication
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+secrets.yaml
+secrets.yml
 
-# Streamlit
-.streamlit/secrets.toml
+
+# ----------------------------------------------------------------
+# GNOSIS local configuration
+# ----------------------------------------------------------------
+
+/config/local/
+/config/private/
+/config/secrets/
+
+*.local.json
+*.local.yaml
+*.local.yml
+
+
+# ----------------------------------------------------------------
+# Private research data
+#
+# Public datasets that are intentionally part of a reproducible
+# experiment should NOT be placed in these directories.
+# ----------------------------------------------------------------
+
+/data/private/
+/data/local/
+/data/raw_private/
+/private_data/
+/local_data/
+
+
+# ----------------------------------------------------------------
+# Generated research results
+#
+# Reproducible source definitions, experiment configurations and
+# intentionally published benchmark results should remain tracked.
+# ----------------------------------------------------------------
+
+/experiments/output/
+/experiments/results_local/
+/benchmarks/results_local/
+
+
+# ----------------------------------------------------------------
+# Large generated artifacts
+# ----------------------------------------------------------------
+
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+
+*.cache
+*.pickle
+*.pkl
+
+
+# ----------------------------------------------------------------
+# Local databases
+# ----------------------------------------------------------------
+
+*.db
+*.sqlite
+*.sqlite3
+
+
+# ----------------------------------------------------------------
+# Machine learning / AI generated artifacts
+#
+# Large model weights and local checkpoints should not accidentally
+# enter the public repository.
+# ----------------------------------------------------------------
+
+/models/local/
+/models/checkpoints/
+/checkpoints/
+/weights/
+
+*.ckpt
+*.safetensors
+*.onnx
+
+
+# ----------------------------------------------------------------
+# Generated datasets
+# ----------------------------------------------------------------
+
+/datasets/local/
+/datasets/generated/
+/datasets/cache/
+
+
+# ----------------------------------------------------------------
+# Simulation and benchmark temporary files
+# ----------------------------------------------------------------
+
+/simulations/output/
+/simulation_output/
+/benchmarks/tmp/
+/benchmark_output/
+
+
+# ----------------------------------------------------------------
+# Build and distribution artifacts
+# ----------------------------------------------------------------
+
+*.whl
+*.tar.gz
+*.zip
+
+/build/
+/release/
+
+
+# ----------------------------------------------------------------
+# Documentation build artifacts
+# ----------------------------------------------------------------
+
+/docs/_build/
+/docs/build/
+/site/
+
+
+# ----------------------------------------------------------------
+# IDEs and editors
+# ----------------------------------------------------------------
+
+.idea/
+.vscode/
+*.code-workspace
+
+# Visual Studio
+.vs/
+
+# Vim
+*.vimrc
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+
+# ----------------------------------------------------------------
+# Operating systems
+# ----------------------------------------------------------------
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+
+# ----------------------------------------------------------------
+# Temporary development files
+# ----------------------------------------------------------------
+
+*.pid
+*.seed
+*.pid.lock
+
+tmp/
+temp/
+.cache/
+
+
+# ----------------------------------------------------------------
+# Local profiling / performance files
+# ----------------------------------------------------------------
+
+*.prof
+*.lprof
+*.coverage
+
+
+# ----------------------------------------------------------------
+# Local exports
+# ----------------------------------------------------------------
+
+/exports/local/
+/exports/private/
+
+
+# ----------------------------------------------------------------
+# GNOSIS developer workspace
+# ----------------------------------------------------------------
+
+/.gnosis/
+/gnosis.local/
+/uroboros.local/
+
+
+# ----------------------------------------------------------------
+# IMPORTANT
+#
+# The following project directories MUST remain trackable:
+#
+#   src/
+#   tests/
+#   examples/
+#   experiments/
+#   benchmarks/
+#   docs/
+#
+# They contain the public research implementation, reproducibility
+# materials and scientific documentation of GNOSIS.
+#
+# Do NOT add these directories to .gitignore unless a specific
+# subdirectory contains private or generated material.
+# ----------------------------------------------------------------
