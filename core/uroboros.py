@@ -1,32 +1,41 @@
-from   future   import annotations
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Iterable
 
 from .engine import Engine
+from .relation import Relation
 from .state import State
 
+
+@dataclass(frozen=True)
 class Uroboros:
-"""Recursive runtime for the GNOSIS/UROBOROS core."""
+    """Recursive GNOSIS/UROBOROS computational core."""
 
+    state: State
+    engine: Engine
 
-def __init__(
-    self,
-    initial_state: State,
-    rules=None,
-):
-    self.state = initial_state
-    self.engine = Engine(rules)
+    def step(self) -> "Uroboros":
+        """Perform one endogenous evolution step."""
+        next_state = self.engine.step(
+            state=self.state,
+            relations=(),
+        )
+        return Uroboros(
+            state=next_state,
+            engine=self.engine,
+        )
 
-def step(self) -> State:
-    """Perform one endogenous evolution step."""
-    self.state = self.engine.step(self.state)
-    return self.state
-
-def run(self, steps: int) -> State:
-    """Run the recursive evolution cycle."""
-    if steps < 0:
-        raise ValueError("steps must be non-negative")
-
-    for _ in range(steps):
-        self.step()
-
-    return self.state
-
+    def with_relations(
+        self,
+        relations: Iterable[Relation],
+    ) -> "Uroboros":
+        """Return a core instance configured with the supplied relations."""
+        next_state = self.engine.step(
+            state=self.state,
+            relations=relations,
+        )
+        return Uroboros(
+            state=next_state,
+            engine=self.engine,
+        )
