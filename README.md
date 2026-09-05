@@ -4,63 +4,109 @@
 
 ### Universal Computational Research Platform
 
-### UROBOROS — Ψ-Core v33
+**UROBOROS — Ψ-Core v33**
 
-> **A general computational architecture for autopoietic systems, modeling, reasoning, evolution, scientific research and discovery.**
+> A general computational architecture for studying autopoietic systems, modeling, reasoning, evolution, scientific research and discovery.
 
-**Copyright © 2026 Mikhail Kucheriaviy. All rights reserved except where expressly granted by the applicable project license.**
+**Copyright © 2026 Mikhail Kucheriavyi. All rights reserved except where expressly granted by the applicable project license.**
 
 **Public Research Release: 3 September 2026**
 
-**Research and qualifying non-commercial use:** permitted under `LICENSE-RESEARCH.md`.
+Research and qualifying non-commercial use is permitted under `LICENSE-RESEARCH.md`.
 
-**Commercial use:** requires a separate commercial license. See `COMMERCIAL-LICENSE.md`.
+Commercial use requires a separate commercial license. See `COMMERCIAL-LICENSE.md`.
 
-**Project names:** GNOSIS, UROBOROS and Ψ-Core are project identifiers and are not automatically licensed for unrestricted commercial branding. See `TRADEMARKS.md`.
+Project names including GNOSIS, UROBOROS and Ψ-Core are project identifiers and are not automatically licensed for unrestricted commercial branding. See `TRADEMARKS.md`.
 
 ---
 
 ## Overview
 
-GNOSIS is an open research platform built around **UROBOROS — Ψ-Core v33**, a recursive computational core designed to investigate autopoietic systems and their applications to scientific discovery, artificial intelligence, modeling, reasoning, simulation and complex systems.
+GNOSIS is a public research platform built around **UROBOROS — Ψ-Core v33**.
 
-The project is publicly available for research so that the architecture can be:
+The repository contains a minimal computational core together with tests, examples, documentation and research materials intended to support reproducible investigation.
 
-* inspected;
-* executed;
-* tested;
-* reproduced;
-* challenged;
-* falsified;
-* extended;
-* independently implemented.
+The current implementation provides fundamental computational primitives for:
 
-**Public availability of the source code does not by itself grant unrestricted commercial rights.**
+* state representation;
+* relations;
+* deterministic state transitions;
+* recursive execution;
+* reproducible examples;
+* automated testing.
+
+The broader Ψ-Core architecture remains a subject of research and validation.
+
+GNOSIS is therefore intentionally divided into two levels:
+
+```text
+Implemented Core
+       ↓
+Research Architecture
+```
+
+The implemented software should not be interpreted as proof that every theoretical component of Ψ-Core has been validated.
 
 ---
 
 ## Project Structure
 
-GNOSIS distinguishes between the research platform, its computational core and the reference architecture.
+```text
+GNOSIS
+│
+├── core/
+│   ├── __init__.py
+│   ├── state.py
+│   ├── relation.py
+│   ├── engine.py
+│   └── uroboros.py
+│
+├── examples/
+│   └── basic.py
+│
+├── tests/
+│   └── test_core.py
+│
+├── research/
+│   └── README.md
+│
+└── .github/
+    └── workflows/
+        └── test.yml
+```
 
-| Layer        | Name            | Role                                                  |
-| ------------ | --------------- | ----------------------------------------------------- |
-| Platform     | GNOSIS          | Universal research and discovery platform             |
-| Core         | UROBOROS        | Recursive computational core                          |
-| Architecture | Ψ-Core v33      | Public reference architecture                         |
-| Research     | GNOSIS Research | Experiments, validation and independent investigation |
+### Conceptual layers
 
-The public baseline is:
+| Layer      | Role                                      |
+| ---------- | ----------------------------------------- |
+| GNOSIS     | Research platform                         |
+| UROBOROS   | Recursive computational core              |
+| Ψ-Core v33 | Public reference architecture             |
+| Research   | Experimental and scientific investigation |
+| Tests      | Verification of implemented behavior      |
+| Examples   | Minimal executable demonstrations         |
 
-**Ψ-Core v33 — Public Research Release — 3 September 2026**
-
-Later experimental or architectural developments should not silently redefine the historical v33 baseline.
+The exact repository structure may evolve.
 
 ---
 
 ## Scientific Purpose
 
-GNOSIS is intended as a computational research framework for studying systems that can:
+GNOSIS investigates whether a relatively compact computational architecture can provide useful primitives for studying:
+
+* autopoietic systems;
+* recursive systems;
+* artificial intelligence;
+* machine reasoning;
+* scientific discovery;
+* hypothesis generation;
+* model construction;
+* simulation;
+* optimization;
+* complex systems;
+* autonomous computation.
+
+A conceptual research cycle is:
 
 ```text
 Represent
@@ -80,21 +126,7 @@ Evolve
 Repeat
 ```
 
-The project investigates whether a relatively compact computational architecture can serve as a common foundation for studying:
-
-* autopoietic systems;
-* recursive systems;
-* artificial intelligence;
-* machine reasoning;
-* scientific discovery;
-* hypothesis generation;
-* model construction;
-* simulation;
-* optimization;
-* complex systems;
-* autonomous computational processes.
-
-The central research objective is not to assume that the architecture is correct, but to make it sufficiently explicit that it can be independently tested.
+This cycle is a research hypothesis and architectural direction, not a claim of established scientific fact.
 
 ---
 
@@ -112,9 +144,9 @@ Independent Validation
 Reproducible Computation
 ```
 
-Scientific usefulness is evaluated through evidence rather than through acceptance of the project's assumptions.
+Scientific usefulness is evaluated through evidence rather than acceptance of project assumptions.
 
-Researchers are explicitly encouraged to:
+Researchers are encouraged to:
 
 * reproduce results;
 * identify weaknesses;
@@ -132,25 +164,57 @@ Researchers are explicitly encouraged to:
 
 GNOSIS is a **research platform**.
 
-The architecture, hypotheses and computational mechanisms contained in the project are subject to independent examination.
+The software implementation, architectural hypotheses and research mechanisms are subject to independent examination.
 
-Publication of the project does **not** establish that every hypothesis, mechanism or result is scientifically validated.
+Publication of the project does not establish that every hypothesis, mechanism or result is scientifically validated.
 
-The project therefore distinguishes between:
+The project distinguishes:
 
 ```text
-Computational Output
-        ↓
+Implementation
+      ↓
+Observation
+      ↓
 Hypothesis
-        ↓
+      ↓
 Experimental Test
-        ↓
+      ↓
 Independent Validation
-        ↓
+      ↓
 Scientific Result
 ```
 
-A computational result should not automatically be interpreted as a scientific fact, proof or validated discovery.
+A computational output should not automatically be interpreted as a scientific fact, proof or validated discovery.
+
+---
+
+## Current Implementation
+
+The current core provides four primary components:
+
+### State
+
+Immutable state representation used by the computational engine.
+
+### Relation
+
+Immutable representation of a relation between two entities.
+
+### Engine
+
+Deterministic state-transition mechanism supporting:
+
+* single-step evolution;
+* finite execution;
+* trajectory generation.
+
+### UROBOROS
+
+A recursive computational wrapper combining state and engine execution.
+
+The current implementation is intentionally small.
+
+The purpose of this minimal core is to provide a stable computational substrate that can be tested and extended without unnecessarily increasing fundamental complexity.
 
 ---
 
@@ -158,7 +222,7 @@ A computational result should not automatically be interpreted as a scientific f
 
 Reproducibility is a primary development principle.
 
-Where practical, research involving GNOSIS should identify:
+Research involving GNOSIS should identify, where practical:
 
 * GNOSIS version;
 * UROBOROS version;
@@ -171,13 +235,13 @@ Where practical, research involving GNOSIS should identify:
 * computational environment;
 * random seeds where applicable.
 
-The public repository history provides a technical provenance record for the corresponding source states.
+Repository history provides a technical provenance record for corresponding source states.
 
 ---
 
 ## Reference Baseline
 
-The reference baseline of this public release is:
+The public reference baseline is:
 
 ```text
 GNOSIS
@@ -193,66 +257,32 @@ Experimental changes that materially alter the conceptual architecture should be
 
 ---
 
-## Repository Development Model
-
-The project distinguishes between stable implementation and research activity.
-
-Conceptually:
-
-```text
-GNOSIS
-│
-├── Core
-│
-├── Tests
-│
-├── Examples
-│
-├── Research
-│
-├── Experimental
-│
-└── Benchmarks
-```
-
-The exact repository structure may evolve.
-
-The important distinction is between:
-
-**stable core functionality**
-
-and
-
-**research or experimental functionality**.
-
-Experimental implementations should not be represented as established core behavior without appropriate review.
-
----
-
 ## Testing
 
 Tests are an essential part of the project.
 
-Testing may include:
+The repository currently includes automated core tests executed through GitHub Actions.
+
+Testing may be expanded to include:
 
 * unit tests;
 * integration tests;
 * regression tests;
-* stress tests;
 * property-based tests;
 * reproducibility tests;
+* stress tests;
 * benchmark tests;
 * architectural consistency checks.
 
-Research claims should be supported by reproducible computational procedures whenever practical.
+A passing software test establishes behavior covered by that test. It does not by itself establish the scientific validity of the underlying architecture.
 
 ---
 
 ## Examples
 
-Examples are provided for demonstrating and testing project functionality.
+The repository contains minimal executable examples demonstrating the core API.
 
-Example implementations should be treated as demonstrations unless explicitly identified as stable project components.
+Examples are demonstrations of implementation behavior and should not automatically be interpreted as validated scientific models.
 
 Researchers are encouraged to modify examples, construct alternative implementations and use them as starting points for independent experiments.
 
@@ -273,7 +303,7 @@ Researchers may attempt to:
 * challenge theoretical claims;
 * identify limitations.
 
-A result that demonstrates a limitation or failure of GNOSIS is scientifically valuable.
+A result demonstrating a limitation or failure of GNOSIS is scientifically valuable.
 
 The project does not require contributors to support its hypotheses.
 
@@ -300,7 +330,7 @@ Independent research should accurately identify material use of GNOSIS where sci
 
 Recommended attribution:
 
-> This work was conducted using GNOSIS — UROBOROS Ψ-Core v33, developed by Mikhail Kucheriaviy.
+> This work was conducted using GNOSIS — UROBOROS Ψ-Core v33, developed by Mikhail Kucheriavyi.
 
 ---
 
@@ -327,15 +357,13 @@ Questions concerning:
 
 are governed by applicable law, agreements and actual contribution.
 
-See:
-
-`DISCOVERY-POLICY.md`
+See `DISCOVERY-POLICY.md`.
 
 ---
 
 ## Intellectual Property
 
-The project consists of multiple forms of intellectual property and associated rights.
+The project contains multiple forms of intellectual property and associated rights.
 
 ### Project
 
@@ -351,7 +379,7 @@ The project consists of multiple forms of intellectual property and associated r
 
 ### Author
 
-**Mikhail Kucheriaviy**
+**Mikhail Kucheriavyi**
 
 Original source code, documentation and other copyrightable project materials are protected to the extent provided by applicable law.
 
@@ -369,7 +397,7 @@ See:
 
 ## Licensing
 
-GNOSIS uses a deliberate separation between research access and commercial authorization.
+GNOSIS separates research access from commercial authorization.
 
 | Use                                     | Applicable status           |
 | --------------------------------------- | --------------------------- |
@@ -405,13 +433,11 @@ Public Source
 Unrestricted Commercial Permission
 ```
 
-Public research access is intended to enable scientific investigation without automatically granting commercial exploitation rights.
-
 ---
 
 ## Trademarks and Project Identity
 
-The project names are:
+Project identifiers include:
 
 * **GNOSIS**
 * **UROBOROS**
@@ -422,7 +448,7 @@ These names may be used descriptively to accurately identify the project and its
 
 Third-party implementations, forks and derivative projects should clearly distinguish themselves from official GNOSIS releases where necessary.
 
-Use of the project names does not automatically imply:
+Use of project names does not automatically imply:
 
 * endorsement;
 * certification;
@@ -431,9 +457,7 @@ Use of the project names does not automatically imply:
 * authorization;
 * scientific validation.
 
-See:
-
-`TRADEMARKS.md`
+See `TRADEMARKS.md`.
 
 ---
 
@@ -472,9 +496,7 @@ Architectural Change
 
 Substantial architectural changes should not silently redefine Ψ-Core v33.
 
-See:
-
-`CONTRIBUTING.md`
+See `CONTRIBUTING.md`.
 
 ---
 
@@ -557,7 +579,7 @@ Reference Architecture:
 Ψ-Core v33
 
 Author:
-Mikhail Kucheriaviy
+Mikhail Kucheriavyi
 
 Public Research Release:
 3 September 2026
@@ -587,19 +609,17 @@ Pilot
 Commercial Deployment
 ```
 
-The transition to Commercial Use is governed by the applicable commercial licensing requirements.
+The transition to commercial use is governed by the applicable commercial licensing requirements.
 
 An independently developed discovery does not automatically eliminate licensing requirements applicable to GNOSIS technology incorporated into a commercial system.
 
-See:
-
-`COMMERCIAL-LICENSE.md`
+See `COMMERCIAL-LICENSE.md`.
 
 ---
 
 ## Project Documents
 
-The repository should contain and maintain the following principal project documents:
+The repository maintains the following principal project documents:
 
 | File                    | Purpose                                      |
 | ----------------------- | -------------------------------------------- |
@@ -617,7 +637,7 @@ These documents should be interpreted together with the applicable license terms
 
 ## Core Philosophy
 
-GNOSIS is built around a simple development principle:
+GNOSIS follows a simple development principle:
 
 ```text
 Minimum Necessary Complexity
@@ -637,7 +657,7 @@ When two implementations provide equivalent intended behavior, the simpler imple
 
 ## Vision
 
-GNOSIS aims to provide a common computational foundation for investigating:
+GNOSIS aims to provide a computational foundation for investigating:
 
 * intelligence;
 * autopoiesis;
@@ -693,23 +713,3 @@ The project welcomes researchers who seek to:
 **prove it right, prove it wrong, improve it, replace it, reproduce it, or develop competing approaches.**
 
 Scientific usefulness is more important than preserving assumptions.
-
----
-
-# GNOSIS
-
-## UROBOROS — Ψ-Core v33
-
-**Open Research.**
-
-**Independent Investigation.**
-
-**Reproducible Development.**
-
-**Transparent Provenance.**
-
-**Responsible Commercialization.**
-
-**Copyright © 2026 Mikhail Kucheriaviy.**
-
-**Public Research Release — 3 September 2026**
