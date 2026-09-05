@@ -52,7 +52,7 @@ Contributions should not silently redefine the original architecture.
 
 # 3. Ψ-Core v33 Baseline
 
-Ψ-Core v33 represents the reference baseline of the public release dated:
+**Ψ-Core v33** represents the reference baseline of the public release dated:
 
 **3 September 2026**
 
@@ -208,7 +208,7 @@ Before submitting a pull request, contributors should:
 
 A useful pull request should answer:
 
-```text id="2m7j9e"
+```text
 What changed?
 
 Why was it changed?
@@ -523,11 +523,8 @@ Where appropriate, future development may follow:
 main
 │
 ├── stable
-│
 ├── research
-│
 ├── experimental
-│
 └── benchmarks
 ```
 
@@ -590,3 +587,4 @@ Scientific usefulness is more important than preserving assumptions.
 **Copyright © 2026 Mikhail Kucheriavyi.**
 
 **Public Research Release — 3 September 2026.**
+
