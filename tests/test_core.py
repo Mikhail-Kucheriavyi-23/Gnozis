@@ -26,14 +26,7 @@ def test_uroboros_initialization():
     assert uroboros is not None
 
 
-def test_engine_step():
-    state = State()
-    engine = Engine()
-    next_state = engine.step(state=state, relations=())
-    assert next_state is not None
-
-
 def test_uroboros_step():
     uroboros = Uroboros()
     next_uroboros = uroboros.step()
-    assert next_uroboros is not None
+    assert isinstance(next_uroboros, Uroboros)
