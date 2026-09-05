@@ -1,13 +1,11 @@
-from **future** import annotations
+from   future   import annotations
 
 from dataclasses import dataclass
 from typing import Any
 
 @dataclass(frozen=True)
 class Relation:
-"""
-Minimal relation between two elements of a system.
-"""
+"""Minimal relation between two elements of a system."""
 
 ```
 source: Any
