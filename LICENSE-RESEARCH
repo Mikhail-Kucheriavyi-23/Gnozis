@@ -25,11 +25,11 @@ This Research License is intended to make GNOSIS publicly available for:
 * non-commercial development;
 * non-commercial derivative research.
 
-The purpose of this license is to encourage open scientific investigation while preserving the author's rights and requiring a separate license for commercial exploitation.
+The purpose of this License is to encourage open scientific investigation while preserving the author's rights and requiring separate authorization for commercial exploitation.
 
 ---
 
-# 2. Definitions
+## 2. Definitions
 
 For the purposes of this License:
 
@@ -55,11 +55,11 @@ means documentation, specifications, explanations, diagrams, examples and other 
 
 ### "Research Use"
 
-means use conducted primarily for scientific, academic, educational, experimental or other non-commercial purposes.
+means use conducted primarily for scientific, academic, educational, experimental, reproducibility, benchmarking, or other non-commercial purposes.
 
 ### "Commercial Use"
 
-means any use intended primarily or materially to generate revenue, commercial advantage or monetary compensation.
+means any use primarily or materially intended to generate revenue, commercial advantage, monetary compensation or business value.
 
 Commercial Use includes, without limitation:
 
@@ -67,18 +67,20 @@ Commercial Use includes, without limitation:
 * selling access to GNOSIS;
 * commercial SaaS;
 * commercial APIs;
-* enterprise deployment;
-* paid services based substantially on GNOSIS;
+* commercial cloud services;
+* enterprise commercial deployment;
+* paid services substantially based on GNOSIS;
 * embedding GNOSIS into commercial products;
 * commercial redistribution;
 * licensing GNOSIS-derived software for commercial purposes;
-* using GNOSIS as a material component of a commercial product or service.
+* monetized applications substantially incorporating GNOSIS;
+* commercial deployment of GNOSIS or UROBOROS as a material component of a product or service.
 
 ---
 
-# 3. Grant of Research Rights
+## 3. Grant of Research Rights
 
-Subject to the terms of this License, the copyright holder grants a worldwide, non-exclusive, non-transferable and royalty-free license to use GNOSIS for Research Use.
+Subject to the terms of this License, the copyright holder grants a worldwide, non-exclusive, royalty-free license to use GNOSIS for Research Use.
 
 Permitted Research Use includes:
 
@@ -96,9 +98,11 @@ Permitted Research Use includes:
 12. publishing scientific analyses of GNOSIS;
 13. teaching and demonstrating GNOSIS in educational settings.
 
+The rights granted under this License are limited to Research Use and do not include unrestricted Commercial Use.
+
 ---
 
-# 4. Academic and Scientific Publication
+## 4. Academic and Scientific Publication
 
 Researchers may publish scientific work involving GNOSIS.
 
@@ -122,9 +126,11 @@ Recommended attribution:
 > Mikhail Kucheriaviy
 > Public Research Release — 3 September 2026
 
+Where practical, researchers should also identify the relevant Git commit, release tag or version.
+
 ---
 
-# 5. Attribution Requirement
+## 5. Attribution Requirement
 
 Redistribution of GNOSIS or substantial portions of its source code for permitted Research Use must retain:
 
@@ -133,11 +139,13 @@ Redistribution of GNOSIS or substantial portions of its source code for permitte
 * the original project name where technically and reasonably possible;
 * attribution to Mikhail Kucheriaviy.
 
-Removal or intentional concealment of the original copyright notice is not permitted where such notice is reasonably preserved in the distributed material.
+Removal or intentional concealment of the original copyright notice is not permitted where preservation is reasonably possible and required by the applicable license terms.
+
+Modified versions must not be represented as official GNOSIS releases.
 
 ---
 
-# 6. Modification
+## 6. Modification
 
 Research users may modify GNOSIS for permitted Research Use.
 
@@ -148,7 +156,8 @@ Modified versions may be created for:
 * benchmarking;
 * academic research;
 * educational use;
-* independent verification.
+* independent verification;
+* alternative implementations.
 
 Modified versions should clearly identify that they differ from the official GNOSIS release.
 
@@ -158,29 +167,29 @@ Recommended statement:
 
 ---
 
-# 7. Commercial Use
+## 7. Commercial Use
 
 This Research License **does not grant Commercial Use rights**.
 
-Any Commercial Use requires a separate written commercial license from the copyright holder or an authorized licensing entity.
+Any Commercial Use requires separate written authorization under the applicable commercial licensing terms.
 
-Examples of activities requiring a Commercial License include:
+Examples of activities requiring Commercial authorization include:
 
 * commercial SaaS;
 * paid APIs;
 * commercial cloud services;
-* enterprise deployments;
+* enterprise commercial deployments;
 * commercial products incorporating GNOSIS;
 * commercial redistribution;
-* paid consulting substantially based on GNOSIS;
+* paid services substantially based on GNOSIS;
 * monetized applications substantially incorporating GNOSIS;
 * commercial licensing of GNOSIS-derived implementations.
 
-For commercial licensing inquiries, contact the copyright holder through the official GNOSIS project contact channel.
+For commercial licensing inquiries, users should contact the copyright holder through the official GNOSIS project contact channel.
 
 ---
 
-# 8. No Automatic Commercial Rights
+## 8. No Automatic Commercial Rights
 
 Public availability of GNOSIS, its source code, documentation or research materials does not constitute a grant of unrestricted commercial rights.
 
@@ -188,13 +197,13 @@ In particular:
 
 > **Public source availability is not equivalent to unrestricted commercial licensing.**
 
-A person or organization may inspect, study and use GNOSIS under the Research License without acquiring commercial rights.
+A person or organization may inspect, study and use GNOSIS under this Research License without acquiring commercial rights.
 
 Commercial rights must be separately granted.
 
 ---
 
-# 9. Independent Research Results
+## 9. Independent Research Results
 
 This License does not automatically transfer ownership of independently created research results to the copyright holder.
 
@@ -215,7 +224,7 @@ Researchers remain responsible for determining whether their work contains mater
 
 ---
 
-# 10. Scientific Discoveries and Inventions
+## 10. Scientific Discoveries and Inventions
 
 GNOSIS is intended to facilitate scientific investigation.
 
@@ -233,11 +242,11 @@ Questions of:
 
 are governed by applicable law and the specific circumstances of the work.
 
-Researchers and organizations are responsible for obtaining appropriate legal advice before publicly disclosing potentially patentable inventions.
+Researchers and organizations are responsible for obtaining appropriate professional advice before publicly disclosing potentially patentable inventions.
 
 ---
 
-# 11. No Patent Grant
+## 11. No Patent Grant
 
 Except where expressly stated in a separate written agreement, this Research License does not grant any patent license.
 
@@ -245,7 +254,7 @@ No patent rights are transferred or licensed merely by obtaining access to GNOSI
 
 ---
 
-# 12. Trademarks
+## 12. Trademarks
 
 This License does not grant trademark rights.
 
@@ -256,7 +265,7 @@ The names:
 * Ψ-Core;
 * Ψ-Core v33;
 
-remain project identifiers and may not be used in a manner that falsely suggests official endorsement, certification, partnership or authorship.
+remain project identifiers and may not be used in a manner that falsely suggests official endorsement, certification, partnership, sponsorship or authorization.
 
 Separate trademark terms may be provided in:
 
@@ -264,11 +273,11 @@ Separate trademark terms may be provided in:
 
 ---
 
-# 13. No Endorsement
+## 13. No Endorsement
 
 Use of GNOSIS does not imply endorsement by the author.
 
-Researchers may describe their independent work as being:
+Researchers may accurately describe their independent work as:
 
 > "based on GNOSIS"
 
@@ -276,11 +285,11 @@ or
 
 > "using GNOSIS"
 
-provided that such statements are accurate and do not imply official certification or endorsement.
+provided that such statements do not imply official certification, endorsement or affiliation.
 
 ---
 
-# 14. No Warranty
+## 14. No Warranty
 
 GNOSIS is provided for research purposes.
 
@@ -303,7 +312,7 @@ The author does not warrant that:
 
 ---
 
-# 15. Scientific Responsibility
+## 15. Scientific Responsibility
 
 GNOSIS is a research tool.
 
@@ -324,7 +333,7 @@ High-consequence applications require appropriate independent validation and pro
 
 ---
 
-# 16. No Liability
+## 16. No Liability
 
 To the maximum extent permitted by applicable law, the copyright holder shall not be liable for damages, losses or claims arising from the use, modification, distribution or inability to use GNOSIS.
 
@@ -343,35 +352,37 @@ Nothing in this section excludes liability that cannot legally be excluded.
 
 ---
 
-# 17. Termination
+## 17. Termination
 
 The rights granted by this License terminate automatically if a user materially violates its terms.
 
 Upon termination, the affected user must cease activities that are no longer authorized by this License.
 
-Rights granted to properly completed and independently created research publications are not retroactively revoked solely because a later violation occurs, except where otherwise required by applicable law.
+Rights in properly completed and independently created research publications are not retroactively revoked solely because of a later violation, except where otherwise required by applicable law.
 
 ---
 
-# 18. No Sublicensing of Commercial Rights
+## 18. No Sublicensing of Commercial Rights
 
-Research rights granted by this License may not be converted into commercial rights or sublicensed as commercial rights.
+Research rights granted by this License may not be converted into commercial rights or represented as commercial rights.
 
 A research user may not represent that they possess authority to grant unrestricted commercial licenses to GNOSIS, UROBOROS or Ψ-Core.
 
 ---
 
-# 19. Contributions
+## 19. Contributions
 
-Unless a separate Contributor License Agreement or written agreement states otherwise, contributions submitted to the GNOSIS repository must be provided under terms compatible with the project's applicable contribution policy.
+Unless a separate Contributor License Agreement or written agreement states otherwise, contributions submitted to the GNOSIS repository are subject to the applicable contribution terms.
 
-The project may establish additional contribution requirements in:
+Contributors must have the necessary rights to submit their contributions.
+
+Additional contribution requirements may be established in:
 
 `CONTRIBUTING.md`
 
 ---
 
-# 20. Version Identification
+## 20. Version Identification
 
 Researchers are encouraged to record:
 
@@ -379,16 +390,18 @@ Researchers are encouraged to record:
 * UROBOROS version;
 * Ψ-Core version;
 * Git commit;
+* release tag;
 * experiment configuration;
 * relevant parameters;
 * data sources;
-* computational environment.
+* computational environment;
+* software dependencies.
 
-This is particularly important for scientific reproducibility.
+This information is particularly important for scientific reproducibility.
 
 ---
 
-# 21. Research Freedom
+## 21. Research Freedom
 
 The purpose of this License is not to restrict legitimate scientific investigation.
 
@@ -409,22 +422,22 @@ Scientific criticism is expressly compatible with the purpose of this project.
 
 ---
 
-# 22. Relationship to Other Project Documents
+## 22. Relationship to Other Project Documents
 
 This Research License should be read together with:
 
-* `README.md`
-* `COPYRIGHT.md`
-* `COMMERCIAL-LICENSE.md`
-* `TRADEMARKS.md`
-* `DISCOVERY-POLICY.md`
-* `CONTRIBUTING.md`
+* `README.md`;
+* `COPYRIGHT.md`;
+* `COMMERCIAL-LICENSE.md`;
+* `TRADEMARKS.md`;
+* `DISCOVERY-POLICY.md`;
+* `CONTRIBUTING.md`.
 
 In the event of a conflict concerning software permissions, the applicable license terms govern.
 
 ---
 
-# 23. Reservation of Rights
+## 23. Reservation of Rights
 
 All rights not expressly granted by this Research License are reserved by the copyright holder.
 
@@ -437,7 +450,7 @@ In particular, unless separately licensed:
 
 ---
 
-# 24. Open Scientific Access
+## 24. Open Scientific Access
 
 The author intentionally makes GNOSIS publicly accessible for scientific investigation.
 
@@ -455,7 +468,7 @@ $$
 
 ---
 
-# 25. Effective Date
+## 25. Effective Date
 
 This Research License applies to the GNOSIS materials to which it is explicitly attached or referenced.
 
@@ -465,7 +478,7 @@ This Research License applies to the GNOSIS materials to which it is explicitly 
 
 ---
 
-# 26. Contact
+## 26. Contact
 
 For:
 
@@ -475,11 +488,11 @@ For:
 * enterprise deployment;
 * intellectual-property inquiries;
 
-use the official contact channel designated by the GNOSIS project.
+users should use the official contact channel designated by the GNOSIS project.
 
 ---
 
-## Final Notice
+# Final Notice
 
 GNOSIS is released to the world for scientific investigation.
 
