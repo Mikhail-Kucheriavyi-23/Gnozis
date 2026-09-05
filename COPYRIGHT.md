@@ -4,7 +4,7 @@
 
 ### UROBOROS — Ψ-Core v33
 
-**Copyright © 2026 Mikhail Kucheriaviy.**
+**Copyright © 2026 Mikhail Kucheriavyi.**
 
 All rights reserved except where rights are expressly granted by an applicable project license or separate written agreement.
 
@@ -14,7 +14,7 @@ All rights reserved except where rights are expressly granted by an applicable p
 
 The GNOSIS project is an open research project developed and published by:
 
-**Mikhail Kucheriaviy**
+**Mikhail Kucheriavyi**
 
 Project:
 
@@ -194,7 +194,7 @@ When GNOSIS or UROBOROS is referenced in scientific, technical or educational wo
 
 > GNOSIS — Universal Scientific Discovery & Intelligence Platform
 > UROBOROS — Ψ-Core v33
-> Mikhail Kucheriaviy
+> Mikhail Kucheriavyi
 > Public Research Release — 3 September 2026
 
 Where possible, researchers should also identify the relevant Git commit, release or version.
@@ -268,7 +268,7 @@ This copyright notice applies to the GNOSIS materials to which it is attached or
 
 **Public Research Release: 3 September 2026**
 
-**Copyright © 2026 Mikhail Kucheriaviy.**
+**Copyright © 2026 Mikhail Kucheriavyi.**
 
 ---
 
@@ -280,6 +280,6 @@ This copyright notice applies to the GNOSIS materials to which it is attached or
 
 **Commercial Use Requires Appropriate Authorization.**
 
-**Copyright © 2026 Mikhail Kucheriaviy.**
+**Copyright © 2026 Mikhail Kucheriavyi.**
 
 **All rights reserved except as expressly licensed.**
