@@ -1,24 +1,67 @@
-from core import State, Uroboros
+from core import Engine, Relation, State, Uroboros
 
-def test_uroboros_evolution():
 def increment(state: State) -> State:
-value = state.values.get("x", 0)
+return State(value=state.value + 1)
 
-```
-    return state.evolve(
-        values={
-            **state.values,
-            "x": value + 1,
-        }
-    )
+def test_state_creation():
+state = State(value=1)
+assert state.value == 1
 
-system = Uroboros(
-    initial_state=State(values={"x": 0}),
-    rules=[increment],
+def test_relation_creation():
+relation = Relation(
+source="a",
+target="b",
+relation_type="test",
+)
+assert relation.source == "a"
+assert relation.target == "b"
+assert relation.relation_type == "test"
+
+def test_engine_creation():
+engine = Engine()
+assert engine is not None
+
+def test_engine_step():
+state = State(value=1)
+engine = Engine(transform=increment)
+
+
+next_state = engine.step(
+    state=state,
+    relations=(),
 )
 
-result = system.run(10)
+assert next_state.value == 2
 
-assert result.values["x"] == 10
+
+def test_uroboros_initialization():
+state = State(value=1)
+engine = Engine(transform=increment)
+
+
+uroboros = Uroboros(
+    state=state,
+    engine=engine,
+)
+
+assert uroboros.state is state
+assert uroboros.engine is engine
+
+
+def test_uroboros_step():
+state = State(value=1)
+engine = Engine(transform=increment)
+
+
+uroboros = Uroboros(
+    state=state,
+    engine=engine,
+)
+
+next_uroboros = uroboros.step()
+
+assert next_uroboros.state.value == 2
+assert next_uroboros.engine is engine
+
 
 
