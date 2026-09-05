@@ -1,285 +1,304 @@
-# COPYRIGHT
+# GNOSIS TRADEMARKS AND PROJECT IDENTITY
 
 ## GNOSIS — Universal Scientific Discovery & Intelligence Platform
 
 ### UROBOROS — Ψ-Core v33
 
-**Copyright © 2026 Mikhail Kucheriavyi.**
+**Copyright © 2026 Mikhail Kucheriaviy.**
 
-All rights reserved except where rights are expressly granted by an applicable project license or separate written agreement.
-
----
-
-## 1. Project Attribution
-
-The GNOSIS project is an open research project developed and published by:
-
-**Mikhail Kucheriavyi**
-
-Project:
-
-**GNOSIS**
-
-Core:
-
-**UROBOROS**
-
-Reference architecture:
-
-**Ψ-Core v33**
-
-Public research release:
-
-**3 September 2026**
+**Public Research Release: 3 September 2026**
 
 ---
 
-## 2. Scope of Copyright
+## 1. Purpose
 
-Copyright protection may apply, to the extent permitted by applicable law, to original expressive elements of the project, including:
+This document defines the naming and project-identity principles applicable to GNOSIS, UROBOROS and Ψ-Core.
 
-* source code;
-* documentation;
-* original textual descriptions;
-* diagrams;
-* software architecture documentation;
-* examples;
-* test implementations;
-* original research materials;
-* repository materials;
-* original project documentation.
-
-Copyright does not, by itself, grant exclusive ownership over abstract mathematical ideas, scientific facts, discoveries, methods, algorithms or concepts where such subject matter is not protected by copyright under applicable law.
-
-Different forms of intellectual property may provide different forms of protection.
+The purpose is to allow accurate identification of the project while reducing the risk of confusion between official GNOSIS releases and independent implementations, forks or derivative projects.
 
 ---
 
-## 3. UROBOROS
+## 2. Project Names
 
-**UROBOROS** is the name assigned to the computational core developed as part of GNOSIS.
+The principal project identifiers are:
 
-The reference implementation and associated original source materials are part of the GNOSIS project unless explicitly identified otherwise.
+* **GNOSIS**
+* **UROBOROS**
+* **Ψ-Core**
+* **Ψ-Core v33**
 
-The name UROBOROS does not by itself constitute a grant of trademark rights.
-
----
-
-## 4. Ψ-Core v33
-
-**Ψ-Core v33** identifies the reference architecture of the UROBOROS core corresponding to the public project version designated by the author as version 33.
-
-The repository history should be used to identify the exact source state associated with a particular release.
-
-Changes made by third parties should not be represented as the official Ψ-Core v33 implementation unless they correspond to the official release.
+These names identify the GNOSIS project, its computational core and its reference architecture.
 
 ---
 
-## 5. Public Provenance
+## 3. GNOSIS
 
-The project is intentionally published as an open research project.
+**GNOSIS** is the name of the research platform.
 
-The repository provides a public technical record containing, where available:
+It identifies:
 
-* source code;
-* commits;
-* version history;
-* documentation;
-* releases;
-* research experiments;
-* benchmarks.
+**GNOSIS — Universal Scientific Discovery & Intelligence Platform**
 
-These records can assist in establishing the provenance of the corresponding repository materials.
-
-The public GitHub timestamp should not be represented as a substitute for a formal patent filing, copyright registration, trademark registration, notarization or other legally recognized priority mechanism.
+Third parties may use the name descriptively to identify the official project where such use is accurate and does not imply endorsement, certification or affiliation.
 
 ---
 
-## 6. Research Access
+## 4. UROBOROS
 
-GNOSIS is intentionally made available for scientific and research use.
+**UROBOROS** identifies the recursive computational core developed as part of GNOSIS.
 
-Research access is governed by:
+The name may be used descriptively when referring accurately to the GNOSIS computational core.
 
-`LICENSE-RESEARCH.md`
-
-Public access to the repository does not automatically grant unrestricted rights for commercial exploitation.
+Third-party implementations should clearly distinguish themselves from the official UROBOROS implementation.
 
 ---
 
-## 7. Commercial Rights
+## 5. Ψ-Core
 
-Commercial rights are not granted merely by publication of the source code.
+**Ψ-Core** identifies the architectural family associated with the UROBOROS computational core.
 
-Commercial use is governed by the applicable commercial license or separate written agreement.
+**Ψ-Core v33** identifies the public reference architecture designated by the author as version 33.
 
-See:
-
-`COMMERCIAL-LICENSE.md`
+A modified or independently implemented architecture should not be presented as the official Ψ-Core v33 implementation unless it corresponds to the official release.
 
 ---
 
-## 8. Trademarks and Project Names
+## 6. Descriptive Use
 
-The following names identify the project and its technology:
+Accurate descriptive use of the project names is permitted where necessary to identify the project or technology.
 
-* GNOSIS
-* UROBOROS
-* Ψ-Core
-* Ψ-Core v33
+Examples include:
 
-Use of these names does not automatically grant trademark rights.
+* "Research conducted using GNOSIS."
+* "This experiment uses UROBOROS."
+* "This implementation is based on Ψ-Core v33."
+* "This paper evaluates GNOSIS."
 
-See:
-
-`TRADEMARKS.md`
+Such references should not imply official endorsement or certification.
 
 ---
 
-## 9. Contributions
+## 7. No Implied Endorsement
 
-Contributions made by third parties remain subject to the contribution terms applicable at the time of contribution.
+Use of the project names does not imply:
 
-A contributor does not automatically transfer ownership of unrelated intellectual property merely by participating in the project.
+* endorsement;
+* certification;
+* sponsorship;
+* partnership;
+* investment;
+* authorization;
+* affiliation;
+* scientific validation.
 
-Contribution and authorship rules are defined in:
-
-`CONTRIBUTING.md`
-
----
-
-## 10. Independent Works
-
-Researchers and developers may create independent works using GNOSIS according to the applicable license.
-
-Independent works may include:
-
-* research papers;
-* software;
-* experiments;
-* datasets;
-* simulations;
-* engineering implementations;
-* mathematical analyses;
-* scientific models.
-
-Ownership of such independent works is determined by applicable law, agreements between the relevant parties and the actual contribution of each party.
-
-Use of GNOSIS does not automatically make the author of GNOSIS the owner of every independent result produced with the software.
+Third parties must not represent an independent project as officially approved by GNOSIS unless such approval has been expressly granted in writing.
 
 ---
 
-## 11. Scientific Discoveries
+## 8. Independent Implementations
 
-GNOSIS may be used as a research instrument for investigating scientific questions.
+Independent implementations, forks and derivative projects may accurately describe their relationship to GNOSIS.
 
-The project does not claim automatic ownership of every discovery, invention or scientific result generated through its use.
+However, they should make the distinction between the original project and the independent implementation reasonably clear.
 
-However, users must comply with applicable intellectual-property laws and contractual obligations when determining:
+Recommended wording:
 
-* inventorship;
-* authorship;
-* patent rights;
-* publication rights;
-* licensing;
-* ownership.
+> This is an independent implementation derived from or inspired by GNOSIS and is not an official GNOSIS release.
 
-Users should obtain appropriate professional legal advice before public disclosure of potentially patentable inventions.
+Where the implementation is materially different, the distinction should be especially clear.
+
+---
+
+## 9. Modified Versions
+
+Modified versions must not be represented as unchanged official GNOSIS releases.
+
+Where practical, modified distributions should identify:
+
+* that modifications were made;
+* the original GNOSIS version;
+* the relevant modification or fork;
+* the responsible organization or developer.
+
+---
+
+## 10. Commercial Branding
+
+A commercial license to use GNOSIS technology does not automatically grant the right to use:
+
+* GNOSIS;
+* UROBOROS;
+* Ψ-Core;
+* Ψ-Core v33;
+
+as commercial product names, trademarks or branding.
+
+Commercial branding rights, if any, must be separately authorized.
+
+---
+
+## 11. Product Naming
+
+Third parties should avoid naming independent commercial products in a manner that could reasonably cause confusion with official GNOSIS products or releases.
+
+Examples of potentially confusing presentation include statements suggesting that an independent product is:
+
+* an official GNOSIS product;
+* an official UROBOROS release;
+* certified by GNOSIS;
+* developed by the GNOSIS project;
+* officially supported by the author;
+
+when no such relationship exists.
 
 ---
 
 ## 12. Attribution
 
-When GNOSIS or UROBOROS is referenced in scientific, technical or educational work, the following attribution is recommended:
+When GNOSIS technology is referenced in research or technical work, the following attribution is recommended:
 
 > GNOSIS — Universal Scientific Discovery & Intelligence Platform
 > UROBOROS — Ψ-Core v33
-> Mikhail Kucheriavyi
+> Mikhail Kucheriaviy
 > Public Research Release — 3 September 2026
 
-Where possible, researchers should also identify the relevant Git commit, release or version.
+Where possible, the relevant version or Git commit should also be identified.
 
 ---
 
-## 13. Preservation of Notices
+## 13. Relationship to Copyright
 
-Copyright and attribution notices included in the original project should not be intentionally removed from redistributed copies where their preservation is required by the applicable license.
+Trademark and project-identity rights are separate from copyright.
 
-Modified versions should not be presented as official GNOSIS releases.
+Copyright protection may apply to original project materials according to applicable law.
 
----
+See:
 
-## 14. No Implied Transfer
-
-Nothing in the public availability of GNOSIS should be interpreted as an automatic transfer of:
-
-* copyright;
-* trademark rights;
-* patent rights;
-* commercial licensing rights;
-* ownership of the original project;
-* rights to represent a third-party implementation as official GNOSIS.
-
-Any transfer or grant of rights must be expressly established by the applicable license or written agreement.
+`COPYRIGHT.md`
 
 ---
 
-## 15. Reservation of Rights
+## 14. Relationship to Licensing
 
-Except for rights expressly granted under the applicable project license:
+Permission to use GNOSIS software under the Research License does not automatically grant trademark rights.
 
-**All rights are reserved.**
+Permission for Commercial Use under a separate commercial agreement does not automatically grant trademark rights unless expressly stated.
 
-This includes rights relating to the original project materials and any rights that may be protected under applicable copyright, trademark, patent or other intellectual-property laws.
+See:
 
----
-
-## 16. No False Attribution
-
-No person or organization may knowingly represent:
-
-* an unofficial modification as the official GNOSIS release;
-* an independent result as an original result of the GNOSIS author;
-* an unrelated implementation as the official UROBOROS implementation;
-* an unauthorized commercial product as officially endorsed by the project.
-
-Accurate attribution is encouraged.
+* `LICENSE-RESEARCH.md`
+* `COMMERCIAL-LICENSE.md`
 
 ---
 
-## 17. Project History
+## 15. No Certification
 
-The project maintains its public development history through the repository.
+The project names must not be used to imply that a third-party system has been:
 
-Important architectural changes should be documented through:
+* scientifically certified;
+* technically certified;
+* safety certified;
+* commercially approved;
+* officially validated;
 
-* commits;
-* releases;
-* changelog entries;
-* technical documentation.
-
-This is intended to preserve a transparent research record.
-
----
-
-## 18. Effective Date
-
-This copyright notice applies to the GNOSIS materials to which it is attached or referenced.
-
-**Public Research Release: 3 September 2026**
-
-**Copyright © 2026 Mikhail Kucheriavyi.**
+by GNOSIS or its author unless such certification has been expressly established.
 
 ---
 
-# GNOSIS
+## 16. Scientific Publications
 
-## UROBOROS — Ψ-Core v33
+Researchers may identify GNOSIS, UROBOROS and Ψ-Core accurately in:
+
+* scientific papers;
+* preprints;
+* theses;
+* dissertations;
+* conference presentations;
+* technical reports;
+* benchmarks;
+* reproducibility studies;
+* educational materials.
+
+Such use should accurately describe the relationship between the research and the project.
+
+---
+
+## 17. Forks and Derivative Projects
+
+Forks and derivative projects are encouraged where permitted by the applicable license.
+
+However, they should preserve a clear distinction between:
+
+**Official GNOSIS**
+
+and
+
+**Independent or Modified Implementations.**
+
+A fork should not use project identifiers in a manner that falsely suggests that it is an official release.
+
+---
+
+## 18. Reservation of Rights
+
+Except for descriptive uses permitted by applicable law or expressly authorized by the project, rights relating to project names and identifiers are reserved by the project owner to the extent such rights exist under applicable law.
+
+Nothing in this document creates rights that do not otherwise exist under applicable law.
+
+---
+
+## 19. Legal Qualification
+
+Trademark rights vary by jurisdiction.
+
+This document does not constitute a representation that any project name is registered as a trademark in any particular jurisdiction.
+
+The absence of a registration does not necessarily determine whether rights may exist.
+
+Users should obtain appropriate legal advice regarding trademark registration, enforcement and commercial branding in their jurisdiction.
+
+---
+
+## 20. Project Identity
+
+The official project identity is:
+
+**GNOSIS**
+
+The computational core is:
+
+**UROBOROS**
+
+The reference architecture is:
+
+**Ψ-Core v33**
+
+The author is:
+
+**Mikhail Kucheriaviy**
+
+The public research release is:
+
+**3 September 2026**
+
+---
+
+## Final Principle
+
+GNOSIS is intended to remain identifiable as an open research project while allowing independent researchers and developers to investigate, reproduce, modify and extend the technology.
+
+Accurate identification is encouraged.
+
+False affiliation is not.
+
+**GNOSIS**
+
+**UROBOROS — Ψ-Core v33**
 
 **Open for Research.**
 
-**Commercial Use Requires Appropriate Authorization.**
+**Independent Implementations Welcome.**
 
-**Copyright © 2026 Mikhail Kucheriavyi.**
+**No Implied Endorsement.**
 
-**All rights reserved except as expressly licensed.**
+**Copyright © 2026 Mikhail Kucheriaviy.**
