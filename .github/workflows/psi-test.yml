@@ -1,0 +1,47 @@
+name: Ψ Mathematical Corpus Test
+
+on:
+  push:
+    branches:
+      - experiment/psi-math-self-optimization
+  pull_request:
+    branches:
+      - experiment/psi-math-self-optimization
+
+jobs:
+  psi-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      - name: Install test dependency
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Validate Ψ corpus exists and is non-empty
+        run: |
+          test -s research/psi_mathematical_corpus_v1.md
+
+      - name: Run baseline test suite
+        run: |
+          python -m pytest -q
+
+      - name: Record corpus metadata
+        run: |
+          mkdir -p artifacts
+          sha256sum research/psi_mathematical_corpus_v1.md > artifacts/psi_corpus.sha256
+          git rev-parse HEAD > artifacts/commit.txt
+
+      - name: Upload Ψ experiment metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: psi-experiment-metadata
+          path: artifacts/
