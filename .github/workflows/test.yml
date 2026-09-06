@@ -23,23 +23,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
       - name: Run core tests
-        run: |
-          python -m pytest -q
+        run: python -m pytest -q
       - name: Run TEST-10
-        run: |
-          python research/psi_test10.py
+        run: python research/psi_test10.py
       - name: Run TEST-11 after TEST-10
-        run: |
-          python research/psi_test11.py
+        run: python research/psi_test11.py
       - name: Run TEST-12 after TEST-11
-        run: |
-          python research/psi_test12.py
+        run: python research/psi_test12.py
       - name: Run TEST-13 after TEST-12
-        run: |
-          python research/psi_test13.py
+        run: python research/psi_test13.py
       - name: Run TEST-14 after TEST-13
-        run: |
-          python research/psi_test14.py
+        run: python research/psi_test14.py
       - name: Run TEST-15 after TEST-14
-        run: |
-          python research/psi_test15.py
+        run: python research/psi_test15.py
+      - name: Run TEST-16 after TEST-15
+        run: python research/psi_test16.py
