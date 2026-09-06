@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - experiment/psi-math-self-optimization
+  workflow_dispatch:
 
 jobs:
   psi-test:
@@ -15,41 +16,28 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.10"
-
       - name: Install test dependency
         run: |
           python -m pip install --upgrade pip
           pip install pytest
-
       - name: Validate Ψ corpus exists and is non-empty
-        run: |
-          test -s research/psi_mathematical_corpus_v1.md
-
+        run: test -s research/psi_mathematical_corpus_v1.md
       - name: Run Test-1 structural extraction
-        run: |
-          python research/psi_test1.py
-
+        run: python research/psi_test1.py
       - name: Run Test-2 model construction
-        run: |
-          python research/psi_test2.py
-
+        run: python research/psi_test2.py
       - name: Run Test-3 alternative model selection
-        run: |
-          python research/psi_test3.py
-
+        run: python research/psi_test3.py
       - name: Run Test-4 candidate generation and selection
-        run: |
-          python research/psi_test4.py
-
+        run: python research/psi_test4.py
+      - name: Run Test-5 constraint-driven reconstruction
+        run: python research/psi_test5.py
       - name: Run baseline test suite
-        run: |
-          python -m pytest -q
-
+        run: python -m pytest -q
       - name: Record experiment metadata
         run: |
           mkdir -p artifacts
@@ -59,7 +47,7 @@ jobs:
           cp research/psi_test2_result.json artifacts/test2_result.json
           cp research/psi_test3_result.json artifacts/test3_result.json
           cp research/psi_test4_result.json artifacts/test4_result.json
-
+          cp research/psi_test5_result.json artifacts/test5_result.json
       - name: Upload Ψ experiment metadata
         uses: actions/upload-artifact@v4
         with:
