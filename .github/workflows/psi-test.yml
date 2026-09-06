@@ -38,6 +38,10 @@ jobs:
         run: |
           python research/psi_test2.py
 
+      - name: Run Test-3 alternative model selection
+        run: |
+          python research/psi_test3.py
+
       - name: Run baseline test suite
         run: |
           python -m pytest -q
@@ -49,6 +53,7 @@ jobs:
           git rev-parse HEAD > artifacts/commit.txt
           printf 'TEST-1=PASS\n' > artifacts/test1.txt
           cp research/psi_test2_result.json artifacts/test2_result.json
+          cp research/psi_test3_result.json artifacts/test3_result.json
 
       - name: Upload Ψ experiment metadata
         uses: actions/upload-artifact@v4
