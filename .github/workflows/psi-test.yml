@@ -34,6 +34,10 @@ jobs:
         run: |
           python research/psi_test1.py
 
+      - name: Run Test-2 model construction
+        run: |
+          python research/psi_test2.py
+
       - name: Run baseline test suite
         run: |
           python -m pytest -q
@@ -44,6 +48,7 @@ jobs:
           sha256sum research/psi_mathematical_corpus_v1.md > artifacts/psi_corpus.sha256
           git rev-parse HEAD > artifacts/commit.txt
           printf 'TEST-1=PASS\n' > artifacts/test1.txt
+          cp research/psi_test2_result.json artifacts/test2_result.json
 
       - name: Upload Ψ experiment metadata
         uses: actions/upload-artifact@v4
