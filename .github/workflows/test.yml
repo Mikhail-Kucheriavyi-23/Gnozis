@@ -44,3 +44,5 @@ jobs:
         run: python research/psi_test17.py
       - name: Run TEST-18 after TEST-17
         run: python research/psi_test18.py
+      - name: Run TEST-19 after TEST-18
+        run: python research/psi_test19.py
