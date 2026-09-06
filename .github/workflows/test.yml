@@ -37,3 +37,6 @@ jobs:
       - name: Run TEST-13 after TEST-12
         run: |
           python research/psi_test13.py
+      - name: Run TEST-14 after TEST-13
+        run: |
+          python research/psi_test14.py
