@@ -30,15 +30,20 @@ jobs:
         run: |
           test -s research/psi_mathematical_corpus_v1.md
 
+      - name: Run Test-1 structural extraction
+        run: |
+          python research/psi_test1.py
+
       - name: Run baseline test suite
         run: |
           python -m pytest -q
 
-      - name: Record corpus metadata
+      - name: Record experiment metadata
         run: |
           mkdir -p artifacts
           sha256sum research/psi_mathematical_corpus_v1.md > artifacts/psi_corpus.sha256
           git rev-parse HEAD > artifacts/commit.txt
+          printf 'TEST-1=PASS\n' > artifacts/test1.txt
 
       - name: Upload Ψ experiment metadata
         uses: actions/upload-artifact@v4
