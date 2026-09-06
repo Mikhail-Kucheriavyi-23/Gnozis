@@ -4,28 +4,47 @@ on:
   push:
     branches:
       - main
+      - experiment/psi-math-self-optimization
   pull_request:
     branches:
       - main
+      - experiment/psi-math-self-optimization
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.10"
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pytest
-
-      - name: Run tests
-        run: |
-          python -m pytest -q
+      - name: Run core tests
+        run: python -m pytest -q
+      - name: Run TEST-10
+        run: python research/psi_test10.py
+      - name: Run TEST-11 after TEST-10
+        run: python research/psi_test11.py
+      - name: Run TEST-12 after TEST-11
+        run: python research/psi_test12.py
+      - name: Run TEST-13 after TEST-12
+        run: python research/psi_test13.py
+      - name: Run TEST-14 after TEST-13
+        run: python research/psi_test14.py
+      - name: Run TEST-15 after TEST-14
+        run: python research/psi_test15.py
+      - name: Run TEST-16 after TEST-15
+        run: python research/psi_test16.py
+      - name: Run TEST-17 after TEST-16
+        run: python research/psi_test17.py
+      - name: Run TEST-18 after TEST-17
+        run: python research/psi_test18.py
+      - name: Run TEST-19 after TEST-18
+        run: python research/psi_test19.py
+      - name: Run TEST-20 after TEST-19
+        run: python research/psi_test20.py
