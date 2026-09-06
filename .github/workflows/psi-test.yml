@@ -43,6 +43,8 @@ jobs:
         run: python research/psi_test8.py
       - name: Run Test-9 corpus-derived competing formalizations
         run: python research/psi_test9.py
+      - name: Run Test-10 autonomous consequence generation
+        run: python research/psi_test10.py
       - name: Run baseline test suite
         run: python -m pytest -q
       - name: Record experiment metadata
@@ -59,6 +61,7 @@ jobs:
           cp research/psi_test7_result.json artifacts/test7_result.json
           cp research/psi_test8_result.json artifacts/test8_result.json
           cp research/psi_test9_result.json artifacts/test9_result.json
+          cp research/psi_test10_result.json artifacts/test10_result.json
       - name: Upload Ψ experiment metadata
         uses: actions/upload-artifact@v4
         with:
