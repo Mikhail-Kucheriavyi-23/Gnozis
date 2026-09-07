@@ -58,5 +58,5 @@ def test_context_mismatch_is_rejected(self):
     self.assertEqual(result["reason"], "CONTEXT_MISMATCH")
 ```
 
-if **name** == "**main**":
+if   name   == "  main  ":
 unittest.main()
