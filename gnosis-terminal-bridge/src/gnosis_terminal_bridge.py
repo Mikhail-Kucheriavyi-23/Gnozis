@@ -4,6 +4,8 @@ import secrets
 import time
 from dataclasses import dataclass, asdict
 
+from agency_context import AgencyContext, AgencyIdentity
+
 
 @dataclass
 class Challenge:
@@ -61,6 +63,7 @@ class GnosisTerminalBridge:
         epoch: int,
         generation: int,
         height: int,
+        identity: AgencyIdentity | None = None,
     ) -> dict:
         challenge = self.challenges.get(challenge_id)
 
@@ -85,14 +88,20 @@ class GnosisTerminalBridge:
 
         challenge.used = True
 
+        agency = AgencyContext(
+            identity=identity
+            or AgencyIdentity(provider="unknown", subject="ephemeral"),
+            epoch=epoch,
+            generation=generation,
+            height=height,
+            expires_at=challenge.expires_at,
+        )
+
         return {
             "status": "VERIFIED",
             "agency": {
                 "type": "EPHEMERAL",
-                "epoch": epoch,
-                "generation": generation,
-                "height": height,
-                "expires_at": challenge.expires_at,
+                **agency.to_dict(),
             },
         }
 
@@ -113,12 +122,22 @@ def handle(request: dict) -> dict:
 
         if action == "VERIFY_CHALLENGE_RESPONSE":
             try:
+                identity_data = request.get("identity")
+                identity = None
+                if identity_data is not None:
+                    identity = AgencyIdentity(
+                        provider=identity_data["provider"],
+                        subject=identity_data["subject"],
+                        authenticated=identity_data.get("authenticated", True),
+                    )
+
                 return _BRIDGE.verify_challenge(
                     challenge_id=request["challenge_id"],
                     response=request["response"],
                     epoch=request["epoch"],
                     generation=request["generation"],
                     height=request["height"],
+                    identity=identity,
                 )
             except KeyError as exc:
                 return {
