@@ -26,8 +26,11 @@ def test_agency_context_is_available_to_transition_and_evolution_needs_no_extern
     def transition(state, agency_context):
         calls.append(agency_context.identity.subject)
         return state.evolve(
-            agency_seen=agency_context.identity.subject,
-            next_height=agency_context.height + 1,
+            values={
+                **state.values,
+                "agency_seen": agency_context.identity.subject,
+                "next_height": agency_context.height + 1,
+            }
         )
 
     engine = engine_from_agency_context(context, transition)
@@ -41,7 +44,6 @@ def test_agency_context_is_available_to_transition_and_evolution_needs_no_extern
     assert evolved.state.values["next_height"] == 4
     assert calls == ["Mikhail-Kucheriavyi-23"]
 
-    # The second step uses only State -> State; no new identity lookup occurs.
     evolved_again = evolved.step()
     assert evolved_again.state.values["agency_seen"] == "Mikhail-Kucheriavyi-23"
     assert calls == ["Mikhail-Kucheriavyi-23", "Mikhail-Kucheriavyi-23"]
@@ -52,8 +54,11 @@ def test_same_state_and_same_agency_context_are_deterministic():
 
     def transition(state, agency_context):
         return state.evolve(
-            subject=agency_context.identity.subject,
-            height=agency_context.height,
+            values={
+                **state.values,
+                "subject": agency_context.identity.subject,
+                "height": agency_context.height,
+            }
         )
 
     engine = engine_from_agency_context(context, transition)
