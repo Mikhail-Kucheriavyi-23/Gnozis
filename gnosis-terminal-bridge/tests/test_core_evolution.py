@@ -92,3 +92,36 @@ def test_unauthenticated_context_cannot_create_evolution_engine():
         assert str(exc) == "Agency identity is not authenticated"
     else:
         raise AssertionError("Unauthenticated context must be rejected")
+
+
+def test_context_is_captured_once_and_three_evolution_steps_need_no_external_input():
+    context = make_context()
+    external_calls = []
+    transition_calls = []
+
+    def transition(state, agency_context):
+        transition_calls.append(agency_context.identity.subject)
+        return state.evolve(
+            values={
+                **state.values,
+                "steps": state.values.get("steps", 0) + 1,
+                "subject": agency_context.identity.subject,
+            }
+        )
+
+    engine = engine_from_agency_context(context, transition)
+    initial = State(values={"steps": 0})
+    uroboros = Uroboros(state=initial, engine=engine)
+
+    first = uroboros.step()
+    second = first.step()
+    third = second.step()
+
+    assert third.state.values["steps"] == 3
+    assert third.state.values["subject"] == "Mikhail-Kucheriavyi-23"
+    assert transition_calls == [
+        "Mikhail-Kucheriavyi-23",
+        "Mikhail-Kucheriavyi-23",
+        "Mikhail-Kucheriavyi-23",
+    ]
+    assert external_calls == []
