@@ -34,19 +34,21 @@ def test_verified_challenge_can_carry_agency_identity():
 def test_handle_accepts_agency_identity_without_exposing_credentials():
     bridge = GnosisTerminalBridge(ttl_seconds=300)
     context = {"epoch": 1, "generation": 2, "height": 1}
+    identity = AgencyIdentity(
+        provider="github",
+        subject="Mikhail-Kucheriavyi-23",
+    )
 
-    # The handle() API uses the process-local bridge, so exercise the same
-    # contract directly through the bridge with the identity context.
+    issued = bridge.initiate_challenge(context)
+    challenge = issued["challenge"]
+
     result = bridge.verify_challenge(
-        bridge.initiate_challenge(context)["challenge"]["challenge_id"],
-        bridge.initiate_challenge(context)["challenge"]["value"],
+        challenge["challenge_id"],
+        challenge["value"],
         1,
         2,
         1,
-        identity=AgencyIdentity(
-            provider="github",
-            subject="Mikhail-Kucheriavyi-23",
-        ),
+        identity=identity,
     )
 
     assert result["status"] == "VERIFIED"
