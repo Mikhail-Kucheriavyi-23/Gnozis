@@ -51,42 +51,13 @@ def test_prepared_witness_is_aborted():
     assert bridge.canonical == old
 
 
-def test_generation_reuse_halts():
-    old = pointer(0, 0, "h0")
-    conflicting = pointer(1, 1, "h1")
-    bridge = GnosisPsiBridge(old)
-
-    bad = JPsiWitness(
-        old=old,
-        new=conflicting,
-        gamma_finality="gamma",
-        omega="omega",
-        token="token",
-        status=WitnessStatus.DECIDED,
-    )
-    bad_new = pointer(2, 2, "h2")
-    bad = JPsiWitness(
-        old=replace_pointer_generation(bad.old, 5),
-        new=bad_new,
-        gamma_finality="gamma",
-        omega="omega",
-        token="token",
-        status=WitnessStatus.DECIDED,
-    )
+def test_generation_gap_halts():
+    current = pointer(0, 0, "h0")
+    future = pointer(2, 2, "h2")
+    bridge = GnosisPsiBridge(current)
 
     with pytest.raises(PsiHalt, match="generation gap"):
-        bridge.replay([bad])
-
-
-def replace_pointer_generation(p, generation):
-    return CanonicalPointer(
-        epoch=p.epoch,
-        generation=generation,
-        height=p.height,
-        state_hash=p.state_hash,
-        finality_height=p.finality_height,
-        finality_hash=p.finality_hash,
-    )
+        bridge.install(future)
 
 
 def test_conflicting_decisions_for_same_generation_halt():
