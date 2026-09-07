@@ -5,7 +5,7 @@ from gnosis_terminal_bridge import GnosisTerminalBridge
 
 class TerminalBridgeIntegrationTests(unittest.TestCase):
     def setUp(self):
-        self.bridge = GnosisTerminalBridge(challenge_ttl_seconds=300)
+        self.bridge = GnosisTerminalBridge(ttl_seconds=300)
         self.context = {"epoch": 1, "generation": 2, "height": 1}
 
     def test_initiate_verify_and_replay_rejection(self):
