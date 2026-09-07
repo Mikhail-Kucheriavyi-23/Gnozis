@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gnozis Auth Box</title>
+  <style>
+    body{font-family:system-ui,sans-serif;max-width:560px;margin:12vh auto;padding:24px}
+    .box{border:1px solid #ddd;border-radius:18px;padding:28px;box-shadow:0 8px 30px #00000012}
+    button{width:100%;padding:13px;border:0;border-radius:10px;cursor:pointer;font-size:16px}
+    .note{font-size:14px;color:#666;line-height:1.5}
+  </style>
+</head>
+<body>
+  <main class="box">
+    <h1>Gnozis Auth Box</h1>
+    <p>Authenticate with GitHub without pasting a GitHub token into this page.</p>
+    <button id="github">Continue with GitHub</button>
+    <p class="note" id="status">No credential is requested or stored by this static page.</p>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const clientId = params.get('client_id');
+    const redirectUri = params.get('redirect_uri');
+    const state = crypto.randomUUID();
+
+    document.getElementById('github').onclick = () => {
+      if (!clientId || !redirectUri) {
+        document.getElementById('status').textContent =
+          'This prototype needs a registered GitHub App/OAuth client_id and callback URL before authentication can be enabled.';
+        return;
+      }
+
+      const url = new URL('https://github.com/login/oauth/authorize');
+      url.searchParams.set('client_id', clientId);
+      url.searchParams.set('redirect_uri', redirectUri);
+      url.searchParams.set('state', state);
+      url.searchParams.set('code_challenge_method', 'S256');
+      // The backend must provide the matching PKCE verifier/challenge pair.
+      document.getElementById('status').textContent =
+        'Redirecting to GitHub for authorization...';
+      location.href = url.toString();
+    };
+  </script>
+</body>
+</html>
