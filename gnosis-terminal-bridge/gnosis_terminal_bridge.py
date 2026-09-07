@@ -28,7 +28,6 @@ class GnosisTerminalBridge:
             sort_keys=True,
             separators=(",", ":")
         ).encode()
-
         return hashlib.sha256(raw).hexdigest()
 
     def initiate_challenge(self, request: dict) -> dict:
@@ -48,7 +47,6 @@ class GnosisTerminalBridge:
             height=height,
             expires_at=expires_at,
         )
-
         self.challenges[challenge_id] = challenge
 
         return {
@@ -64,42 +62,26 @@ class GnosisTerminalBridge:
         generation: int,
         height: int,
     ) -> dict:
-
         challenge = self.challenges.get(challenge_id)
 
         if challenge is None:
-            return {
-                "status": "REJECT",
-                "reason": "UNKNOWN_CHALLENGE",
-            }
+            return {"status": "REJECT", "reason": "UNKNOWN_CHALLENGE"}
 
         if challenge.used:
-            return {
-                "status": "REJECT",
-                "reason": "CHALLENGE_ALREADY_USED",
-            }
+            return {"status": "REJECT", "reason": "CHALLENGE_ALREADY_USED"}
 
         if int(time.time()) > challenge.expires_at:
-            return {
-                "status": "REJECT",
-                "reason": "CHALLENGE_EXPIRED",
-            }
+            return {"status": "REJECT", "reason": "CHALLENGE_EXPIRED"}
 
         if (
             challenge.epoch != epoch
             or challenge.generation != generation
             or challenge.height != height
         ):
-            return {
-                "status": "REJECT",
-                "reason": "CONTEXT_MISMATCH",
-            }
+            return {"status": "REJECT", "reason": "CONTEXT_MISMATCH"}
 
-        if response != challenge.value:
-            return {
-                "status": "REJECT",
-                "reason": "INVALID_RESPONSE",
-            }
+        if not secrets.compare_digest(response, challenge.value):
+            return {"status": "REJECT", "reason": "INVALID_RESPONSE"}
 
         challenge.used = True
 
@@ -115,26 +97,39 @@ class GnosisTerminalBridge:
         }
 
 
-def handle(request: dict) -> dict:
-    bridge = GnosisTerminalBridge()
+# A long-running bridge must keep one bridge instance so a challenge issued
+# by one request can be verified by the following request in the same process.
+_BRIDGE = GnosisTerminalBridge()
 
+
+def handle(request: dict) -> dict:
     command = request.get("command")
 
     if command == "inject":
         action = request.get("metadata", {}).get("action")
 
         if action == "INITIATE_CHALLENGE_RESPONSE":
-            return bridge.initiate_challenge(request)
+            return _BRIDGE.initiate_challenge(request)
 
-        return {
-            "status": "REJECT",
-            "reason": "UNKNOWN_ACTION",
-        }
+        if action == "VERIFY_CHALLENGE_RESPONSE":
+            try:
+                return _BRIDGE.verify_challenge(
+                    challenge_id=request["challenge_id"],
+                    response=request["response"],
+                    epoch=request["epoch"],
+                    generation=request["generation"],
+                    height=request["height"],
+                )
+            except KeyError as exc:
+                return {
+                    "status": "REJECT",
+                    "reason": "MISSING_FIELD",
+                    "field": str(exc),
+                }
 
-    return {
-        "status": "REJECT",
-        "reason": "UNKNOWN_COMMAND",
-    }
+        return {"status": "REJECT", "reason": "UNKNOWN_ACTION"}
+
+    return {"status": "REJECT", "reason": "UNKNOWN_COMMAND"}
 
 
 if __name__ == "__main__":
@@ -142,5 +137,4 @@ if __name__ == "__main__":
 
     request = json.load(sys.stdin)
     response = handle(request)
-
     print(json.dumps(response, indent=2))
