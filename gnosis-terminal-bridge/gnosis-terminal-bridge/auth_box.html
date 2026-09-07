@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gnozis Agency Auth Box</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .box {
+      width: min(420px, calc(100% - 32px));
+      padding: 32px;
+      box-sizing: border-box;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #status {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="box">
+    <h1>Gnozis</h1>
+    <p>Agency Authentication</p>
+
+    <button id="github">
+      Continue with GitHub
+    </button>
+
+    <div id="status"></div>
+  </main>
+
+  <script>
+    const CLIENT_ID = "Iv23liXLuRmRJcLQxLCP";
+
+    const button = document.getElementById("github");
+    const status = document.getElementById("status");
+
+    button.addEventListener("click", () => {
+      status.textContent = "Opening GitHub authorization…";
+
+      /*
+       * Device Flow requires a backend request to GitHub's
+       * device authorization endpoint. We intentionally do
+       * not put a client secret, private key, or GitHub token
+       * into this public page.
+       *
+       * The backend will be added in the next step.
+       */
+
+      const url =
+        "https://github.com/login/device";
+
+      window.open(url, "_blank", "noopener,noreferrer");
+
+      status.textContent =
+        "GitHub authorization opened. Backend device-flow exchange is the next step.";
+    });
+  </script>
+</body>
+</html>
