@@ -22,6 +22,15 @@ def select_next_state(
     boolean boundary and the selector may only return one of the exact tested
     candidate objects.
     """
+    if not isinstance(state, State):
+        raise TypeError("state must be a State instance")
+    if not callable(generate):
+        raise TypeError("generate must be callable")
+    if not callable(test):
+        raise TypeError("test must be callable")
+    if not callable(select):
+        raise TypeError("select must be callable")
+
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
