@@ -11,12 +11,19 @@ Transition = Callable[[State], State]
 
 @dataclass
 class Engine:
-    """Deterministic state-transition engine for GNOSIS/UROBOROS."""
+    """State-transition engine for GNOSIS/UROBOROS."""
 
     transition: Transition
 
+    def __post_init__(self) -> None:
+        if not callable(self.transition):
+            raise TypeError("Engine transition must be callable.")
+
     def step(self, state: State) -> State:
-        """Apply one transition to the current state."""
+        """Apply one transition to the current State."""
+        if not isinstance(state, State):
+            raise TypeError("Engine.step requires a State instance.")
+
         next_state = self.transition(state)
 
         if not isinstance(next_state, State):
@@ -43,7 +50,7 @@ class Engine:
         state: State,
         steps: int,
     ) -> Iterable[State]:
-        """Yield the initial state followed by each subsequent state."""
+        """Yield the initial State followed by each subsequent State."""
         if steps < 0:
             raise ValueError("steps must be non-negative.")
 
@@ -53,4 +60,3 @@ class Engine:
         for _ in range(steps):
             current = self.step(current)
             yield current
-

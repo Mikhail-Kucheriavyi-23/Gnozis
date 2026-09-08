@@ -2,7 +2,7 @@ from dataclasses import FrozenInstanceError
 
 import pytest
 
-from core import Relation, State, Uroboros, select_next_state
+from core import Engine, Relation, State, Uroboros, select_next_state
 
 
 def test_state_owns_x_and_r_without_aliasing_relation_container():
@@ -210,3 +210,23 @@ def test_default_state_has_empty_relation_structure():
     state = State()
 
     assert state.relations == ()
+
+
+def test_engine_rejects_non_callable_transition():
+    with pytest.raises(TypeError, match="transition must be callable"):
+        Engine(transition=None)  # type: ignore[arg-type]
+
+
+def test_engine_rejects_non_state_input():
+    engine = Engine(transition=lambda state: state)
+
+    with pytest.raises(TypeError, match="requires a State instance"):
+        engine.step(object())  # type: ignore[arg-type]
+
+
+def test_state_rejects_cyclic_standard_containers():
+    cyclic = []
+    cyclic.append(cyclic)
+
+    with pytest.raises(ValueError, match="cyclic standard container"):
+        State(values={"cycle": cyclic})

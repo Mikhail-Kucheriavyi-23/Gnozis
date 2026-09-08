@@ -45,18 +45,34 @@ class _FrozenList(list):
     sort = _immutable
 
 
-def _freeze_standard(value: Any) -> Any:
+def _freeze_standard(value: Any, active: set[int] | None = None) -> Any:
     """Freeze standard containers without imposing semantics on arbitrary objects."""
-    if isinstance(value, Mapping):
-        return _FrozenDict(
-            {key: _freeze_standard(item) for key, item in value.items()}
-        )
-    if isinstance(value, list):
-        return _FrozenList(_freeze_standard(item) for item in value)
-    if isinstance(value, tuple):
-        return tuple(_freeze_standard(item) for item in value)
-    if isinstance(value, (set, frozenset)):
-        return frozenset(_freeze_standard(item) for item in value)
+    if active is None:
+        active = set()
+
+    if isinstance(value, (Mapping, list, tuple, set, frozenset)):
+        value_id = id(value)
+        if value_id in active:
+            raise ValueError("cyclic standard container is not supported")
+        active.add(value_id)
+        try:
+            if isinstance(value, Mapping):
+                return _FrozenDict(
+                    {
+                        key: _freeze_standard(item, active)
+                        for key, item in value.items()
+                    }
+                )
+            if isinstance(value, list):
+                return _FrozenList(
+                    _freeze_standard(item, active) for item in value
+                )
+            if isinstance(value, tuple):
+                return tuple(_freeze_standard(item, active) for item in value)
+            return frozenset(_freeze_standard(item, active) for item in value)
+        finally:
+            active.remove(value_id)
+
     return value
 
 
@@ -71,9 +87,9 @@ class State:
     not recursively frozen and remain outside this structural immutability
     guarantee.
 
-    Standard dict/list containers nested inside ``values`` are normalized to
-    immutable, JSON-compatible subclasses. Other arbitrary objects are left
-    unchanged and therefore remain outside the recursive immutability contract.
+    Standard containers nested inside ``values`` are normalized to immutable,
+    JSON-compatible representations. Cyclic standard containers are rejected.
+    Other arbitrary objects are left unchanged.
     """
 
     values: Mapping[str, Any] = field(default_factory=dict)
