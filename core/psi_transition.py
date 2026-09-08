@@ -10,22 +10,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from .state import State
-
-
-@dataclass(frozen=True)
-class Psi:
-    """Fundamental state: exactly the pair (X, R)."""
-
-    x: Any
-    relations: Any
-
-    @classmethod
-    def from_state(cls, state: State) -> "Psi":
-        return cls(state.values["x"], state.values["relations"])
-
-    def to_state(self) -> State:
-        return State(values={"x": self.x, "relations": self.relations})
+from .state import Psi, State
 
 
 PsiFunction = Callable[[Any, Any], tuple[Any, Any]]
