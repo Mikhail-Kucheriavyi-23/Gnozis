@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import Iterable
 
 from .engine import Engine
+from .evolution import Generator, Selector, Tester, evolutionary_transition
 from .relation import Relation
 from .state import State
 
@@ -18,6 +19,27 @@ class Uroboros:
             transition=lambda state: state
         )
     )
+
+    @classmethod
+    def evolutionary(
+        cls,
+        *,
+        generate: Generator,
+        test: Tester,
+        select: Selector,
+        state: State | None = None,
+    ) -> "Uroboros":
+        """Create a core whose endogenous transition is Generate → Test → Select."""
+        return cls(
+            state=state or State(),
+            engine=Engine(
+                transition=evolutionary_transition(
+                    generate=generate,
+                    test=test,
+                    select=select,
+                )
+            ),
+        )
 
     def step(self) -> "Uroboros":
         """Perform one endogenous evolution step."""
@@ -39,5 +61,3 @@ class Uroboros:
             state=self.state,
             engine=self.engine,
         )
-
-
