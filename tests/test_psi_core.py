@@ -72,11 +72,28 @@ def test_evolve_relations_none_is_rejected_not_treated_as_omitted_or_empty():
         state.evolve(relations=None)
 
 
+def test_evolve_values_none_is_rejected_not_treated_as_omitted():
+    state = State(values={"x": 1})
+
+    with pytest.raises(TypeError):
+        state.evolve(values=None)
+
+
 def test_evolve_requires_an_explicit_component():
     state = State(values={"x": 1})
 
     with pytest.raises(TypeError):
         state.evolve()  # type: ignore[call-arg]
+
+
+def test_state_rejects_non_mapping_values():
+    with pytest.raises(TypeError):
+        State(values=[("x", 1)])  # type: ignore[arg-type]
+
+
+def test_state_rejects_non_relation_members():
+    with pytest.raises(TypeError):
+        State(values={"x": 1}, relations=("not-a-relation",))  # type: ignore[arg-type]
 
 
 def test_state_outer_mapping_and_nested_standard_containers_are_protected():
@@ -125,7 +142,10 @@ def test_evolution_can_change_r_as_part_of_complete_state():
 
     def generate(state):
         return [
-            State(values={"step": state.values["step"] + 1}, relations=(relation_b,))
+            State(
+                values={"step": state.values["step"] + 1},
+                relations=(relation_b,),
+            )
         ]
 
     def test(state):
