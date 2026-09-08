@@ -86,11 +86,22 @@ def test_state_outer_mapping_and_nested_standard_containers_are_protected():
     source["nested"]["items"].append(3)
     source["nested"]["new"] = True
 
-    assert state.values["nested"]["items"] == (1, 2)
+    assert state.values["nested"]["items"] == [1, 2]
     assert "new" not in state.values["nested"]
 
     with pytest.raises(TypeError):
         state.values["nested"] = {}  # type: ignore[index]
+
+    with pytest.raises(TypeError):
+        state.values["nested"]["items"].append(3)
+
+
+def test_state_values_remain_json_compatible_for_standard_dict_list_data():
+    import json
+
+    state = State(values={"nested": {"items": [1, 2]}})
+
+    assert json.dumps(state.values) == '{"nested": {"items": [1, 2]}}'
 
 
 def test_relation_outer_object_is_frozen_but_arbitrary_endpoint_semantics_are_unchanged():
