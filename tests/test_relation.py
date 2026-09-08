@@ -19,7 +19,7 @@ def test_relation_is_immutable_for_scalar_fields():
         raise AssertionError("Relation.relation_type must be immutable")
 
 
-def test_relation_does_not_mutate_through_container_entities():
+def test_relation_does_not_alias_mutable_container_entities():
     source = {"id": [1]}
     target = {"id": [2]}
     relation = Relation(source, target, "related")
@@ -27,7 +27,23 @@ def test_relation_does_not_mutate_through_container_entities():
     source["id"].append(3)
     target["id"].append(4)
 
-    # Relation currently accepts arbitrary entities. The test documents that
-    # dataclass freezing alone does not guarantee deep immutability here.
-    assert relation.source["id"] == [1, 3]
-    assert relation.target["id"] == [2, 4]
+    assert tuple(relation.source["id"]) == (1,)
+    assert tuple(relation.target["id"]) == (2,)
+
+
+def test_relation_nested_entities_are_immutable():
+    relation = Relation({"id": [1]}, {"id": {2}}, "related")
+
+    try:
+        relation.source["id"].append(3)
+    except AttributeError:
+        pass
+    else:
+        raise AssertionError("Relation source list must be immutable")
+
+    try:
+        relation.target["id"].add(3)
+    except AttributeError:
+        pass
+    else:
+        raise AssertionError("Relation target set must be immutable")
