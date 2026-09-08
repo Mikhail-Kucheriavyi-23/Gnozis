@@ -2,7 +2,7 @@
 
 ## Scope
 
-Audit of the repository's computational core against the working model Ψ = (X, R), with emphasis on state ownership, evolution contracts, immutability boundaries, regression protection, and CI.
+Audit of the repository's computational core against the working model Ψ = (X, R), with emphasis on state ownership, evolution contracts, immutability boundaries, regression protection, package integrity, and CI.
 
 ## Verified architecture
 
@@ -17,12 +17,15 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 - `Uroboros.with_relations()` stores R through State rather than maintaining a second relation state.
 - `Uroboros.run()` repeats the endogenous transition without an external selection operator between steps.
 - The bridge's legacy autonomous-selection entry point delegates to the canonical core GTS implementation rather than maintaining a second algorithm.
+- The bridge-to-core adapters pass credential-free derived state into the core while keeping authentication concerns outside the core.
 
 ## Regression evidence
 
-The audited branch currently has **61 tests passing** on the full GitHub Actions matrix for Python 3.10, 3.11, 3.12, and 3.13. The latest completed run was green on all four jobs.
+The audited branch currently has **73 tests passing** on the full GitHub Actions matrix for Python 3.10, 3.11, 3.12, and 3.13. The latest completed run was green on all four jobs.
 
-The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, cyclic-container rejection, Relation freezing, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, initial State validation, operator callability, and Engine input contracts.
+The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, nested standard-container normalization, cyclic-container rejection, Relation freezing and validation, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, initial State validation, operator callability, Engine input contracts, and protection against direct structural mutation attempts.
+
+CI additionally verifies package installation, dependency consistency with `pip check`, Python compilation of both `core` and the terminal bridge, and the full pytest suite.
 
 ## Explicit non-claims
 
@@ -38,3 +41,4 @@ No mathematical semantics for the elements of X, no graph-specific assumptions, 
 2. Decide whether the abstract R representation should eventually expose set-like semantics while preserving endpoint generality.
 3. Extend evidence around endogenous rule/model evolution only after the State-level contract remains stable.
 4. Add repository branch protection / required CI checks at the GitHub governance layer if desired; workflow presence alone does not make a branch protected.
+5. Consider a future dedicated immutable mapping type if stronger resistance to Python-level base-class mutation bypasses becomes a formal requirement; the current JSON-compatible dict subclass deliberately documents that boundary rather than claiming absolute immutability.
