@@ -1,23 +1,46 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from types import MappingProxyType
 from typing import Any, Mapping
 
 
+class _FrozenDict(dict):
+    """JSON-compatible immutable dictionary container."""
+
+    def _immutable(self, *args: Any, **kwargs: Any) -> None:
+        raise TypeError("immutable mapping")
+
+    __setitem__ = __delitem__ = clear = pop = popitem = setdefault = update = _immutable
+
+
+class _FrozenList(list):
+    """JSON-compatible immutable list container."""
+
+    def _immutable(self, *args: Any, **kwargs: Any) -> None:
+        raise TypeError("immutable sequence")
+
+    __setitem__ = __delitem__ = append = clear = extend = insert = pop = remove = reverse = sort = _immutable
+
+    def __iadd__(self, other: Any) -> "_FrozenList":
+        raise TypeError("immutable sequence")
+
+    def __imul__(self, other: Any) -> "_FrozenList":
+        raise TypeError("immutable sequence")
+
+
 def _freeze(value: Any) -> Any:
-    """Recursively freeze standard mutable containers.
+    """Recursively copy and freeze standard mutable containers.
 
     Arbitrary domain objects are intentionally left untouched: Ψ permits
     arbitrary entities, and imposing a universal object-level immutability
     protocol would change the mathematical domain of X.
     """
     if isinstance(value, Mapping):
-        return MappingProxyType(
+        return _FrozenDict(
             {_freeze(key): _freeze(item) for key, item in value.items()}
         )
     if isinstance(value, list):
-        return tuple(_freeze(item) for item in value)
+        return _FrozenList(_freeze(item) for item in value)
     if isinstance(value, set):
         return frozenset(_freeze(item) for item in value)
     if isinstance(value, tuple):
