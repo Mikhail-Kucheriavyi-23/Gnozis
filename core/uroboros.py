@@ -11,20 +11,21 @@ from .state import State
 
 @dataclass(frozen=True)
 class Uroboros:
-    """Recursive GNOSIS/UROBOROS computational core.
-
-    Relations are part of the explicit core configuration. They are preserved
-    across endogenous steps and are no longer silently discarded by
-    ``with_relations``.
-    """
+    """Recursive Ψ core carrying state, relations and endogenous evolution."""
 
     state: State = field(default_factory=State)
-    engine: Engine = field(
-        default_factory=lambda: Engine(
-            transition=lambda state: state
-        )
-    )
+    engine: Engine = field(default_factory=lambda: Engine(transition=lambda state: state))
     relations: tuple[Relation, ...] = field(default_factory=tuple)
+
+    def __post_init__(self) -> None:
+        normalized_relations = tuple(self.relations)
+        if self.state.relations and normalized_relations and self.state.relations != normalized_relations:
+            raise ValueError("Uroboros relations must match State relations")
+        if not normalized_relations and self.state.relations:
+            normalized_relations = self.state.relations
+        elif normalized_relations and not self.state.relations:
+            object.__setattr__(self, "state", self.state.evolve(values=self.state.values, relations=normalized_relations))
+        object.__setattr__(self, "relations", normalized_relations)
 
     @classmethod
     def evolutionary(
@@ -36,36 +37,26 @@ class Uroboros:
         state: State | None = None,
         relations: Iterable[Relation] = (),
     ) -> "Uroboros":
-        """Create a core with endogenous Generate → Test → Select evolution."""
+        relations_tuple = tuple(relations)
+        initial_state = state if state is not None else State(relations=relations_tuple)
+        if initial_state.relations and relations_tuple and initial_state.relations != relations_tuple:
+            raise ValueError("Initial State relations must match Uroboros relations")
         return cls(
-            state=state if state is not None else State(),
-            engine=Engine(
-                transition=evolutionary_transition(
-                    generate=generate,
-                    test=test,
-                    select=select,
-                )
-            ),
-            relations=tuple(relations),
+            state=initial_state,
+            engine=Engine(transition=evolutionary_transition(generate, test, select)),
+            relations=relations_tuple or initial_state.relations,
         )
 
     def step(self) -> "Uroboros":
-        """Perform one endogenous evolution step while preserving relations."""
         next_state = self.engine.step(self.state)
+        if next_state.relations != self.relations:
+            next_state = next_state.evolve(values=next_state.values, relations=self.relations)
+        return Uroboros(state=next_state, engine=self.engine, relations=self.relations)
 
+    def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
+        relations_tuple = tuple(relations)
         return Uroboros(
-            state=next_state,
+            state=self.state.evolve(values=self.state.values, relations=relations_tuple),
             engine=self.engine,
-            relations=self.relations,
-        )
-
-    def with_relations(
-        self,
-        relations: Iterable[Relation],
-    ) -> "Uroboros":
-        """Return an immutable core instance with the supplied relations."""
-        return Uroboros(
-            state=self.state,
-            engine=self.engine,
-            relations=tuple(relations),
+            relations=relations_tuple,
         )
