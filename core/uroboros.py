@@ -11,13 +11,7 @@ from .state import State
 
 @dataclass(frozen=True)
 class Uroboros:
-    """Recursive Ψ core carrying state and endogenous evolution.
-
-    ``State`` is the single source of truth for relations. ``Uroboros.relations``
-    is a compatibility projection of that state, so endogenous evolution may
-    intentionally change the relation structure instead of being silently
-    overwritten by an older copy.
-    """
+    """Recursive Ψ core carrying state and endogenous evolution."""
 
     state: State = field(default_factory=State)
     engine: Engine = field(
@@ -30,8 +24,11 @@ class Uroboros:
         if normalized_relations and self.state.relations and normalized_relations != self.state.relations:
             raise ValueError("Uroboros relations must match State relations")
 
-        # State is authoritative. Keep the compatibility projection synchronized.
-        object.__setattr__(self, "relations", self.state.relations or normalized_relations)
+        object.__setattr__(
+            self,
+            "relations",
+            self.state.relations or normalized_relations,
+        )
 
         if not self.state.relations and normalized_relations:
             object.__setattr__(
@@ -72,12 +69,23 @@ class Uroboros:
         )
 
     def step(self) -> "Uroboros":
-        """Perform one endogenous step and retain the evolved relation structure."""
+        """Perform one endogenous step.
+
+        A candidate produced with ``State.evolve(...)`` may intentionally
+        replace the relation structure. If a transition returns a State with
+        an empty relation tuple while the current state has relations, that is
+        treated as an omitted relation payload and the existing relations are
+        preserved. This keeps ordinary value-only transitions safe while still
+        allowing explicit non-empty endogenous relation changes.
+        """
         next_state = self.engine.step(self.state)
 
-        # The evolved State is authoritative. This is what permits Ψ's
-        # relation structure/rules to evolve endogenously rather than being
-        # reset to the previous Uroboros configuration.
+        if self.state.relations and not next_state.relations:
+            next_state = next_state.evolve(
+                values=next_state.values,
+                relations=self.state.relations,
+            )
+
         return Uroboros(
             state=next_state,
             engine=self.engine,
