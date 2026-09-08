@@ -11,9 +11,10 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 - `State.relations` is an immutable tuple representation of the relational structure R. The tuple is an implementation container and does not introduce mathematical ordering semantics.
 - `Relation` remains a frozen record with unconstrained endpoints and validated relation type.
 - `evolve()` creates a new State and distinguishes omitted components from explicit replacements; `relations=()` is the explicit representation of R = ∅; `None` is rejected.
-- Standard nested dict/list/tuple/set containers in `values` are normalized to immutable representations. Cyclic standard containers are rejected. Arbitrary objects are not recursively frozen.
+- Standard nested dict/list/tuple/set containers in `values` are normalized to protected immutable-style representations for ordinary public mutation operations. Cyclic standard containers are rejected. Arbitrary objects are not recursively frozen.
 - Generate → Test → Select operates on complete State candidates, allowing X, R, or both to evolve through the same state transition.
 - Tester results must be the built-in `bool` type.
+- Generator output must consist only of `State` instances.
 - Selector output must be one of the exact candidate objects that passed the test.
 - `Uroboros.with_relations()` stores R through State rather than maintaining a second relation state.
 - `Uroboros.run()` repeats the endogenous transition without an external selection operator between steps.
@@ -21,13 +22,13 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 
 ## Regression evidence
 
-At the audited branch head before this hardening pass, GitHub Actions completed successfully on Python 3.10, 3.11, 3.12, and 3.13 with **55 tests passed**.
+The audited branch currently has **58 tests passing** on the full GitHub Actions matrix for Python 3.10, 3.11, 3.12, and 3.13. The latest completed run was green on all four jobs.
 
-The hardening pass adds regression coverage for engine input validation and cyclic standard containers and updates CI to install the package itself before running the full suite. The resulting commit must be accepted only after its new CI run is green on the complete matrix.
+The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, cyclic-container rejection, Relation freezing, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, and Engine input contracts.
 
 ## Explicit non-claims
 
-This core does not claim arbitrary deep immutability: mutable custom objects stored in X or used as Relation endpoints remain outside the structural immutability contract.
+This core does not claim arbitrary deep immutability: mutable custom objects stored in X or used as Relation endpoints remain outside the structural immutability contract. The standard-container protection is intended to cover ordinary public mutation paths; Python-level bypasses through base-class methods on compatibility container subclasses are not treated as part of the supported API.
 
 The core also does not claim that a background process automatically runs forever. `Engine.run()` / `Uroboros.run()` provide finite endogenous repetition; scheduling or long-running execution remains infrastructure.
 
