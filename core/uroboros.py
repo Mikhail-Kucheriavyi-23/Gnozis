@@ -18,6 +18,12 @@ class Uroboros:
         default_factory=lambda: Engine(transition=lambda state: state)
     )
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.state, State):
+            raise TypeError("Uroboros.state must be a State instance.")
+        if not isinstance(self.engine, Engine):
+            raise TypeError("Uroboros.engine must be an Engine instance.")
+
     @classmethod
     def evolutionary(
         cls,
