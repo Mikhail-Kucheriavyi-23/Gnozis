@@ -15,20 +15,28 @@ def select_next_state(
     test: Tester,
     select: Selector,
 ) -> State:
-    """Endogenous Generate → Test → Select transition.
-
-    Selection is restricted to candidates that have passed the test.
-    No external intervention is required between generation and selection.
-    """
+    """Perform one endogenous Generate → Test → Select transition."""
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
 
-    valid = [candidate for candidate in candidates if test(candidate)]
+    if any(not isinstance(candidate, State) for candidate in candidates):
+        raise TypeError("Generator must produce only State instances")
+
+    valid: list[State] = []
+    for candidate in candidates:
+        result = test(candidate)
+        if not isinstance(result, bool):
+            raise TypeError("Test must return a bool acceptance result")
+        if result:
+            valid.append(candidate)
+
     if not valid:
         raise ValueError("No candidate state passed the test")
 
     chosen = select(valid)
+    if not isinstance(chosen, State):
+        raise TypeError("Selector must return a State instance")
     if chosen not in valid:
         raise ValueError("Selector must choose one of the tested candidates")
 
