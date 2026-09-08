@@ -19,8 +19,8 @@ def select_next_state(
 
     Candidates are complete ``State`` values, so an evolution may change the
     X representation, the R representation, or both. The tester is a strict
-    boolean boundary and the selector may only return one of the exact tested
-    candidate objects.
+    boolean boundary and the selector may only return a value equal to one of
+    the tested candidates.
     """
     if not isinstance(state, State):
         raise TypeError("state must be a State instance")
@@ -53,7 +53,7 @@ def select_next_state(
     chosen = select(valid)
     if not isinstance(chosen, State):
         raise TypeError("Selector must return a State instance")
-    if not any(chosen is candidate for candidate in valid):
+    if chosen not in valid:
         raise ValueError("Selector must choose one of the tested candidates")
 
     return chosen
