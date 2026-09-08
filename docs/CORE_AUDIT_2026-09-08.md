@@ -13,18 +13,16 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 - `evolve()` creates a new State and distinguishes omitted components from explicit replacements; `relations=()` is the explicit representation of R = ∅; `None` is rejected.
 - Standard nested dict/list/tuple/set containers in `values` are normalized to protected immutable-style representations for ordinary public mutation operations. Cyclic standard containers are rejected. Arbitrary objects are not recursively frozen.
 - Generate → Test → Select operates on complete State candidates, allowing X, R, or both to evolve through the same state transition.
-- Tester results must be the built-in `bool` type.
-- Generator output must consist only of `State` instances.
-- Selector output must be one of the exact candidate objects that passed the test.
+- The GTS boundary validates the initial State, all three operators, candidate State outputs, strict built-in `bool` tester results, and exact identity of the selected tested candidate.
 - `Uroboros.with_relations()` stores R through State rather than maintaining a second relation state.
 - `Uroboros.run()` repeats the endogenous transition without an external selection operator between steps.
 - The bridge's legacy autonomous-selection entry point delegates to the canonical core GTS implementation rather than maintaining a second algorithm.
 
 ## Regression evidence
 
-The audited branch currently has **58 tests passing** on the full GitHub Actions matrix for Python 3.10, 3.11, 3.12, and 3.13. The latest completed run was green on all four jobs.
+The audited branch currently has **61 tests passing** on the full GitHub Actions matrix for Python 3.10, 3.11, 3.12, and 3.13. The latest completed run was green on all four jobs.
 
-The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, cyclic-container rejection, Relation freezing, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, and Engine input contracts.
+The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, cyclic-container rejection, Relation freezing, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, initial State validation, operator callability, and Engine input contracts.
 
 ## Explicit non-claims
 
