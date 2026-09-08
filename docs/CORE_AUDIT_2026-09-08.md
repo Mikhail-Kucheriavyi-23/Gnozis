@@ -21,7 +21,7 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 
 ## Regression evidence
 
-The audited branch currently has **73 tests passing** on the full GitHub Actions matrix for Python 3.10, 3.11, 3.12, and 3.13. The latest completed run was green on all four jobs.
+The latest completed GitHub Actions run for the audited branch passed **79 tests** on each Python 3.10, 3.11, 3.12, and 3.13 matrix job. The run was green on all four jobs.
 
 The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, nested standard-container normalization, cyclic-container rejection, Relation freezing and validation, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, initial State validation, operator callability, Engine input contracts, and protection against direct structural mutation attempts.
 
