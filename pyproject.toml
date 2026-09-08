@@ -13,7 +13,7 @@ authors = [
     { name = "Mikhail Kucheriavyi" }
 ]
 
-license = { file = "LICENSE-RESEARCH.md" }
+license = { file = "LICENSE-RESEARCH" }
 
 keywords = [
     "scientific-discovery",
