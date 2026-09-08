@@ -1,4 +1,4 @@
-from core import State, Uroboros, select_next_state
+from core import Relation, State, Uroboros, select_next_state
 
 
 def test_generate_test_select_selects_only_tested_candidates():
@@ -18,7 +18,6 @@ def test_generate_test_select_selects_only_tested_candidates():
         return max(valid, key=lambda state: state.values["score"])
 
     result = select_next_state(initial, generate, test, select)
-
     assert result.values["score"] == 2
 
 
@@ -83,5 +82,30 @@ def test_uroboros_can_run_endogenous_generate_test_select():
     )
 
     evolved = core.step().step().step()
-
     assert evolved.state.values["score"] == 3
+
+
+def test_uroboros_evolution_preserves_relations_when_candidate_omits_them():
+    relation = Relation(source="hypothesis", target="test", relation_type="tested_by")
+
+    def generate(state):
+        return [State(values={"score": state.values.get("score", 0) + 1})]
+
+    def test(state):
+        return state.values["score"] >= 0
+
+    def select(valid):
+        return valid[0]
+
+    core = Uroboros.evolutionary(
+        generate=generate,
+        test=test,
+        select=select,
+        state=State(values={"score": 0}, relations=(relation,)),
+    )
+
+    evolved = core.step()
+
+    assert evolved.state.values["score"] == 1
+    assert evolved.state.relations == (relation,)
+    assert evolved.relations == (relation,)
