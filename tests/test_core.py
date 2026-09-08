@@ -12,6 +12,22 @@ def test_state_creation():
     assert state.relations == ()
 
 
+def test_state_values_are_immutable():
+    source = {"value": 1}
+    state = State(values=source)
+
+    source["value"] = 99
+
+    assert state.values["value"] == 1
+
+    try:
+        state.values["value"] = 2
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("State.values must be read-only")
+
+
 def test_relation_creation():
     relation = Relation(source="a", target="b")
     assert relation.source == "a"
