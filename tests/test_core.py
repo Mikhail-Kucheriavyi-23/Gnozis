@@ -71,6 +71,7 @@ def test_uroboros_initialization():
 
     assert uroboros.state is not None
     assert uroboros.engine is not None
+    assert uroboros.relations == ()
 
 
 def test_uroboros_step():
@@ -84,3 +85,26 @@ def test_uroboros_step():
     next_uroboros = uroboros.step()
 
     assert next_uroboros.state.values["value"] == 2
+
+
+def test_uroboros_with_relations_preserves_configuration():
+    first = Relation(source="x", target="y", relation_type="depends_on")
+    second = Relation(source="y", target="z", relation_type="produces")
+    uroboros = Uroboros().with_relations([first, second])
+
+    assert uroboros.relations == (first, second)
+    assert uroboros.state.values == {}
+
+
+def test_uroboros_step_preserves_relations():
+    relation = Relation(source="x", target="y")
+    uroboros = Uroboros(
+        state=State(values={"value": 1}),
+        engine=Engine(transition=increment),
+        relations=(relation,),
+    )
+
+    evolved = uroboros.step()
+
+    assert evolved.state.values["value"] == 2
+    assert evolved.relations == (relation,)
