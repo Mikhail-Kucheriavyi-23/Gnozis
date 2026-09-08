@@ -15,10 +15,14 @@ class Uroboros:
 
     state: State = field(default_factory=State)
     engine: Engine = field(
-        default_factory=lambda: Engine(
-            transition=lambda state: state
-        )
+        default_factory=lambda: Engine(transition=lambda state: state)
     )
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.state, State):
+            raise TypeError("Uroboros.state must be a State instance.")
+        if not isinstance(self.engine, Engine):
+            raise TypeError("Uroboros.engine must be an Engine instance.")
 
     @classmethod
     def evolutionary(
@@ -31,7 +35,7 @@ class Uroboros:
     ) -> "Uroboros":
         """Create a core whose endogenous transition is Generate → Test → Select."""
         return cls(
-            state=state or State(),
+            state=state if state is not None else State(),
             engine=Engine(
                 transition=evolutionary_transition(
                     generate=generate,
@@ -42,22 +46,30 @@ class Uroboros:
         )
 
     def step(self) -> "Uroboros":
-        """Perform one endogenous evolution step."""
-        next_state = self.engine.step(self.state)
-
+        """Perform one endogenous evolution step and return a new core."""
         return Uroboros(
-            state=next_state,
+            state=self.engine.step(self.state),
             engine=self.engine,
         )
+
+    def run(self, steps: int) -> "Uroboros":
+        """Perform multiple endogenous evolution steps without external selection."""
+        if type(steps) is not int:
+            raise TypeError("steps must be an integer.")
+        if steps < 0:
+            raise ValueError("steps must be non-negative.")
+
+        current = self
+        for _ in range(steps):
+            current = current.step()
+        return current
 
     def with_relations(
         self,
         relations: Iterable[Relation],
     ) -> "Uroboros":
-        """Return a core instance configured with the supplied relations."""
-        _ = tuple(relations)
-
+        """Return a new core whose State owns the supplied relations."""
         return Uroboros(
-            state=self.state,
+            state=self.state.evolve(relations=tuple(relations)),
             engine=self.engine,
         )

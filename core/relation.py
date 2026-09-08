@@ -6,7 +6,12 @@ from typing import Any
 
 @dataclass(frozen=True)
 class Relation:
-    """Immutable relation between two entities in GNOSIS/UROBOROS."""
+    """Structurally immutable relation record.
+
+    ``source`` and ``target`` are intentionally unconstrained. If either is a
+    mutable object, that object's internal state is outside Relation's
+    immutability boundary.
+    """
 
     source: Any
     target: Any
@@ -18,5 +23,3 @@ class Relation:
 
         if not self.relation_type:
             raise ValueError("relation_type must not be empty.")
-
-

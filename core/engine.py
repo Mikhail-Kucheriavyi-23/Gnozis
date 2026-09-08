@@ -11,12 +11,27 @@ Transition = Callable[[State], State]
 
 @dataclass
 class Engine:
-    """Deterministic state-transition engine for GNOSIS/UROBOROS."""
+    """State-transition engine for GNOSIS/UROBOROS."""
 
     transition: Transition
 
+    def __post_init__(self) -> None:
+        if not callable(self.transition):
+            raise TypeError("Engine transition must be callable.")
+
+    @staticmethod
+    def _validate_steps(steps: int) -> None:
+        """Require an actual integer step count and reject bool explicitly."""
+        if type(steps) is not int:
+            raise TypeError("steps must be an integer.")
+        if steps < 0:
+            raise ValueError("steps must be non-negative.")
+
     def step(self, state: State) -> State:
-        """Apply one transition to the current state."""
+        """Apply one transition to the current State."""
+        if not isinstance(state, State):
+            raise TypeError("Engine.step requires a State instance.")
+
         next_state = self.transition(state)
 
         if not isinstance(next_state, State):
@@ -28,8 +43,9 @@ class Engine:
 
     def run(self, state: State, steps: int) -> State:
         """Apply the transition repeatedly for a finite number of steps."""
-        if steps < 0:
-            raise ValueError("steps must be non-negative.")
+        if not isinstance(state, State):
+            raise TypeError("Engine.run requires a State instance.")
+        self._validate_steps(steps)
 
         current = state
 
@@ -43,9 +59,10 @@ class Engine:
         state: State,
         steps: int,
     ) -> Iterable[State]:
-        """Yield the initial state followed by each subsequent state."""
-        if steps < 0:
-            raise ValueError("steps must be non-negative.")
+        """Yield the initial State followed by each subsequent State."""
+        if not isinstance(state, State):
+            raise TypeError("Engine.trajectory requires a State instance.")
+        self._validate_steps(steps)
 
         current = state
         yield current
@@ -53,4 +70,3 @@ class Engine:
         for _ in range(steps):
             current = self.step(current)
             yield current
-

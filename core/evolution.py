@@ -15,20 +15,44 @@ def select_next_state(
     test: Tester,
     select: Selector,
 ) -> State:
-    """Endogenous Generate → Test → Select transition.
+    """Perform one endogenous Generate → Test → Select transition over Ψ.
 
-    Selection is restricted to candidates that have passed the test.
-    No external intervention is required between generation and selection.
+    Candidates are complete ``State`` values, so an evolution may change the
+    X representation, the R representation, or both. The tester is a strict
+    boolean boundary and the selector may only return a value equal to one of
+    the tested candidates.
     """
+    if not isinstance(state, State):
+        raise TypeError("state must be a State instance")
+    if not callable(generate):
+        raise TypeError("generate must be callable")
+    if not callable(test):
+        raise TypeError("test must be callable")
+    if not callable(select):
+        raise TypeError("select must be callable")
+
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
 
-    valid = [candidate for candidate in candidates if test(candidate)]
+    for candidate in candidates:
+        if not isinstance(candidate, State):
+            raise TypeError("Generator must produce State instances")
+
+    valid: list[State] = []
+    for candidate in candidates:
+        result = test(candidate)
+        if not isinstance(result, bool):
+            raise TypeError("Tester must return a bool")
+        if result:
+            valid.append(candidate)
+
     if not valid:
         raise ValueError("No candidate state passed the test")
 
     chosen = select(valid)
+    if not isinstance(chosen, State):
+        raise TypeError("Selector must return a State instance")
     if chosen not in valid:
         raise ValueError("Selector must choose one of the tested candidates")
 
