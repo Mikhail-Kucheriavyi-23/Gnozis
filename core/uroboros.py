@@ -29,7 +29,7 @@ class Uroboros:
         select: Selector,
         state: State | None = None,
     ) -> "Uroboros":
-        """Create a core whose endogenous transition is Generate → Test → Select."""
+        """Create a core with an endogenous Generate → Test → Select transition."""
         return cls(
             state=state or State(),
             engine=Engine(
@@ -44,20 +44,11 @@ class Uroboros:
     def step(self) -> "Uroboros":
         """Perform one endogenous evolution step."""
         next_state = self.engine.step(self.state)
+        return Uroboros(state=next_state, engine=self.engine)
 
+    def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
+        """Return a new core with the supplied relational structure R."""
         return Uroboros(
-            state=next_state,
-            engine=self.engine,
-        )
-
-    def with_relations(
-        self,
-        relations: Iterable[Relation],
-    ) -> "Uroboros":
-        """Return a core instance configured with the supplied relations."""
-        _ = tuple(relations)
-
-        return Uroboros(
-            state=self.state,
+            state=self.state.evolve(relations=tuple(relations)),
             engine=self.engine,
         )
