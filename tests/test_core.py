@@ -64,15 +64,15 @@ def test_uroboros_step():
     assert next_uroboros.state.values["value"] == 2
 
 
-def test_uroboros_with_relations_preserves_configuration():
+def test_uroboros_with_relations_updates_state_and_projection():
     first = Relation(source="x", target="y", relation_type="depends_on")
     second = Relation(source="y", target="z", relation_type="produces")
     uroboros = Uroboros().with_relations([first, second])
     assert uroboros.relations == (first, second)
-    assert uroboros.state.relations == ()
+    assert uroboros.state.relations == (first, second)
 
 
-def test_uroboros_step_preserves_relations_in_core_and_state():
+def test_uroboros_step_preserves_relations_when_transition_uses_state_evolve():
     relation = Relation(source="x", target="y")
     state = State(values={"value": 1}, relations=(relation,))
     uroboros = Uroboros(
@@ -84,3 +84,24 @@ def test_uroboros_step_preserves_relations_in_core_and_state():
     assert evolved.state.values["value"] == 2
     assert evolved.state.relations == (relation,)
     assert evolved.relations == (relation,)
+
+
+def test_uroboros_step_allows_endogenous_relation_change():
+    first = Relation(source="x", target="y", relation_type="depends_on")
+    second = Relation(source="y", target="z", relation_type="produces")
+
+    def transition(state: State) -> State:
+        return state.evolve(
+            values={"value": state.values.get("value", 0) + 1},
+            relations=(second,),
+        )
+
+    uroboros = Uroboros(
+        state=State(values={"value": 1}, relations=(first,)),
+        engine=Engine(transition=transition),
+        relations=(first,),
+    )
+    evolved = uroboros.step()
+    assert evolved.state.values["value"] == 2
+    assert evolved.state.relations == (second,)
+    assert evolved.relations == (second,)
