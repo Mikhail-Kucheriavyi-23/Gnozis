@@ -1,4 +1,4 @@
-from core import State, select_next_state
+from core import State, Uroboros, select_next_state
 
 
 def test_generate_test_select_selects_only_tested_candidates():
@@ -60,3 +60,28 @@ def test_evolution_can_continue_without_external_selection_step():
         state = select_next_state(state, generate, test, select)
 
     assert state.values["score"] == 3
+
+
+def test_uroboros_can_run_endogenous_generate_test_select():
+    def generate(state):
+        return [
+            State(values={"score": state.values.get("score", 0) + 1}),
+            State(values={"score": state.values.get("score", 0) - 1}),
+        ]
+
+    def test(state):
+        return state.values["score"] >= 0
+
+    def select(valid):
+        return max(valid, key=lambda state: state.values["score"])
+
+    core = Uroboros.evolutionary(
+        generate=generate,
+        test=test,
+        select=select,
+        state=State(values={"score": 0}),
+    )
+
+    evolved = core.step().step().step()
+
+    assert evolved.state.values["score"] == 3
