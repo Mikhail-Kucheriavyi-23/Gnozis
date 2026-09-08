@@ -85,11 +85,19 @@ def test_uroboros_can_run_endogenous_generate_test_select():
     assert evolved.state.values["score"] == 3
 
 
-def test_uroboros_evolution_preserves_relations_when_candidate_omits_them():
-    relation = Relation(source="hypothesis", target="test", relation_type="tested_by")
+def test_uroboros_evolution_preserves_relations_when_candidate_uses_state_evolve():
+    relation = Relation(
+        source="hypothesis",
+        target="test",
+        relation_type="tested_by",
+    )
 
     def generate(state):
-        return [State(values={"score": state.values.get("score", 0) + 1})]
+        return [
+            state.evolve(
+                values={"score": state.values.get("score", 0) + 1}
+            )
+        ]
 
     def test(state):
         return state.values["score"] >= 0
@@ -109,3 +117,32 @@ def test_uroboros_evolution_preserves_relations_when_candidate_omits_them():
     assert evolved.state.values["score"] == 1
     assert evolved.state.relations == (relation,)
     assert evolved.relations == (relation,)
+
+
+def test_uroboros_evolution_can_explicitly_remove_relations():
+    relation = Relation(
+        source="hypothesis",
+        target="test",
+        relation_type="tested_by",
+    )
+
+    def generate(state):
+        return [state.evolve(values=state.values, relations=())]
+
+    def test(state):
+        return True
+
+    def select(valid):
+        return valid[0]
+
+    core = Uroboros.evolutionary(
+        generate=generate,
+        test=test,
+        select=select,
+        state=State(values={"score": 0}, relations=(relation,)),
+    )
+
+    evolved = core.step()
+
+    assert evolved.state.relations == ()
+    assert evolved.relations == ()
