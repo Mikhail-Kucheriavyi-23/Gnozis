@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from types import MappingProxyType
 from typing import Any, Mapping
 
 from .relation import Relation
@@ -14,7 +15,13 @@ class State:
     relations: tuple[Relation, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
-        object.__setattr__(self, "values", dict(self.values))
+        # A frozen dataclass alone does not freeze a nested dict. Copy it into
+        # a read-only mapping so the state really is immutable at its boundary.
+        object.__setattr__(
+            self,
+            "values",
+            MappingProxyType(dict(self.values)),
+        )
         object.__setattr__(self, "relations", tuple(self.relations))
 
     def evolve(
