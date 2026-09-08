@@ -1,8 +1,7 @@
-"""A state-minimal transition boundary for Psi=(X,R).
+"""Canonical fundamental transition boundary for Psi=(X,R).
 
-The transition function receives only the fundamental projection (X, R).
-It never receives the mutable/extended State object, so auxiliary metadata
-cannot become an implicit input to the fundamental dynamics.
+Psi is the complete input/output domain of the fundamental dynamics.
+State is only an adapter around Psi and may contain derived metadata.
 """
 
 from __future__ import annotations
@@ -13,23 +12,40 @@ from typing import Any
 
 from .state import State
 
-Psi = tuple[Any, Any]
-PsiFunction = Callable[[Any, Any], Psi]
+
+@dataclass(frozen=True)
+class Psi:
+    """Fundamental state: exactly the pair (X, R)."""
+
+    x: Any
+    relations: Any
+
+    @classmethod
+    def from_state(cls, state: State) -> "Psi":
+        return cls(state.values["x"], state.values["relations"])
+
+    def to_state(self) -> State:
+        return State(values={"x": self.x, "relations": self.relations})
+
+
+PsiFunction = Callable[[Any, Any], tuple[Any, Any]]
 
 
 @dataclass(frozen=True)
 class PsiTransition:
-    """Transition whose only explicit runtime input is (X, R)."""
+    """Canonical fundamental operator F: Psi -> Psi."""
 
     function: PsiFunction
 
-    def __call__(self, state: State) -> State:
-        x = state.values["x"]
-        relations = state.values["relations"]
-        next_x, next_relations = self.function(x, relations)
-        return State(values={"x": next_x, "relations": next_relations})
+    def __call__(self, psi: Psi) -> Psi:
+        next_x, next_relations = self.function(psi.x, psi.relations)
+        return Psi(next_x, next_relations)
+
+    def on_state(self, state: State) -> State:
+        """Explicit adapter for legacy State-based engines."""
+        return self(Psi.from_state(state)).to_state()
 
 
 def make_psi_transition(function: PsiFunction) -> PsiTransition:
-    """Construct a transition through the minimal Psi=(X,R) boundary."""
+    """Construct the canonical F: Psi -> Psi operator."""
     return PsiTransition(function=function)
