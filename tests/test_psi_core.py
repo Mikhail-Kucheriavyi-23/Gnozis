@@ -202,18 +202,20 @@ def test_gts_rejects_non_state_generator_output():
         )
 
 
-def test_gts_requires_exact_tested_candidate_identity():
+def test_gts_accepts_value_equal_tested_state():
     state = State(values={"score": 0})
     candidate = State(values={"score": 1})
     equal_but_distinct = State(values={"score": 1})
 
-    with pytest.raises(ValueError, match="Selector must choose one of the tested candidates"):
-        select_next_state(
-            state,
-            generate=lambda _: [candidate],
-            test=lambda _: True,
-            select=lambda valid: equal_but_distinct,
-        )
+    result = select_next_state(
+        state,
+        generate=lambda _: [candidate],
+        test=lambda _: True,
+        select=lambda valid: equal_but_distinct,
+    )
+
+    assert result == candidate
+    assert result is equal_but_distinct
 
 
 def test_gts_rejects_non_state_initial_input():
