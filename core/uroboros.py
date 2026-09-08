@@ -24,11 +24,12 @@ class Uroboros:
         if normalized_relations and self.state.relations and normalized_relations != self.state.relations:
             raise ValueError("Uroboros relations must match State relations")
 
-        object.__setattr__(
-            self,
-            "relations",
-            self.state.relations or normalized_relations,
+        canonical_relations = (
+            self.state.relations
+            if self.state.relations
+            else normalized_relations
         )
+        object.__setattr__(self, "relations", canonical_relations)
 
         if not self.state.relations and normalized_relations:
             object.__setattr__(
@@ -51,10 +52,20 @@ class Uroboros:
         relations: Iterable[Relation] = (),
     ) -> "Uroboros":
         relations_tuple = tuple(relations)
-        initial_state = state if state is not None else State(relations=relations_tuple)
+        initial_state = (
+            state
+            if state is not None
+            else State(relations=relations_tuple)
+        )
 
-        if initial_state.relations and relations_tuple and initial_state.relations != relations_tuple:
-            raise ValueError("Initial State relations must match Uroboros relations")
+        if (
+            initial_state.relations
+            and relations_tuple
+            and initial_state.relations != relations_tuple
+        ):
+            raise ValueError(
+                "Initial State relations must match Uroboros relations"
+            )
 
         return cls(
             state=initial_state,
@@ -71,20 +82,13 @@ class Uroboros:
     def step(self) -> "Uroboros":
         """Perform one endogenous step.
 
-        A candidate produced with ``State.evolve(...)`` may intentionally
-        replace the relation structure. If a transition returns a State with
-        an empty relation tuple while the current state has relations, that is
-        treated as an omitted relation payload and the existing relations are
-        preserved. This keeps ordinary value-only transitions safe while still
-        allowing explicit non-empty endogenous relation changes.
+        The transition result is authoritative. In particular, an empty
+        relation tuple is a valid explicit next relation state and is not
+        silently replaced with the previous relations. Value-only transitions
+        that intend to preserve relations should use State.evolve(), whose
+        default is relation-preserving.
         """
         next_state = self.engine.step(self.state)
-
-        if self.state.relations and not next_state.relations:
-            next_state = next_state.evolve(
-                values=next_state.values,
-                relations=self.state.relations,
-            )
 
         return Uroboros(
             state=next_state,
