@@ -35,6 +35,8 @@ class Engine:
 
     def run(self, state: State, steps: int) -> State:
         """Apply the transition repeatedly for a finite number of steps."""
+        if not isinstance(state, State):
+            raise TypeError("Engine.run requires a State instance.")
         if steps < 0:
             raise ValueError("steps must be non-negative.")
 
@@ -51,6 +53,8 @@ class Engine:
         steps: int,
     ) -> Iterable[State]:
         """Yield the initial State followed by each subsequent State."""
+        if not isinstance(state, State):
+            raise TypeError("Engine.trajectory requires a State instance.")
         if steps < 0:
             raise ValueError("steps must be non-negative.")
 
