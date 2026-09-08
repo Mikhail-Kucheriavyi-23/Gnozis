@@ -113,6 +113,16 @@ def test_state_outer_mapping_and_nested_standard_containers_are_protected():
         state.values["nested"]["items"].append(3)
 
 
+def test_state_outer_assignment_is_rejected():
+    state = State(values={"x": 1})
+
+    with pytest.raises(FrozenInstanceError):
+        state.values = {"x": 2}  # type: ignore[misc]
+
+    with pytest.raises(FrozenInstanceError):
+        state.relations = ()  # type: ignore[misc]
+
+
 def test_state_values_remain_json_compatible_for_standard_dict_list_data():
     import json
 
@@ -204,6 +214,29 @@ def test_gts_requires_exact_tested_candidate_identity():
             test=lambda _: True,
             select=lambda valid: equal_but_distinct,
         )
+
+
+def test_gts_rejects_non_state_initial_input():
+    with pytest.raises(TypeError, match="state must be a State instance"):
+        select_next_state(
+            object(),  # type: ignore[arg-type]
+            generate=lambda _: [],
+            test=lambda _: True,
+            select=lambda valid: valid[0],
+        )
+
+
+def test_gts_rejects_non_callable_operators():
+    state = State(values={"score": 0})
+
+    with pytest.raises(TypeError, match="generate must be callable"):
+        select_next_state(state, None, lambda _: True, lambda valid: valid[0])  # type: ignore[arg-type]
+
+    with pytest.raises(TypeError, match="test must be callable"):
+        select_next_state(state, lambda _: [state], None, lambda valid: valid[0])  # type: ignore[arg-type]
+
+    with pytest.raises(TypeError, match="select must be callable"):
+        select_next_state(state, lambda _: [state], lambda _: True, None)  # type: ignore[arg-type]
 
 
 def test_default_state_has_empty_relation_structure():
