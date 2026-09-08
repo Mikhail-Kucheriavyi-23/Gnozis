@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Callable, Iterable
 
 from core import State
-
+from core.evolution import select_next_state as _core_select_next_state
 
 Generator = Callable[[State], Iterable[State]]
 Tester = Callable[[State], bool]
@@ -16,16 +16,5 @@ def select_next_state(
     test: Tester,
     select: Selector,
 ) -> State:
-    """Generate, test, and select the next state without external intervention."""
-    candidates = list(generate(state))
-    if not candidates:
-        raise ValueError("Generator must produce at least one candidate state")
-
-    valid = [candidate for candidate in candidates if test(candidate)]
-    if not valid:
-        raise ValueError("No candidate state passed the test")
-
-    chosen = select(valid)
-    if chosen not in valid:
-        raise ValueError("Selector must choose one of the tested candidates")
-    return chosen
+    """Bridge-compatible entry point delegating to the canonical core GTS."""
+    return _core_select_next_state(state, generate, test, select)
