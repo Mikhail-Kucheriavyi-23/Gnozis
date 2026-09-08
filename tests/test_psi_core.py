@@ -2,7 +2,7 @@ from dataclasses import FrozenInstanceError
 
 import pytest
 
-from core import Relation, State, Uroboros
+from core import Relation, State, Uroboros, select_next_state
 
 
 def test_state_owns_x_and_r_without_aliasing_relation_container():
@@ -165,3 +165,48 @@ def test_evolution_can_change_r_as_part_of_complete_state():
     assert evolved.state.values["step"] == 2
     assert evolved.state.relations == (relation_b,)
     assert initial.relations == (relation_a,)
+
+
+def test_gts_rejects_non_bool_tester_result():
+    state = State(values={"score": 0})
+    candidate = State(values={"score": 1})
+
+    with pytest.raises(TypeError, match="Tester must return a bool"):
+        select_next_state(
+            state,
+            generate=lambda _: [candidate],
+            test=lambda _: 1,  # type: ignore[return-value]
+            select=lambda valid: valid[0],
+        )
+
+
+def test_gts_rejects_non_state_generator_output():
+    state = State(values={"score": 0})
+
+    with pytest.raises(TypeError, match="Generator must produce State instances"):
+        select_next_state(
+            state,
+            generate=lambda _: [object()],  # type: ignore[list-item]
+            test=lambda _: True,
+            select=lambda valid: valid[0],
+        )
+
+
+def test_gts_requires_exact_tested_candidate_identity():
+    state = State(values={"score": 0})
+    candidate = State(values={"score": 1})
+    equal_but_distinct = State(values={"score": 1})
+
+    with pytest.raises(ValueError, match="Selector must choose one of the tested candidates"):
+        select_next_state(
+            state,
+            generate=lambda _: [candidate],
+            test=lambda _: True,
+            select=lambda valid: equal_but_distinct,
+        )
+
+
+def test_default_state_has_empty_relation_structure():
+    state = State()
+
+    assert state.relations == ()

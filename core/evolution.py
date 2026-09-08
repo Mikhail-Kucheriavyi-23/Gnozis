@@ -15,10 +15,12 @@ def select_next_state(
     test: Tester,
     select: Selector,
 ) -> State:
-    """Endogenous Generate → Test → Select transition over complete State.
+    """Perform one endogenous Generate → Test → Select transition over Ψ.
 
-    Because State carries both components of Ψ, a generated candidate may
-    evolve X, R, or both. Selection remains internal to the GTS transition.
+    Candidates are complete ``State`` values, so an evolution may change the
+    X representation, the R representation, or both. The tester is a strict
+    boolean boundary and the selector may only return one of the exact tested
+    candidate objects.
     """
     candidates = list(generate(state))
     if not candidates:
@@ -42,7 +44,7 @@ def select_next_state(
     chosen = select(valid)
     if not isinstance(chosen, State):
         raise TypeError("Selector must return a State instance")
-    if chosen not in valid:
+    if not any(chosen is candidate for candidate in valid):
         raise ValueError("Selector must choose one of the tested candidates")
 
     return chosen
