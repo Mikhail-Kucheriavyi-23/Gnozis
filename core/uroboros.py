@@ -11,7 +11,12 @@ from .state import State
 
 @dataclass(frozen=True)
 class Uroboros:
-    """Recursive GNOSIS/UROBOROS computational core."""
+    """Recursive GNOSIS/UROBOROS computational core.
+
+    Relations are part of the explicit core configuration. They are preserved
+    across endogenous steps and are no longer silently discarded by
+    ``with_relations``.
+    """
 
     state: State = field(default_factory=State)
     engine: Engine = field(
@@ -19,6 +24,7 @@ class Uroboros:
             transition=lambda state: state
         )
     )
+    relations: tuple[Relation, ...] = field(default_factory=tuple)
 
     @classmethod
     def evolutionary(
@@ -28,10 +34,11 @@ class Uroboros:
         test: Tester,
         select: Selector,
         state: State | None = None,
+        relations: Iterable[Relation] = (),
     ) -> "Uroboros":
-        """Create a core whose endogenous transition is Generate → Test → Select."""
+        """Create a core with endogenous Generate → Test → Select evolution."""
         return cls(
-            state=state or State(),
+            state=state if state is not None else State(),
             engine=Engine(
                 transition=evolutionary_transition(
                     generate=generate,
@@ -39,25 +46,26 @@ class Uroboros:
                     select=select,
                 )
             ),
+            relations=tuple(relations),
         )
 
     def step(self) -> "Uroboros":
-        """Perform one endogenous evolution step."""
+        """Perform one endogenous evolution step while preserving relations."""
         next_state = self.engine.step(self.state)
 
         return Uroboros(
             state=next_state,
             engine=self.engine,
+            relations=self.relations,
         )
 
     def with_relations(
         self,
         relations: Iterable[Relation],
     ) -> "Uroboros":
-        """Return a core instance configured with the supplied relations."""
-        _ = tuple(relations)
-
+        """Return an immutable core instance with the supplied relations."""
         return Uroboros(
             state=self.state,
             engine=self.engine,
+            relations=tuple(relations),
         )
