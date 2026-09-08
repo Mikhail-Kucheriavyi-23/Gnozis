@@ -43,6 +43,47 @@ def test_generate_test_select_rejects_untested_selection():
         raise AssertionError("untested candidate was selected")
 
 
+def test_selector_cannot_replace_tested_candidate_with_equal_copy():
+    initial = State(values={"score": 0})
+    accepted = State(values={"score": 1})
+
+    def generate(state):
+        return [accepted]
+
+    def test(state):
+        return True
+
+    def select(valid):
+        return State(values={"score": 1})
+
+    try:
+        select_next_state(initial, generate, test, select)
+    except ValueError as error:
+        assert str(error) == "Selector must choose one of the tested candidates"
+    else:
+        raise AssertionError("selector returned a non-lineage copy")
+
+
+def test_generator_cannot_inject_non_state_candidate():
+    initial = State(values={"score": 0})
+
+    def generate(state):
+        return [State(values={"score": 1}), {"score": 2}]
+
+    def test(state):
+        return True
+
+    def select(valid):
+        return valid[0]
+
+    try:
+        select_next_state(initial, generate, test, select)
+    except TypeError as error:
+        assert str(error) == "Generator must produce only State candidates"
+    else:
+        raise AssertionError("non-State candidate crossed the generation boundary")
+
+
 def test_evolution_can_continue_without_external_selection_step():
     state = State(values={"score": 0})
 
