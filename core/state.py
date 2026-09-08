@@ -87,9 +87,11 @@ class State:
     not recursively frozen and remain outside this structural immutability
     guarantee.
 
-    Standard containers nested inside ``values`` are normalized to immutable,
-    JSON-compatible representations. Cyclic standard containers are rejected.
-    Other arbitrary objects are left unchanged.
+    Standard containers nested inside ``values`` are normalized to protected
+    immutable-style representations. Mappings and lists retain JSON-compatible
+    behavior; sets become frozensets and therefore are not JSON-serializable by
+    the standard library. Cyclic standard containers are rejected. Other
+    arbitrary objects are left unchanged.
     """
 
     values: Mapping[str, Any] = field(default_factory=dict)
