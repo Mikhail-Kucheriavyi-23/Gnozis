@@ -11,21 +11,37 @@ from .state import State
 
 @dataclass(frozen=True)
 class Uroboros:
-    """Recursive Ψ core carrying state, relations and endogenous evolution."""
+    """Recursive Ψ core carrying state and endogenous evolution.
+
+    ``State`` is the single source of truth for relations. ``Uroboros.relations``
+    is a compatibility projection of that state, so endogenous evolution may
+    intentionally change the relation structure instead of being silently
+    overwritten by an older copy.
+    """
 
     state: State = field(default_factory=State)
-    engine: Engine = field(default_factory=lambda: Engine(transition=lambda state: state))
+    engine: Engine = field(
+        default_factory=lambda: Engine(transition=lambda state: state)
+    )
     relations: tuple[Relation, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
         normalized_relations = tuple(self.relations)
-        if self.state.relations and normalized_relations and self.state.relations != normalized_relations:
+        if normalized_relations and self.state.relations and normalized_relations != self.state.relations:
             raise ValueError("Uroboros relations must match State relations")
-        if not normalized_relations and self.state.relations:
-            normalized_relations = self.state.relations
-        elif normalized_relations and not self.state.relations:
-            object.__setattr__(self, "state", self.state.evolve(values=self.state.values, relations=normalized_relations))
-        object.__setattr__(self, "relations", normalized_relations)
+
+        # State is authoritative. Keep the compatibility projection synchronized.
+        object.__setattr__(self, "relations", self.state.relations or normalized_relations)
+
+        if not self.state.relations and normalized_relations:
+            object.__setattr__(
+                self,
+                "state",
+                self.state.evolve(
+                    values=self.state.values,
+                    relations=normalized_relations,
+                ),
+            )
 
     @classmethod
     def evolutionary(
@@ -39,24 +55,42 @@ class Uroboros:
     ) -> "Uroboros":
         relations_tuple = tuple(relations)
         initial_state = state if state is not None else State(relations=relations_tuple)
+
         if initial_state.relations and relations_tuple and initial_state.relations != relations_tuple:
             raise ValueError("Initial State relations must match Uroboros relations")
+
         return cls(
             state=initial_state,
-            engine=Engine(transition=evolutionary_transition(generate, test, select)),
+            engine=Engine(
+                transition=evolutionary_transition(
+                    generate=generate,
+                    test=test,
+                    select=select,
+                )
+            ),
             relations=relations_tuple or initial_state.relations,
         )
 
     def step(self) -> "Uroboros":
+        """Perform one endogenous step and retain the evolved relation structure."""
         next_state = self.engine.step(self.state)
-        if next_state.relations != self.relations:
-            next_state = next_state.evolve(values=next_state.values, relations=self.relations)
-        return Uroboros(state=next_state, engine=self.engine, relations=self.relations)
+
+        # The evolved State is authoritative. This is what permits Ψ's
+        # relation structure/rules to evolve endogenously rather than being
+        # reset to the previous Uroboros configuration.
+        return Uroboros(
+            state=next_state,
+            engine=self.engine,
+            relations=next_state.relations,
+        )
 
     def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
         relations_tuple = tuple(relations)
         return Uroboros(
-            state=self.state.evolve(values=self.state.values, relations=relations_tuple),
+            state=self.state.evolve(
+                values=self.state.values,
+                relations=relations_tuple,
+            ),
             engine=self.engine,
             relations=relations_tuple,
         )
