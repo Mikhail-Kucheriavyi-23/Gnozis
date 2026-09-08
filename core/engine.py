@@ -19,6 +19,14 @@ class Engine:
         if not callable(self.transition):
             raise TypeError("Engine transition must be callable.")
 
+    @staticmethod
+    def _validate_steps(steps: int) -> None:
+        """Require an actual integer step count and reject bool explicitly."""
+        if type(steps) is not int:
+            raise TypeError("steps must be an integer.")
+        if steps < 0:
+            raise ValueError("steps must be non-negative.")
+
     def step(self, state: State) -> State:
         """Apply one transition to the current State."""
         if not isinstance(state, State):
@@ -37,8 +45,7 @@ class Engine:
         """Apply the transition repeatedly for a finite number of steps."""
         if not isinstance(state, State):
             raise TypeError("Engine.run requires a State instance.")
-        if steps < 0:
-            raise ValueError("steps must be non-negative.")
+        self._validate_steps(steps)
 
         current = state
 
@@ -55,8 +62,7 @@ class Engine:
         """Yield the initial State followed by each subsequent State."""
         if not isinstance(state, State):
             raise TypeError("Engine.trajectory requires a State instance.")
-        if steps < 0:
-            raise ValueError("steps must be non-negative.")
+        self._validate_steps(steps)
 
         current = state
         yield current

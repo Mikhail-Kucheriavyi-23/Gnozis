@@ -54,6 +54,8 @@ class Uroboros:
 
     def run(self, steps: int) -> "Uroboros":
         """Perform multiple endogenous evolution steps without external selection."""
+        if type(steps) is not int:
+            raise TypeError("steps must be an integer.")
         if steps < 0:
             raise ValueError("steps must be non-negative.")
 
