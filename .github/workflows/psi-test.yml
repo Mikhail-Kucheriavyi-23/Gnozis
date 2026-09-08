@@ -1,0 +1,69 @@
+name: Ψ Mathematical Corpus Test
+
+on:
+  push:
+    branches:
+      - experiment/psi-math-self-optimization
+  pull_request:
+    branches:
+      - experiment/psi-math-self-optimization
+  workflow_dispatch:
+
+jobs:
+  psi-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+      - name: Install test dependency
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+      - name: Validate Ψ corpus exists and is non-empty
+        run: test -s research/psi_mathematical_corpus_v1.md
+      - name: Run Test-1 structural extraction
+        run: python research/psi_test1.py
+      - name: Run Test-2 model construction
+        run: python research/psi_test2.py
+      - name: Run Test-3 alternative model selection
+        run: python research/psi_test3.py
+      - name: Run Test-4 candidate generation and selection
+        run: python research/psi_test4.py
+      - name: Run Test-5 constraint-driven reconstruction
+        run: python research/psi_test5.py
+      - name: Run Test-6 holdout reconstruction
+        run: python research/psi_test6.py
+      - name: Run Test-7 blind structural discovery
+        run: python research/psi_test7.py
+      - name: Run Test-8 indirect consequence generalization
+        run: python research/psi_test8.py
+      - name: Run Test-9 corpus-derived competing formalizations
+        run: python research/psi_test9.py
+      - name: Run Test-10 autonomous consequence generation
+        run: python research/psi_test10.py
+      - name: Run baseline test suite
+        run: python -m pytest -q
+      - name: Record experiment metadata
+        run: |
+          mkdir -p artifacts
+          sha256sum research/psi_mathematical_corpus_v1.md > artifacts/psi_corpus.sha256
+          git rev-parse HEAD > artifacts/commit.txt
+          printf 'TEST-1=PASS\n' > artifacts/test1.txt
+          cp research/psi_test2_result.json artifacts/test2_result.json
+          cp research/psi_test3_result.json artifacts/test3_result.json
+          cp research/psi_test4_result.json artifacts/test4_result.json
+          cp research/psi_test5_result.json artifacts/test5_result.json
+          cp research/psi_test6_result.json artifacts/test6_result.json
+          cp research/psi_test7_result.json artifacts/test7_result.json
+          cp research/psi_test8_result.json artifacts/test8_result.json
+          cp research/psi_test9_result.json artifacts/test9_result.json
+          cp research/psi_test10_result.json artifacts/test10_result.json
+      - name: Upload Ψ experiment metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: psi-experiment-metadata
+          path: artifacts/
