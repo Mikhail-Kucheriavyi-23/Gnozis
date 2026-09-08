@@ -13,7 +13,7 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 - `evolve()` creates a new State and distinguishes omitted components from explicit replacements; `relations=()` is the explicit representation of R = ∅; `None` is rejected.
 - Standard nested dict/list/tuple/set containers in `values` are normalized to protected immutable-style representations for ordinary public mutation operations. Cyclic standard containers are rejected. Arbitrary objects are not recursively frozen.
 - Generate → Test → Select operates on complete State candidates, allowing X, R, or both to evolve through the same state transition.
-- The GTS boundary validates the initial State, all three operators, candidate State outputs, strict built-in `bool` tester results, and exact identity of the selected tested candidate.
+- The GTS boundary validates the initial State, all three operators, candidate State outputs, strict built-in `bool` tester results, and value-membership of the selected tested candidate.
 - `Uroboros.with_relations()` stores R through State rather than maintaining a second relation state.
 - `Uroboros.run()` repeats the endogenous transition without an external selection operator between steps.
 - The bridge's legacy autonomous-selection entry point delegates to the canonical core GTS implementation rather than maintaining a second algorithm.
@@ -21,11 +21,11 @@ Audit of the repository's computational core against the working model Ψ = (X, 
 
 ## Regression evidence
 
-The latest completed GitHub Actions run for the audited branch passed **79 tests** on each Python 3.10, 3.11, 3.12, and 3.13 matrix job. The run was green on all four jobs.
+The completed GitHub Actions baseline run for the audited branch passed **79 tests** on each Python 3.10, 3.11, 3.12, and 3.13 matrix job. A follow-up semantic correction to GTS selection has since added one regression test, so the branch now requires a fresh CI run before it can be considered fully re-verified.
 
-The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, nested standard-container normalization, cyclic-container rejection, Relation freezing and validation, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, exact candidate identity, initial State validation, operator callability, Engine input contracts, and protection against direct structural mutation attempts.
+The regression suite covers State ownership of X/R, evolve semantics, explicit empty R, rejection of `None`, standard-container alias protection, nested standard-container normalization, cyclic-container rejection, Relation freezing and validation, Uroboros relation integration, R evolution through GTS, strict boolean testing, State-only generator output, value semantics for selected State candidates, initial State validation, operator callability, Engine input contracts, and protection against direct structural mutation attempts.
 
-CI additionally verifies package installation, dependency consistency with `pip check`, Python compilation of both `core` and the terminal bridge, and the full pytest suite.
+CI additionally verifies package installation, dependency consistency with `pip check`, Python compilation of both `core` and the terminal bridge, and the full pytest suite across Python 3.10–3.13.
 
 ## Explicit non-claims
 
