@@ -18,14 +18,14 @@ def test_state_copies_relation_iterable_container():
     assert state.relations == (relation,)
 
 
-def test_evolve_preserves_r_when_only_x_changes_after_external_relation_list_mutation():
-    relation = Relation(source="a", target="b")
-    state = State(values={"x": 1}, relations=[relation])
-    replacement = [Relation(source="b", target="c")]
+def test_evolve_copies_supplied_relation_iterable_container():
+    old_relation = Relation(source="a", target="b")
+    new_relation = Relation(source="b", target="c")
+    state = State(values={"x": 1}, relations=[old_relation])
+    supplied = [new_relation]
 
-    evolved = state.evolve(values={"x": 2})
-    replacement.clear()
+    evolved = state.evolve(relations=supplied)
+    supplied.clear()
 
-    assert evolved.values["x"] == 2
-    assert evolved.relations == (relation,)
-    assert state.relations == (relation,)
+    assert evolved.relations == (new_relation,)
+    assert state.relations == (old_relation,)
