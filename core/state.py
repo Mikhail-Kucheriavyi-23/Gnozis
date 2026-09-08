@@ -7,6 +7,19 @@ from typing import Any, Mapping
 from .relation import Relation
 
 
+def _freeze(value: Any) -> Any:
+    """Recursively freeze common mutable containers at the State boundary."""
+    if isinstance(value, Mapping):
+        return MappingProxyType({k: _freeze(v) for k, v in value.items()})
+    if isinstance(value, list):
+        return tuple(_freeze(v) for v in value)
+    if isinstance(value, tuple):
+        return tuple(_freeze(v) for v in value)
+    if isinstance(value, set):
+        return frozenset(_freeze(v) for v in value)
+    return value
+
+
 @dataclass(frozen=True)
 class State:
     """Immutable Ψ state: values together with explicit relations."""
@@ -15,12 +28,10 @@ class State:
     relations: tuple[Relation, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
-        # A frozen dataclass alone does not freeze a nested dict. Copy it into
-        # a read-only mapping so the state really is immutable at its boundary.
         object.__setattr__(
             self,
             "values",
-            MappingProxyType(dict(self.values)),
+            MappingProxyType({k: _freeze(v) for k, v in self.values.items()}),
         )
         object.__setattr__(self, "relations", tuple(self.relations))
 
@@ -32,6 +43,6 @@ class State:
     ) -> "State":
         """Create a new immutable state while preserving relations by default."""
         return State(
-            values=dict(values),
-            relations=self.relations if relations is None else tuple(relations),
+            values=values,
+            relations=self.relations if relations is None else relations,
         )
