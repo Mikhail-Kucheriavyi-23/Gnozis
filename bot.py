@@ -3,11 +3,9 @@ import logging
 import requests
 from flask import Flask, request
 
-# Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Чтение переменных окружения
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 ALLOWED_USER_ID = os.environ.get("ALLOWED_USER_ID")
@@ -35,7 +33,6 @@ def webhook():
     text = message.get("text")
 
     if ALLOWED_USER_ID and user_id != str(ALLOWED_USER_ID):
-        logger.warning(f"Unauthorized access attempt from user_id: {user_id}")
         return "OK", 200
 
     if not text:
@@ -49,7 +46,7 @@ def webhook():
 
 def query_openrouter(prompt: str) -> str:
     if not OPENROUTER_API_KEY:
-        return "❌ Ошибка: не задан OPENROUTER_API_KEY в переменных окружения Render."
+        return "❌ Ошибка: не задан OPENROUTER_API_KEY."
     
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
@@ -68,29 +65,20 @@ def query_openrouter(prompt: str) -> str:
     try:
         response = requests.post(url, headers=headers, json=payload, timeout=60)
         if response.status_code == 200:
-            data = response.json()
-            return data["choices"][0]["message"]["content"]
+            return response.json()["choices"][0]["message"]["content"]
         else:
-            logger.error(f"OpenRouter error {response.status_code}: {response.text}")
             return f"❌ Ошибка OpenRouter: {response.status_code}"
     except Exception as e:
-        logger.error(f"Exception during OpenRouter request: {e}")
-        return f"❌ Ошибка соединения с OpenRouter: {str(e)}"
+        return f"❌ Ошибка соединения: {str(e)}"
 
 def send_telegram_message(chat_id, text):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": text,
-        "parse_mode": "Markdown"
-    }
     try:
-        requests.post(url, json=payload, timeout=10)
+        requests.post(url, json={"chat_id": chat_id, "text": text, "parse_mode": "Markdown"}, timeout=10)
     except Exception as e:
-        logger.error(f"Failed to send Telegram message: {e}")
+        logger.error(f"Failed: {e}")
 
 def main():
-    logger.info("Starting Gnozis bot service...")
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
