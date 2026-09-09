@@ -26,7 +26,6 @@ def webhook():
 
     logger.info(f"Received update: {json_data}")
 
-    # Извлекаем сообщение
     message = json_data.get("message") or json_data.get("edited_message")
     if not message:
         return "OK", 200
@@ -35,7 +34,6 @@ def webhook():
     user_id = str(message["from"]["id"])
     text = message.get("text")
 
-    # Проверка доступа (если задан ALLOWED_USER_ID)
     if ALLOWED_USER_ID and user_id != str(ALLOWED_USER_ID):
         logger.warning(f"Unauthorized access attempt from user_id: {user_id}")
         return "OK", 200
@@ -43,13 +41,8 @@ def webhook():
     if not text:
         return "OK", 200
 
-    # Отправляем статусное сообщение
     send_telegram_message(chat_id, "🔄 Запрос принят. Обрабатываю через OpenRouter...")
-
-    # Запрос к OpenRouter API
     ai_response = query_openrouter(text)
-
-    # Отправка ответа пользователю
     send_telegram_message(chat_id, ai_response)
 
     return "OK", 200
@@ -65,7 +58,7 @@ def query_openrouter(prompt: str) -> str:
         "X-Title": "Gnozis AI Bot"
     }
     payload = {
-        "model": "anthropic/claude-3.5-sonnet", # Или любая модель по умолчанию на OpenRouter
+        "model": "anthropic/claude-3.5-sonnet",
         "messages": [
             {"role": "system", "content": "You are Gnozis, an advanced AI engineering agent."},
             {"role": "user", "content": prompt}
