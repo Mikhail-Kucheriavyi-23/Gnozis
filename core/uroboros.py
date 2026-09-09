@@ -54,10 +54,8 @@ class Uroboros:
         self,
         relations: Iterable[Relation],
     ) -> "Uroboros":
-        """Return a core instance configured with the supplied relations."""
-        _ = tuple(relations)
-
+        """Return a new core with the supplied relations persisted in State."""
         return Uroboros(
-            state=self.state,
+            state=self.state.evolve(relations=tuple(relations)),
             engine=self.engine,
         )
