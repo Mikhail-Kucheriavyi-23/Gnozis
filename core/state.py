@@ -18,9 +18,13 @@ class State:
 
     values: Mapping[str, Any] = field(default_factory=dict)
 
-    def evolve(self, *, values: Mapping[str, Any]) -> "State":
-        """Create a new state without modifying the current state."""
-        return State(values=dict(values))
+    def evolve(self, *, values: Mapping[str, Any] | None = None, **updates: Any) -> "State":
+        """Create a new state, preserving existing fields unless explicitly updated."""
+        next_values = dict(self.values)
+        if values is not None:
+            next_values = dict(values)
+        next_values.update(updates)
+        return State(values=next_values)
 
     def to_psi(self) -> Psi:
         """Project extended state onto its fundamental Psi=(X,R) component."""
