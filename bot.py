@@ -1,6 +1,6 @@
 import os
-import asyncio
 import logging
+import requests
 from flask import Flask, request
 
 # Настройка логирования
@@ -20,23 +20,84 @@ def index():
 
 @app.route(f"/{TELEGRAM_TOKEN}", methods=["POST"])
 def webhook():
-    # Обработка входящих вебхуков от Telegram
     json_data = request.get_json()
-    if json_data:
-        logger.info(f"Received update: {json_data}")
+    if not json_data:
+        return "OK", 200
+
+    logger.info(f"Received update: {json_data}")
+
+    # Извлекаем сообщение
+    message = json_data.get("message") or json_data.get("edited_message")
+    if not message:
+        return "OK", 200
+
+    chat_id = message["chat"]["id"]
+    user_id = str(message["from"]["id"])
+    text = message.get("text")
+
+    # Проверка доступа (если задан ALLOWED_USER_ID)
+    if ALLOWED_USER_ID and user_id != str(ALLOWED_USER_ID):
+        logger.warning(f"Unauthorized access attempt from user_id: {user_id}")
+        return "OK", 200
+
+    if not text:
+        return "OK", 200
+
+    # Отправляем статусное сообщение
+    send_telegram_message(chat_id, "🔄 Запрос принят. Обрабатываю через OpenRouter...")
+
+    # Запрос к OpenRouter API
+    ai_response = query_openrouter(text)
+
+    # Отправка ответа пользователю
+    send_telegram_message(chat_id, ai_response)
+
     return "OK", 200
+
+def query_openrouter(prompt: str) -> str:
+    if not OPENROUTER_API_KEY:
+        return "❌ Ошибка: не задан OPENROUTER_API_KEY в переменных окружения Render."
+    
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "HTTP-Referer": "https://github.com/Mikhail-Kucheriavyi-23/Gnozis",
+        "X-Title": "Gnozis AI Bot"
+    }
+    payload = {
+        "model": "anthropic/claude-3.5-sonnet", # Или любая модель по умолчанию на OpenRouter
+        "messages": [
+            {"role": "system", "content": "You are Gnozis, an advanced AI engineering agent."},
+            {"role": "user", "content": prompt}
+        ]
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload, timeout=60)
+        if response.status_code == 200:
+            data = response.json()
+            return data["choices"][0]["message"]["content"]
+        else:
+            logger.error(f"OpenRouter error {response.status_code}: {response.text}")
+            return f"❌ Ошибка OpenRouter: {response.status_code}"
+    except Exception as e:
+        logger.error(f"Exception during OpenRouter request: {e}")
+        return f"❌ Ошибка соединения с OpenRouter: {str(e)}"
+
+def send_telegram_message(chat_id, text):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": chat_id,
+        "text": text,
+        "parse_mode": "Markdown"
+    }
+    try:
+        requests.post(url, json=payload, timeout=10)
+    except Exception as e:
+        logger.error(f"Failed to send Telegram message: {e}")
 
 def main():
     logger.info("Starting Gnozis bot service...")
-    
-    # Безопасная инициализация цикла событий для Python 3.14+
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-    # Запуск Flask-сервера на порту, который требует Render (по умолчанию 10000)
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
