@@ -25,10 +25,7 @@ def test_local_rule_evolution_is_independent_of_disconnected_component():
     def tester(state):
         return all("->" in r or isinstance(r, tuple) for r in state.values["relations"])
 
-    def selector(candidates):
-        return candidates[0]
-
-    transition = evolutionary_transition(generator, tester, selector)
+    transition = evolutionary_transition(generator, tester)
     result_a = Engine(transition).step(state_a)
     result_b = Engine(transition).step(state_b)
 
@@ -59,9 +56,6 @@ def test_local_rule_candidate_is_selected_from_local_neighborhood():
     def tester(state):
         return state.values["rules"]["a"] == "add_neighbor" and state.values["nodes"]["a"] == 3
 
-    def selector(candidates):
-        return candidates[0]
-
-    result = Engine(evolutionary_transition(generator, tester, selector)).step(initial)
+    result = Engine(evolutionary_transition(generator, tester)).step(initial)
     assert result.values["rules"]["a"] == "add_neighbor"
     assert result.values["nodes"]["a"] == 3
