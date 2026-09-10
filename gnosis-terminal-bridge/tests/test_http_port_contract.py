@@ -1,0 +1,83 @@
+from __future__ import annotations
+
+import json
+import threading
+import urllib.error
+import urllib.request
+from http.server import ThreadingHTTPServer
+
+from src.chat_server import GnozisChatHandler
+
+
+def _request(server, path, payload=None):
+    url = f"http://127.0.0.1:{server.server_port}{path}"
+    data = None if payload is None else json.dumps(payload).encode()
+    req = urllib.request.Request(url, data=data, method="POST" if payload is not None else "GET")
+    req.add_header("Content-Type", "application/json")
+    try:
+        with urllib.request.urlopen(req, timeout=2) as response:
+            return response.status, json.loads(response.read())
+    except urllib.error.HTTPError as exc:
+        return exc.code, json.loads(exc.read())
+
+
+def test_health_exposes_port_protocol():
+    server = ThreadingHTTPServer(("127.0.0.1", 0), GnozisChatHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        status, body = _request(server, "/health")
+        assert status == 200
+        assert body["protocol"] == "gnozis-port/1"
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def test_handshake_and_exchange_roundtrip():
+    server = ThreadingHTTPServer(("127.0.0.1", 0), GnozisChatHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        status, handshake = _request(server, "/v1/handshake", {
+            "protocol": "gnozis-port/1",
+            "client_id": "test-client",
+            "nonce": "0123456789abcdef",
+        })
+        assert status == 200
+        assert handshake["protocol"] == "gnozis-port/1"
+        assert "session_id" in handshake
+
+        status, result = _request(server, "/v1/exchange", {
+            "protocol": "gnozis-port/1",
+            "session_id": handshake["session_id"],
+            "message_id": "msg-1",
+            "message_type": "hypothesis",
+            "payload": {"text": "test"},
+            "provenance": {"source": "test-client"},
+        })
+        assert status == 200
+        assert result["accepted"] is True
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def test_replay_is_rejected():
+    server = ThreadingHTTPServer(("127.0.0.1", 0), GnozisChatHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        _, handshake = _request(server, "/v1/handshake", {
+            "protocol": "gnozis-port/1", "client_id": "test-client", "nonce": "abcdef0123456789"
+        })
+        payload = {
+            "protocol": "gnozis-port/1", "session_id": handshake["session_id"],
+            "message_id": "same-message", "message_type": "hypothesis",
+            "payload": {"text": "test"}, "provenance": {"source": "test-client"},
+        }
+        assert _request(server, "/v1/exchange", payload)[0] == 200
+        assert _request(server, "/v1/exchange", payload)[0] == 401
+    finally:
+        server.shutdown()
+        server.server_close()
