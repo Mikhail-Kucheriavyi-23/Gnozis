@@ -10,7 +10,7 @@ Purpose: explicit ledger for the September 2–10 historical reconciliation. Thi
 - GAP — expected historical material is not currently available in the repository and must not be invented.
 - PLANNED — accepted implementation work, not yet complete.
 
-## Confirmed in repository
+## Confirmed in repository / recovered audit material
 
 - Minimal Ψ direction: `Ψ=(X,R)`.
 - Endogenous evolution direction: `E:X→2^X` and state/rule-state extension `Y=(X,ρ)`.
@@ -20,7 +20,15 @@ Purpose: explicit ledger for the September 2–10 historical reconciliation. Thi
 - Memory provenance regression contracts.
 - Secure bridge / Internet Port direction with challenge binding, expiration, replay protection, fail-closed behavior, identity/provenance and authority boundaries.
 - Living Context / project-state hierarchy.
-- Research branches recorded in `GNOZIS_MASTER_AUDIT.md` and `EVOLUTION.md`.
+- Historical core audit empirically reproduced: default `Uroboros()` identity transition; `with_relations()` losing relations; `Test` accepting truthy non-bools; `bool` accepted as `steps=1`; shallow immutability; hidden `_pending_message`; shared threaded chat state; fail-open authentication; misleading `/health`; duplicate `PsiTransition` implementations; formal Ψ boundary isolated from the live Engine/Uroboros/Evolution path.
+- Recommended lightweight architecture: typed `Psi`, typed `State`, one canonical transition, explicit Ports/Adapters, property-based/adversarial regression tests.
+- Direct prior-art comparison recovered: Ψ's Generate→Test→Select pattern is related to genetic programming/generate-and-test; formal proof-before-self-modification is closely related to Gödel Machine; practical agent loops include Voyager/Reflexion/Self-Refine. These are comparisons, not claims of equivalence.
+
+## Historical recovery search status
+
+A focused Library search was performed for the user-described episode in which a Gnozis-generated proposal about protected/internal memory was forwarded into the conversation. Searches covered semantic variants of: Gnozis + memory, protected/encrypted memory, key/nonce, hash, ciphertext, integrity, provenance, trajectory, state/trace, and related Russian wording.
+
+Result: the exact forwarded Gnozis proposal and its cryptographic equations have NOT yet been uniquely identified. Do not mark them as recovered. The search did recover adjacent historical memory/state material and the engineering audit, but not the specific cryptographic proposal.
 
 ## Historical gaps requiring primary-source recovery
 
