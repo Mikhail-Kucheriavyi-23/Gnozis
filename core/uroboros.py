@@ -14,50 +14,24 @@ class Uroboros:
     """Recursive GNOSIS/UROBOROS computational core."""
 
     state: State = field(default_factory=State)
-    engine: Engine = field(
-        default_factory=lambda: Engine(
-            transition=lambda state: state
-        )
-    )
+    engine: Engine = field(default_factory=lambda: Engine(transition=lambda state: state))
 
     @classmethod
-    def evolutionary(
-        cls,
-        *,
-        generate: Generator,
-        test: Tester,
-        select: Selector,
-        state: State | None = None,
-    ) -> "Uroboros":
+    def evolutionary(cls, *, generate: Generator, test: Tester, select: Selector,
+                     state: State | None = None) -> "Uroboros":
         """Create a core whose endogenous transition is Generate → Test → Select."""
         return cls(
             state=state or State(),
-            engine=Engine(
-                transition=evolutionary_transition(
-                    generate=generate,
-                    test=test,
-                    select=select,
-                )
-            ),
+            engine=Engine(transition=evolutionary_transition(generate=generate, test=test, select=select)),
         )
 
     def step(self) -> "Uroboros":
         """Perform one endogenous evolution step."""
-        next_state = self.engine.step(self.state)
+        return Uroboros(state=self.engine.step(self.state), engine=self.engine)
 
-        return Uroboros(
-            state=next_state,
-            engine=self.engine,
-        )
-
-    def with_relations(
-        self,
-        relations: Iterable[Relation],
-    ) -> "Uroboros":
-        """Return a core instance configured with the supplied relations."""
-        _ = tuple(relations)
-
-        return Uroboros(
-            state=self.state,
-            engine=self.engine,
-        )
+    def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
+        """Return a new core with the same X and a replaced immutable relation set R."""
+        new_relations = tuple(relations)
+        values = dict(self.state.values)
+        values["relations"] = new_relations
+        return Uroboros(state=State(values=values), engine=self.engine)
