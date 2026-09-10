@@ -1,21 +1,18 @@
-from core import Engine, Psi, make_psi_transition
+from core import Engine, Psi, Relation, make_psi_transition
 
 
 def test_full_psi_cycle_generate_test_select_evolve_and_persist_shape():
-    initial = Psi(("a",), (("a", "b"),))
+    initial = Psi(("a",), (Relation("a", "b"),))
     generated = [
         Psi(("a", "reject"), initial.relations),
         Psi(("a", "accept"), ()),
     ]
 
-    def generate(psi):
-        return generated
+    def transition(x, relations):
+        valid = [candidate for candidate in generated if candidate.x[-1] == "accept"]
+        return valid[0].x, valid[0].relations
 
-    def test(candidate):
-        return candidate.x[-1] == "accept"
-
-    transition = make_psi_transition(lambda x, relations: generated[1])
-    result = Engine.from_psi(transition).step_psi(initial)
+    result = Engine.from_psi(make_psi_transition(transition)).step_psi(initial)
 
     assert result == generated[1]
     assert result.relations == ()
@@ -23,7 +20,7 @@ def test_full_psi_cycle_generate_test_select_evolve_and_persist_shape():
 
 
 def test_external_memory_or_web_is_not_part_of_fundamental_transition():
-    initial = Psi(("a",), (("a", "b"),))
+    initial = Psi(("a",), (Relation("a", "b"),))
     external = {"memory": "noise", "web": "noise"}
 
     def transition(x, relations):
