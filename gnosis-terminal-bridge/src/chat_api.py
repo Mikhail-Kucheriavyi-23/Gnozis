@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from types import MappingProxyType
 from typing import Any
 
 from .agency_context import AgencyContext, AgencyIdentity
@@ -29,6 +30,19 @@ def handle_chat(payload: dict[str, Any], chat: CoreChat) -> dict[str, Any]:
     return chat.send(message)
 
 
+def _json_safe(value: Any) -> Any:
+    """Convert immutable core containers into ordinary JSON-compatible values."""
+    if isinstance(value, MappingProxyType):
+        return {str(k): _json_safe(v) for k, v in value.items()}
+    if isinstance(value, dict):
+        return {str(k): _json_safe(v) for k, v in value.items()}
+    if isinstance(value, (tuple, list)):
+        return [_json_safe(v) for v in value]
+    if isinstance(value, (set, frozenset)):
+        return [_json_safe(v) for v in value]
+    return value
+
+
 def dumps_response(result: dict[str, Any]) -> str:
     """Serialize a core chat result for an HTTP response."""
-    return json.dumps(result, ensure_ascii=False)
+    return json.dumps(_json_safe(result), ensure_ascii=False)

@@ -29,10 +29,14 @@ def test_hidden_closure_dependency_is_rejected():
             "relations": state.values["relations"],
         })
 
+    def make_state_with_hidden(x, relations, metadata):
+        hidden["value"] = metadata["hidden"]
+        return make_state(x, relations, metadata)
+
     try:
         assert_extensional_transition(
             transition,
-            make_state,
+            make_state_with_hidden,
             3,
             (("a", "b"),),
         )
