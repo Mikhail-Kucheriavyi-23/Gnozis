@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Iterable
 
 from .engine import Engine
@@ -13,16 +13,23 @@ from .state import State
 class Uroboros:
     """Recursive GNOSIS/UROBOROS computational core."""
 
-    state: State = field(default_factory=State)
-    engine: Engine = field(default_factory=lambda: Engine(transition=lambda state: state))
+    state: State
+    engine: Engine
 
     @classmethod
-    def evolutionary(cls, *, generate: Generator, test: Tester,
-                     state: State | None = None) -> "Uroboros":
-        """Create a core whose endogenous transition is Generate → Test → Select."""
+    def evolutionary(
+        cls,
+        *,
+        generate: Generator,
+        test: Tester,
+        state: State | None = None,
+    ) -> "Uroboros":
+        """Create a core whose transition is Generate -> Test -> Select."""
         return cls(
-            state=state or State(),
-            engine=Engine(transition=evolutionary_transition(generate=generate, test=test)),
+            state=state if state is not None else State(),
+            engine=Engine(
+                transition=evolutionary_transition(generate=generate, test=test)
+            ),
         )
 
     def step(self) -> "Uroboros":
@@ -30,8 +37,7 @@ class Uroboros:
         return Uroboros(state=self.engine.step(self.state), engine=self.engine)
 
     def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
-        """Return a new core with the same X and a replaced immutable relation set R."""
-        new_relations = tuple(relations)
+        """Return a new core with the same X and a replaced immutable R."""
         values = dict(self.state.values)
-        values["relations"] = new_relations
+        values["relations"] = tuple(relations)
         return Uroboros(state=State(values=values), engine=self.engine)
