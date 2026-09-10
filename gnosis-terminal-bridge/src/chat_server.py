@@ -26,10 +26,13 @@ def _port_handler(envelope: dict[str, Any]) -> dict[str, Any]:
 class GnozisChatHandler(BaseHTTPRequestHandler):
     """HTTP adapter for Gnozis chat and gnozis-port/1 interoperability."""
 
-    chat = create_chat()
     internet_port = InternetPort(_port_handler)
     _rate_lock = threading.Lock()
     _rate_events: dict[str, deque[float]] = defaultdict(deque)
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        self.chat = create_chat()
+        super().__init__(*args, **kwargs)
 
     def _rate_limited(self) -> bool:
         now = time.monotonic()
@@ -61,6 +64,11 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if self.path == "/health":
+            try:
+                create_chat()
+            except Exception as exc:
+                self._json(503, {"status": "degraded", "core": "unavailable", "error": str(exc)})
+                return
             self._json(200, {"status": "online", "core": "ready", "protocol": "gnozis-port/1"})
             return
         self._json(404, {"error": "Not found"})
