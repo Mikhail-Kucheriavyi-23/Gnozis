@@ -12,14 +12,12 @@ ALLOWED_USER_ID = os.environ.get("ALLOWED_USER_ID")
 
 app = Flask(__name__)
 
-# Ранжированная цепочка бесплатных моделей: на 1-м месте DeepSeek R1 для архитектуры ядра и кода
+# Актуальная цепочка стабильных бесплатных моделей для кода и логики
 MODELS_CHAIN = [
-    "deepseek/deepseek-r1:free",                 # 1. Глубокие рассуждения (Chain of Thought), системный Python-код и математика
-    "google/gemini-2.0-flash-exp:free",        # 2. Высокая скорость, свежая база знаний, отличная логика
-    "qwen/qwen-2.5-72b-instruct:free",         # 3. Превосходное понимание алгоритмов, структуры и рефакторинга
-    "meta-llama/llama-3.3-70b-instruct:free",  # 4. Мощная и стабильная модель от Meta
-    "deepseek/deepseek-chat:free",             # 5. Быстрый базовый DeepSeek V3 на случай перегрузки R1
-    "mistralai/mistral-large-2411:free"        # 6. Резервный тяжеловес от Mistral
+    "deepseek/deepseek-r1:free",                 # 1. Глубокие рассуждения и математика
+    "meta-llama/llama-3.3-70b-instruct:free",  # 2. Мощная и стабильная модель от Meta
+    "qwen/qwen-2.5-72b-instruct:free",         # 3. Отличный синтаксис и понимание кода
+    "mistralai/mistral-large-2411:free"        # 4. Резервный тяжеловес
 ]
 
 @app.route("/", methods=["GET"])
