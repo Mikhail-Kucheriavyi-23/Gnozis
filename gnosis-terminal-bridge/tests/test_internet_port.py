@@ -1,6 +1,6 @@
 import pytest
 
-from gnosis_terminal_bridge.src.internet_port import InternetPort, PortError, PROTOCOL
+from src.internet_port import InternetPort, PortError, PROTOCOL
 
 
 def make_port():
