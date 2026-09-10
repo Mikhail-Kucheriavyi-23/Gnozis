@@ -5,6 +5,7 @@ from .evolution import evolutionary_transition, select_next_state
 from .observation import Observation
 from .memory import Memory, InMemoryStore, PsiMemory
 from .observation_cycle import ObservationCycle
+from .web import WebObservationSource
 from .uroboros import Uroboros
 
 __all__ = [
@@ -19,5 +20,6 @@ __all__ = [
     "InMemoryStore",
     "PsiMemory",
     "ObservationCycle",
+    "WebObservationSource",
     "Uroboros",
 ]
