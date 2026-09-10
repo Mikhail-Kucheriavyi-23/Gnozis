@@ -1,15 +1,16 @@
 # GNOZIS — PROJECT STATE
 
-**State version:** 2026-09-10 / Audit baseline 1.1
+**State version:** 2026-09-10 / Audit baseline 1.2
 **Public baseline:** Ψ-Core v33, 2026-09-03
 **Detailed audit:** `GNOZIS_MASTER_AUDIT.md`
+**Recovery ledger:** `RECOVERY_GAPS_2026-09-10.md`
 
 ## Current status
 Gnozis is a research project investigating whether a minimal endogenous computational architecture can support recursive state evolution, model construction, autonomous hypothesis generation/testing/selection, and eventually broader machine reasoning and discovery.
 
 The project now has two coupled tracks: the Ψ research core and a protected operational interoperability layer (memory/context, secure bridge, Internet Port, external-model adapters).
 
-**Current stage:** consolidation and recovery of the complete September research record, followed by adversarial validation and implementation of protected internal memory. The goal is a clean, reproducible and auditable state model without losing prior mathematical decisions.
+**Current stage:** consolidation of the September research record, adversarial validation, and preparation for protected internal memory. The memory subsystem is deliberately parked until the exact earlier specification is recovered; no reconstructed cryptographic design is to be treated as historical fact.
 
 ## Fundamental model
 The working mathematical lineage has converged toward:
@@ -59,7 +60,9 @@ Working semantic principle:
 
 Memory is a transformed trace of the past, not an undeclared external controller. If memory affects future evolution, that dependency must be explicit in the state/dynamics.
 
-A protected internal memory subsystem was developed conceptually during the September conversations, but the current repository does not yet contain enough implementation evidence to mark the earlier cryptographic construction COMPLETE. This is the immediate recovery/implementation task.
+A protected internal memory subsystem was developed conceptually during the September conversations, including a remembered goal of fast recovery after context/memory damage. However, the exact primary-source specification and adversarial damage/recovery test set have not yet been recovered. This remains **GAP / PLANNED**, not COMPLETE.
+
+Recovery target is recorded in `RECOVERY_GAPS_2026-09-10.md`. Do not invent or silently substitute a new cryptographic construction.
 
 ## Secure bridge / Internet Port
 The operational track includes challenge binding, replay protection, expiration, fail-closed behavior, identity/provenance propagation, protocol/session/channel boundaries and the trust rule:
@@ -97,18 +100,19 @@ phenomenological intuition
 ```
 
 ## Current research frontier
-1. Keep `GNOZIS_MASTER_AUDIT.md` as the detailed recovery record.
-2. Keep `PROJECT_STATE.md` as the concise handoff state.
-3. Recover exact September protected-memory mathematics before reimplementing it.
-4. Implement memory integrity/authenticity/replay protection and connect it to Living Context.
-5. Audit bridge ↔ memory ↔ Ψ trust boundaries.
-6. Continue adversarial tests for extensionality, autonomy, reproducibility, locality and Generate/Test/Select integrity.
-7. Keep mathematical/physics experiments in separate evidence tracks.
+1. Preserve the September recovery ledger and exact historical evidence.
+2. Recover exact protected-memory mathematics and the fast-recovery/damage test protocol.
+3. Verify implemented bridge and memory code against executable tests rather than relying on documentation.
+4. Audit bridge ↔ memory ↔ Ψ trust boundaries.
+5. Continue adversarial tests for extensionality, autonomy, reproducibility, locality and Generate/Test/Select integrity.
+6. Keep mathematical/physics experiments in separate evidence tracks.
+7. After reconciliation, remove obsolete/misleading documentation and consolidate the canonical architecture.
 
 ## Model handoff order
 ```text
 PROJECT_STATE.md
 GNOZIS_MASTER_AUDIT.md
+RECOVERY_GAPS_2026-09-10.md
 PHILOSOPHY.md
 EVOLUTION.md
 ARCHITECTURE.md
