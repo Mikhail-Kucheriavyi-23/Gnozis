@@ -66,11 +66,11 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
                 return
 
             result = handle_chat(payload, self.chat)
-        except (json.JSONDecodeError, TypeError, ValueError) as exc:
-            self._json(400, {"error": str(exc)})
-            return
         except PortError as exc:
             self._json(401, {"error": str(exc)})
+            return
+        except (json.JSONDecodeError, TypeError, ValueError) as exc:
+            self._json(400, {"error": str(exc)})
             return
         except Exception as exc:
             self._json(500, {"error": str(exc)})
