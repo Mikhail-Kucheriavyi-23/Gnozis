@@ -16,7 +16,11 @@ def test_chat_server_health_and_chat_roundtrip() -> None:
         connection.request("GET", "/health")
         response = connection.getresponse()
         assert response.status == 200
-        assert json.loads(response.read()) == {"status": "online", "core": "ready"}
+        assert json.loads(response.read()) == {
+            "status": "online",
+            "core": "ready",
+            "protocol": "gnozis-port/1",
+        }
 
         connection.request(
             "POST",
@@ -27,7 +31,7 @@ def test_chat_server_health_and_chat_roundtrip() -> None:
         response = connection.getresponse()
         payload = json.loads(response.read())
         assert response.status == 200
-        assert payload["state"]["turn"] >= 1
+        assert payload["state"]["turn"] == 1
         assert payload["state"]["last_message"] == "hello"
         assert payload["response"]
         connection.close()
@@ -35,3 +39,15 @@ def test_chat_server_health_and_chat_roundtrip() -> None:
         server.shutdown()
         server.server_close()
         thread.join(timeout=2)
+
+
+def test_chat_handler_creates_isolated_chat_per_handler_instance() -> None:
+    first = object.__new__(GnozisChatHandler)
+    second = object.__new__(GnozisChatHandler)
+    first.chat = __import__("src.chat_api", fromlist=["create_chat"]).create_chat("first")
+    second.chat = __import__("src.chat_api", fromlist=["create_chat"]).create_chat("second")
+
+    assert first.chat is not second.chat
+    first.chat.send("one")
+    assert second.chat.state.values["turn"] == 0
+    assert second.chat.state.values["history"] == []
