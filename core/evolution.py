@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import replace
 from typing import Callable, Iterable
 
 from .state import State
@@ -12,10 +11,12 @@ Tester = Callable[[State], bool]
 def _endogenous_score(state: State) -> tuple[int, str]:
     """Deterministic selection criterion derived only from candidate state.
 
-    Lower complexity (fewer relations) is preferred; ties are resolved by a
-    canonical representation. No externally supplied selector is involved.
+    Candidates that do not carry explicit relations are valid application
+    states; they receive zero relation complexity rather than requiring a
+    legacy ``state.relations`` attribute.
     """
-    return (len(state.relations), repr(state))
+    relations = state.values.get("relations", ())
+    return (len(relations), repr(state))
 
 
 def select_next_state(
