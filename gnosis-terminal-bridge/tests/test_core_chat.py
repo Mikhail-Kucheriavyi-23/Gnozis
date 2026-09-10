@@ -26,7 +26,7 @@ def test_chat_message_goes_through_core_engine_and_evolves_state():
     assert result["response"] == "Gnozis core received the message and evolved its state."
     assert result["state"]["turn"] == 1
     assert result["state"]["last_message"] == "Hello, Gnozis"
-    assert result["state"]["agency_subject"] == "Mikhail-Kucheriav-23" if False else "Mikhail-Kucheriavyi-23"
+    assert result["state"]["agency_subject"] == "Mikhail-Kucheriavyi-23"
     assert result["state"]["height"] == 3
     assert "_pending_message" not in result["state"]
 
