@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any, Mapping
 
+from .relation import Relation
+
 
 def _freeze(value: Any) -> Any:
     """Recursively freeze the built-in container types used by State."""
@@ -22,15 +24,21 @@ def _freeze(value: Any) -> Any:
 
 @dataclass(frozen=True)
 class Psi:
-    """Fundamental state: exactly the pair Psi=(X,R)."""
+    """Fundamental immutable state Ψ=(X,R)."""
 
     x: Any
-    relations: Any
+    relations: tuple[Relation, ...]
+
+    def __post_init__(self) -> None:
+        relations = tuple(self.relations)
+        if any(not isinstance(relation, Relation) for relation in relations):
+            raise TypeError("Psi.relations must contain only Relation instances")
+        object.__setattr__(self, "relations", relations)
 
 
 @dataclass(frozen=True)
 class State:
-    """Extended state with recursively immutable built-in containers."""
+    """Compatibility/application wrapper around the fundamental Psi state."""
 
     values: Mapping[str, Any] = field(default_factory=dict)
 
@@ -42,12 +50,15 @@ class State:
         return State(values=values)
 
     def to_psi(self) -> Psi:
-        """Project extended state onto its fundamental Psi=(X,R) component."""
+        """Project the wrapper onto its explicit fundamental Ψ=(X,R) state."""
         if "x" not in self.values or "relations" not in self.values:
             raise ValueError("State must contain fundamental fields 'x' and 'relations'")
-        return Psi(self.values["x"], self.values["relations"])
+        relations = tuple(self.values["relations"])
+        return Psi(self.values["x"], relations)
 
     @classmethod
     def from_psi(cls, psi: Psi) -> "State":
-        """Adapt a fundamental Psi state into an extended State."""
+        """Adapt a fundamental Psi state into the application wrapper."""
+        if not isinstance(psi, Psi):
+            raise TypeError("psi must be a Psi instance")
         return cls(values={"x": psi.x, "relations": psi.relations})
