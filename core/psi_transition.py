@@ -12,7 +12,6 @@ from typing import Any
 
 from .state import Psi, State
 
-
 PsiFunction = Callable[[Any, Any], tuple[Any, Any]]
 
 
@@ -28,7 +27,7 @@ class PsiTransition:
 
     def on_state(self, state: State) -> State:
         """Explicit adapter for State-based engines."""
-        return State.from_psi(self(Psi.from_state(state)))
+        return State.from_psi(self(State.to_psi(state)))
 
 
 def make_psi_transition(function: PsiFunction) -> PsiTransition:
