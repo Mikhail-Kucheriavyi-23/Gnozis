@@ -12,6 +12,13 @@ ALLOWED_USER_ID = os.environ.get("ALLOWED_USER_ID")
 
 app = Flask(__name__)
 
+# Цепочка моделей для автоматического переключения при исчерпании лимитов или ошибках
+MODELS_CHAIN = [
+    "anthropic/claude-3.5-sonnet",
+    "openai/gpt-4o",
+    "google/gemini-1.5-pro"
+]
+
 @app.route("/", methods=["GET"])
 def index():
     return "Gnozis AI Engineering Agent is running!", 200
@@ -54,22 +61,31 @@ def query_openrouter(prompt: str) -> str:
         "HTTP-Referer": "https://github.com/Mikhail-Kucheriavyi-23/Gnozis",
         "X-Title": "Gnozis AI Bot"
     }
-    payload = {
-        "model": "anthropic/claude-3.5-sonnet",
-        "messages": [
-            {"role": "system", "content": "You are Gnozis, an advanced AI engineering agent."},
-            {"role": "user", "content": prompt}
-        ]
-    }
 
-    try:
-        response = requests.post(url, headers=headers, json=payload, timeout=60)
-        if response.status_code == 200:
-            return response.json()["choices"][0]["message"]["content"]
-        else:
-            return f"❌ Ошибка OpenRouter: {response.status_code}"
-    except Exception as e:
-        return f"❌ Ошибка соединения: {str(e)}"
+    last_error = ""
+    for model in MODELS_CHAIN:
+        payload = {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": "You are Gnozis, an advanced AI engineering agent."},
+                {"role": "user", "content": prompt}
+            ]
+        }
+        try:
+            response = requests.post(url, headers=headers, json=payload, timeout=60)
+            if response.status_code == 200:
+                content = response.json()["choices"][0]["message"]["content"]
+                return content
+            else:
+                last_error = f"HTTP {response.status_code}"
+                logger.warning(f"Модель {model} ответила с ошибкой: {response.status_code}, пробую следующую...")
+                continue
+        except Exception as e:
+            last_error = str(e)
+            logger.warning(f"Ошибка соединения с моделью {model}: {e}, пробую следующую...")
+            continue
+
+    return f"❌ Ошибка OpenRouter: все модели в цепочке недоступны (последняя ошибка: {last_error})"
 
 def send_telegram_message(chat_id, text):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
