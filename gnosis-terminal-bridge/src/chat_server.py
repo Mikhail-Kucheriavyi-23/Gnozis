@@ -5,14 +5,23 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
 from .chat_api import create_chat, handle_chat
-from .internet_port import ExchangeRequest, HandshakeRequest, InternetPort, PortError
+from .internet_port import InternetPort, PortError
+
+
+def _port_handler(envelope: dict[str, Any]) -> dict[str, Any]:
+    """Minimal transport adapter; core integration stays behind this boundary."""
+    return {
+        "accepted": True,
+        "message_type": envelope["type"],
+        "payload_sha256": envelope["payload_sha256"],
+    }
 
 
 class GnozisChatHandler(BaseHTTPRequestHandler):
     """HTTP adapter for Gnozis chat and gnozis-port/1 interoperability."""
 
     chat = create_chat()
-    internet_port = InternetPort()
+    internet_port = InternetPort(_port_handler)
 
     def _json(self, status: int, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -43,12 +52,12 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
                 raise ValueError("JSON body must be an object")
 
             if self.path == "/v1/handshake":
-                result = self.internet_port.handshake(HandshakeRequest(**payload))
+                result = self.internet_port.handshake(payload)
                 self._json(200, result)
                 return
 
             if self.path == "/v1/exchange":
-                result = self.internet_port.exchange(ExchangeRequest(**payload))
+                result = self.internet_port.exchange(payload)
                 self._json(200, result)
                 return
 
