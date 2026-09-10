@@ -51,3 +51,40 @@ def test_uroboros_can_run_endogenous_generate_test_select():
 
     evolved = core.step().step().step()
     assert evolved.state.values["score"] == 3
+
+
+def test_rule_set_can_evolve_with_the_state():
+    initial = State(values={"score": 0, "relations": ("r0",)})
+
+    def generate(state):
+        return [
+            State(values={"score": 1, "relations": ("r0", "r1")}),
+            State(values={"score": 1, "relations": ("r0",)}),
+        ]
+
+    def test(state):
+        return state.values["score"] > 0
+
+    evolved = select_next_state(initial, generate, test)
+
+    assert evolved.values["relations"] == ("r0",)
+    assert initial.values["relations"] == ("r0",)
+
+
+def test_uroboros_step_can_change_relations_without_external_correction():
+    initial = State(values={"score": 0, "relations": ("r0",)})
+
+    def generate(state):
+        return [
+            State(values={"score": state.values["score"] + 1,
+                          "relations": state.values["relations"] + ("r1",)}),
+        ]
+
+    def test(state):
+        return state.values["score"] > 0
+
+    core = Uroboros.evolutionary(generate=generate, test=test, state=initial)
+    evolved = core.step()
+
+    assert evolved.state.values["relations"] == ("r0", "r1")
+    assert core.state.values["relations"] == ("r0",)
