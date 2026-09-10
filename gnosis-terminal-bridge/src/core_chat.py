@@ -18,9 +18,9 @@ def default_chat_transition(
 ) -> Mapping[str, Any]:
     """Minimal endogenous chat transition used until a richer cognition layer exists."""
     values = dict(state.values)
-    message = str(values.pop("_pending_message", "")).strip()
+    message = str(values.pop("input_message", "")).strip()
     if not message:
-        raise ValueError("state must contain a pending message")
+        raise ValueError("state must contain an input message")
 
     history = list(values.get("history", []))
     history.append({"role": "user", "content": message})
@@ -66,7 +66,7 @@ class CoreChat:
 
         assert self.state is not None
         self.state = self.state.evolve(
-            values={**self.state.values, "_pending_message": message}
+            values={**self.state.values, "input_message": message}
         )
         self.state = self.engine.step(self.state)
         values = dict(self.state.values)
