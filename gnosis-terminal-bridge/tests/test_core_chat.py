@@ -28,7 +28,7 @@ def test_chat_message_goes_through_core_engine_and_evolves_state():
     assert result["state"]["last_message"] == "Hello, Gnozis"
     assert result["state"]["agency_subject"] == "Mikhail-Kucheriavyi-23"
     assert result["state"]["height"] == 3
-    assert "_pending_message" not in result["state"]
+    assert "input_message" not in result["state"]
 
 
 def test_chat_preserves_history_across_multiple_core_steps():
@@ -50,7 +50,7 @@ def test_chat_preserves_history_across_multiple_core_steps():
             "content": "Gnozis core received the message and evolved its state.",
         },
     ]
-    assert "_pending_message" not in result["state"]
+    assert "input_message" not in result["state"]
 
 
 def test_chat_rejects_empty_message():
@@ -78,9 +78,9 @@ def test_chat_transition_reads_message_from_explicit_state():
     chat.state = State(values={
         "turn": 4,
         "history": [],
-        "_pending_message": "state-owned message",
+        "input_message": "state-owned message",
     })
     result = chat.engine.step(chat.state)
 
     assert result.values["last_message"] == "state-owned message"
-    assert "_pending_message" not in result.values
+    assert "input_message" not in result.values
