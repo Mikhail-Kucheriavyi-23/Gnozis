@@ -5,12 +5,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
 from .chat_api import create_chat, handle_chat
+from .internet_port import ExchangeRequest, HandshakeRequest, InternetPort, PortError
 
 
 class GnozisChatHandler(BaseHTTPRequestHandler):
-    """Minimal stdlib HTTP adapter for the Gnozis core chat."""
+    """HTTP adapter for Gnozis chat and gnozis-port/1 interoperability."""
 
     chat = create_chat()
+    internet_port = InternetPort()
 
     def _json(self, status: int, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -29,23 +31,37 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if self.path == "/health":
-            self._json(200, {"status": "online", "core": "ready"})
+            self._json(200, {"status": "online", "core": "ready", "protocol": "gnozis-port/1"})
             return
         self._json(404, {"error": "Not found"})
 
     def do_POST(self) -> None:
-        if self.path != "/chat":
-            self._json(404, {"error": "Not found"})
-            return
-
         length = int(self.headers.get("Content-Length", "0"))
         try:
             payload = json.loads(self.rfile.read(length) or b"{}")
             if not isinstance(payload, dict):
                 raise ValueError("JSON body must be an object")
+
+            if self.path == "/v1/handshake":
+                result = self.internet_port.handshake(HandshakeRequest(**payload))
+                self._json(200, result)
+                return
+
+            if self.path == "/v1/exchange":
+                result = self.internet_port.exchange(ExchangeRequest(**payload))
+                self._json(200, result)
+                return
+
+            if self.path != "/chat":
+                self._json(404, {"error": "Not found"})
+                return
+
             result = handle_chat(payload, self.chat)
-        except (json.JSONDecodeError, ValueError) as exc:
+        except (json.JSONDecodeError, TypeError, ValueError) as exc:
             self._json(400, {"error": str(exc)})
+            return
+        except PortError as exc:
+            self._json(401, {"error": str(exc)})
             return
         except Exception as exc:
             self._json(500, {"error": str(exc)})
@@ -60,7 +76,7 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
 def serve(host: str = "0.0.0.0", port: int = 8788) -> None:
     server = ThreadingHTTPServer((host, port), GnozisChatHandler)
     print(f"Gnozis Core API listening on http://{host}:{port}", flush=True)
-    print("POST /chat   GET /health", flush=True)
+    print("POST /chat   GET /health   POST /v1/handshake   POST /v1/exchange", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
