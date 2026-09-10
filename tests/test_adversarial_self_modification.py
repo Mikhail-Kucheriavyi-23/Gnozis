@@ -14,10 +14,7 @@ def test_invalid_rule_candidate_is_rejected_before_next_generation():
     def tester(state):
         return state.values["rule"] in {"stable", "extend"}
 
-    def selector(candidates):
-        return candidates[0]
-
-    result = Engine(evolutionary_transition(generator, tester, selector)).step(initial)
+    result = Engine(evolutionary_transition(generator, tester)).step(initial)
 
     assert result.values["rule"] == "extend"
     assert result.values["x"] == 1
@@ -33,10 +30,7 @@ def test_no_valid_rule_cannot_enter_recursive_cycle():
     def tester(state):
         return state.values["rule"] in {"stable", "extend"}
 
-    def selector(candidates):
-        return candidates[0]
-
-    transition = evolutionary_transition(generator, tester, selector)
+    transition = evolutionary_transition(generator, tester)
 
     try:
         Engine(transition).step(initial)
