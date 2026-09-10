@@ -88,3 +88,25 @@ def test_uroboros_step_can_change_relations_without_external_correction():
 
     assert evolved.state.values["relations"] == ("r0", "r1")
     assert core.state.values["relations"] == ("r0",)
+
+
+def test_rule_change_is_derived_from_current_state_without_external_rule_updater():
+    initial = State(values={"x": 0, "relations": ("r0",)})
+
+    def generate(state):
+        x = state.values["x"]
+        relations = state.values["relations"]
+        return [State(values={
+            "x": x + 1,
+            "relations": relations + (f"r{x + 1}",),
+        })]
+
+    def test(state):
+        return state.values["x"] > 0
+
+    core = Uroboros.evolutionary(generate=generate, test=test, state=initial)
+    evolved = core.step()
+
+    assert evolved.state.values["x"] == 1
+    assert evolved.state.values["relations"] == ("r0", "r1")
+    assert core.state.values["relations"] == ("r0",)
