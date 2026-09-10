@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 import json
+import threading
+import time
+from collections import defaultdict, deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
 from .chat_api import create_chat, handle_chat
-from .internet_port import InternetPort, PortError
+from .internet_port import InternetPort, PortError, MAX_BODY_BYTES
+
+RATE_WINDOW_SECONDS = 60
+RATE_LIMIT = 60
 
 
 def _port_handler(envelope: dict[str, Any]) -> dict[str, Any]:
@@ -22,6 +28,21 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
 
     chat = create_chat()
     internet_port = InternetPort(_port_handler)
+    _rate_lock = threading.Lock()
+    _rate_events: dict[str, deque[float]] = defaultdict(deque)
+
+    def _rate_limited(self) -> bool:
+        now = time.monotonic()
+        peer = self.client_address[0]
+        with self._rate_lock:
+            events = self._rate_events[peer]
+            cutoff = now - RATE_WINDOW_SECONDS
+            while events and events[0] <= cutoff:
+                events.popleft()
+            if len(events) >= RATE_LIMIT:
+                return True
+            events.append(now)
+            return False
 
     def _json(self, status: int, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -45,8 +66,16 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
         self._json(404, {"error": "Not found"})
 
     def do_POST(self) -> None:
-        length = int(self.headers.get("Content-Length", "0"))
+        if self._rate_limited():
+            self._json(429, {"error": "rate limit exceeded"})
+            return
+
         try:
+            length_header = self.headers.get("Content-Length")
+            length = int(length_header) if length_header is not None else 0
+            if length < 0 or length > MAX_BODY_BYTES:
+                self._json(413, {"error": "request body too large"})
+                return
             payload = json.loads(self.rfile.read(length) or b"{}")
             if not isinstance(payload, dict):
                 raise ValueError("JSON body must be an object")
@@ -82,8 +111,13 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
         return
 
 
+class GnozisHTTPServer(ThreadingHTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
+
 def serve(host: str = "0.0.0.0", port: int = 8788) -> None:
-    server = ThreadingHTTPServer((host, port), GnozisChatHandler)
+    server = GnozisHTTPServer((host, port), GnozisChatHandler)
     print(f"Gnozis Core API listening on http://{host}:{port}", flush=True)
     print("POST /chat   GET /health   POST /v1/handshake   POST /v1/exchange", flush=True)
     try:
