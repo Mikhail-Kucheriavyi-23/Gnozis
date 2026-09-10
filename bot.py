@@ -12,11 +12,14 @@ ALLOWED_USER_ID = os.environ.get("ALLOWED_USER_ID")
 
 app = Flask(__name__)
 
-# Цепочка моделей для автоматического переключения при исчерпании лимитов или ошибках
+# Ранжированная цепочка бесплатных моделей: на 1-м месте DeepSeek R1 для архитектуры ядра и кода
 MODELS_CHAIN = [
-    "anthropic/claude-3.5-sonnet",
-    "openai/gpt-4o",
-    "google/gemini-1.5-pro"
+    "deepseek/deepseek-r1:free",                 # 1. Глубокие рассуждения (Chain of Thought), системный Python-код и математика
+    "google/gemini-2.0-flash-exp:free",        # 2. Высокая скорость, свежая база знаний, отличная логика
+    "qwen/qwen-2.5-72b-instruct:free",         # 3. Превосходное понимание алгоритмов, структуры и рефакторинга
+    "meta-llama/llama-3.3-70b-instruct:free",  # 4. Мощная и стабильная модель от Meta
+    "deepseek/deepseek-chat:free",             # 5. Быстрый базовый DeepSeek V3 на случай перегрузки R1
+    "mistralai/mistral-large-2411:free"        # 6. Резервный тяжеловес от Mistral
 ]
 
 @app.route("/", methods=["GET"])
