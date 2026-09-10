@@ -8,15 +8,12 @@ def _transition():
         # E is intentionally defined only from the exposed (X, R) projection.
         x = state.values["x"]
         relations = state.values["relations"]
-        return (state.evolve(values={"x": x + len(relations)}),)
+        return (state.evolve(values={"x": x + len(relations), "relations": relations}),)
 
     def tester(state):
         return True
 
-    def selector(candidates):
-        return candidates[0]
-
-    return evolutionary_transition(generator, tester, selector)
+    return evolutionary_transition(generator, tester)
 
 
 def test_same_x_and_r_have_same_transition_even_with_extra_metadata():
@@ -32,6 +29,7 @@ def test_same_x_and_r_have_same_transition_even_with_extra_metadata():
     result_enriched = Engine(transition).step(enriched)
 
     assert result_base.values["x"] == result_enriched.values["x"] == 4
+    assert result_base.values["relations"] == result_enriched.values["relations"]
 
 
 def test_adversarial_hidden_variable_cannot_change_transition_when_not_in_x_or_r():
@@ -53,7 +51,7 @@ def test_adversarial_hidden_variable_cannot_change_transition_when_not_in_x_or_r
     assert result_a.values["x"] == result_b.values["x"] == 6
 
 
-def test_relevant_relation_change_may_change_transition():
+def test_relevant_relation_change_changes_transition():
     state_a = State(values={"x": 5, "relations": (("a", "b"),)})
     state_b = State(values={
         "x": 5,
