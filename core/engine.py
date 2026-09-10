@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import inspect
 from dataclasses import dataclass
 from typing import Callable, Iterable
 
@@ -10,23 +9,27 @@ from .state import State
 Transition = Callable[[State], State]
 
 
-def _validate_transition(transition: Transition) -> None:
-    """Reject transitions that capture hidden runtime state in a closure.
-
-    The core transition contract is State -> State. Closure-captured values
-    would make the next state depend on state outside the explicit input.
-    Callable objects are allowed when their state is explicit in the object
-    itself and can therefore be inspected/tested as part of the engine.
-    """
-    if not callable(transition):
-        raise TypeError("transition must be callable")
-
-    closure = getattr(transition, "__closure__", None)
+def _validate_callable_boundary(value: object, name: str) -> None:
+    if not callable(value):
+        raise TypeError(f"{name} must be callable")
+    closure = getattr(value, "__closure__", None)
     if closure:
         raise ValueError(
-            "Engine transition must not capture hidden closure state; "
-            "pass all evolving state explicitly through State."
+            f"{name} must not capture hidden closure state; "
+            "pass evolving state explicitly through State."
         )
+
+
+def _validate_transition(transition: Transition) -> None:
+    """Reject a transition whose executable state is hidden in a closure."""
+    _validate_callable_boundary(transition, "transition")
+
+    # EvolutionaryTransition stores its generator and tester explicitly.
+    # Validate those callables as well without importing the evolution module.
+    for name in ("generate", "test"):
+        nested = getattr(transition, name, None)
+        if nested is not None:
+            _validate_callable_boundary(nested, name)
 
 
 @dataclass
@@ -41,10 +44,8 @@ class Engine:
     def step(self, state: State) -> State:
         """Apply one transition to the current state."""
         next_state = self.transition(state)
-
         if not isinstance(next_state, State):
             raise TypeError("Engine transition must return a State instance.")
-
         return next_state
 
     @staticmethod
@@ -58,10 +59,8 @@ class Engine:
         """Apply the transition repeatedly for a finite number of steps."""
         self._validate_steps(steps)
         current = state
-
         for _ in range(steps):
             current = self.step(current)
-
         return current
 
     def trajectory(self, state: State, steps: int) -> Iterable[State]:
@@ -69,7 +68,6 @@ class Engine:
         self._validate_steps(steps)
         current = state
         yield current
-
         for _ in range(steps):
             current = self.step(current)
             yield current
