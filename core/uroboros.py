@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import Iterable
 
 from .engine import Engine
-from .evolution import Generator, Selector, Tester, evolutionary_transition
+from .evolution import Generator, Tester, evolutionary_transition
 from .relation import Relation
 from .state import State
 
@@ -17,12 +17,12 @@ class Uroboros:
     engine: Engine = field(default_factory=lambda: Engine(transition=lambda state: state))
 
     @classmethod
-    def evolutionary(cls, *, generate: Generator, test: Tester, select: Selector,
+    def evolutionary(cls, *, generate: Generator, test: Tester,
                      state: State | None = None) -> "Uroboros":
         """Create a core whose endogenous transition is Generate → Test → Select."""
         return cls(
             state=state or State(),
-            engine=Engine(transition=evolutionary_transition(generate=generate, test=test, select=select)),
+            engine=Engine(transition=evolutionary_transition(generate=generate, test=test)),
         )
 
     def step(self) -> "Uroboros":
