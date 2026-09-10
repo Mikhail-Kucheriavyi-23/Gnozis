@@ -9,16 +9,20 @@ from .agency_context import AgencyContext
 from .core_evolution import engine_from_agency_context
 
 
-ChatTransition = Callable[[State, AgencyContext, str], Mapping[str, Any]]
+ChatTransition = Callable[[State, AgencyContext], Mapping[str, Any]]
 
 
 def default_chat_transition(
     state: State,
     context: AgencyContext,
-    message: str,
 ) -> Mapping[str, Any]:
     """Minimal endogenous chat transition used until a richer cognition layer exists."""
-    history = list(state.values.get("history", []))
+    values = dict(state.values)
+    message = str(values.pop("_pending_message", "")).strip()
+    if not message:
+        raise ValueError("state must contain a pending message")
+
+    history = list(values.get("history", []))
     history.append({"role": "user", "content": message})
     history.append(
         {
@@ -27,9 +31,9 @@ def default_chat_transition(
         }
     )
     return {
-        **state.values,
+        **values,
         "history": history,
-        "turn": int(state.values.get("turn", 0)) + 1,
+        "turn": int(values.get("turn", 0)) + 1,
         "last_message": message,
         "agency_subject": context.identity.subject,
         "height": context.height,
@@ -50,10 +54,9 @@ class CoreChat:
         self.engine: Engine = engine_from_agency_context(
             self.context,
             lambda state, context: State(
-                values=self.transition(state, context, self._pending_message)
+                values=self.transition(state, context)
             ),
         )
-        self._pending_message = ""
 
     def send(self, message: str) -> dict[str, Any]:
         """Send one message through the core and return the new state snapshot."""
@@ -61,7 +64,10 @@ class CoreChat:
         if not message:
             raise ValueError("message must not be empty")
 
-        self._pending_message = message
+        assert self.state is not None
+        self.state = self.state.evolve(
+            values={**self.state.values, "_pending_message": message}
+        )
         self.state = self.engine.step(self.state)
         values = dict(self.state.values)
         history = list(values.get("history", []))
