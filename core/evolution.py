@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import replace
+from dataclasses import dataclass
 from typing import Callable, Iterable
 
 from .state import State
@@ -10,12 +10,8 @@ Tester = Callable[[State], bool]
 
 
 def _endogenous_score(state: State) -> tuple[int, str]:
-    """Deterministic selection criterion derived only from candidate state.
-
-    Lower complexity (fewer relations) is preferred; ties are resolved by a
-    canonical representation. No externally supplied selector is involved.
-    """
-    return (len(state.relations), repr(state))
+    """Deterministic selection criterion derived only from candidate state."""
+    return (len(state.values.get("relations", ())), repr(state))
 
 
 def select_next_state(
@@ -23,21 +19,41 @@ def select_next_state(
     generate: Generator,
     test: Tester,
 ) -> State:
-    """Endogenous Generate → Test → Select transition."""
+    """Endogenous Generate -> Test -> Select transition."""
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
 
-    valid = [candidate for candidate in candidates if test(candidate)]
+    valid: list[State] = []
+    for candidate in candidates:
+        if not isinstance(candidate, State):
+            raise TypeError("Generator must produce State instances")
+        result = test(candidate)
+        if not isinstance(result, bool):
+            raise TypeError("Test must return bool")
+        if result:
+            valid.append(candidate)
+
     if not valid:
         raise ValueError("No candidate state passed the test")
 
     return min(valid, key=_endogenous_score)
 
 
+@dataclass(frozen=True)
+class EvolutionaryTransition:
+    """Explicit callable carrying evolution functions as configuration."""
+
+    generate: Generator
+    test: Tester
+
+    def __call__(self, state: State) -> State:
+        return select_next_state(state, self.generate, self.test)
+
+
 def evolutionary_transition(
     generate: Generator,
     test: Tester,
-) -> Callable[[State], State]:
-    """Build an Engine-compatible transition with endogenous selection."""
-    return lambda state: select_next_state(state, generate, test)
+) -> EvolutionaryTransition:
+    """Build an explicit Engine-compatible endogenous transition."""
+    return EvolutionaryTransition(generate=generate, test=test)
