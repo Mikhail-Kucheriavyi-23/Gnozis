@@ -29,6 +29,19 @@ def handle_chat(payload: dict[str, Any], chat: CoreChat) -> dict[str, Any]:
     return chat.send(message)
 
 
+def _wire_value(value: Any) -> Any:
+    """Convert immutable core containers into JSON-compatible wire values."""
+    if isinstance(value, dict):
+        return {str(key): _wire_value(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_wire_value(item) for item in value]
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+    if hasattr(value, "items"):
+        return {str(key): _wire_value(item) for key, item in value.items()}
+    return str(value)
+
+
 def dumps_response(result: dict[str, Any]) -> str:
-    """Serialize a core chat result for an HTTP response."""
-    return json.dumps(result, ensure_ascii=False)
+    """Serialize a core result at the external wire boundary only."""
+    return json.dumps(_wire_value(result), ensure_ascii=False)
