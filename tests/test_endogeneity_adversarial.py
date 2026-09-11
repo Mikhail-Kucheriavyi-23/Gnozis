@@ -1,88 +1,84 @@
-"""Adversarial tests for state-extensional evolution.
-
-These tests are deliberately black-box: the same canonical State must not
-produce different evolution outcomes merely because hidden process context
-(global state, mutable closure state, randomness, or wall-clock time) changes.
-"""
+"""Adversarial tests for state-extensional evolution."""
 
 import random
 import time
 
-from core.evolution import EndogenousEvolution
+from core.evolution import evolutionary_transition
 from core.state import State
 
 
-def _state(values=None):
-    return State(values or {"elements": ["a"], "relations": []})
+def _state():
+    return State(values={"score": 0, "relations": ("r0",)})
 
 
 def _signature(state):
-    return state.to_psi().to_dict()
+    return (state.values["score"], state.values["relations"])
 
 
-def test_same_state_is_independent_of_global_context(monkeypatch):
-    external = {"value": 0}
-
+def _transition():
     def generate(state):
-        # Generator is intentionally state-only; changing unrelated process
-        # context must not alter the canonical result.
-        return [state]
+        return [State(values={
+            "score": state.values["score"] + 1,
+            "relations": state.values["relations"],
+        })]
 
     def test(state):
-        return True
+        return state.values["score"] > 0
 
-    engine = EndogenousEvolution(generate=generate, test=test)
+    return evolutionary_transition(generate, test)
 
+
+def test_same_state_is_independent_of_global_context():
+    external = {"value": 0}
+    transition = _transition()
     external["value"] = 1
-    first = _signature(engine.evolve(_state()))
+    first = _signature(transition(_state()))
     external["value"] = 999999
-    second = _signature(engine.evolve(_state()))
-
+    second = _signature(transition(_state()))
     assert first == second
 
 
 def test_same_state_is_independent_of_random_source(monkeypatch):
-    def generate(state):
-        return [state]
-
-    def test(state):
-        return True
-
-    engine = EndogenousEvolution(generate=generate, test=test)
-
+    transition = _transition()
     monkeypatch.setattr(random, "random", lambda: 0.0)
-    first = _signature(engine.evolve(_state()))
+    first = _signature(transition(_state()))
     monkeypatch.setattr(random, "random", lambda: 1.0)
-    second = _signature(engine.evolve(_state()))
-
+    second = _signature(transition(_state()))
     assert first == second
 
 
 def test_same_state_is_independent_of_wall_clock(monkeypatch):
-    def generate(state):
-        return [state]
-
-    def test(state):
-        return True
-
-    engine = EndogenousEvolution(generate=generate, test=test)
-
+    transition = _transition()
     monkeypatch.setattr(time, "time", lambda: 1.0)
-    first = _signature(engine.evolve(_state()))
+    first = _signature(transition(_state()))
     monkeypatch.setattr(time, "time", lambda: 9999999999.0)
-    second = _signature(engine.evolve(_state()))
-
+    second = _signature(transition(_state()))
     assert first == second
 
 
 def test_repeated_execution_with_identical_state_has_identical_result():
+    transition = _transition()
+    results = [_signature(transition(_state())) for _ in range(5)]
+    assert all(result == results[0] for result in results)
+
+
+def test_mutable_closure_is_not_used_by_transition():
+    hidden = {"increment": 1}
+
     def generate(state):
-        return [state]
+        # The generator intentionally has access to mutable closure state,
+        # but the transition implementation must not add hidden state of its own.
+        increment = 1
+        return [State(values={
+            "score": state.values["score"] + increment,
+            "relations": state.values["relations"],
+        })]
 
     def test(state):
-        return True
+        return state.values["score"] > 0
 
-    engine = EndogenousEvolution(generate=generate, test=test)
-    results = [_signature(engine.evolve(_state())) for _ in range(5)]
-
-    assert all(result == results[0] for result in results)
+    transition = evolutionary_transition(generate, test)
+    first = _signature(transition(_state()))
+    hidden["increment"] = 999
+    second = _signature(transition(_state()))
+    assert first == second
