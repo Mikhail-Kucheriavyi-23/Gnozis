@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import replace
 from typing import Callable, Iterable
 
 from .state import State
@@ -10,12 +9,9 @@ Tester = Callable[[State], bool]
 
 
 def _endogenous_score(state: State) -> tuple[int, str]:
-    """Deterministic selection criterion derived only from candidate state.
-
-    Lower complexity (fewer relations) is preferred; ties are resolved by a
-    canonical representation. No externally supplied selector is involved.
-    """
-    return (len(state.relations), repr(state))
+    """Deterministic selection criterion derived only from candidate state."""
+    psi = state.to_psi()
+    return (len(psi.relations), repr(state))
 
 
 def select_next_state(
@@ -23,7 +19,7 @@ def select_next_state(
     generate: Generator,
     test: Tester,
 ) -> State:
-    """Endogenous Generate → Test → Select transition."""
+    """Endogenous Generate -> Test -> Select transition."""
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
