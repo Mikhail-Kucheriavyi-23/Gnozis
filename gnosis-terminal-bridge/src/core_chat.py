@@ -58,8 +58,19 @@ class CoreChat:
             ),
         )
 
+    @staticmethod
+    def _wire_value(value: Any) -> Any:
+        """Return a detached mutable wire representation without mutating Core state."""
+        if isinstance(value, dict):
+            return {str(key): CoreChat._wire_value(item) for key, item in value.items()}
+        if isinstance(value, (list, tuple)):
+            return [CoreChat._wire_value(item) for item in value]
+        if hasattr(value, "items"):
+            return {str(key): CoreChat._wire_value(item) for key, item in value.items()}
+        return value
+
     def send(self, message: str) -> dict[str, Any]:
-        """Send one message through the core and return the new state snapshot."""
+        """Send one message through the core and return a wire-safe state snapshot."""
         message = str(message).strip()
         if not message:
             raise ValueError("message must not be empty")
@@ -82,5 +93,5 @@ class CoreChat:
 
         return {
             "response": response,
-            "state": values,
+            "state": self._wire_value(values),
         }
