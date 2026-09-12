@@ -14,7 +14,9 @@ Purpose: connect the Ψ contract to the live implementation and prevent tests fr
 |---|---|---|---|---|
 | Fundamental domain | Ψ=(X,R) | `core/state.py::Psi` | Ψ transition tests | GREEN |
 | State adapter | State projects to and reconstructs Ψ | `State.to_psi()` / `State.from_psi()` | state/transition tests | GREEN |
-| Canonical Ψ transition | One fundamental `F: Ψ→Ψ` | `core/psi_transition.py` | conformance tests | YELLOW — not yet sole Engine path |
+| Canonical Ψ transition | One fundamental `F: Ψ→Ψ` | `core/psi_transition.py` | integration/conformance tests | YELLOW — legacy State-callable path remains explicit compatibility |
+| X representation | X remains the state payload | `Psi.x` / State `x` field | adapter tests | GREEN at boundary level |
+| R representation | R is an immutable tuple of `Relation` values at the Uroboros relation boundary | `Uroboros.with_relations()` validates and stores `tuple[Relation, ...]` | repair regression | GREEN at canonical relation boundary |
 | Deep immutability | Built-in nested containers cannot mutate prior State | recursive `_freeze()` | state tests | GREEN for supported built-ins |
 | Relation persistence | R is part of state, not discarded metadata | `Uroboros.with_relations()` | repair regression | GREEN |
 | Strict Test contract | `Test(candidate) -> bool` exactly | `_test_candidate()` | repair regression | GREEN |
@@ -28,6 +30,12 @@ Purpose: connect the Ψ contract to the live implementation and prevent tests fr
 | Internet Port/Core alignment | bridge preserves authority/provenance boundaries | bridge + security tests | port suite | YELLOW |
 | Latest CI evidence | current commit has actual workflow evidence | workflow exists; latest evidence must be rechecked | GitHub Actions | YELLOW |
 
+## 2026-09-12 reconciliation update
+
+The relation boundary is now stricter: `Uroboros.with_relations()` accepts only `Relation` instances and stores them as an immutable tuple. This closes the previous ambiguity where arbitrary tuples could masquerade as relations.
+
+This is a boundary-level consolidation, not a claim that every possible `R` payload in the entire repository is already fully typed. The fundamental Ψ contract remains `Ψ=(X,R)`, while the canonical Uroboros relation API now defines the concrete relation representation.
+
 ## Current reconciliation rule
 
 The formal Ψ transition boundary is explicitly present, but the project must converge on one canonical route:
@@ -38,4 +46,4 @@ No second semantic transition implementation should be introduced. Boundary adap
 
 ## Next gate
 
-Before expanding mathematical/physics research, close the remaining canonical-path discrepancy and run the full regression suite against the repaired live Core.
+Before expanding mathematical/physics research, run the full regression suite against the repaired live Core, then make the explicit architectural decision whether the legacy State-callable transition remains as a documented compatibility API or is removed.
