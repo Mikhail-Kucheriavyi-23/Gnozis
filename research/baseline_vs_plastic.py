@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Mapping
 
 from .drosophila_principles import LIFState, Synapse, lif_step, propagate
-from .novel_topology_generation import generate_novel_relations
+from .novel_topology_generation import generate_local_relations
 from .viability import viability
 
 
@@ -24,6 +24,7 @@ def run_variant(
     inputs: tuple[Mapping[str, float], ...],
     plastic: bool,
 ) -> tuple[ComparisonStep, ...]:
+    """Run one controlled variant with identical external inputs."""
     current = dict(states)
     current_relations = tuple(relations)
     history: list[ComparisonStep] = []
@@ -34,10 +35,14 @@ def run_variant(
             for node in current
         }
         if plastic:
-            current_relations = tuple(current_relations) + tuple(
-                generate_novel_relations(current, current_relations)
+            current_relations = generate_local_relations(current, current_relations)
+        history.append(
+            ComparisonStep(
+                current,
+                current_relations,
+                viability(current, current_relations),
             )
-        history.append(ComparisonStep(current, current_relations, viability(current, current_relations)))
+        )
     return tuple(history)
 
 
