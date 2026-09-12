@@ -6,7 +6,7 @@ This is the active engineering defect ledger. A defect is closed only when code 
 
 | ID | Defect | Current status | Next action |
 |---|---|---|---|
-| D-001 | Canonical Ψ transition is not yet the sole live Engine/Evolution path | OPEN | integrate `PsiTransition` with Engine without creating a second semantic transition |
+| D-001 | Canonical Ψ transition is not yet the sole live Engine/Evolution path | PARTIALLY CLOSED | keep `PsiTransition` as canonical path; formally bound or remove legacy State-callable compatibility path |
 | D-002 | Relation/State canonical representation needs final consolidation | OPEN | define one typed representation for X and R and migrate boundary code |
 | D-003 | Default `Uroboros()` previously performed identity evolution | FIXED | keep fail-closed regression test |
 | D-004 | `Test` previously accepted truthy non-bools | FIXED | keep strict bool regression test |
