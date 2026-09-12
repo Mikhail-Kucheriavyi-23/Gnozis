@@ -2,6 +2,7 @@ import unittest
 
 from core.engine import Engine
 from core.evolution import evolutionary_psi_transition
+from core.psi_transition import PsiTransition
 from core.state import State
 from core.uroboros import Uroboros
 
@@ -25,7 +26,7 @@ class PsiCoreIntegrationTests(unittest.TestCase):
             state=initial,
         )
 
-        self.assertIsInstance(core.engine.transition, type(evolutionary_psi_transition(generate, test)))
+        self.assertIsInstance(core.engine.transition, PsiTransition)
         evolved = core.step()
         self.assertEqual(evolved.state.to_psi().x, "x2")
         self.assertEqual(evolved.state.to_psi().relations, ())
