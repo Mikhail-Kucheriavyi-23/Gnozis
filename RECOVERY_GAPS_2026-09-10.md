@@ -9,6 +9,7 @@ Purpose: explicit ledger for the September 2–10 historical reconciliation. Thi
 - RECONSTRUCTED — derived from retained project context; not primary-source recovery.
 - GAP — expected historical material is not currently available in the repository and must not be invented.
 - PLANNED — accepted implementation work, not yet complete.
+- FIXED — historical engineering defect has been repaired in the current branch; regression evidence still requires CI/full-suite confirmation.
 
 ## Confirmed in repository / recovered audit material
 
@@ -23,6 +24,18 @@ Purpose: explicit ledger for the September 2–10 historical reconciliation. Thi
 - Historical core audit empirically reproduced: default `Uroboros()` identity transition; `with_relations()` losing relations; `Test` accepting truthy non-bools; `bool` accepted as `steps=1`; shallow immutability; hidden `_pending_message`; shared threaded chat state; fail-open authentication; misleading `/health`; duplicate `PsiTransition` implementations; formal Ψ boundary isolated from the live Engine/Uroboros/Evolution path.
 - Recommended lightweight architecture: typed `Psi`, typed `State`, one canonical transition, explicit Ports/Adapters, property-based/adversarial regression tests.
 - Direct prior-art comparison recovered: Ψ's Generate→Test→Select pattern is related to genetic programming/generate-and-test; formal proof-before-self-modification is closely related to Gödel Machine; practical agent loops include Voyager/Reflexion/Self-Refine. These are comparisons, not claims of equivalence.
+
+## Current engineering repair status — 2026-09-12
+
+The following historical defects have been repaired in the current branch and locked by targeted regression tests:
+
+- `Uroboros()` no longer silently performs an identity transition; an unconfigured core fails closed.
+- `Uroboros.with_relations()` preserves the supplied relation state.
+- `Test(candidate)` now requires an exact `bool` return value.
+- `Engine.run()` and `trajectory()` now reject `bool` as a step count.
+- `State` recursively freezes built-in nested containers in the current implementation.
+
+These are **implementation fixes**, not historical recovery claims. They still require successful full-suite CI evidence before being marked fully closed.
 
 ## Historical recovery search status
 
@@ -78,7 +91,7 @@ These remain hypotheses/tests until exact evidence is recovered.
 
 ## Current engineering discrepancy to preserve
 
-Recent CI evidence showed an import/contract failure involving `Selector` in `core/uroboros.py` importing from `core.evolution`. Do not resolve this by blindly adding a selector implementation: first verify whether the intended selector is an internal endogenous operator and what its explicit selection criterion is.
+The main remaining discrepancy is architectural: the formal Ψ transition boundary exists, but it is not yet the sole semantic transition path used by the live Engine/Uroboros/Evolution stack. This must be reconciled before the project claims a single canonical Core transition.
 
 A separate HTTP replay contract previously returned `400` where the security contract expected `401`. Preserve this as a historical contract defect if it is already fixed in the current branch; do not describe the old failure as the current state without checking CI.
 
