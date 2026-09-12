@@ -9,16 +9,28 @@ from .relation import Relation
 from .state import State
 
 
+def _unconfigured_transition(state: State) -> State:
+    """Prevent an unconfigured core from silently performing identity evolution."""
+    raise RuntimeError(
+        "Uroboros has no transition configured; provide an Engine or use Uroboros.evolutionary()."
+    )
+
+
 @dataclass(frozen=True)
 class Uroboros:
     """Recursive GNOSIS/UROBOROS computational core."""
 
     state: State = field(default_factory=State)
-    engine: Engine = field(default_factory=lambda: Engine(transition=lambda state: state))
+    engine: Engine = field(default_factory=lambda: Engine(transition=_unconfigured_transition))
 
     @classmethod
-    def evolutionary(cls, *, generate: Generator, test: Tester,
-                     state: State | None = None) -> "Uroboros":
+    def evolutionary(
+        cls,
+        *,
+        generate: Generator,
+        test: Tester,
+        state: State | None = None,
+    ) -> "Uroboros":
         """Create a core whose endogenous transition is Generate → Test → Select."""
         return cls(
             state=state or State(),
