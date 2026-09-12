@@ -6,7 +6,7 @@ The full `test.yml` workflow executed on the reconciled Core and reported 45 fai
 
 ## Cluster A — obsolete State attribute API
 
-Some tests still access `state.x` / `state.relations`, while the canonical State implementation exposes the data through `state.values` and the explicit `to_psi()` / `from_psi()` boundary. The current State implementation contains only `values` plus the adapters. These failures are test-fixture/API migration work, not evidence that the new canonical State implementation itself is broken.
+Some tests still access `state.x` / `state.relations`. The canonical State implementation still stores the source of truth in `values`, but now exposes `x` and `relations` as read-only projections of those canonical values. This preserves compatibility without creating a second state model.
 
 ## Cluster B — non-Ψ / incomplete State fixtures
 
@@ -22,7 +22,9 @@ Generic `State -> State` callables cannot automatically guarantee that evolution
 
 ## Immediate decision
 
-Do not repair the 45 failures one-by-one blindly. First migrate/classify the obsolete State API fixtures, then re-run the full suite. The remaining failures after migration become the genuine semantic defect set.
+Cluster A compatibility was repaired without weakening the canonical contract: `state.x` and `state.relations` are read-only projections of `State.values`, not independent storage. Added regression coverage in `tests/test_state_compatibility_projections.py`.
+
+Cluster B remains the next migration target. Do not repair the remaining failures one-by-one blindly.
 
 ## Architectural implication
 
@@ -30,7 +32,7 @@ Canonical Ψ evidence must use `PsiTransition` or explicitly prove delegation to
 
 ## Next gate
 
-1. Migrate Cluster A/B tests without weakening canonical contracts.
+1. Migrate/classify Cluster B incomplete fixtures without weakening canonical contracts.
 2. Re-run full pytest CI.
 3. Review remaining failures as semantic candidates.
 4. Run adversarial regression against the reconciled canonical path.
