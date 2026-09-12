@@ -8,32 +8,33 @@ Generator = Callable[[State], Iterable[State]]
 Tester = Callable[[State], bool]
 
 
+def _test_candidate(test: Tester, candidate: State) -> bool:
+    """Enforce the fundamental Test(candidate) -> bool contract."""
+    result = test(candidate)
+    if type(result) is not bool:
+        raise TypeError("Test(candidate) must return bool exactly.")
+    return result
+
+
 def _endogenous_score(state: State) -> tuple[int, str]:
     """Deterministic selection criterion derived only from candidate state."""
     psi = state.to_psi()
     return (len(psi.relations), repr(state))
 
 
-def select_next_state(
-    state: State,
-    generate: Generator,
-    test: Tester,
-) -> State:
+def select_next_state(state: State, generate: Generator, test: Tester) -> State:
     """Endogenous Generate -> Test -> Select transition."""
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
 
-    valid = [candidate for candidate in candidates if test(candidate)]
+    valid = [candidate for candidate in candidates if _test_candidate(test, candidate)]
     if not valid:
         raise ValueError("No candidate state passed the test")
 
     return min(valid, key=_endogenous_score)
 
 
-def evolutionary_transition(
-    generate: Generator,
-    test: Tester,
-) -> Callable[[State], State]:
+def evolutionary_transition(generate: Generator, test: Tester) -> Callable[[State], State]:
     """Build an Engine-compatible transition with endogenous selection."""
     return lambda state: select_next_state(state, generate, test)
