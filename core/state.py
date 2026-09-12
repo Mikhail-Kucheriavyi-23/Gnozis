@@ -37,6 +37,20 @@ class State:
     def __post_init__(self) -> None:
         object.__setattr__(self, "values", _freeze(self.values))
 
+    @property
+    def x(self) -> Any:
+        """Read-only compatibility projection of canonical values['x']."""
+        if "x" not in self.values:
+            raise AttributeError("State has no canonical 'x' value")
+        return self.values["x"]
+
+    @property
+    def relations(self) -> Any:
+        """Read-only compatibility projection of canonical values['relations']."""
+        if "relations" not in self.values:
+            raise AttributeError("State has no canonical 'relations' value")
+        return self.values["relations"]
+
     def evolve(self, *, values: Mapping[str, Any]) -> "State":
         """Create a new state without modifying the current state."""
         return State(values=values)
