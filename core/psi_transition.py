@@ -27,8 +27,8 @@ class PsiTransition:
         return Psi(next_x, next_relations)
 
     def on_state(self, state: State) -> State:
-        """Explicit adapter for State-based engines."""
-        return State.from_psi(self(Psi.from_state(state)))
+        """Adapt the canonical Psi transition to the State engine boundary."""
+        return State.from_psi(self(state.to_psi()))
 
 
 def make_psi_transition(function: PsiFunction) -> PsiTransition:
