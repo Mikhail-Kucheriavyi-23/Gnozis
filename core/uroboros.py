@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import Iterable
 
 from .engine import Engine
-from .evolution import Generator, Tester, evolutionary_transition
+from .evolution import Generator, Tester, evolutionary_psi_transition
 from .relation import Relation
 from .state import State
 
@@ -31,10 +31,13 @@ class Uroboros:
         test: Tester,
         state: State | None = None,
     ) -> "Uroboros":
-        """Create a core whose endogenous transition is Generate → Test → Select."""
+        """Create a core whose fundamental transition is Psi -> Psi."""
+        initial = state or State()
+        # Fail early if the supplied State cannot represent the fundamental Ψ=(X,R).
+        initial.to_psi()
         return cls(
-            state=state or State(),
-            engine=Engine(transition=evolutionary_transition(generate=generate, test=test)),
+            state=initial,
+            engine=Engine(transition=evolutionary_psi_transition(generate=generate, test=test)),
         )
 
     def step(self) -> "Uroboros":
