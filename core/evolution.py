@@ -17,14 +17,23 @@ def _test_candidate(test: Tester, candidate: State) -> bool:
     return result
 
 
-def _endogenous_score(state: State) -> tuple[int, str]:
-    """Deterministic selection criterion derived only from candidate state."""
+def _generic_score(state: State) -> tuple[str]:
+    """Deterministic score for the generic State compatibility path.
+
+    This path is intentionally independent of the canonical Psi=(X,R)
+    representation. It therefore must not require State.to_psi().
+    """
+    return (repr(state),)
+
+
+def _psi_score(state: State) -> tuple[int, str]:
+    """Deterministic endogenous score for canonical Psi evolution."""
     psi = state.to_psi()
-    return (len(psi.relations), repr(state))
+    return (len(psi.relations), repr(psi))
 
 
 def select_next_state(state: State, generate: Generator, test: Tester) -> State:
-    """Endogenous Generate -> Test -> Select transition."""
+    """Generic endogenous Generate -> Test -> Select transition."""
     candidates = list(generate(state))
     if not candidates:
         raise ValueError("Generator must produce at least one candidate state")
@@ -33,7 +42,7 @@ def select_next_state(state: State, generate: Generator, test: Tester) -> State:
     if not valid:
         raise ValueError("No candidate state passed the test")
 
-    return min(valid, key=_endogenous_score)
+    return min(valid, key=_generic_score)
 
 
 def evolutionary_transition(generate: Generator, test: Tester) -> Callable[[State], State]:
@@ -51,7 +60,13 @@ def evolutionary_psi_transition(generate: Generator, test: Tester) -> PsiTransit
 
     def transition(x: object, relations: object) -> tuple[object, object]:
         current = State.from_psi(Psi(x, relations))
-        next_state = select_next_state(current, generate, test)
+        candidates = list(generate(current))
+        if not candidates:
+            raise ValueError("Generator must produce at least one candidate state")
+        valid = [candidate for candidate in candidates if _test_candidate(test, candidate)]
+        if not valid:
+            raise ValueError("No candidate state passed the test")
+        next_state = min(valid, key=_psi_score)
         next_psi = next_state.to_psi()
         return next_psi.x, next_psi.relations
 
