@@ -9,6 +9,14 @@ from .state import State
 Transition = Callable[[State], State]
 
 
+def _validate_steps(steps: int) -> None:
+    """Require a real integer step count; bool is intentionally rejected."""
+    if type(steps) is not int:
+        raise TypeError("steps must be an int, not bool or another numeric type.")
+    if steps < 0:
+        raise ValueError("steps must be non-negative.")
+
+
 @dataclass
 class Engine:
     """Deterministic state-transition engine for GNOSIS/UROBOROS."""
@@ -20,37 +28,23 @@ class Engine:
         next_state = self.transition(state)
 
         if not isinstance(next_state, State):
-            raise TypeError(
-                "Engine transition must return a State instance."
-            )
+            raise TypeError("Engine transition must return a State instance.")
 
         return next_state
 
     def run(self, state: State, steps: int) -> State:
         """Apply the transition repeatedly for a finite number of steps."""
-        if steps < 0:
-            raise ValueError("steps must be non-negative.")
-
+        _validate_steps(steps)
         current = state
-
         for _ in range(steps):
             current = self.step(current)
-
         return current
 
-    def trajectory(
-        self,
-        state: State,
-        steps: int,
-    ) -> Iterable[State]:
+    def trajectory(self, state: State, steps: int) -> Iterable[State]:
         """Yield the initial state followed by each subsequent state."""
-        if steps < 0:
-            raise ValueError("steps must be non-negative.")
-
+        _validate_steps(steps)
         current = state
         yield current
-
         for _ in range(steps):
             current = self.step(current)
             yield current
-
