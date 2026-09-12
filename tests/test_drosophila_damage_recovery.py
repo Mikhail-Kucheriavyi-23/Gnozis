@@ -11,19 +11,13 @@ def test_damage_is_structural_and_local():
 def test_damage_experiment_does_not_invent_a_target_relation():
     relations = (Synapse("a", "b", 0.5), Synapse("b", "c", 0.5), Synapse("c", "a", 0.5))
     states = {"a": LIFState(spiked=True), "b": LIFState(), "c": LIFState()}
-    result = run_damage_experiment(
-        relations, states, damaged_source="a", damaged_target="b"
-    )
+    result = run_damage_experiment(relations, states, damaged_source="a", damaged_target="b")
     assert Synapse("a", "b", 0.5) not in result.damaged
     assert all(r.source != "a" or r.target != "b" for r in result.after)
 
 
-def test_damage_experiment_preserves_observability_of_existing_structure():
+def test_damage_experiment_can_create_only_from_coactive_nodes():
     relations = (Synapse("a", "b", 0.5), Synapse("b", "c", 0.5), Synapse("c", "a", 0.5))
-    states = {"a": LIFState(spiked=True), "b": LIFState(), "c": LIFState()}
-    result = run_damage_experiment(
-        relations, states, damaged_source="a", damaged_target="b"
-    )
-    assert result.before == relations
-    assert len(result.damaged) == 2
-    assert set(result.active_nodes) == {"a"}
+    states = {"a": LIFState(spiked=True), "b": LIFState(spiked=True), "c": LIFState()}
+    result = run_damage_experiment(relations, states, damaged_source="a", damaged_target="b")
+    assert Synapse("b", "a", 0.05) in result.after
