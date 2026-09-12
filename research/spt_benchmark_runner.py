@@ -1,28 +1,43 @@
-"""Produce a reproducible SPT benchmark artifact from benchmark_runner.
+"""Generate one reproducible benchmark artifact from the controlled protocol.
 
-No scientific numbers are embedded here. The artifact is generated only by
-executing the existing benchmark implementation.
+This is a deterministic fixture for validating the measurement pipeline. The
+matched control is explicitly supplied and has the same relation count as the
+initial topology; it is not yet a claim of a statistically sampled random
+control.
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-from research.benchmark_runner import run_benchmark
+from research.controlled_benchmark import run_controlled_benchmark
+from research.drosophila_principles import LIFState, Synapse
 
 ARTIFACT = Path("research/artifacts/spt_benchmark.json")
 
 
 def main() -> int:
-    # Keep the experiment configuration explicit and deterministic.
-    result = run_benchmark(seed=0)
+    states = {"a": LIFState(), "b": LIFState(), "c": LIFState()}
+    relations = (Synapse("a", "b", 0.5), Synapse("b", "a", 0.5))
+    matched = (Synapse("a", "c", 0.5), Synapse("c", "a", 0.5))
+    inputs = tuple({"a": 1.0} for _ in range(4))
+
+    result = run_controlled_benchmark(
+        states,
+        relations,
+        inputs=inputs,
+        random_matched_relations=matched,
+    )
+
     payload = {
-        "baseline": [float(step.baseline) for step in result],
-        "random_matched": [float(step.random_matched) for step in result],
-        "plastic": [float(step.plastic) for step in result],
-        "random_budget": int(result[0].random_budget),
-        "initial_budget": int(result[0].initial_budget),
+        "baseline": [float(step.viability) for step in result.baseline],
+        "random_matched": [float(step.viability) for step in result.random_matched],
+        "plastic": [float(step.viability) for step in result.plastic],
+        "initial_budget": len(relations),
+        "random_budget": len(matched),
         "seed": 0,
+        "control_type": "deterministic_matched_fixture",
+        "input_steps": len(inputs),
     }
     ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
     ARTIFACT.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
