@@ -3,10 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Iterable
 
+from .psi_transition import PsiTransition
 from .state import State
 
 
-Transition = Callable[[State], State]
+Transition = Callable[[State], State] | PsiTransition
 
 
 def _validate_steps(steps: int) -> None:
@@ -24,8 +25,15 @@ class Engine:
     transition: Transition
 
     def step(self, state: State) -> State:
-        """Apply one transition to the current state."""
-        next_state = self.transition(state)
+        """Apply one transition to the current state.
+
+        PsiTransition is the canonical fundamental path. A State callable is
+        retained as an explicit compatibility boundary for existing clients.
+        """
+        if isinstance(self.transition, PsiTransition):
+            next_state = self.transition.on_state(state)
+        else:
+            next_state = self.transition(state)
 
         if not isinstance(next_state, State):
             raise TypeError("Engine transition must return a State instance.")
