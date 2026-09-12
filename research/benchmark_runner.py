@@ -7,7 +7,7 @@ from typing import Mapping
 
 from .baseline_vs_plastic import ComparisonStep, run_variant
 from .drosophila_principles import LIFState, Synapse
-from .viability import viability
+from .random_matched import generate_matched_random_relations
 
 
 @dataclass(frozen=True)
@@ -34,10 +34,21 @@ def run_benchmark(
     relations: tuple[Synapse, ...],
     *,
     inputs: tuple[Mapping[str, float], ...],
-    random_relations: tuple[Synapse, ...] | None = None,
+    seed: int,
 ) -> tuple[BenchmarkResult, BenchmarkResult, BenchmarkResult]:
-    """Run identical inputs through baseline, matched control, and plastic variants."""
-    matched = relations if random_relations is None else random_relations
+    """Run identical inputs through baseline, matched random, and plastic variants.
+
+    The random control is generated internally from the same node set and exact
+    initial relation budget as the supplied topology. It has no access to
+    viability or to the plastic variant's outcome.
+    """
+    nodes = tuple(states.keys())
+    matched = generate_matched_random_relations(
+        nodes,
+        len(relations),
+        seed=seed,
+        weight=relations[0].weight if relations else 0.05,
+    )
     baseline = run_variant(states, relations, inputs=inputs, plastic=False)
     random_control = run_variant(states, matched, inputs=inputs, plastic=False)
     plastic = run_variant(states, relations, inputs=inputs, plastic=True)
