@@ -16,28 +16,31 @@ Only mechanism-level ideas were reimplemented independently in `research/drosoph
 2. Recurrent propagation through weighted relations.
 3. Local activity-dependent relation strengthening/weakening.
 4. Structural decay and explicit relation extinction (`R -> ∅`).
+5. A research-only candidate for local relation creation between co-active nodes.
 
 No Drosophila connectome dataset, Brian2 model, or original source implementation is placed in the GNOSIS core.
 
-## Why this boundary exists
+## Audit finding — 2026-09-12
 
-GNOSIS defines the canonical object as Ψ=(X,R). The Drosophila project is therefore treated as a source of experimentally useful biological principles, not as a replacement architecture. Keeping the adapter outside `core/` prevents the biological simulator from becoming an implicit second state model or an external selector.
+The adapter is useful as an experimental scaffold, but it does **not yet demonstrate endogenous autopoiesis, structural memory, or intelligence**.
 
-## First hypothesis
+The current topology generator creates a relation only when two nodes are already marked active. Therefore it changes `R`, but it does not yet demonstrate that the system generated a new functional organization from its own evolving state. In particular, the current experiment does not establish viability preservation or recovery after damage.
 
-The useful transfer is not “simulate a fly”. It is:
+The repeated-damage harness retains the structural result between trials, but its local activity input is supplied as a fixed mapping. Consequently, it is a valid structural-memory *test harness*, not yet evidence of structural memory.
 
-`local recurrent dynamics + structural plasticity -> candidate endogenous reorganization of R`
+## Architectural decision
 
-The current adapter is deliberately small and dependency-free. It is a research instrument, not evidence that autopoiesis or intelligence has been achieved.
+Keep all Drosophila-derived mechanisms outside `core/`. Do not merge them into canonical Ψ until experiments show a property that cannot be explained by a fixed rule or externally supplied state.
 
-## Required next experiments
+## Next required experiment
 
-- damage one relation and test whether a viable recurrent organization can be regenerated;
-- repeat the damage and compare the response with the first trial;
-- test whether previous structural changes alter future adaptation;
-- test whether novel viable relation structures can arise without an external selector;
-- only after positive evidence consider any change to canonical `core/`.
+Build a closed experimental loop in which:
+
+`Ψ=(X,R)` → activity → relation change → next `X,R` → viability test → repeat.
+
+The experiment must measure whether a damaged system can produce a **new viable topology** without being told the target topology. The viability criterion must itself be explicit and auditable, but the repair topology must not be prescribed.
+
+Only after this experiment passes should the mechanism be considered for promotion from `research/` into the canonical architecture.
 
 ## Attribution
 
