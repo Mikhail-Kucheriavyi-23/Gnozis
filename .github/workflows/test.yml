@@ -30,10 +30,24 @@ jobs:
           python -m pytest -q 2>&1 | tee pytest-output.txt
           test ${PIPESTATUS[0]} -eq 0
 
+      - name: Run SPT benchmark
+        run: python -m research.spt_benchmark_runner
+
+      - name: Evaluate SPT acceptance
+        run: python -m research.run_spt_experiment
+
       - name: Upload pytest report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pytest-report
           path: pytest-output.txt
+          if-no-files-found: error
+
+      - name: Upload SPT benchmark artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spt-benchmark
+          path: research/artifacts/spt_benchmark.json
           if-no-files-found: error
