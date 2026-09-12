@@ -45,8 +45,10 @@ class Uroboros:
         return Uroboros(state=self.engine.step(self.state), engine=self.engine)
 
     def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
-        """Return a new core with the same X and a replaced immutable relation set R."""
+        """Return a new core with the same X and a canonical immutable relation tuple."""
         new_relations = tuple(relations)
+        if any(not isinstance(relation, Relation) for relation in new_relations):
+            raise TypeError("relations must contain Relation instances.")
         values = dict(self.state.values)
         values["relations"] = new_relations
         return Uroboros(state=State(values=values), engine=self.engine)
