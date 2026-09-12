@@ -6,7 +6,7 @@ This is the active engineering defect ledger. A defect is closed only when code 
 
 | ID | Defect | Current status | Next action |
 |---|---|---|---|
-| D-001 | Canonical Ψ transition is not yet the sole live Engine/Evolution path | PARTIALLY CLOSED | keep `PsiTransition` as canonical path; formally bound or remove legacy State-callable compatibility path |
+| D-001 | Canonical Ψ transition is not yet the sole live Engine/Evolution path | PARTIALLY CLOSED | canonical `PsiTransition` is now executable through `Engine` and `Uroboros.evolutionary`; next remove or formally constrain the legacy State-callable compatibility path |
 | D-002 | Relation/State canonical representation needs final consolidation | OPEN | define one typed representation for X and R and migrate boundary code |
 | D-003 | Default `Uroboros()` previously performed identity evolution | FIXED | keep fail-closed regression test |
 | D-004 | `Test` previously accepted truthy non-bools | FIXED | keep strict bool regression test |
@@ -20,6 +20,24 @@ This is the active engineering defect ledger. A defect is closed only when code 
 | D-012 | Protected/encrypted internal memory historical specification | GAP | recover primary-source design before implementing |
 | D-013 | Interoperability contract | PLANNED | implement after Core canonicalization |
 | D-014 | Mathematical/physics research claims | SEPARATE | preserve as hypothesis/evidence tracks; do not mix with Core conformance |
+
+## 2026-09-12 reconciliation update
+
+The canonical boundary was repaired and verified at the code level:
+
+```text
+State
+  ↓ to_psi()
+Psi=(X,R)
+  ↓ PsiTransition
+Psi'
+  ↓ State.from_psi()
+State'
+```
+
+`Engine` recognizes `PsiTransition` as the canonical fundamental path, while the older State-callable transition remains explicitly marked as a compatibility boundary. `Uroboros.evolutionary()` constructs the canonical `PsiTransition`, and targeted integration tests cover both direct Engine execution and Uroboros evolution.
+
+This update is evidence of implementation progress, not full D-001 closure. Full closure still requires full-suite CI verification and a decision on the legacy State-callable compatibility path.
 
 ## Closure rule
 
