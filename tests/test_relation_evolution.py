@@ -4,6 +4,10 @@ from core import State
 from core.evolution import evolutionary_transition
 
 
+def _psi_state(relations):
+    return State(values={"x": (), "relations": relations})
+
+
 def _transition(candidates):
     def generate(_state):
         return tuple(candidates)
@@ -12,8 +16,8 @@ def _transition(candidates):
 
 
 def test_relations_can_evolve_to_empty_set():
-    initial = State(values={"relations": (("a", "b"),)})
-    reduced = State(values={"relations": ()})
+    initial = _psi_state((("a", "b"),))
+    reduced = _psi_state(())
 
     result = _transition((reduced,))(initial)
 
@@ -22,8 +26,8 @@ def test_relations_can_evolve_to_empty_set():
 
 
 def test_empty_relations_can_evolve_to_nonempty_set():
-    initial = State(values={"relations": ()})
-    expanded = State(values={"relations": (("a", "b"),)})
+    initial = _psi_state(())
+    expanded = _psi_state((("a", "b"),))
 
     result = _transition((expanded,))(initial)
 
@@ -31,9 +35,9 @@ def test_empty_relations_can_evolve_to_nonempty_set():
 
 
 def test_relation_change_is_realized_through_generate_test_select_cycle():
-    initial = State(values={"relations": (("a", "b"),)})
-    rejected = State(values={"relations": (("bad", "relation"),)})
-    accepted = State(values={"relations": ()})
+    initial = _psi_state((("a", "b"),))
+    rejected = _psi_state((("bad", "relation"),))
+    accepted = _psi_state(())
 
     def generate(_state):
         return (rejected, accepted)
