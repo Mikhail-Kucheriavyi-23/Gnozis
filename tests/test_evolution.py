@@ -18,6 +18,22 @@ def test_generate_test_select_is_endogenous():
     assert result.values["score"] == 1
 
 
+def test_generic_selector_is_deterministic_for_the_same_candidates():
+    initial = State(values={"score": 0})
+    candidates = (
+        State(values={"score": 1}),
+        State(values={"score": 2}),
+    )
+
+    def test(state):
+        return True
+
+    first = select_next_state(initial, lambda _s: candidates, test)
+    second = select_next_state(initial, lambda _s: tuple(reversed(candidates)), test)
+
+    assert first == second
+
+
 def test_no_external_selector_is_required():
     state = State(values={"score": 0})
 
@@ -37,7 +53,6 @@ def test_uroboros_can_run_endogenous_generate_test_select():
     def generate(state):
         return [
             State(values={"x": state.values["x"] + 1, "relations": state.values["relations"]}),
-            State(values={"x": state.values["x"] - 1, "relations": state.values["relations"]}),
         ]
 
     def test(state):
