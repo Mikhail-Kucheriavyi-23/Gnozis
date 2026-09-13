@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Callable, Iterable
 
+from .proof import prove_transition
 from .psi_transition import PsiTransition
 from .state import Psi, State
 
@@ -18,16 +19,12 @@ def _test_candidate(test: Tester, candidate: State) -> bool:
 
 
 def _generic_score(state: State) -> tuple[str]:
-    """Deterministic score for the generic State compatibility path.
-
-    This path is intentionally independent of the canonical Psi=(X,R)
-    representation. It therefore must not require State.to_psi().
-    """
+    """Deterministic score for the generic State compatibility path."""
     return (repr(state),)
 
 
 def _psi_score(state: State) -> tuple[int, str]:
-    """Deterministic endogenous score for canonical Psi evolution."""
+    """Deterministic score for canonical Psi evolution."""
     psi = state.to_psi()
     return (len(psi.relations), repr(psi))
 
@@ -51,11 +48,12 @@ def evolutionary_transition(generate: Generator, test: Tester) -> Callable[[Stat
 
 
 def evolutionary_psi_transition(generate: Generator, test: Tester) -> PsiTransition:
-    """Build the canonical fundamental F: Psi -> Psi transition.
+    """Build the canonical F: Psi -> Psi transition with proof-gated selection.
 
-    Generate/Test remain implementation hooks over the State adapter, but the
-    fundamental input and output of the evolution operator are Psi=(X,R).
-    No State metadata can become part of the fundamental transition domain.
+    Generate produces the candidate pool. ProofObligation independently evaluates
+    each candidate against the invariant/test and depth-1 viability. Select only
+    receives candidates whose proof passed. No generation or selection occurs in
+    the proof layer itself.
     """
 
     def transition(x: object, relations: object) -> tuple[object, object]:
@@ -63,9 +61,19 @@ def evolutionary_psi_transition(generate: Generator, test: Tester) -> PsiTransit
         candidates = list(generate(current))
         if not candidates:
             raise ValueError("Generator must produce at least one candidate state")
-        valid = [candidate for candidate in candidates if _test_candidate(test, candidate)]
+
+        proofs = [
+            prove_transition(current, candidate, candidates, test)
+            for candidate in candidates
+        ]
+        valid = [
+            candidate
+            for candidate, proof in zip(candidates, proofs)
+            if proof.passed
+        ]
         if not valid:
-            raise ValueError("No candidate state passed the test")
+            raise ValueError("No candidate state passed ProofObligation")
+
         next_state = min(valid, key=_psi_score)
         next_psi = next_state.to_psi()
         return next_psi.x, next_psi.relations
