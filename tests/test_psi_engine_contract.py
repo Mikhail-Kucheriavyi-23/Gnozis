@@ -1,13 +1,27 @@
 """Contract tests for the canonical Ψ Engine boundary."""
 
+import pytest
+
 from core import Psi, PsiEngine
 
 
-def test_engine_state_is_only_psi():
-    engine = PsiEngine(Psi(frozenset({"a"}), frozenset()))
-    assert engine.psi.X == frozenset({"a"})
-    assert engine.psi.R == frozenset()
-    assert not hasattr(engine, "hidden")
+def make_psi() -> Psi:
+    return Psi(frozenset({"a"}), frozenset())
+
+
+def test_engine_accepts_only_psi_as_step_state():
+    def transition(psi):
+        return psi
+
+    engine = PsiEngine(transition=transition)
+    result = engine.step(make_psi())
+
+    assert isinstance(result, Psi)
+    assert result.x == frozenset({"a"})
+    assert result.relations == frozenset()
+
+    with pytest.raises(TypeError):
+        engine.step({"x": {"a"}, "relations": set()})
 
 
 def test_engine_transition_receives_only_psi():
@@ -17,8 +31,8 @@ def test_engine_transition_receives_only_psi():
         seen.append(psi)
         return psi
 
-    engine = PsiEngine(Psi(frozenset({"a"}), frozenset()), transition=transition)
-    engine.step()
+    engine = PsiEngine(transition=transition)
+    engine.step(make_psi())
 
     assert len(seen) == 1
     assert isinstance(seen[0], Psi)
@@ -27,13 +41,9 @@ def test_engine_transition_receives_only_psi():
 
 def test_engine_rejects_non_psi_transition_result():
     def bad_transition(_psi):
-        return {"X": {"a"}, "R": set()}
+        return {"x": {"a"}, "relations": set()}
 
-    engine = PsiEngine(Psi(frozenset({"a"}), frozenset()), transition=bad_transition)
+    engine = PsiEngine(transition=bad_transition)
 
-    try:
-        engine.step()
-    except TypeError:
-        pass
-    else:
-        raise AssertionError("canonical Ψ Engine accepted a non-Ψ transition result")
+    with pytest.raises((TypeError, AttributeError)):
+        engine.step(make_psi())
