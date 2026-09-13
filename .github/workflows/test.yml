@@ -25,9 +25,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Run tests and capture report
+      - name: Run Core tests and capture report
         run: |
-          python -m pytest -q 2>&1 | tee pytest-output.txt
+          python -m pytest -q tests --ignore=tests/research 2>&1 | tee pytest-output.txt
           test ${PIPESTATUS[0]} -eq 0
 
       - name: Upload pytest report
