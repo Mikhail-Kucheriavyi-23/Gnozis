@@ -6,8 +6,8 @@ from core.evolution import evolutionary_psi_transition
 from core.state import State
 
 
-def _valid_candidate():
-    return State(values={"x": "valid", "relations": (("a", "b"),)})
+def _valid_candidate(label="valid"):
+    return State(values={"x": label, "relations": (("a", "b"),)})
 
 
 def _invalid_candidate():
@@ -18,12 +18,16 @@ def _transition(generate, test=lambda _candidate: True):
     return evolutionary_psi_transition(generate=generate, test=test)
 
 
-def test_invalid_candidate_is_rejected_when_valid_continuation_exists():
+def test_invalid_candidate_is_rejected_when_valid_continuations_exist():
     transition = _transition(
-        lambda _state: (_invalid_candidate(), _valid_candidate()),
+        lambda _state: (
+            _invalid_candidate(),
+            _valid_candidate("valid-a"),
+            _valid_candidate("valid-b"),
+        ),
     )
     result = transition(State(values={"x": "current", "relations": ()}).to_psi())
-    assert result.x == "valid"
+    assert result.x in {"valid-a", "valid-b"}
 
 
 def test_dead_end_candidate_is_rejected_by_proof_gate():
