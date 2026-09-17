@@ -1,0 +1,23 @@
+name: Gnozis Runtime Status
+
+on:
+  push:
+    branches:
+      - feature/gnosis-terminal-bridge
+  workflow_dispatch:
+
+jobs:
+  runtime-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Gnozis bridge
+        run: |
+          printf '%s\n' '{"action":"status"}' '{"action":"evolution"}' | python terminal.py
