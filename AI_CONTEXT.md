@@ -1931,3 +1931,19 @@ Resolution candidates are routed through `admit_resolution()` and `commit_resolu
 PM-08 is COMPLETE for canonical conflict/resolution semantics. PM-07 remains NEAR-COMPLETE: branch lineage and deferred outcomes exist, but a formal parallel-outcome relation/merge algebra has not yet been added. Do not invent a winner or ranking to close this gap.
 
 Next: formalize the smallest parallel/deferred outcome relation required by the existing Ψ partial-order semantics, then test it. If the relation is already represented elsewhere, reuse it rather than creating a second order model.
+
+## 42. PM-07 COMPLETE — Parallel Branch Outcome — 2026-09-18
+
+Repository search found no separate poset/partial-order implementation. The existing branch ancestry relation is the canonical order representation.
+
+Added `core/outcome.py` with `ParallelOutcome` and `parallel(a,b)`. A parallel outcome is valid exactly when neither branch is an ancestor of the other:
+
+`ParallelOutcome(Ba,Bb) <=> incomparable(Ba,Bb)`.
+
+It retains both branches and performs no winner selection or semantic mutation. `tests/test_outcome.py` verifies sibling branches are accepted and ancestor/descendant pairs are rejected.
+
+PM-07 is COMPLETE for the branch-order/parallel-outcome invariant. This does not claim that a general algebraic merge of arbitrary Psi structures is complete; that would be a separate future requirement.
+
+Current block status: PM-05 COMPLETE, PM-07 COMPLETE, PM-08 COMPLETE.
+
+Next remaining mathematical frontier in the proof matrix is PM-09/PM-10: protected root invariant K0 and meta-transition/refinement proof for self-evolution. Do not begin implementation until the existing self-modification contracts and proof obligations are located and reconciled.
