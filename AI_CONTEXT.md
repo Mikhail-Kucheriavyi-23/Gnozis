@@ -2453,3 +2453,11 @@ This closes the previously identified architectural composition gap. Full reposi
 Rechecked the final commit after canonical-boundary composition. GitHub reports zero workflow runs and zero combined statuses for the current commit, so the repository's full pytest suite still has no empirical PASS result. The CI workflow itself is validly configured to run `python -m pytest -q tests --ignore=tests/research`, preserve the pytest exit status through `PIPESTATUS[0]`, and upload the report.
 
 Added `tests/test_ci_contract.py` to lock these CI invariants in the repository. This verifies the test-run contract but does NOT substitute for an actual CI execution. Therefore 100% completion remains intentionally unclaimed.
+
+## 108. Historical Full-Regression Evidence Recovered — 2026-09-18
+
+Adversarial repository search recovered `docs/REGRESSION_FAILURE_CLASSIFICATION_2026-09-12.md`, which records an actual full `test.yml` execution on the reconciled Core: 45 failed, 114 passed, 1 xfailed. The document explicitly states this was a real test failure, not a CI/tee masking issue.
+
+Therefore the previous wording that the full suite was merely 'unverified' is outdated/incomplete. There is historical empirical evidence of a failing full suite. The current repository still needs a fresh full CI run after the subsequent fixes. Do NOT claim 100% or infer that the old failure count remains current.
+
+The historical failures were classified into: obsolete State API compatibility, incomplete/non-Ψ fixtures, genuine semantic candidates (hidden closure dependence, Markov sufficiency, invalid-candidate handling, empty valid sets, selector sensitivity, hashability), and intentionally adversarial legacy-boundary behavior. The next work should prioritize semantic candidates and fixture migration, not blindly patch individual historical failures.
