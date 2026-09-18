@@ -2355,3 +2355,9 @@ Remaining concern: `State.to_psi()` remains widely used as an adapter/observatio
 Audited `core/evolution.py`: `evolutionary_transition()` is explicitly the legacy State-based transition interface, while `evolutionary_psi_transition()` is the canonical Ψ path. Added `core/legacy_authority.py` and `tests/test_legacy_authority.py` to make the compatibility-only authority rule executable: a legacy `State` is never recognized as canonical authority and cannot be promoted through this guard.
 
 This does not delete the legacy transition. It establishes an explicit quarantine marker and regression guard. PM-02 is therefore narrowed to integration: every external/public semantic entry point must respect this authority classification, and no adapter may silently promote legacy State to canonical Ψ.
+
+## 94. Adapter / External Authority Boundary Audit — 2026-09-18
+
+Inspected `core/state.py`, `core/psi_transition.py`, and `core/authority.py`. `State.to_psi()` is an explicit projection adapter; `PsiTransition.on_state()` adapts canonical Ψ transition output back into State; neither function performs SemanticCommit. Added `tests/test_adapter_authority_boundary.py` to verify that an adapted `State` cannot cross `canonicalize_psi()`, while direct `PsiTransition(Psi)` remains valid.
+
+`core/authority.py` independently classifies foreign evidence as non-authoritative (`admitted=False`). No `core/bridge.py`, `core/external.py`, `core/ports.py`, or `core/api.py` files were found at the inspected paths, so no claim is made about nonexistent adapters. Remaining external-boundary work is therefore limited to actual bridge/API modules if/when they are introduced or located elsewhere.
