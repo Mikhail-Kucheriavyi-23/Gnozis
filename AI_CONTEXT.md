@@ -2251,3 +2251,9 @@ This establishes the intended canonical projection at the proof layer. It does n
 Added `formal/FullTransition.lean`. This is the first composition point for the proof-layer work: a `CertifiedTransition` carries candidate, proof obligation, admission, semantic commit equality `next.psi = candidate`, and protected-root preservation. The theorem `full_transition_preserves` proves that a valid starting semantic/root invariant yields the full next-state invariant `J` after the certified transition.
 
 The theorem deliberately assumes the concrete invariant `I` and root predicate as parameters. It therefore composes the existing contracts without pretending that their concrete Python/formal equivalence is already solved. Remaining work is to instantiate I/root from executable semantics, formalize locality, and validate the bridge against runtime tests.
+
+## 77. Locality and Causal Closure — 2026-09-18
+
+Re-read the executable contract and regression/conformance evidence. `core/contract.py` defines Ψ-extensionality over `(X,R)`. Repository conformance documents report locality and causal-closure tests as GREEN, with transition behavior required to depend only on declared state and remain within the declared causal boundary.
+
+Added `formal/Locality.lean`. It defines `Local T` as equality-respecting transition behavior over canonical Psi and treats causal closure at the semantic boundary as the absence of an ambient external input to `T : Psi -> Psi`. This is intentionally a minimal proof-level encoding; it does not claim that all Python side channels have been formally eliminated. Runtime test evidence remains the empirical guard.
