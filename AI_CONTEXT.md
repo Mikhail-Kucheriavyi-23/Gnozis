@@ -2349,3 +2349,9 @@ Searched production code for `commit(`, `SemanticCommit(` and `to_psi()`. Direct
 `core/evolution.py` returns only `semantic_commit.apply()`. `core/resolution.py` checks that the Admission candidate matches the resolution candidate before delegating to `commit(previous, admission)`. This substantially closes the canonical commit caller audit.
 
 Remaining concern: `State.to_psi()` remains widely used as an adapter/observation mechanism, and the generic `evolutionary_transition` remains a legacy State→State semantic transition. These are not direct SemanticCommit callers, but PM-02 is not universally closed until their public authority is explicitly constrained.
+
+## 93. Legacy Authority Quarantine — 2026-09-18
+
+Audited `core/evolution.py`: `evolutionary_transition()` is explicitly the legacy State-based transition interface, while `evolutionary_psi_transition()` is the canonical Ψ path. Added `core/legacy_authority.py` and `tests/test_legacy_authority.py` to make the compatibility-only authority rule executable: a legacy `State` is never recognized as canonical authority and cannot be promoted through this guard.
+
+This does not delete the legacy transition. It establishes an explicit quarantine marker and regression guard. PM-02 is therefore narrowed to integration: every external/public semantic entry point must respect this authority classification, and no adapter may silently promote legacy State to canonical Ψ.
