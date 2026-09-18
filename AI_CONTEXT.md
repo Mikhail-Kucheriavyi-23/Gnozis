@@ -2303,3 +2303,9 @@ Added `formal/CanonicalBoundary.lean` to separate the canonical semantic transit
 Added `tests/test_canonical_no_bypass_contract.py`. The tests structurally verify: canonical `PsiEngine/PsiTransition` typing, explicit legacy/generic classification, presence of Admission on the canonical evolution path, and the safety rule that global no-bypass must not be claimed before adversarial evidence is complete.
 
 This is deliberately a contract-level test, not yet a dynamic exploit test. It establishes a regression guard against documentation/code drift. PM-05 remains incomplete until a test can actually attempt an unadmitted canonical mutation and demonstrate fail-closed behavior, plus a caller audit of all canonical semantic mutation entry points.
+
+## 86. Real Fail-Closed Commit Test — 2026-09-18
+
+Inspected the actual runtime schemas in `core/admission.py`, `core/proof.py`, and `core/commit.py` and corrected the initial test to match them exactly. `tests/test_commit_fail_closed.py` now constructs a real rejected `ProofObligation`/`Admission` and asserts that canonical `SemanticCommit.apply()` raises `ValueError`; it also verifies an admitted `Psi` reaches the committed result.
+
+This is the first direct adversarial runtime check of the canonical commit gate. It proves the public commit path is fail-closed for an explicitly rejected Admission. It does not yet prove that no other mutation entry point can bypass this path; caller/path audit remains required.
