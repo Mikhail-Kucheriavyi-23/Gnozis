@@ -30,9 +30,9 @@ This document is an audit map, not a proof claim.
 | PM-16 | Crash atomicity/idempotence | commit_once() | NEAR-COMPLETE | durable crash tests |
 | PM-17 | Kernel/provenance attached | TransitionRecord + Provenance | NEAR-COMPLETE | commit binding |
 | PM-18 | Evidence separated from commit | provenance contract | NEAR-COMPLETE | integration |
-| PM-19 | Hard stop unresolved | SafetyGate/execution admission | NEAR-COMPLETE | canonical runner |
-| PM-20 | External actor no authority | authority.py | NEAR-COMPLETE | all external paths |
-| PM-21 | Protected kernel/workspace | KernelMemory/Workspace | NEAR-COMPLETE | state/persistence binding |
+| PM-19 | Hard stop unresolved | `canonical_chain.admit_transition` gates Safety + Gas before commit | NEAR-COMPLETE | prove all operation paths use chain |
+| PM-20 | External actor no authority | `authority.py` + provenance/commit boundary | NEAR-COMPLETE | route all external paths |
+| PM-21 | Protected kernel/workspace | `memory.py` boundary remains separate from commit chain | NEAR-COMPLETE | bind protected state/persistence |
 | PM-22 | Machine-checked proof | formal/MinimalCore.lean | PARTIAL | real definitions + invariant proof |
 
 ## Reconciliation result
