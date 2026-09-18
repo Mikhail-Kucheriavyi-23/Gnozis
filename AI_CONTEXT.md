@@ -2487,3 +2487,9 @@ The open semantic contradiction from block 109 is now resolved in production cod
 Added `tests/test_fixed_point_proof.py` covering both sides of the boundary: an invariant-valid unchanged candidate is accepted as a fixed point, while an invariant-valid changing candidate with no distinct continuation remains rejected.
 
 This closes the specific fixed-point semantic contradiction. It does not establish full-suite PASS; the next gate is regression execution against the historical failure classes.
+
+## 111. Hidden-State / Markov Sufficiency Audit Opened — 2026-09-18
+
+Reviewed the historical Cluster C concern about hidden closure dependence and Markov sufficiency. The proof layer itself has no module-level mutable state and consumes explicit current/candidate/invariant inputs. However, the existing memory-independence tests target the legacy compatibility transition rather than the canonical CanonicalExecutor path.
+
+Added `docs/HIDDEN_STATE_MARKOV_AUDIT_2026-09-18.md`. The canonical claim remains OPEN until adversarial tests demonstrate that, for fixed declared inputs, unrelated external mutable memory cannot alter the accepted set or selected Psi. This is an evidence gap, not an observed production hidden-state bug.
