@@ -2199,3 +2199,11 @@ Remaining: replace the intermediate K0 predicate with the concrete protected-ker
 Inspected the exact executable `core/root_invariant.py`: `preserve_root(root,before,after)` is precisely `root.holds(before) and root.holds(after)`. Updated `formal/RootInvariant.lean` to expose the corresponding logical relation `preserves K before after := K before ∧ K after`, while retaining proof-carrying transition preservation and composition.
 
 This closes the semantic-shape gap between the Python preservation helper and the formal layer. It still does not prove that a particular concrete Gnozis kernel predicate is the intended K0; that requires selecting the actual protected-kernel predicate and proving its correspondence.
+
+## 69. Sigma-Level Protected Invariant — 2026-09-18
+
+Search confirmed the earlier mathematical architecture had the stronger system state `Sigma = (Psi, W; K)` and invariant shape `J(Sigma) = I(Psi) AND Root(K)`, with the central obligation `J(Sigma) AND Adm(Sigma,c) AND T(Sigma,c,Sigma') => J(Sigma')`. To reconnect the current executable contracts with that existing mathematical line, added `formal/Sigma.lean`.
+
+The file now separates semantic `Psi`, mutable workspace type `W`, and protected kernel type `K`; defines `Root`, `J`, abstract `Adm`, and a proof-carrying `CertifiedTransition` whose preservation theorem maps `J` from the old Sigma/kernel pair to the next one.
+
+This is a structural bridge, not yet the full theorem: the concrete `I(Psi)`, concrete root predicate, admission predicate, and actual transition semantics still need to be instantiated from the repository. No second runtime state model is introduced; this file is proof-level only.
