@@ -2543,3 +2543,9 @@ The key distinction is now explicit: information may influence execution without
 Added `docs/PSI_STATE_VS_CONTEXT_DECISION_RULES_2026-09-18.md`. Eight working rules now guide architecture reviews: state identity, explicit transition context, state-relevant observation, hidden-dependence detection, no state inflation, no hidden semantic state, preservation of optionality, and evidence-before-axiom.
 
 Current consequence: the closure finding alone does not justify changing Ψ. The canonical state remains exactly Ψ=(X,R). These rules should next be tested against concrete Gnozis flows including world observation, memory/learning, multi-agent interaction, and autonomous evolution before becoming core invariants.
+
+## 119. Ψ Context Case Study — Memory — 2026-09-18
+
+Applied the state-vs-context rules to the existing `core/memory.py`. `KernelMemory`, `Workspace`, and `MemoryView` are currently protected/access boundaries, not declared Ψ state. Memory that semantically represents agent/world state may later become X/R, but memory access alone is not sufficient justification.
+
+Added `docs/PSI_CONTEXT_CASE_MEMORY_2026-09-18.md`. Three models remain deliberately open: memory as explicit execution context, selected memory promoted into X/R, or memory producing explicit observations/candidates. No direct MemoryView → hidden closure → F(Ψ) connection is allowed as a shortcut.
