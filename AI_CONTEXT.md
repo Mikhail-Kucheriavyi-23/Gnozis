@@ -2469,3 +2469,11 @@ Reviewed the historical Cluster C candidates directly. `tests/test_extensional_t
 Also reviewed `docs/psi_transition_conformance.md`: empty-valid-set and relation/X evolution semantics are marked PASS, while accepted-unchanged-candidate fixed-point semantics remains explicitly PENDING CI confirmation. This is the next concrete semantic test gate rather than another architectural rewrite.
 
 No production change made in this step. The correct next action is to verify the fixed-point contract in the canonical Ψ path and then reassess the remaining Cluster C candidates against the canonical boundary, not the legacy generic API.
+
+## 109. Semantic Regression Finding — Fixed-Point Proof Contradiction — 2026-09-18
+
+Cross-checking `docs/psi_transition_conformance.md` against `core/proof.py` exposed a substantive semantic inconsistency. The conformance document explicitly defines an accepted unchanged candidate (`Psi' = Psi`) as a valid fixed point, but `prove_transition()` currently requires a distinct invariant-valid continuation for every non-empty candidate, which rejects a sole unchanged candidate as non-viable.
+
+This is not a fixture issue. The proof predicate and the documented trichotomy disagree. The intended correction is to make viability explicitly bifurcate: an invariant-valid unchanged candidate is viable as a fixed point; a changing candidate requires a distinct invariant-valid continuation under the current depth-1 rule. The correction must preserve rejection of a changing dead-end candidate.
+
+Do not claim the proof contract is closed until this contradiction is resolved and covered by tests. Full regression remains blocked.
