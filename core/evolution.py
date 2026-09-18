@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Callable, Iterable
 
 from .admission import admit, require_admitted
+from .commit import commit
 from .proof import prove_transition
 from .psi_transition import PsiTransition
 from .state import Psi, State
@@ -85,6 +86,12 @@ def evolutionary_psi_transition(generate: Generator, test: Tester) -> PsiTransit
         )
         next_state = require_admitted(selected)
         next_psi = next_state.to_psi()
-        return next_psi.x, next_psi.relations
+
+        semantic_commit = commit(
+            previous=Psi(x, relations),
+            admission=selected,
+        )
+        committed = semantic_commit.apply()
+        return committed.x, committed.relations
 
     return PsiTransition(function=transition)
