@@ -2517,3 +2517,11 @@ The production Uroboros surface now has an explicit `canonical()` constructor ac
 The existing `evolutionary()` constructor remains as a compatibility/evolutionary candidate path and is intentionally not relabeled as the canonical F: Ψ→Ψ path. `tests/test_uroboros_canonical_path.py` verifies that the canonical constructor preserves the explicit `PsiTransition` identity, evolves the Ψ state, and records exactly one history entry.
 
 This closes the concrete Uroboros-to-PsiTransition wiring gap. Markov sufficiency for the canonical path is now structurally stronger: the transition boundary is explicit and its domain is Ψ. Remaining work is to audit/adversarially test transition closures themselves and the admission/proof semantics; generic evolutionary compatibility remains a separate surface.
+
+## 115. PsiTransition Closure Audit — Explicit Boundary Finding — 2026-09-18
+
+Inspected `core/psi_transition.py` and `core/state.py`. `PsiTransition` itself is a thin `F: Psi -> Psi` wrapper and introduces no hidden mutable state. However, its callable contract currently permits the supplied function to close over arbitrary external mutable state. Therefore the type boundary alone does not prove Markov sufficiency.
+
+Added `tests/test_psi_transition_markov.py` as an adversarial characterization test: it intentionally demonstrates that an undeclared mutable closure can change `F(Psi)` for identical declared Psi. The test is not a regression to make green; it documents the semantic vulnerability/contract gap and passes only by asserting that the two results differ.
+
+This sharpens the next architectural question: whether canonical transition functions must be pure over `(X,R)`, or whether any additional transition context must be explicitly represented inside the declared Psi state. No blanket closure ban is adopted yet; the decision remains OPEN pending the superposition/state-model analysis.
