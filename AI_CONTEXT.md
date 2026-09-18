@@ -366,3 +366,338 @@ The central engineering question is:
 What is the smallest lawful recursive structure from which the observed higher-level capabilities can naturally emerge?
 
 Do not optimize the architecture before answering this question.
+
+## 20. New analytical conclusions — 2026-09-18
+
+### 20.1 Transformation space should be derived, not necessarily stored
+
+Define the lawful future set from the law:
+
+T_L(Psi) = {Psi' in P | L(Psi,Psi') = 1}
+
+Therefore T_L may be a derived construction rather than a primitive Core object.
+
+The fundamental candidate can remain:
+
+Psi = (X,R)
+plus an admissibility relation/law L.
+
+### 20.2 Evolution as a path through structural space
+
+Let P be the space of valid structures. A transition is a path gamma from Psi to Psi'. A possible structural cost is:
+
+D(Psi,Psi') = inf_gamma Cost(gamma).
+
+This is only a candidate metric/cost, but it suggests that structural distance should be based on the minimum transformation required to move between structures rather than an arbitrary coordinate distance.
+
+Potential identity relation:
+
+Psi ~ Psi' when they preserve the required organizational invariant, even if their concrete X and R differ.
+
+Therefore:
+same organizational identity != same state.
+
+### 20.3 Discrete variational candidate
+
+For a sequence:
+
+Psi_0,...,Psi_n
+
+candidate action:
+
+S[Psi_0,...,Psi_n] = sum_k F(Psi_k,Psi_{k+1})
+
+with an extremal admissible path:
+
+gamma* = Ext_{gamma in Gamma_L} S[gamma].
+
+Do not assume min/max or a specific F until it is derived or empirically justified.
+
+### 20.4 Information as restriction of transformation possibilities
+
+An observation y need not only reduce possible states. It can reduce the set of possible future transformations:
+
+T_y(Psi) subseteq T(Psi).
+
+Candidate interpretation:
+
+Information = restriction/distinguishability of possible transformations.
+
+A later structural reorganization may expand lawful possibilities again.
+
+### 20.5 Creativity as lawful expansion of invariant-preserving possibilities
+
+Candidate:
+
+T^I(Psi) = {tau in T_L(Psi) | I(tau(Psi)) = I(Psi)}
+
+A candidate creative transformation expands the lawful invariant-preserving transformation space:
+
+T^I_{new} properly contains T^I_{old}.
+
+This is not a theorem. It is a testable definition candidate.
+
+Important distinction:
+Novelty != Evolution.
+More possibilities alone are not sufficient; organization and law must be preserved.
+
+### 20.6 Self-evolution as evolution of transformation space
+
+Ordinary evolution:
+Psi_t -> Psi_{t+1}.
+
+Higher-order evolution:
+T_{L_t}(Psi_t) -> T_{L_{t+1}}(Psi_{t+1}).
+
+Thus self-evolution is not synonymous with self-editing code. It is a mathematical change in the system's lawful space of possible transformations, followed by validated implementation.
+
+### 20.7 World A/B as constraint and observation contexts
+
+World A and B can be modeled through:
+O_A(Psi), O_B(Psi)
+and/or
+L_A, L_B.
+
+Compare:
+T_A intersection T_B
+T_A minus T_B
+T_B minus T_A.
+
+If a common admissible region exists, integration can preserve it. If constraints are incompatible, the incompatibility itself is information.
+
+A candidate collective synthesis C should be sought where its lawful transformation space is compatible with required constraints and may, in successful cases, contain structures unavailable to either source independently.
+
+Do not implement World A/B as special engines.
+
+### 20.8 Tension as empty or reduced admissible intersection
+
+For constraints L_A and L_B:
+
+A_AB(Psi) = A_A(Psi) intersection A_B(Psi).
+
+Strong incompatibility occurs when:
+
+A_AB(Psi) = empty.
+
+Partial tension occurs when the overlap is nonempty but significantly restricted.
+
+Do not make tau -> 0 the universal objective.
+
+### 20.9 Observation, memory, knowledge as derived layers
+
+Let external structure be E and interaction relations connect Psi with E.
+
+Observation is induced by accessible relations.
+
+Memory exists when an observation produces a persistent relation that changes later reachable futures.
+
+Knowledge is stronger: persistent information becomes part of validated generative constraints/admissibility.
+
+Therefore:
+database persistence != mathematical memory;
+stored data != knowledge.
+
+### 20.10 Agent, World and Multi-agent behavior as structural predicates
+
+An Agent may be a persistent, internally organized substructure with a boundary of relations and causal activity.
+
+A World may be a dynamical structure of the same family.
+
+Multi-agent behavior may emerge from multiple persistent substructures in one relational system.
+
+Avoid making these fundamental ontology classes until irreducibility is demonstrated.
+
+### 20.11 Trust as evidence-derived relation
+
+Prefer storing evidence/history relations and deriving trust from them rather than treating trust as a primitive scalar.
+
+Candidate:
+Trust(A,B) = f(evidence, consistency, history, context).
+
+The exact f remains open.
+
+### 20.12 Time and causality may be derived
+
+No global clock is required for the mathematical core.
+
+A transition ordering or causal dependency relation may generate the relevant temporal order.
+
+For distributed systems, partial order may be more fundamental than a universal scalar time.
+
+### 20.13 Law may itself be emergent regularity
+
+A major open question is:
+
+Can L be derived from R?
+
+Observed transitions form D = {(Psi_i,Psi_i')}.
+
+A repeated relation P may be:
+- observed regularity;
+- validated conditional law;
+- mathematically necessary law.
+
+Do not collapse these levels.
+
+Candidate conditional law:
+L = (C,P), where C is the applicability domain and P the transition relation.
+
+A law should not be promoted from observation to necessity without counterexample search and/or proof.
+
+### 20.14 Closure is an architectural criterion
+
+If a new concept cannot be derived from the existing mathematical vocabulary without adding an unrelated special subsystem, this is evidence that the foundation may be incomplete.
+
+Candidate closure test:
+
+(X,R,L)
+=> Observation
+=> Information
+=> Memory
+=> Knowledge
+=> Agent
+=> World
+=> Trust
+=> Tension
+=> Creativity
+=> Autopoiesis
+=> Self-evolution.
+
+This is a research test, not a claim that all derivations are already proven.
+
+### 20.15 Minimal transition candidate
+
+A compact candidate process is:
+
+Psi
+-> interaction/constraint C
+-> admissible set A(Psi,C)
+-> if A = empty: STOP
+-> otherwise choose/search Psi' in A
+-> verify invariant I(Psi,Psi')
+-> transition Psi -> Psi'
+-> update relational structure.
+
+This gives a mathematical interpretation of hard stop:
+if no admissible transition exists, the system must not invent one.
+
+### 20.16 Creativity under tension
+
+When existing constraints are incompatible, the system need not choose A or B immediately.
+
+Candidate higher-order operation:
+
+L_A, L_B
+-> discover structural transformation L_C or Psi_C
+-> restore a nonempty lawful solution space
+-> preserve required invariants.
+
+This is a candidate mathematical model of creative resolution of contradiction.
+
+### 20.17 Mathematical architecture must be derived before implementation
+
+The current repository must not be treated as proof that the present architecture is mathematically optimal.
+
+The correct workflow is:
+
+1. derive candidate mathematical primitives;
+2. attempt counterexamples;
+3. derive higher-level concepts;
+4. compare with current Core;
+5. identify redundant/historical Frankenstein components;
+6. only then modify implementation;
+7. verify implementation against the derived model.
+
+## 21. Analytical test suite to run before repository modernization
+
+Use minimal mathematical counterexamples for at least:
+1. stable structure;
+2. X changes while R stays constant;
+3. R changes while X stays constant;
+4. both X and R change;
+5. R becomes empty when permitted;
+6. branching admissible futures;
+7. impossible transition;
+8. World A/B incompatible constraints;
+9. World A/B compatible integration;
+10. new structure expanding lawful possibilities;
+11. persistent memory affecting future dynamics;
+12. emergent agent boundary;
+13. multi-agent interaction;
+14. trust from evidence history;
+15. autopoietic self-maintenance;
+16. law change under proof-preserving constraints;
+17. recursive/self-similar structures;
+18. distributed transitions without a global clock.
+
+A model that survives these is a stronger candidate, not automatically a proven universal theory.
+
+## 22. Analytical phases / expected remaining work
+
+The exact number cannot be known before counterexamples are run. Current planning estimate:
+
+Phase A — Foundation and ontology:
+~3-5 analytical blocks.
+Goal: decide whether Psi=(X,R) is sufficient as the structural primitive and define recursion/identity.
+
+Phase B — Dynamics and admissibility:
+~3-5 blocks.
+Goal: derive transitions, branching, invariants, hard stop, and determine whether L is primitive or derivable.
+
+Phase C — Information, observation, memory, knowledge:
+~3-4 blocks.
+Goal: derive these from interaction and persistent relational effects.
+
+Phase D — World A/B, tension and collective integration:
+~3-5 blocks.
+Goal: mathematically test different realities, incompatible constraints, synthesis, and tension.
+
+Phase E — Agent, trust, autopoiesis and multi-agent structure:
+~4-6 blocks.
+Goal: test whether these emerge as structural predicates/relations rather than primitives.
+
+Phase F — Variational/optimization principle:
+~4-7 blocks.
+Goal: compare relational, operator, matrix, variational and constrained-variational formulations; derive rather than invent the objective.
+
+Phase G — Meta-evolution and proof-preserving law change:
+~3-5 blocks.
+Goal: formalize L_t -> L_{t+1}, invariants, verification, self-modification boundaries.
+
+Phase H — Full counterexample/synthesis pass:
+~4-6 blocks.
+Goal: attempt to break the candidate model, remove redundant concepts, and produce the minimal mathematical specification.
+
+Expected remaining analytical workload:
+approximately 27-43 focused analytical blocks.
+
+This is not a fixed schedule. Some phases may collapse if a derivation succeeds quickly; others may expand when a counterexample exposes a missing primitive.
+
+The key stopping condition is not 'we have done enough discussion'. It is:
+the same minimal mathematical model explains the required cases without ad-hoc special mechanisms, or we have a precise proof/counterexample showing what additional primitive is necessary.
+
+## 23. Implementation gate after analysis
+
+Do not start broad Core modernization merely because the repository becomes accessible.
+
+When repository access returns:
+1. import this complete analytical context;
+2. compare the candidate model with actual code;
+3. map every existing component to fundamental/derived/external;
+4. identify contradictions and redundant architecture;
+5. preserve useful implementation only where it conforms;
+6. create explicit mathematical acceptance tests;
+7. implement the smallest justified changes;
+8. independently audit before enabling self-evolution.
+
+World A/B, persistence, memory, bridge, logging, security, and self-evolution remain important implementation requirements, but their final architecture must be derived from the mathematical model rather than allowed to dictate it.
+
+## 24. Strategic final principle
+
+The project is attempting to reproduce lawful recursive organization, not imitate the surface appearance of natural systems.
+
+The central research question remains:
+
+What is the smallest lawful recursive relational structure from which the required higher-level capabilities naturally emerge?
+
+The target is not a beautiful formula by itself. The target is a mathematically coherent generative architecture whose implementation is smaller, safer, more compositional, and more evolvable because the higher-level mechanisms are derived rather than separately invented.
