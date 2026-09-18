@@ -1485,3 +1485,243 @@ Invariant Evolution and Proof-Preserving Relaxation:
 how Gnozis can discover that an existing invariant/law is insufficient and propose a lawful extension without being able to simply delete the constraint that blocks a desired transition.
 
 After that, the accumulated theory should be converted into the operational Task Registry and mapped against the actual repository state before implementation changes.
+
+
+## 29. Mathematical Freeze — CLXI–CLXIV — 2026-09-18
+
+The mathematical consolidation has now reached the planned freeze point. No new mathematical layer should be added merely to continue theory. Future work must first use counterexamples, formal verification, repository evidence, tests, or implementation gaps to justify any change to the model.
+
+### 29.1 Merge and Resolution Calculus — CLXI
+
+Two valid realities/states may differ without either being invalid:
+
+Psi_A = (X_A, R_A)
+Psi_B = (X_B, R_B)
+
+Comparison is classified as:
+Equivalent / Compatible / Conflict / Unknown.
+
+Merge is a candidate operation, not an authority:
+
+MergeCandidate in CandidateSpace.
+
+For compatible structures:
+
+X_M = X_shared union X_A_private union X_B_private
+R_M = R_shared union R_A_private union R_B_private
+
+subject to semantic compatibility and invariants.
+
+For conflict, define an explicit conflict set:
+
+K(Psi_A, Psi_B).
+
+Partial merge may return:
+
+(MergedState, ConflictSet).
+
+An unresolved conflict must not be silently erased. Valid branches may be preserved independently:
+
+NoMerge does not imply InvalidBranch.
+
+Resolution may generate new candidates, request evidence, run experiments, or preserve separation. Resolution never receives a bypass around ordinary admission.
+
+Important distinction:
+Merge = Candidate, not Authority.
+Conflict = information, not necessarily failure.
+Unknown != Contradicted.
+
+Independent conflict components may be processed independently. Global confluence is not assumed.
+
+### 29.2 Self-Evolution / Meta-Kernel Calculus — CLXII
+
+Separate state evolution from mechanism/law evolution.
+
+State evolution:
+(Psi_t, K_t) -> (Psi_{t+1}, K_t)
+
+Meta-evolution:
+(Psi_t, K_t) -> (Psi_{t+1}, K_{t+1})
+
+where K represents the operational kernel/law/verification machinery at the mathematical level.
+
+A protected root contract K_0 defines RootInvariant(K). A meta-candidate:
+
+m = (K_i, K_{i+1}, Proof_m)
+
+must satisfy root preservation, refinement, proof validity, resource bounds, and replayability before acceptance.
+
+Core theorem candidate:
+
+RootValid(K_i) AND Adm_meta(K_i,K_{i+1})
+=> RootValid(K_{i+1}).
+
+Self-modification may change policy/mechanism only through a validated meta-transition. It may not silently remove the verifier, commit boundary, resource accounting, emergency stop, lineage integrity, or other root constraints.
+
+Changing code is an implementation event; mathematical self-evolution is a validated change in the lawful transformation space.
+
+No self-evolution is mandatory:
+NoAdmissibleMetaCandidate => K_{t+1} = K_t.
+
+NoEvolution != SystemFailure.
+
+### 29.3 Persistence / Replay / Recovery Calculus — CLXIII
+
+Psi remains the sole logical semantic source of truth.
+
+Persistence, SQLite, snapshots, logs and caches are representations/history, not a second state model.
+
+History is an append-only causal structure:
+
+H = (V,E)
+
+or a linear sequence for a single branch.
+
+Each accepted transition must identify its parent(s), candidate, resulting state/delta, proof/certificate, and the kernel version under which it was admitted.
+
+Replay must satisfy:
+
+Replay(Genesis, History, KernelVersions) = CurrentSemanticState
+
+under valid history/certificates.
+
+Snapshots are optimization/verification anchors:
+
+Snapshot != SourceOfTruth.
+
+Recovery from a verified snapshot plus a valid tail must reconstruct the same semantic state.
+
+An invalid/corrupted transition is not silently deleted. Recovery stops at the last valid state and creates a new admissible recovery branch if continuation is desired.
+
+Persistence must not introduce semantic mutations:
+Persistence != Mutation.
+
+Uncommitted/crashed transactions cannot become accepted semantic history. Transition IDs make persistence idempotent.
+
+For stochastic transitions, sufficient random seed/trace/provenance must be retained for reproducible replay where reproducibility is required.
+
+### 29.4 Formal Verification Map — CLXIV
+
+The mathematical model is now mapped into a machine-verification target.
+
+Core definitions:
+Psi = (X,R)
+Sigma = (Psi,W;K)
+I(Psi) = state invariants
+Root(K) = protected kernel/root invariants
+Adm(Sigma,c) = candidate admission
+T(Psi,c,Psi') = transition relation
+H = history.
+
+Central transition rule:
+
+J(Sigma) AND Adm(Sigma,c) AND T(Sigma,c,Sigma')
+=> J(Sigma')
+
+where:
+
+J(Sigma) = I(Psi) AND Root(K).
+
+Main theorem obligations include:
+T1–T12: Core/state/transition;
+T13–T17: evidence/epistemic separation;
+T18–T23: merge/resolution/concurrency/gas;
+T24–T29: self-evolution;
+T30–T36: persistence/replay/recovery;
+T37: global preservation;
+T38: kernel preservation;
+T39: replay soundness;
+T40: recovery soundness;
+T41: admission non-bypass.
+
+Critical non-bypass property:
+
+Apply(Psi,c) => Adm(Psi,c).
+
+No external actor, AI model, database, network, user, agent, or bridge receives a special semantic commit path.
+
+Verification must distinguish:
+A = machine-prover theorem;
+B = executable/property-based test;
+C = runtime invariant;
+D = environmental/security assumption.
+
+Formal proof of Core properties is not proof of external physical truth or host-level security.
+
+### 29.5 Mathematical Freeze status
+
+The planned conceptual/formal mathematics is considered complete for the current architecture:
+
+New mathematics remaining: approximately 0%.
+
+This does NOT mean machine-proven: current machine-proven status remains 0% until actual formal proofs are implemented and checked.
+
+The correct next phase is therefore not CLXV as another theory layer. It is:
+
+MATHEMATICAL FREEZE
+-> PROOF MATRIX
+-> repository mapping
+-> FACT / CONTRACT / GAP / TASK / TEST / EVIDENCE audit
+-> implementation only where a verified gap exists.
+
+### 29.6 Required repository artifacts identified by the freeze
+
+The repository should eventually expose a clear mapping for:
+- GNOZIS-MATH-SPEC;
+- PROOF_MATRIX;
+- theorem/obligation registry;
+- math -> code -> test -> evidence matrix;
+- invariant/refinement mapping;
+- canonical serialization specification;
+- memory/history mapping;
+- trusted computing base (TCB) inventory.
+
+These are documentation/verification surfaces, not evidence that the corresponding implementation already exists.
+
+Existing persistence, recovery, reflection, sandbox, capability and test infrastructure must be mapped against the specification before being rebuilt.
+
+### 29.7 Current proof-status baseline
+
+Previous analytical estimate:
+- State Integrity: ~70%
+- Transition: ~50%
+- Atomicity: ~40%
+- Authority/Capability: ~80%
+
+These are planning estimates, not verified proof percentages.
+
+Known proof obligations include, among others:
+PO-IS-REMOVE
+PO-CAP-ATTENUATION
+PO-CAP-CONTROL
+
+Exact status must be established from repository evidence and tests, not inferred from documentation.
+
+### 29.8 Next operational task
+
+The next step is a specification audit against the actual Gnozis-V2 repository.
+
+Required order:
+
+mathematical requirement
+-> existing implementation
+-> test/evidence
+-> IMPLEMENTED / PARTIAL / MISSING / CONTRADICTED
+-> Task-ID.
+
+Do not retrofit mathematics to code. Do not implement a missing feature merely because it appears in the mathematical specification; first establish the evidence-backed gap and acceptance test.
+
+The operational Task Registry should preserve the existing contract:
+TASK-ID / BLOCK / STATUS / PRIORITY / DEPENDS_ON / OBJECTIVE / SCOPE / DO_NOT_CHANGE / REQUIRED TESTS / ACCEPTANCE / AUDIT / NEXT.
+
+### 29.9 Continuity rule
+
+Future AI sessions reading AI_CONTEXT.md must treat Sections 29.1–29.8 as the current mathematical freeze and operational handoff.
+
+Do not reopen the mathematical model unless:
+1. a counterexample invalidates an existing theorem/definition;
+2. formal verification exposes an inconsistency;
+3. repository evidence demonstrates a necessary missing semantic primitive;
+4. an empirical result requires revising a clearly marked hypothesis.
+
+Otherwise proceed directly to specification/repository audit.
