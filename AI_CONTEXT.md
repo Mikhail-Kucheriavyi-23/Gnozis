@@ -1878,3 +1878,17 @@ Critical rule preserved:
 Merge is a candidate operation, not semantic authority. Any future resolved merge candidate must pass the same Proof -> Admission -> SemanticCommit pipeline.
 
 Next: define the smallest resolution candidate representation for an explicit conflict without introducing a new mathematical layer.
+
+## 38. PM-08 Resolution Candidate — 2026-09-18
+
+Added `core/resolution.py` with `ResolutionCandidate` and `resolve()`.
+
+A conflict can now be transformed into an explicit proposed Psi candidate with a non-empty rationale while retaining both source branches. Resolution is proposal-only: it does not mutate semantic state and has no direct commit authority.
+
+Added `tests/test_resolution.py` for source retention, rationale requirement, and Psi type enforcement.
+
+PM-08 is now PARTIAL -> NEAR-COMPLETE. It is not COMPLETE until a resolution candidate is explicitly routed through Proof -> Admission -> SemanticCommit and branch lineage/partial-order semantics are tested.
+
+Important: do not add an autonomous conflict winner. The resolver may propose; the existing semantic commit gate decides admission.
+
+Next: connect one resolution candidate to the existing proof/admission/commit pipeline without bypassing it. Then audit whether PM-07 needs a branch/lineage object before moving on.
