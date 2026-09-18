@@ -1947,3 +1947,17 @@ PM-07 is COMPLETE for the branch-order/parallel-outcome invariant. This does not
 Current block status: PM-05 COMPLETE, PM-07 COMPLETE, PM-08 COMPLETE.
 
 Next remaining mathematical frontier in the proof matrix is PM-09/PM-10: protected root invariant K0 and meta-transition/refinement proof for self-evolution. Do not begin implementation until the existing self-modification contracts and proof obligations are located and reconciled.
+
+## 43. PM-09 K0 Root Invariant — 2026-09-18
+
+Repository search confirmed the formal model already defines `Sigma = (Psi,W;K)`, `Root(K)`, `J(Sigma)=I(Psi) AND Root(K)`, and the central preservation obligation `J(Sigma) AND Adm(Sigma,c) AND T(Sigma,c,Sigma') => J(Sigma')`, but no executable K0 boundary existed.
+
+Added `core/root_invariant.py`:
+- `RootInvariant(predicate, name="K0")` defines an explicit protected-kernel predicate;
+- `holds()` checks the predicate;
+- `require()` fails closed on violation;
+- `preserve_root()` requires K0 to hold before and after a proposed meta-change.
+
+Added `tests/test_root_invariant.py` for preservation and fail-closed behavior.
+
+PM-09 is PARTIAL -> NEAR-COMPLETE. This is deliberately only the invariant boundary, not self-modification itself. The next step is to bind K0 to an explicit kernel representation and create the smallest meta-transition/refinement proof object (PM-10). Do not yet permit arbitrary code or repository mutation.
