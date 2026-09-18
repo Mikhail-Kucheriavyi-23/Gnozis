@@ -1798,3 +1798,13 @@ Do not remove the legacy path blindly; first enumerate callers and establish whe
 Latest commits:
 - Admission implementation: 8853a9a959538c84848874690a619c07da949f36
 - Proof matrix update: 8a4f324e2718e8c625f1d9dcb78eaccdc5751bcf
+
+## 32. PM-05 Apply Path Audit — 2026-09-18
+
+A direct caller/path audit was completed. The canonical semantic path is PsiEngine(PsiTransition), plus Uroboros.evolutionary() using Engine only as a State adapter around PsiTransition. Engine(State -> State) remains a generic compatibility surface and is not evidence of fundamental Ψ semantics. The terminal bridge and CoreChat are adapters/compatibility surfaces and must not be treated as canonical Ψ commit authority.
+
+PM-05 remains PARTIAL, not because the canonical evolutionary path lacks Admission (it now has it), but because the repository still exposes generic State -> State mutation as a compatibility API. T41 cannot be claimed globally until compatibility is explicitly isolated, deprecated, or typed so it cannot be confused with canonical semantic mutation.
+
+New audit artifact: docs/PM-05_APPLY_PATH_AUDIT.md
+
+Do not delete Engine(State -> State) blindly. The next decision is an architectural classification: deprecate/namespace the legacy API, keep it explicitly non-semantic, or replace it with a typed compatibility adapter. Then add adversarial tests proving canonical Ψ has one trusted semantic commit path.
