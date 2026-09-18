@@ -2315,3 +2315,11 @@ This is the first direct adversarial runtime check of the canonical commit gate.
 Added `docs/MUTATION_ENTRYPOINT_MATRIX.md`. It maps the known semantic/compatibility/replay/representation/external surfaces to their required gates and remaining gaps. The matrix explicitly rejects the universal claim that all semantic mutation paths require Admission until complete caller inventory and adversarial coverage exist.
 
 Current evidence: canonical `core/commit.py` is fail-closed for rejected Admission; the broader repository proof matrix still marks PM-02, PM-04, PM-06 partial and PM-19–PM-21 near-complete. This is therefore an audit-control artifact, not a completion claim.
+
+## 88. Concrete Mutation Caller Audit — 2026-09-18
+
+Inspected the actual implementations of `core/evolution.py`, `core/commit.py`, `core/psi_transition.py`, `core/legacy_engine.py`, `core/replay.py`, `core/snapshot.py`, `core/merge.py`, `core/refinement.py`, and `core/authority.py` and reconciled `docs/MUTATION_ENTRYPOINT_MATRIX.md`.
+
+Finding: the canonical `evolutionary_psi_transition` path is correctly ordered Proof → Admission → Select → SemanticCommit. `SemanticCommit.apply()` is fail-closed. `PsiTransition` is the typed canonical transition surface. `LegacyEngine` remains an explicit competing State→State compatibility path, so PM-02 is still genuinely open. Replay/merge/refinement/snapshot/authority are not direct canonical commits in the inspected code, but require adversarial caller coverage before global no-bypass can be claimed.
+
+This audit also confirms that `next_psi` in `evolutionary_psi_transition` is computed but not used for commit; the committed value comes from `SemanticCommit.apply()`. Treat this as harmless redundancy for now, not semantic authority.
