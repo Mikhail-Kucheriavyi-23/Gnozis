@@ -6,6 +6,9 @@ from typing import Callable, Iterable
 from .psi_transition import PsiTransition
 from .state import State
 
+# Deprecated compatibility surface. New code should import LegacyEngine
+# from core.legacy_engine instead; canonical Ψ uses PsiEngine/PsiTransition.
+
 
 Transition = Callable[[State], State] | PsiTransition
 
