@@ -2279,3 +2279,9 @@ Added the typed proof-level predicate `TestValid(passed) := passed = true` to `f
 Added `formal/TestAdmissionBridge.lean`. The formal bridge now proves `ProofPasses -> TestValid`, `Admission -> TestValid`, and `Admission -> I(candidate)`. This keeps the test result attached to the candidate's proof obligation rather than incorrectly embedding it into `Psi`.
 
 The resulting gate is: `candidate -> test result -> proof pass -> admission -> invariant-valid candidate`. Remaining work is the selection/commit bridge and then runtime conformance of these formal contracts against the Python implementation.
+
+## 82. Admission → Selection → Commit Bridge — 2026-09-18
+
+Added `formal/SelectionCommitBridge.lean`. Selection is now represented as an admitted candidate relation, so it cannot independently manufacture an unadmitted candidate. `SelectionCommit` carries both the selection proof and an explicit equality `committed = candidate`. Theorems prove selection requires admission and commit is exactly the selected candidate.
+
+This closes the proof-layer chain from test/admission through selection to semantic commit. The remaining major task is runtime conformance: show that the actual Python selection/commit implementation satisfies these formal relations, rather than merely defining equivalent abstract relations in Lean.
