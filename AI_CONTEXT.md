@@ -2097,3 +2097,13 @@ An accepted transition's candidate hash, evidence hash, and kernel version must 
 Added `tests/test_provenance.py` for successful attachment, evidence mismatch, and incomplete provenance.
 
 PM-17 is NEAR-COMPLETE at contract level. Remaining work is binding provenance creation to the canonical commit/persistence boundary. Overall mathematics is still below 100%.
+
+## 55. PM-18 Safety Gate — 2026-09-18
+
+Added `core/safety.py` with a fail-closed `SafetyGate` for autonomous operations.
+
+Contract: `AuthorityGain` must remain zero; `hard_stop` or `silence` blocks all operations; requested operation count must be within the fixed maximum (20 by default). `require()` raises on any violation.
+
+Added `tests/test_safety.py` for the bounded operation limit, authority-gain rejection, hard-stop/silence rejection, and fail-closed behavior.
+
+This makes the safety rule executable, but PM-18 still requires binding the gate to the canonical autonomous executor so no operation path can bypass it.
