@@ -2126,3 +2126,14 @@ Formal rule:
 `ForeignEvidence -> Evidence`, never `ForeignEvidence -> Authority`.
 
 PM-20 is NEAR-COMPLETE at contract level. Remaining work is integration: all external evidence paths must pass through this boundary, and the canonical executor must have a no-bypass test.
+
+## 58. PM-21 Protected Memory Boundary — 2026-09-18
+
+Added `core/memory.py` with explicit `KernelMemory`, `Workspace`, and `MemoryView` separation.
+
+Kernel memory has no mutation operation. Workspace mutation returns a new workspace while preserving the exact kernel object/value. Added `tests/test_memory.py` for this boundary.
+
+Formal distinction:
+`KernelMemory = protected invariant-bearing memory`; `Workspace = mutable operational data`.
+
+PM-21 is NEAR-COMPLETE at the type/contract level. Remaining work: bind protected kernel memory to the canonical state boundary and later persistence/encryption mechanisms without creating a second semantic state model.
