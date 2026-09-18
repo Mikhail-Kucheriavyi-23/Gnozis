@@ -2525,3 +2525,9 @@ Inspected `core/psi_transition.py` and `core/state.py`. `PsiTransition` itself i
 Added `tests/test_psi_transition_markov.py` as an adversarial characterization test: it intentionally demonstrates that an undeclared mutable closure can change `F(Psi)` for identical declared Psi. The test is not a regression to make green; it documents the semantic vulnerability/contract gap and passes only by asserting that the two results differ.
 
 This sharpens the next architectural question: whether canonical transition functions must be pure over `(X,R)`, or whether any additional transition context must be explicitly represented inside the declared Psi state. No blanket closure ban is adopted yet; the decision remains OPEN pending the superposition/state-model analysis.
+
+## 116. Ψ Context / Superposition Hypothesis Preserved — 2026-09-18
+
+Captured the current hypothesis that useful transition context should not be prematurely classified as either canonical state or forbidden hidden state. Context is provisionally divided into intrinsic X/R state, explicitly declared higher-level execution context, undeclared mutable closure state, and infrastructure-only information.
+
+Added `docs/PSI_CONTEXT_SUPERPOSITION_ANALYSIS_2026-09-18.md`. No new component has been added to Ψ and no blanket closure ban has been introduced. The planning principle is to preserve viable representation choices until concrete context examples reveal their semantic role, while keeping the canonical Ψ boundary testable.
