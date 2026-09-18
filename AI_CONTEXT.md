@@ -2764,3 +2764,18 @@ This sharpens the fundamental proof decomposition:
 Consequently the next architecture decision is narrower: determine whether canonical execution requires an explicit semantic admissibility context at all at this Core stage. If yes, define its minimal interface. If no, the canonical Proof may legitimately be a scoped transition-correctness proof rather than pretending to prove semantic fitness.
 
 Do not add domain restrictions to Psi, X, or R solely to satisfy Proof. Do not reuse evolutionary viability as a universal fundamental invariant.
+
+
+## 127. Semantic Admissibility Confirmed by Repository Evidence — 2026-09-19
+
+The previous question 'does canonical execution require semantic admissibility at all?' is now answered by existing repository artifacts: yes, semantic admissibility is already an explicit architectural concept and must not be invented or removed.
+
+Evidence:
+- `formal/AdmissionCommit.lean` defines `Invariant`, `ProofObligation`, `Admission`, and `SemanticCommit`; the formal contract states that admission requires the proof and that semantic commit preserves the candidate invariant.
+- `docs/PSI_CONTEXT_CLASSIFICATION_2026-09-18.md` explicitly classifies evaluation policy/invariant as explicit Test/Proof context, not intrinsic Ψ, and states that undeclared mutable context is inadmissible for a strict Markov F:Ψ→Ψ claim.
+- `tests/test_admission_boundary.py` explicitly calls the boundary an 'explicit semantic admission boundary'.
+- `docs/PROOF_MATRIX.md` records PM-05 as complete in scope and identifies PM-04/PM-06 plus PM-22 as remaining formal/architectural gaps.
+
+Therefore the canonical proof contract should not invent a new invariant inside Psi. It should bind an explicit semantic evaluation context to the candidate/transition and then route that evidence through Admission/Commit. The remaining problem is integration and exact binding semantics, not whether semantic admissibility exists.
+
+New priority: reconcile the Python canonical path with the existing formal semantic-admission contract. In particular, determine how an explicit invariant/evaluation policy is supplied to canonical execution without changing Psi=(X,R), without introducing selector authority, and without allowing a proof record to be manually substituted for computed evidence.
