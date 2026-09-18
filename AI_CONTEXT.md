@@ -2437,3 +2437,13 @@ Do not claim that every canonical mutation uses one universal entrypoint yet. Ad
 Inspection of the proof contract exposed a defect in the newly added Uroboros integration test fixture: `prove_transition()` requires a distinct invariant-valid continuation for depth-1 viability, while the fixture generated only one candidate. The production contract was not changed; the test fixture was corrected to generate two valid candidates so the test exercises the intended canonical path rather than failing for an invalid fixture.
 
 This is a test-quality correction, not evidence of a production regression. The full repository test suite is still not empirically verified; 100% remains blocked.
+
+## 106. Canonical Boundary Composition Implemented — 2026-09-18
+
+Resolved the dual-boundary finding by introducing `core/mutation_guard.py::guard_transition()`. The guard composes SafetyGate + GasBudget + Provenance validation as a pre-commit layer without becoming the Ψ semantic authority.
+
+`SemanticCommit.apply()` now invokes this shared guard immediately before `commit_once()`. It derives deterministic candidate/state and proof-evidence hashes, constructs matching `Provenance`, and supports explicit operation/gas parameters with safe defaults. Thus canonical Ψ evolution retains its Ψ-specific `CanonicalExecutor` semantics while sharing the generic safety/gas/provenance boundary.
+
+Added `tests/test_semantic_commit_guard.py`: hard-stop and gas exhaustion fail before persistence. `canonical_chain.admit_transition()` now delegates its guard logic to the same shared layer, eliminating duplicate guard implementations.
+
+This closes the previously identified architectural composition gap. Full repository regression remains the only empirical completion gate; no 100% claim until actual tests pass.
