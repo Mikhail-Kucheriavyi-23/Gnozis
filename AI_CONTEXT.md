@@ -2309,3 +2309,9 @@ This is deliberately a contract-level test, not yet a dynamic exploit test. It e
 Inspected the actual runtime schemas in `core/admission.py`, `core/proof.py`, and `core/commit.py` and corrected the initial test to match them exactly. `tests/test_commit_fail_closed.py` now constructs a real rejected `ProofObligation`/`Admission` and asserts that canonical `SemanticCommit.apply()` raises `ValueError`; it also verifies an admitted `Psi` reaches the committed result.
 
 This is the first direct adversarial runtime check of the canonical commit gate. It proves the public commit path is fail-closed for an explicitly rejected Admission. It does not yet prove that no other mutation entry point can bypass this path; caller/path audit remains required.
+
+## 87. Mutation Entry-Point Acceptance Matrix — 2026-09-18
+
+Added `docs/MUTATION_ENTRYPOINT_MATRIX.md`. It maps the known semantic/compatibility/replay/representation/external surfaces to their required gates and remaining gaps. The matrix explicitly rejects the universal claim that all semantic mutation paths require Admission until complete caller inventory and adversarial coverage exist.
+
+Current evidence: canonical `core/commit.py` is fail-closed for rejected Admission; the broader repository proof matrix still marks PM-02, PM-04, PM-06 partial and PM-19–PM-21 near-complete. This is therefore an audit-control artifact, not a completion claim.
