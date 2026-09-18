@@ -2395,3 +2395,11 @@ This closes the previously missing execution-owner layer in the architecture. PM
 Added `tests/test_uroboros_canonical_execution.py`: accepted evolutionary step produces one history record; rejected step preserves Ψ/state and creates no record.
 
 PM-12 is now at the production integration stage. Remaining work: reconcile the old `evolutionary_psi_transition()`/`Engine` public compatibility path so it cannot be mistaken for the canonical production execution path, then run the complete end-to-end regression suite.
+
+## 100. Legacy Evolution API Quarantine — 2026-09-18
+
+Audited `core/evolution.py` and the public exports in `core/__init__.py`. The legacy `State -> State` selector/transition APIs are now explicitly marked as compatibility-only and emit `DeprecationWarning`. `evolutionary_psi_transition()` remains a pure `Psi -> Psi` compatibility operator and no longer calls `SemanticCommit`; canonical persistence/execution belongs exclusively to `CanonicalExecutor`/`Uroboros.evolutionary()`.
+
+Added `tests/test_legacy_evolution_api.py` to verify deprecation and the non-commit property. This removes the previous ambiguity where a legacy transition could appear to be a canonical semantic authority.
+
+PM-12 production integration is now architecturally closed pending full repository regression execution. Final 100% gate requires validating all canonical, history, replay, adapter, and legacy-boundary tests together; only after that should this completion state be recorded as final.
