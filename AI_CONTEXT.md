@@ -2151,3 +2151,9 @@ Added `core/canonical_chain.py` to compose the already-defined SafetyGate, GasBu
 Added `tests/test_canonical_chain.py` covering successful admission, provenance failure before commit, hard-stop rejection, and gas exhaustion.
 
 This is a composition contract, not yet proof that every future operation path uses it. No second semantic state or executor was introduced.
+
+## 61. Canonical Bypass Audit — 2026-09-18
+
+Repository search did not expose a broad set of executable transition runners; search results were insufficient to claim a universal no-bypass proof. Added `core/bypass_guard.py` as an explicit audit contract identifying `core.canonical_chain.admit_transition` as the canonical entrypoint and direct commit symbols as forbidden audit targets. Added `tests/test_bypass_guard.py`.
+
+Important: this is an audit target, not proof of absence of bypass. A future static scanner/integration test must inspect all Python transition paths and fail if a semantic commit bypasses the canonical chain.
