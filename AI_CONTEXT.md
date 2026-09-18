@@ -2179,3 +2179,9 @@ Important limitation: `K0 := True` is still a placeholder. The next mathematical
 ## 65. K0 Source Reconciliation — 2026-09-18
 
 Reconciled the machine-proof target with the actual repository. The executable protected invariant is `core/root_invariant.py::RootInvariant`, not a separate invented semantic model. `formal/MinimalCore.lean` was updated to remove the `K0 := True` placeholder and require an explicit predicate witness. This is still an intermediate bridge: the next step is to encode the actual RootInvariant semantics over the canonical `Psi` representation rather than introduce a parallel invariant definition.
+
+## 66. RootInvariant ↔ Ψ Formal Bridge — 2026-09-18
+
+Inspected the actual `core/root_invariant.py` and `core/state.py`. `RootInvariant` is an executable predicate over an arbitrary kernel object; canonical `Psi` is the `(x, relations)` semantic pair. Added `formal/RootInvariant.lean` to encode the invariant as a predicate `K : Psi -> Prop`, require admitted transitions to carry `K P -> K next`, and prove sequential composition preserves K.
+
+This is the first explicit formal bridge between the executable RootInvariant concept and canonical Ψ. It does not yet prove equivalence to the Python implementation; the next step is to define a concrete K0 from the actual protected-kernel semantics and establish correspondence tests/lemmas.
