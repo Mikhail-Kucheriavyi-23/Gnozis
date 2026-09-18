@@ -2549,3 +2549,9 @@ Current consequence: the closure finding alone does not justify changing Ψ. The
 Applied the state-vs-context rules to the existing `core/memory.py`. `KernelMemory`, `Workspace`, and `MemoryView` are currently protected/access boundaries, not declared Ψ state. Memory that semantically represents agent/world state may later become X/R, but memory access alone is not sufficient justification.
 
 Added `docs/PSI_CONTEXT_CASE_MEMORY_2026-09-18.md`. Three models remain deliberately open: memory as explicit execution context, selected memory promoted into X/R, or memory producing explicit observations/candidates. No direct MemoryView → hidden closure → F(Ψ) connection is allowed as a shortcut.
+
+## 120. Ψ Context Case Study — World Observation — 2026-09-18
+
+Applied the state-vs-context rules to the external-world/bridge boundary. Raw bridge/network data is infrastructure/input, not Ψ. Accepted observations may become candidate state material and only become canonical Ψ after explicit transition/proof/admission. Rejected or untrusted observations remain outside Ψ.
+
+Added `docs/PSI_CONTEXT_CASE_WORLD_OBSERVATION_2026-09-18.md`. This establishes an important staging concept: observation can remain a candidate among possible interpretations without becoming hidden mutable state or immediately inflating X/R. Direct Bridge → Core mutation remains excluded.
