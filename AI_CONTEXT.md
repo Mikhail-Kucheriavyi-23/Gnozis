@@ -2014,3 +2014,17 @@ Added `tests/test_dynamics.py`. Identity transition is both closed and fixed; a 
 These are deliberately distinct: closure means the evolution stays inside the admissible state space, while fixed point means the particular state does not change under F.
 
 PM-10 is approximately 99% at contract level. Remaining step: combine K0 + refinement + closure/fixed-point evidence into one explicit meta-transition admissibility contract, while preserving the distinction between finite witness evidence and a universal theorem.
+
+## 48. PM-10 Unified Meta Admission — 2026-09-18
+
+Added `core/meta_admission.py` with `MetaAdmission`, the unified self-evolution admissibility contract.
+
+A meta-transition is admissible only when the K0/refinement proof passes and the supplied ClosureObligation holds. Fixed-point status is intentionally NOT a mandatory admission condition: a changing operator/state may be admissible while individual fixed points remain a separately testable property.
+
+Added `tests/test_meta_admission.py` covering the combined contract.
+
+The mathematical PM-10 chain is now explicit:
+`K0 preservation + F_old ⊑ F_new + closure => admissible MetaTransition`.
+`FixedPoint(F, psi)` remains a descriptive/dynamical property, not a gate on every evolution.
+
+PM-10 is now COMPLETE at the executable contract level. Remaining work before declaring overall mathematics 100% is a full cross-file proof-matrix audit: verify every mathematical obligation, identify any unclosed PM item, and distinguish executable witness contracts from universal proofs.
