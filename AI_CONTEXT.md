@@ -2285,3 +2285,9 @@ The resulting gate is: `candidate -> test result -> proof pass -> admission -> i
 Added `formal/SelectionCommitBridge.lean`. Selection is now represented as an admitted candidate relation, so it cannot independently manufacture an unadmitted candidate. `SelectionCommit` carries both the selection proof and an explicit equality `committed = candidate`. Theorems prove selection requires admission and commit is exactly the selected candidate.
 
 This closes the proof-layer chain from test/admission through selection to semantic commit. The remaining major task is runtime conformance: show that the actual Python selection/commit implementation satisfies these formal relations, rather than merely defining equivalent abstract relations in Lean.
+
+## 83. Runtime Conformance Boundary — 2026-09-18
+
+Checked `docs/PROOF_MATRIX.md` against the current implementation. PM-02, PM-04, PM-06 and PM-22 are explicitly still partial; PM-05 is complete only within its stated scope. Therefore the next phase is runtime conformance, not another abstract theorem.
+
+Added `formal/RuntimeConformance.lean` with an explicit semantic projection from a runtime state to `Psi`, a `Conforms` relation, and semantic equivalence at the Psi boundary. This is a formal bridge contract only. It does not claim that the current Python runtime automatically satisfies it. The runtime proof must be established by tests/inspection of the canonical paths and by adversarial no-bypass cases.
