@@ -2599,3 +2599,15 @@ Do not interpret the percentages as a promise that the project is X% complete. T
 4. Continue concrete context classification only where it can affect a mandatory architectural decision.
 
 Memory, world exploration, multi-agent federation, and the ideality/superposition hypothesis remain important research layers but must not force premature Core changes.
+
+## 122. Canonical Step Boundary Audit — 2026-09-19
+
+Fresh inspection of `core/psi_transition.py` and `core/execution.py` exposed a concrete wiring gap: `Uroboros.canonical().step()` called `CanonicalExecutor.step()`, but the executor did not previously define that method. More importantly, the canonical step needed an explicit binding check between the supplied admission candidate and the actual `PsiTransition(psi)` result.
+
+Added `CanonicalExecutor.step()` with the invariant that `admission.candidate == transition(psi)` before semantic commit. Added `tests/test_canonical_transition_binding.py` proving that an admission for a different candidate is rejected.
+
+This is a mandatory correctness improvement, not exploratory work. It strengthens the boundary:
+
+Psi + PsiTransition -> exact candidate -> Admission -> Commit.
+
+Important remaining issue: the current Uroboros canonical admission still constructs a `ProofObligation(passed=True, invariant=True, viable=True)` locally. That is a provisional proof path and must be audited next; the transition/result binding is now protected, but proof semantics are not yet fully established for arbitrary canonical transitions.
