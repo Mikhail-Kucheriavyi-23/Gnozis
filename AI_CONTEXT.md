@@ -2431,3 +2431,9 @@ The remaining distinction is now explicit: conflict resolution may propose/admit
 Adversarial search of commit surfaces found that `core/canonical_chain.py::admit_transition()` and `core/execution.py::CanonicalExecutor.evolve()` are two distinct mutation boundaries. `canonical_chain` owns SafetyGate + GasBudget + Provenance + `commit_once`; `CanonicalExecutor` owns Ψ-specific Generate → Proof → Admission → Select → history-bound SemanticCommit.
 
 Do not claim that every canonical mutation uses one universal entrypoint yet. Added `docs/CANONICAL_MUTATION_BOUNDARY_AUDIT.md`. The next architectural decision is either to compose/unify these boundaries without weakening Ψ invariants, or explicitly document them as separate layers with a composition contract. Full regression remains pending.
+
+## 105. Final-Gate Test Fixture Correction — 2026-09-18
+
+Inspection of the proof contract exposed a defect in the newly added Uroboros integration test fixture: `prove_transition()` requires a distinct invariant-valid continuation for depth-1 viability, while the fixture generated only one candidate. The production contract was not changed; the test fixture was corrected to generate two valid candidates so the test exercises the intended canonical path rather than failing for an invalid fixture.
+
+This is a test-quality correction, not evidence of a production regression. The full repository test suite is still not empirically verified; 100% remains blocked.
