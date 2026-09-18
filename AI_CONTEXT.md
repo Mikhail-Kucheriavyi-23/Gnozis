@@ -2611,3 +2611,26 @@ This is a mandatory correctness improvement, not exploratory work. It strengthen
 Psi + PsiTransition -> exact candidate -> Admission -> Commit.
 
 Important remaining issue: the current Uroboros canonical admission still constructs a `ProofObligation(passed=True, invariant=True, viable=True)` locally. That is a provisional proof path and must be audited next; the transition/result binding is now protected, but proof semantics are not yet fully established for arbitrary canonical transitions.
+
+## 123. Superposition Between Tension Environments — 2026-09-19
+
+Added to the working superposition hypothesis: two environments/agents/regions of semantic tension may themselves coexist in a superposed relation, or may be moving toward such a relation, rather than being forced immediately into a single resolved state. This is a research hypothesis about relational/system state, not yet a Core axiom.
+
+Architecturally, this belongs primarily at the interaction/relational layer: the relevant object is not simply an isolated agent state but the relation between two states/environments and the set of admissible interpretations/transitions of that relation. It may therefore be represented through R, through explicit candidate relational states, or through a higher-level interaction context depending on future evidence.
+
+Important distinction:
+- `tension` is not automatically failure;
+- `superposition` is not automatically indecision;
+- convergence toward one state is not automatically the only valid evolution.
+
+A useful provisional model is:
+
+Psi_A=(X_A,R_A), Psi_B=(X_B,R_B)
+
+with an interaction relation T_AB whose admissible configurations may include multiple unresolved relational states:
+
+T_AB in {tau_1, tau_2, ..., tau_n}
+
+and evolution may reduce, transform, preserve, or increase this relational possibility space. The system should not prematurely collapse it merely to obtain a single deterministic architectural answer.
+
+This hypothesis is especially relevant to future multi-agent semantics and to the distinction between individual Ψ state and relational R state. No Core implementation change is made yet.
