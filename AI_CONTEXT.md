@@ -2157,3 +2157,9 @@ This is a composition contract, not yet proof that every future operation path u
 Repository search did not expose a broad set of executable transition runners; search results were insufficient to claim a universal no-bypass proof. Added `core/bypass_guard.py` as an explicit audit contract identifying `core.canonical_chain.admit_transition` as the canonical entrypoint and direct commit symbols as forbidden audit targets. Added `tests/test_bypass_guard.py`.
 
 Important: this is an audit target, not proof of absence of bypass. A future static scanner/integration test must inspect all Python transition paths and fail if a semantic commit bypasses the canonical chain.
+
+## 62. Static Bypass Scanner — 2026-09-18
+
+Added `tools/bypass_scan.py`, an AST-based audit scanner that searches `core/**/*.py` for direct calls to commit/append/SemanticCommit symbols outside `canonical_chain.py`. Added `tests/test_bypass_scan.py`, which requires zero findings.
+
+This upgrades PM-19/20 integration from a manual audit target to an executable regression check. Limitation: AST scanning is not a complete interprocedural call-graph proof; aliases, dynamic dispatch, reflection, or external packages require additional analysis.
