@@ -598,574 +598,379 @@ This is a candidate mathematical model of creative resolution of contradiction.
 
 The current repository must not be treated as proof that the present architecture is mathematically optimal.
 
-The correct workflow is:
-
-1. derive candidate mathematical primitives;
-2. attempt counterexamples;
-3. derive higher-level concepts;
-4. compare with current Core;
-5. identify redundant/historical Frankenstein components;
-6. only then modify implementation;
-7. verify implementation against the derived model.
 
-## 21. Analytical test suite to run before repository modernization
+## 27. Analytical consolidation XLII–XLIV — 2026-09-18
 
-Use minimal mathematical counterexamples for at least:
-1. stable structure;
-2. X changes while R stays constant;
-3. R changes while X stays constant;
-4. both X and R change;
-5. R becomes empty when permitted;
-6. branching admissible futures;
-7. impossible transition;
-8. World A/B incompatible constraints;
-9. World A/B compatible integration;
-10. new structure expanding lawful possibilities;
-11. persistent memory affecting future dynamics;
-12. emergent agent boundary;
-13. multi-agent interaction;
-14. trust from evidence history;
-15. autopoietic self-maintenance;
-16. law change under proof-preserving constraints;
-17. recursive/self-similar structures;
-18. distributed transitions without a global clock.
+This section preserves the mathematical conclusions reached after the previous consolidation. These are research candidates unless explicitly marked otherwise.
 
-A model that survives these is a stronger candidate, not automatically a proven universal theory.
+### 27.1 Identity should be an equivalence class, not literal state equality
 
-## 22. Analytical phases / expected remaining work
+For evolving structures, require neither:
 
-The exact number cannot be known before counterexamples are run. Current planning estimate:
+Psi_{t+1} = Psi_t
 
-Phase A — Foundation and ontology:
-~3-5 analytical blocks.
-Goal: decide whether Psi=(X,R) is sufficient as the structural primitive and define recursion/identity.
+nor preservation of the exact same X and R.
 
-Phase B — Dynamics and admissibility:
-~3-5 blocks.
-Goal: derive transitions, branching, invariants, hard stop, and determine whether L is primitive or derivable.
+Candidate organizational identity:
 
-Phase C — Information, observation, memory, knowledge:
-~3-4 blocks.
-Goal: derive these from interaction and persistent relational effects.
+Psi_t ~= Psi_{t+1}
 
-Phase D — World A/B, tension and collective integration:
-~3-5 blocks.
-Goal: mathematically test different realities, incompatible constraints, synthesis, and tension.
+when the required organizational invariants are preserved under an admissible transformation.
 
-Phase E — Agent, trust, autopoiesis and multi-agent structure:
-~4-6 blocks.
-Goal: test whether these emerge as structural predicates/relations rather than primitives.
+Thus:
 
-Phase F — Variational/optimization principle:
-~4-7 blocks.
-Goal: compare relational, operator, matrix, variational and constrained-variational formulations; derive rather than invent the objective.
+same organization != same concrete state.
 
-Phase G — Meta-evolution and proof-preserving law change:
-~3-5 blocks.
-Goal: formalize L_t -> L_{t+1}, invariants, verification, self-modification boundaries.
+### 27.2 The fundamental object may be the admissible transformation law
 
-Phase H — Full counterexample/synthesis pass:
-~4-6 blocks.
-Goal: attempt to break the candidate model, remove redundant concepts, and produce the minimal mathematical specification.
+Let T be the space of potential transformations and A_* the admissible subset:
 
-Expected remaining analytical workload:
-approximately 27-43 focused analytical blocks.
+A_* subseteq T.
 
-This is not a fixed schedule. Some phases may collapse if a derivation succeeds quickly; others may expand when a counterexample exposes a missing primitive.
+A transition is lawful when:
 
-The key stopping condition is not 'we have done enough discussion'. It is:
-the same minimal mathematical model explains the required cases without ad-hoc special mechanisms, or we have a precise proof/counterexample showing what additional primitive is necessary.
+f in A_*.
 
-## 23. Implementation gate after analysis
+The important insight is that the foundation may lie less in the current state and more in the rules governing permissible transformations.
 
-Do not start broad Core modernization merely because the repository becomes accessible.
+Candidate decomposition:
 
-When repository access returns:
-1. import this complete analytical context;
-2. compare the candidate model with actual code;
-3. map every existing component to fundamental/derived/external;
-4. identify contradictions and redundant architecture;
-5. preserve useful implementation only where it conforms;
-6. create explicit mathematical acceptance tests;
-7. implement the smallest justified changes;
-8. independently audit before enabling self-evolution.
+I -> C -> Psi
 
-World A/B, persistence, memory, bridge, logging, security, and self-evolution remain important implementation requirements, but their final architecture must be derived from the mathematical model rather than allowed to dictate it.
+where:
+I = minimal immutable/fundamental constraints;
+C = structures and admissible transformations;
+Psi = current concrete state.
 
-## 24. Strategic final principle
+Do not prematurely implement these as files/classes. This is a mathematical decomposition first.
 
-The project is attempting to reproduce lawful recursive organization, not imitate the surface appearance of natural systems.
+### 27.3 Category-like closure is a candidate formal structure
 
-The central research question remains:
+For:
 
-What is the smallest lawful recursive relational structure from which the required higher-level capabilities naturally emerge?
+f: Psi_0 -> Psi_1
+g: Psi_1 -> Psi_2
 
-The target is not a beautiful formula by itself. The target is a mathematically coherent generative architecture whose implementation is smaller, safer, more compositional, and more evolvable because the higher-level mechanisms are derived rather than separately invented.
+composition gives:
 
+g o f: Psi_0 -> Psi_2.
 
-## 25. New analytical conclusions — 2026-09-18 — recursive law and unified transition
+Identity:
 
-### 25.1 Self-reference is not self-evolution
+id_Psi: Psi -> Psi.
 
-A structure may contain a representation of itself:
-R(Psi, Enc(Psi)).
-This is self-reference, not yet self-evolution.
+Therefore the family of structures and admissible transformations has category-like closure.
 
-Self-evolution requires a validated transformation of the representation/dynamics:
-Psi_t -> M_t -> M_{t+1} -> Psi_{t+1}.
+Do not yet assert that Gnozis "is a category"; the useful result is that objects, admissible transformations, identity and composition form a natural mathematical vocabulary for evolution.
 
-### 25.2 Typed recursion
+### 27.4 Evolution is directional and need not be reversible
 
-To avoid naive self-membership paradoxes, recursive structures can be treated through typed levels S_0, S_1, ... where S_{n+1} contains structures over S_n.
+An evolution step may be:
 
-The architectural goal is not to force literal X in X, but to determine whether a closed/self-describing relational representation can be constructed safely.
+Psi_t -> Psi_{t+1}
 
-### 25.3 Structural identity
+without an inverse transformation.
 
-Identity should not necessarily mean preservation of the same concrete elements.
+Therefore a group structure is unnecessarily restrictive. A more general compositional transformation structure is appropriate.
 
-If f: X_t -> X_{t+1} preserves the required relational organization, then two different concrete states may share organizational identity:
-(X_t,R_t) ~= (X_{t+1},R_{t+1}).
+No global clock is required. A history can be represented by ordered transition edges:
 
-Candidate interpretation:
-identity = preserved organization under admissible transformation.
+(Psi_i, f_i, Psi_{i+1}).
 
-This remains a theorem-candidate, not a proven universal definition.
+### 27.5 Persistence is history of transformations, not merely stored states
 
-### 25.4 Growth and emergence
+A persistence layer should preserve enough information to reconstruct/verify:
 
-If f: X_t -> X_{t+1} preserves existing structure while X_{t+1} contains additional elements/relations, the system can express structural growth.
+Psi_0 -> Psi_1 -> ... -> Psi_n
 
-Candidate emergence:
-P(Psi_t)=false and P(Psi_{t+1})=true for a property P not already explicitly present at the prior description level.
+with transition evidence.
 
-Need counterexamples to distinguish genuine emergence from merely hidden/re-described properties.
+Database storage alone is not mathematical memory. Persistent information becomes memory only when it has a demonstrable causal effect on later reachable futures.
 
-### 25.5 Tension as constraint incompatibility
-
-For contexts A and B with constraints C_A and C_B:
-K_AB = {Psi | C_A(Psi) and C_B(Psi)}.
-
-If K_AB is empty, the constraints are jointly unsatisfiable in the current representational space.
-
-Partial tension can be represented by a restricted/nonempty overlap.
-
-Do not assume universal tau -> 0. A productive transformation may require changing the representational space.
-
-### 25.6 Creativity as lawful expansion
-
-If the current admissible transformation space is T^I_old(Psi), a candidate creative transformation changes the lawful representation/admissibility so that:
-T^I_new(Psi) properly contains T^I_old(Psi).
-
-This is a candidate definition only. Novelty alone is not evolution; invariants and lawful structure must remain meaningful.
-
-### 25.7 Evolution should be represented as a verified transition graph
-
-Define an evolution edge:
-e_t = (Psi_t, tau_t, Psi_{t+1}, pi_t)
-where pi_t is a verification/proof artifact.
-
-The evolution graph G_E=(V,E) can represent branching futures, alternative hypotheses, and later convergence/integration.
-
-Therefore:
-Psi_0 -> {Psi_A, Psi_B}
-does not require an immediate global selector if both branches are admissible and non-dominated.
-
-### 25.8 Selection need not be a primitive oracle
-
-Prefer:
-Max_preorder A(Psi)
-or the full set of admissible/non-dominated continuations,
-rather than a hidden universal score or selector.
-
-If multiple candidates remain incomparable, preserving multiple branches is mathematically legitimate.
-
-### 25.9 Observation can restrict future transformations
-
-Observation y can be modeled not only as restriction of states but as:
-T_y(Psi) subseteq T(Psi).
-
-Information can therefore be interpreted as restriction/distinguishability of possible transformations.
-
-Later structural reorganization may expand the lawful possibility space again.
-
-### 25.10 Law may be represented as a class of admissible structures
-
-Instead of hard-coding a list of immutable variables, a law may define a class:
-C = {Psi | P(Psi)=true}.
-
-Evolution remains inside C while variable structure changes.
-
-This is potentially more natural than a collection of ad-hoc immutable flags.
-
-### 25.11 Candidate unified process
-
-Current compact candidate:
-Psi
--> interaction/constraint C
--> admissible set A(Psi,C)
--> if A is empty: STOP
--> otherwise search/retain admissible Psi'
--> verify required invariants
--> transition
--> update relational structure.
-
-Hard stop is therefore mathematically meaningful: if no admissible transition exists, the system must not invent one.
-
-### 25.12 Path/variational formulation
-
-For a trajectory gamma=(Psi_0,...,Psi_n), candidate:
-S[gamma] = sum_k F(Psi_k,Psi_{k+1}).
-
-A lawful path may be selected through:
-gamma* = Ext_{gamma in Gamma_L} S[gamma].
-
-Do not assume min/max or invent F as a fitness function. The research task is to determine whether F can be derived from structure, information, constraints, invariants, or a deeper law.
-
-### 25.13 Self-evolution as transformation-space evolution
-
-Ordinary evolution:
-Psi_t -> Psi_{t+1}.
-
-Higher-order evolution:
-(Psi_t, L_t) -> (Psi_{t+1}, L_{t+1})
-or equivalently a change in the lawful transformation space.
-
-This is the mathematical target behind software self-evolution. Code editing is only an implementation layer and must follow validated mathematical evolution.
-
-### 25.14 Current minimality test
-
-The architecture should be evaluated against the hypothesis that:
-Psi=(X,R)
-is the smallest fundamental structure,
-while World, Agent, Memory, Knowledge, Trust, Tension, Creativity, Autopoiesis, and possibly Law are derived structures/relations/predicates.
-
-A concept should become primitive only when counterexamples demonstrate that it cannot be derived from the lower-level vocabulary.
-
-### 25.15 Four mathematical closure families to compare next
-
-The next analytical block must compare:
-1. recursive/fixed-point closure;
-2. variational dynamics;
-3. symmetry/conservation structures;
-4. algebraic/category-theoretic closure.
-
-The comparison criterion is not elegance. It is the smallest structure capable of expressing:
-state + relation + law + constraint + branching + emergence + self-maintenance + self-modification.
-
-### 25.16 Critical research warning
-
-Do not retrofit the existing repository into the mathematics merely because it already exists.
-
-Required order:
-mathematical derivation -> counterexamples -> minimal specification -> mapping to existing code -> implementation changes -> verification.
-
-The existing Core is evidence about engineering history, not proof of mathematical optimality.
-
-
-## 26. Consolidation of analytical blocks XXII–XXVI — 2026-09-18
-
-This section explicitly preserves the reasoning that must not be lost between chats.
-
-### 26.1 Transformation space as a derived structure
-
-For Psi=(X,R), define the set of admissible transformations:
-
-End_L(Psi) = {tau | tau: Psi -> Psi' and L(Psi,Psi')=1}.
-
-Do not automatically make End_L(Psi) a primitive Core object. It can be a derived space generated by the structure and its admissibility law.
-
-Composition is fundamental to the analysis:
-
-tau_1: Psi_0 -> Psi_1
-tau_2: Psi_1 -> Psi_2
-therefore
-tau_2 o tau_1: Psi_0 -> Psi_2.
-
-This means transformations themselves have relational structure. The transformation space can therefore be analyzed as a structure of the same general family rather than requiring a separate metaphysical object.
-
-### 26.2 Endomorphisms, automorphisms, and structural change
-
-Aut(Psi) is the subset of transformations preserving structural identity up to isomorphism.
-
-End(Psi) contains broader transformations that can change organization.
-
-Therefore:
-Aut(Psi) subseteq End(Psi).
-
-A transformation outside Aut(Psi) can represent genuine organizational evolution.
-
-### 26.3 Novelty must be structural
-
-Concrete renaming/re-encoding is not sufficient for structural novelty.
-
-If:
-Psi_1 ~= Psi_2
-under the relevant organizational equivalence,
-then a representation change alone is not a new organization.
-
-A candidate structural novelty occurs when a transition reaches a new equivalence class of admissible structures or transformations.
-
-Novelty != value.
-Novelty != evolution.
-Novelty must be analyzed together with invariants and lawful admissibility.
-
-### 26.4 Transformation-space expansion
+### 27.6 Transformation-space expansion is a stronger evolution signal
 
 Let:
-T_t = End_L(Psi_t).
 
-A higher-order evolutionary event is indicated when:
-T_{t+1} != T_t.
+F(Psi) = set of lawful reachable futures.
 
-A particularly important candidate is:
-T_t properly contained in T_{t+1}.
+For a transition:
 
-If the expansion is caused internally by the system's own validated structural transformation, this is a candidate definition of autopoietic expansion.
+Psi -> Psi'
 
-This is stronger than source-code self-editing: the mathematical space of future lawful transformations has changed.
+define:
 
-### 26.5 Ordinary evolution vs capability evolution vs law evolution
+N = F(Psi') \ F(Psi)
+L = F(Psi) \ F(Psi')
+S = F(Psi) intersection F(Psi').
 
-Keep these distinct:
+Then:
 
-State evolution:
-Psi_t -> Psi_{t+1}.
+N = new reachable possibilities;
+L = lost reachable possibilities;
+S = retained possibilities.
 
-Capability/transformation-space evolution:
-T_t -> T_{t+1}.
+This gives a structural description of evolution without reducing it to an arbitrary scalar reward.
 
-Law evolution:
-L_t -> L_{t+1}.
+A candidate higher-order creative event is:
 
-A faster search algorithm does not necessarily expand T.
-A code change does not necessarily change L.
-A larger database does not necessarily constitute memory or evolution.
+F(Psi') properly contains F(Psi)
 
-### 26.6 Arbitrary finite relation arity
+subject to preservation of required invariants and lawfulness.
 
-Binary relations are useful but must not be assumed fundamental without analysis.
+Novelty alone is not value, evolution, or creativity.
 
-General candidate:
-R subseteq X*,
-where X* is the union of all finite tuples over X.
+### 27.7 Cost should remain separate from value
 
-Thus R may contain unary, binary, ternary, or higher finite-arity relations.
+A candidate structural transition cost may be:
 
-Binary matrix form is then an implementation/projection:
-R_2 -> adjacency matrix.
+K(Psi -> Psi').
 
-Higher-arity relations may require tensors or sparse relational representations.
+Do not immediately combine K with novelty or preservation into a single invented score.
 
-The mathematical substrate should not be constrained merely because a particular database or graph library prefers binary edges.
+The candidate evaluation object is a structured vector such as:
 
-### 26.7 Relation types
+V = (preservation, new_possibilities, lost_possibilities, cost, evidence).
 
-An engineering representation may use:
-R subseteq X x X x Lambda.
+Different candidates may remain incomparable.
 
-Lambda encodes relation type.
+This supports partial orders rather than a universal selector.
 
-This should be treated as a useful typed representation, not automatically a new fundamental ontology. Relation type itself may potentially be represented recursively within the relational structure.
+### 27.8 Selection need not be a primitive oracle
 
-### 26.8 Semantic relation vs implementation representation
+After generation and verification, several candidates may remain admissible:
 
-A semantic relation:
-F(a,b,c)
+C_valid = {Psi'_1, Psi'_2, ...}.
 
-is not necessarily identical to its binary reification:
-a -> r <- b, r -> c.
+It is mathematically legitimate to preserve multiple branches rather than force one global winner.
 
-The latter may be an implementation encoding. It must not silently redefine the mathematics.
+A selector, if later required by an application, belongs above the fundamental Core unless analysis proves otherwise.
 
-Therefore database schemas and graph structures must remain representations of the mathematical model, not its source.
+### 27.9 Structural naturalness
 
-### 26.9 Recursive structure and self-reference
+A candidate transition f: Psi -> Psi' can be considered structurally natural relative to the model when it is:
 
-An element x in X may itself carry a structure of the same family.
+Admissible(f)
+and Traceable(f)
+and InvariantPreserving(f).
 
-Self-reference must be distinguished from self-evolution.
+This is a formal candidate for "natural fit"; it is not a claim about universal natural law.
 
-Self-reference:
-Rep(s,Psi).
+### 27.10 Creativity as transformation of the admissible space
 
-Self-evolution:
-Psi_t -> M_t -> M_{t+1} -> Psi_{t+1}.
+Ordinary optimization searches inside a fixed admissible space.
 
-A self-model is not an authority over the Core. It generates hypotheses/candidate transitions; verification remains a separate requirement.
+Higher-order creativity changes the space itself.
 
-Typed recursion may be safer than literal untyped self-membership:
-S_0, S_1, ... where S_{n+1} contains structures over S_n.
+Candidate:
 
-The research question is whether a safe fixed-point/closed representation can be obtained without introducing an unrelated special primitive.
+T_old^I(Psi) = invariant-preserving lawful transformations before the structural reorganization.
 
-### 26.10 Fixed points and organizational persistence
+A candidate creative transformation produces a new lawful space:
 
-For a transformation F, a structural fixed point satisfies:
-F(Psi*) ~= Psi*.
+T_new^I(Psi)
 
-A periodic orbit may instead satisfy:
-F^k(Psi*) ~= Psi*.
+with:
 
-Therefore persistence need not mean literal static identity.
+T_old^I(Psi) properly contained in T_new^I(Psi).
 
-A system may change continuously while preserving organizational identity:
-Psi_t != Psi_{t+1}
-but
-Psi_t ~= Psi_{t+1}.
+This captures the strategic engineering intuition that a powerful design can create additional future design possibilities rather than merely optimize one fixed design.
 
-Candidate interpretation:
-organizational identity = preserved organization under admissible transformation.
+### 27.11 User goals must remain outside the mathematical Core
 
-This remains a theorem-candidate and must be tested with counterexamples.
+The Core can determine:
 
-### 26.11 Dynamics
+what structures are admissible;
+what transformations are possible;
+what invariants are preserved;
+what consequences follow.
 
-The general dynamics need not be deterministic.
+A user/application layer can determine:
 
-Deterministic case:
-Psi_{t+1}=F(Psi_t).
+what is wanted in a particular context.
 
-Branching case:
-Psi_{t+1} in F(Psi_t)
-or
-tau_t in T(Psi_t).
+Therefore:
 
-Possibility must be distinguished from probability:
-Possibility is defined by admissibility.
-Probability, if used, is a later selection/search mechanism.
+Core = lawful possibility;
+Application = contextual objective;
+World = empirical consequence.
 
-Do not allow an AI-generated probability to make an inadmissible transition admissible.
+Do not encode a universal human value function into the mathematical Core.
 
-### 26.12 Structural metric
+### 27.12 Counterexample results from XLIV
 
-If two concrete representations differ only by isomorphism, an appropriate structural distance should ideally satisfy:
-d_struct(Psi_1,Psi_2)=0
-when Psi_1 ~= Psi_2.
+Several structural operations can be derived or checked directly from Psi=(X,R):
 
-A candidate distance can be defined through minimum transformation cost:
-D(Psi,Psi') = inf_gamma Cost(gamma).
+- X addition/removal;
+- R addition/removal;
+- combined structural mutation;
+- type/source/target consistency;
+- relation closure where a specified Gamma permits it.
 
-This is not yet a final metric or objective.
+A general mutation can be normalized as:
 
-### 26.13 Attractors and bifurcations
+DeltaX+ = X' \ X
+DeltaX- = X \ X'
+DeltaR+ = R' \ R
+DeltaR- = R \ R'
 
-For parameterized dynamics:
-Psi_{t+1}=F_mu(Psi_t),
+with:
 
-a qualitative change in the set of stable regimes may occur at a critical parameter.
+X' = (X \ DeltaX-) union DeltaX+
+R' = (R \ DeltaR-) union DeltaR+.
 
-Potential phenomena:
-fixed point -> cycle;
-one attractor -> multiple attractors;
-loss of stability;
-new structural regime.
+This is a useful canonical representation of a candidate transition, not yet the final mutation API.
 
-Do not hard-code complexity modes. A key research hypothesis is that richer regimes may emerge from the same lawful dynamics after structural change.
+### 27.13 Derived laws versus axiomatic laws
 
-Attractor != goal.
-Bifurcation != intelligence.
-These are mathematical dynamical properties.
+Not every admissibility rule can be derived from raw R.
 
-### 26.14 Invariants and self-maintenance
+Separate:
 
-Let I(Psi) denote a candidate organizational invariant.
+A_derived(Psi) = structural consequences of the current relational structure;
 
-For admissible transitions preserving organization:
-I(Psi_{t+1}) = I(Psi_t).
+A_axiom = minimal externally specified mathematical constraints.
 
-Do not declare invariants merely because they are convenient. Candidate invariants must be derived, justified, or empirically tested.
+Then:
 
-A possible autopoietic pattern is:
-change in concrete X,R
-while required organizational invariant persists.
+A(Psi) = A_axiom intersection A_derived(Psi).
 
-This gives a mathematical route to "self-maintenance through change".
+This avoids the false claim that every law of the system must somehow emerge from the current data alone.
 
-### 26.15 Verification boundary for self-modification
-
-Changing the verifier itself is a special case.
+### 27.14 Relation closure must not be silently assumed
 
 If:
-V_t -> V_{t+1},
-then V_{t+1} must not be allowed to validate its own law change merely by definition.
 
-A stronger proof-preserving boundary is required for verifier/law changes than for ordinary state transitions.
+a R b
+and
+b R c
 
-This preserves the distinction:
-self-model != self-authority;
-self-editing code != mathematically validated self-evolution.
+then a R c only if the relation semantics include the corresponding transitivity/closure rule.
 
-### 26.16 Unified current analytical chain
+Therefore a closure operator Gamma_R is a candidate law:
 
-The current compact candidate is:
+R+ = Cl_GammaR(R).
 
-Psi_t=(X_t,R_t)
+The implementation must not smuggle semantic assumptions into a graph/database representation.
+
+### 27.15 Multi-valued transition dynamics
+
+A deterministic map:
+
+Psi_{t+1} = F(Psi_t)
+
+is only one special case.
+
+A more general candidate is:
+
+Gamma(Psi,E) -> C
+
+where C is a set of candidate successor structures.
+
+After verification:
+
+Psi' in C_valid.
+
+This preserves branching and avoids a hidden universal selector.
+
+### 27.16 Verification layers
+
+A candidate transition should distinguish at least:
+
+T_I = invariant/axiom verification;
+T_S = structural consistency;
+T_P = provenance/proof verification;
+T_E = external empirical verification.
+
+Core can formalize the first three where the corresponding mathematics exists.
+
+T_E may require the external world, experiment, simulation, manufacturing, user feedback, or another observation channel.
+
+Therefore:
+
+mathematical proof of a model != proof that the physical world behaves exactly as the model predicts.
+
+### 27.17 Self-modification boundary
+
+State evolution:
+
+Psi_t -> Psi_{t+1}
+
+is different from law/capability evolution:
+
+L_t -> L_{t+1}
+
+or:
+
+T_t -> T_{t+1}.
+
+Changing code is only an implementation event. It is not itself evidence of mathematical self-evolution.
+
+A stronger verification boundary is required when the system changes the mechanism that performs verification itself.
+
+### 27.18 Current unified mathematical candidate
+
+The current compact chain is:
+
+Psi_t = (X_t,R_t)
 -> interaction/observation/constraint C_t
 -> admissible transformation set T_t
--> candidate tau_t
--> verification V
--> Psi_{t+1}=tau_t(Psi_t)
+-> candidate transformation tau_t
+-> verification
+-> Psi_{t+1} = tau_t(Psi_t)
 -> append-only evidence/history
 -> recompute T_{t+1}
--> detect whether state, capability space, or law changed.
+-> determine whether state, capability space, or law changed.
 
 Hard stop:
-if T_t is empty, no invented transition is allowed.
 
-Higher-order self-evolution candidate:
-T_{t+1} differs from T_t because of an internally generated and validated transformation.
+if T_t = empty, no invented transition is allowed.
 
-### 26.17 Current architectural consequence
+Higher-order self-evolution:
 
-The mathematical Core should trend toward the smallest set of irreducible primitives.
+T_{t+1} != T_t
 
-Potentially derived rather than fundamental:
-Agent
-World
-Memory
-Knowledge
-Trust
-Tension
-Creativity
-Autopoiesis
-Transformation space
-Search
-AI interface.
+when the change results from an internally generated and validated structural/lawful transformation.
 
-The current repository must therefore be audited as an implementation history, not treated as the final ontology.
+### 27.19 Next analytical block XLV
 
-The target architecture remains:
+The next calculation must formalize the boundary between the system and external structure:
 
-natural mathematical structure
--> admissibility/laws
--> computable representation
--> minimal Core
--> verification
--> external search/AI/world interfaces.
+Boundary(Psi)
 
-### 26.18 Next analytical frontier
+and derive, from one common model:
 
-Continue with the multi-Psi problem:
+Input / Output
+Observation
+Action
+Feedback
+User interaction
+Internet/world exploration
+Multi-agent interaction.
 
-Psi_A, Psi_B, ..., Psi_n
+The objective is to avoid separate mathematical engines for Internet Bridge, User Bridge, Multi-Agent, Memory and World interaction.
 
-with different observation and constraint contexts.
+After XLV, compare four deeper closure families:
 
-Required analysis:
-- compatibility/incompatibility;
-- intersection of admissible spaces;
-- conflict as information;
-- structural synthesis;
-- whether collective integration can create a lawful structure unavailable to each source independently;
-- multi-agent behavior as multiple persistent substructures;
-- trust from evidence/history;
-- causal/partial-order coordination without a global clock.
-
-After that, compare four deeper mathematical closure families:
 1. recursive/fixed-point closure;
 2. variational dynamics;
 3. symmetry/conservation structures;
 4. algebraic/category-theoretic closure.
 
-The goal is not to choose the most elegant formalism. The goal is to find the smallest mathematically coherent generative architecture that survives counterexamples and naturally expresses state, relation, law, constraint, branching, emergence, self-maintenance and validated self-evolution.
+The comparison criterion remains:
+
+find the smallest mathematically coherent generative architecture capable of expressing state, relation, law, constraint, branching, emergence, self-maintenance and validated self-evolution.
+
+### 27.20 Working rule for all future analysis
+
+Do not retrofit mathematics to existing repository code.
+
+Required order:
+
+mathematical derivation
+-> counterexample
+-> minimal specification
+-> mapping to current code
+-> implementation change
+-> verification.
+
+Existing code is implementation history, not proof of mathematical optimality.
