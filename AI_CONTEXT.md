@@ -2743,3 +2743,24 @@ The two paths should not be conflated. The next mandatory question is whether ca
 Additional security observation: `ProofObligation` is currently a public frozen data container and `Admission` accepts a supplied `ProofObligation`. Tests construct `passed=True` obligations directly. This is acceptable for unit fixtures but means the container itself is not cryptographic/authenticated evidence. We must distinguish executable proof computation from a manually constructed proof record before claiming that Proof prevents forgery.
 
 Do not modify canonical Core to solve this yet. First establish the canonical proof contract and its required inputs, then write adversarial tests against that contract.
+
+
+## 126. Fundamental Structural Validity Audit — 2026-09-19
+
+RAA inspected `core/state.py` and confirmed that canonical `Psi` is intentionally defined as exactly `Psi=(X,R)` with `x: Any` and `relations: Any`. `Psi` is frozen but does not impose additional domain validation on X or R. `PsiTransition.__call__` constructs a new `Psi`, so the transition result is already structurally closed at the Python type/model level.
+
+Therefore we must NOT invent a hidden structural invariant W merely to make Fundamental Proof look stronger. At the current Core abstraction level, the strongest intrinsic structural claim is:
+
+`Psi' is a valid Psi object produced from F(Psi)`.
+
+The binding test `Psi' == F(Psi)` plus construction through `Psi` already establishes this scoped closure. Any stronger claim about what X or R is allowed to contain belongs to an explicit semantic invariant/policy, not to the generic Psi constructor.
+
+This sharpens the fundamental proof decomposition:
+
+`Binding/closure` is intrinsic to the canonical transition path.
+`Semantic admissibility` requires an explicit rule/invariant if the system intends to reject otherwise structurally valid Psi states.
+`Evolutionary viability` must remain separate because it requires a candidate pool and is not intrinsic to F:Psi->Psi.
+
+Consequently the next architecture decision is narrower: determine whether canonical execution requires an explicit semantic admissibility context at all at this Core stage. If yes, define its minimal interface. If no, the canonical Proof may legitimately be a scoped transition-correctness proof rather than pretending to prove semantic fitness.
+
+Do not add domain restrictions to Psi, X, or R solely to satisfy Proof. Do not reuse evolutionary viability as a universal fundamental invariant.
