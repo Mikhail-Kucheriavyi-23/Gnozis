@@ -2387,3 +2387,11 @@ Added `core/execution.py::CanonicalExecutor`. It preserves the pure `PsiTransiti
 Added `tests/test_canonical_execution.py`: accepted step creates exactly one history record; rejected step creates none and preserves Psi; an admitted forged candidate that disagrees with the transition result is rejected.
 
 This closes the previously missing execution-owner layer in the architecture. PM-12 still needs integration with the actual canonical production entry point; the new executor is not yet proof that every production step uses it.
+
+## 99. Uroboros Canonical Execution Integration — 2026-09-18
+
+`CanonicalExecutor` is now the owner of the evolutionary production sequence: Generate → Proof → Admission → Select → SemanticCommit → TransitionRecord → AppendOnlyHistory. `Uroboros.evolutionary()` now constructs this executor and `Uroboros.step()` routes through it; the legacy `Engine` is no longer the execution path for an evolutionary Uroboros instance. `State` remains only the adapter representation at the Uroboros compatibility boundary.
+
+Added `tests/test_uroboros_canonical_execution.py`: accepted evolutionary step produces one history record; rejected step preserves Ψ/state and creates no record.
+
+PM-12 is now at the production integration stage. Remaining work: reconcile the old `evolutionary_psi_transition()`/`Engine` public compatibility path so it cannot be mistaken for the canonical production execution path, then run the complete end-to-end regression suite.
