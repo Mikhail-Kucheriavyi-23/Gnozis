@@ -1808,3 +1808,16 @@ PM-05 remains PARTIAL, not because the canonical evolutionary path lacks Admissi
 New audit artifact: docs/PM-05_APPLY_PATH_AUDIT.md
 
 Do not delete Engine(State -> State) blindly. The next decision is an architectural classification: deprecate/namespace the legacy API, keep it explicitly non-semantic, or replace it with a typed compatibility adapter. Then add adversarial tests proving canonical Ψ has one trusted semantic commit path.
+
+## 33. PM-05 Legacy Isolation — 2026-09-18
+
+The compatibility decision was implemented as explicit isolation rather than deletion.
+
+- Added `core/legacy_engine.py` containing `LegacyEngine` for legacy `State -> State` transitions.
+- Marked `core/engine.py` generic compatibility surface as deprecated; canonical Ψ uses `PsiEngine/PsiTransition`.
+- Added `tests/test_legacy_engine_boundary.py` documenting the compatibility surface.
+- Updated `docs/PROOF_MATRIX.md`: PM-05 is now PARTIAL -> NEAR-COMPLETE.
+
+This is not yet T41 COMPLETE. The remaining requirement is an adversarial/non-bypass test and a final audit of canonical callers proving that canonical Ψ semantic mutation has exactly one trusted path through Admission. Do not claim global non-bypass until that test/audit is complete.
+
+Next: implement the smallest adversarial test for canonical Ψ non-bypass, then close PM-05 if it passes conceptually and by repository evidence. After PM-05, move to PM-07/PM-08 merge/conflict/resolution rather than adding new mathematics.
