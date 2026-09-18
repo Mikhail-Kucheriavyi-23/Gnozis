@@ -974,3 +974,514 @@ mathematical derivation
 -> verification.
 
 Existing code is implementation history, not proof of mathematical optimality.
+
+
+## 28. Missing analytical context preserved — LXXVIII–LXXXI — 2026-09-18
+
+This section explicitly preserves the analytical work that must not be lost between AI sessions. It is research context, not a claim that every item is implemented or mathematically proven.
+
+### 28.1 Inter-Gnozis network: connected but independently authoritative
+
+A Gnozis instance is modeled as:
+
+G_i = (Psi_i, K_i, M_i)
+
+A network contains:
+
+{G_1, G_2, ..., G_n}
+
+Connectivity must not imply shared state:
+
+Connectivity != Shared State.
+
+A remote instance never directly writes another instance's authoritative Core state.
+
+Remote interaction is represented as a protocol message:
+
+m = (sender, receiver, type, payload, provenance, proof, policy, integrity).
+
+Remote messages become inputs/candidates/evidence and must pass the receiving instance's local verification and commit boundary.
+
+Invariant:
+
+RemoteMessage_ij does not directly imply Mutation(Psi_j).
+
+### 28.2 Distributed verification without distributed authority
+
+A network may distribute verification:
+
+G_1 generates a candidate;
+G_2 checks structural properties;
+G_3 checks a mathematical invariant;
+G_4 checks an external source.
+
+But the receiving/local Gnozis retains commit authority.
+
+Distributed verification != distributed authority.
+
+ForeignProof => Evidence, not Authority.
+
+ForeignTrust => InteractionSignal, not CommitPermission.
+
+A trusted peer still cannot bypass the local kernel verification boundary.
+
+### 28.3 Identity, capability and authenticity
+
+Identity must not be confused with authority:
+
+Identity != Authority.
+
+A cryptographic identity may be represented by a public key or a derived identifier. Signatures provide authenticity/integrity of a message, not truth of its contents:
+
+Signature != Truth.
+
+Capabilities describe what an instance can demonstrate it can do. Capability claims themselves should have provenance/evidence. Capability negotiation is separate from truth verification.
+
+Compatibility(Cap_i, Cap_j) may determine whether two instances can meaningfully cooperate.
+
+### 28.4 Claims, evidence and conflict
+
+A complete external claim can be represented as:
+
+Q_i = (q_i, Context_i, Evidence_i, Proof_i).
+
+A receiving instance may classify it as:
+
+Verified / Unverified / Contradicted / Incompatible / Unknown.
+
+Unknown != Contradicted.
+Incompatible != False.
+
+A challenge protocol may request provenance, reproduction, proof, or additional evidence.
+
+Conflict should be recorded rather than silently erased:
+
+ConflictRecord = (Claim_A, Claim_B, Context_A, Context_B, Evidence_A, Evidence_B).
+
+Possible outcomes include:
+Resolve;
+Refine;
+Partition;
+Preserve.
+
+An unresolved conflict is a state of knowledge, not necessarily a system failure.
+
+### 28.5 Different realities and interoperability
+
+Interoperability should permit:
+
+understanding without forced agreement.
+
+A claim may be interpretable in another context without being accepted there:
+
+Compatibility != Agreement.
+
+A RealityProfile may describe ontology, rules, units, assumptions and capabilities without asserting universal truth.
+
+This supports the original different-realities objective without creating hard-coded World A/World B engines.
+
+### 28.6 Proposal, merge, fork and clone lineage
+
+A remote proposal:
+
+p: Psi_j -> Psi_j'
+
+is a proposal, not an instruction.
+
+Receiver choices may include:
+Accept;
+Reject;
+Modify;
+Fork;
+RequestMoreEvidence.
+
+Merge must first create a MergeCandidate and pass compatibility/conflict/proof checks.
+
+Merge = Candidate, not Authority.
+
+Cloning should create connected lineage rather than isolated copies:
+
+Clone(G_i) = G_j
+Parent(G_j) = ID_i
+Clone = SharedLineage + IndependentState.
+
+A fork creates descendants that preserve ancestry without requiring identical future states.
+
+Lineage may therefore be represented as an evolutionary DAG.
+
+### 28.7 Encrypted communication
+
+Network communication needs independent properties:
+
+Confidentiality;
+Authenticity;
+Integrity.
+
+Encryption protects contents. Signing authenticates origin/integrity. Neither proves truth.
+
+Network negotiation must be resource bounded. A communication/session budget prevents unbounded challenge-response loops.
+
+Silence at a mandatory verification gate is not consent:
+
+Silence = HardStop.
+
+### 28.8 User <-> Gnozis and multi-agent symmetry
+
+A user may act as:
+Observer;
+Generator;
+EvidenceProvider;
+Evaluator.
+
+A Gnozis may use multiple users as distributed agents, while users may use multiple Gnozis as agents.
+
+The same underlying relation/agent model should be preferred over separate special-purpose ontologies.
+
+User input, another Gnozis, an AI model, Internet evidence, or an agent may generate candidates or evidence, but none automatically receives Core commit authority.
+
+UserPreference != KernelAuthority.
+
+### 28.9 Assimilation pipeline
+
+External structure E interacts with Psi through observations and relations.
+
+The canonical assimilation pipeline is:
+
+Observation
+-> Interpretation
+-> Candidate
+-> Verification
+-> Assimilation
+-> State.
+
+Observation does not imply assimilation.
+
+Evidence may be assimilated without accepting the associated claim.
+
+Evidence assimilation != Knowledge assimilation.
+
+Knowledge is stronger than raw observation/memory: it becomes part of validated generative constraints/admissibility.
+
+### 28.10 Layered memory
+
+Memory should distinguish at least:
+
+M_obs = observation memory;
+M_evidence = evidence/provenance memory;
+M_knowledge = validated knowledge;
+M_history = evolution/history.
+
+Memory is not merely a database. A mathematical candidate definition is:
+
+Memory exists when retained information has a persistent causal effect on future dynamics.
+
+Database persistence != mathematical memory.
+Stored data != knowledge.
+
+### 28.11 Psi remains authoritative; SQLite is persistence/serialization
+
+Psi = (X,R) remains the logical source of truth.
+
+SQLite is a persistence representation, not a second authoritative state model:
+
+Psi -> serialization -> SQLite
+SQLite -> recovery/verification -> Psi'.
+
+Recovery must verify integrity before evolution resumes.
+
+If integrity cannot be verified, the instance may enter quarantine:
+
+State readable, but evolution unauthorized.
+
+### 28.12 Identity across evolution and recovery
+
+Instance identity should be lineage-based rather than equal to a literal state.
+
+A conceptual identity may contain:
+
+RootID;
+Lineage;
+CryptographicIdentity.
+
+Same instance across restart requires verified continuity of lineage/integrity.
+
+A descendant can share RootID while having a different lineage.
+
+Unrelated instances have different roots.
+
+Organizational identity may survive concrete state change when required organizational invariants remain preserved.
+
+### 28.13 Self-modification lattice
+
+Self-modification is not one operation. Candidate levels:
+
+L0 Data
+L1 Knowledge
+L2 Strategy
+L3 Generator
+L4 Policy
+L5 Protocol
+L6 Kernel.
+
+Higher levels require stronger containment and verification.
+
+Changing a generator must not automatically change the verifier.
+Changing a policy must not automatically remove safety constraints.
+Changing a protocol must preserve explicit compatibility/versioning.
+Kernel self-modification is a separate meta-evolution class.
+
+### 28.14 Candidate self-modification lifecycle
+
+For ordinary mutable mechanisms:
+
+Propose
+-> Sandbox
+-> Verify
+-> Shadow
+-> Canary
+-> Promote
+-> Commit
+
+with rollback available.
+
+A new mechanism must first exist as an object of evaluation, not immediately become active.
+
+Self-modification must not grant itself additional privilege:
+
+CodeEvolution != PrivilegeEvolution.
+
+Candidate permission expansion is a separate transition.
+
+### 28.15 Immutable safety/verification boundary
+
+The safety/verification boundary should contain, at minimum, candidates for:
+
+State integrity;
+Commit semantics;
+Proof verification;
+Resource/gas accounting;
+Emergency stop;
+Lineage integrity.
+
+The precise immutable boundary remains a design subject to formal verification.
+
+Critical invariant:
+
+No self-modification may remove or bypass the mechanism required to verify that self-modification.
+
+EmergencyStop should not be ordinary self-modifiable policy.
+
+### 28.16 Gas-limited autonomous and meta-evolution
+
+Ordinary evolution and self-modification must be resource bounded.
+
+A conceptual cost can include:
+
+Cost = BaseCost + DepthCost + VerificationCost.
+
+Per-cycle depth and operation budgets prevent recursive explosion:
+
+G -> G' -> G'' -> ...
+
+No unbounded autonomous negotiation or self-modification.
+
+Evolution is permitted, not mandatory.
+
+### 28.17 Endogenous selection without an external selector
+
+The old Generate -> Test -> Select -> Evolve chain is preserved without introducing a selector oracle.
+
+Generate produces:
+
+C_t = {c_1, ..., c_n}.
+
+Test/verification produces:
+
+C_valid = {c in C_t | Valid(c)=1}.
+
+Selection is a relation/function returning a set of admissible candidates, not a winner-producing actor:
+
+Sel : (Psi, C, K, B) -> P(C).
+
+Selection can be decomposed into:
+
+Validity != Selection != Scheduling.
+
+Validity asks whether a candidate is lawful.
+Selection identifies admissible continuation candidates.
+Scheduling determines which admissible candidates can be executed now under resource limits.
+
+### 28.18 Partial orders instead of universal scalar fitness
+
+When multiple candidates are admissible, do not invent a universal score merely to force a winner.
+
+Candidates may be incomparable:
+
+c_1 || c_2.
+
+A partial order may encode documented dominance where justified.
+
+Incomparable valid candidates may be:
+- retained as branches;
+- deferred;
+- scheduled later;
+- compared after additional evidence.
+
+Resource selection is not truth selection.
+
+If only one branch can be executed for resource reasons, a deterministic canonical tie-break may be used for reproducibility, but it must not be interpreted as a truth claim.
+
+### 28.19 Defer and branch are legitimate outcomes
+
+Selection results may include:
+
+Accept;
+Reject;
+Defer;
+Branch.
+
+If no valid candidate exists:
+
+NoValidTransition.
+
+This is not necessarily failure. The system may remain unchanged:
+
+Psi_{t+1} = Psi_t.
+
+Hard stop applies when no admissible transition exists or a mandatory verification gate is unresolved.
+
+Evolution is permitted, not mandatory.
+
+### 28.20 Selection as a transition-system property
+
+A stronger formulation is:
+
+T : (Psi, E, K, B) -> P(Psi)
+
+rather than a deterministic universal map.
+
+The transition system defines the space of admissible successors. A trajectory is one path through that space.
+
+Selection is therefore a property of the transition system, not an external decision-maker.
+
+### 28.21 Candidate evaluation structure
+
+Avoid collapsing all evaluation into an invented scalar score.
+
+A candidate may be represented by structured properties such as:
+
+V = (preservation, new_possibilities, lost_possibilities, cost, evidence).
+
+Candidate validity may require:
+
+Invariant(c) = 1
+Proof(c) >= RequiredProof
+Cost(c) <= Budget
+AuthorityGain(c) = 0
+Compatibility(c,K) = 1.
+
+This is a constraint/evidence model, not a universal ranking.
+
+### 28.22 Rejected candidates remain evidence/history
+
+Reject(c) should not necessarily erase c.
+
+Record:
+candidate;
+failure reason;
+failed invariant/test;
+context;
+evidence.
+
+A later policy/evidence change may permit reevaluation without rewriting history.
+
+This connects selection to append-only audit logs.
+
+### 28.23 Unified bounded evolution cycle
+
+Candidate canonical cycle:
+
+Observe
+-> Generate
+-> Normalize
+-> Test
+-> Verify
+-> Select
+-> Schedule
+-> Simulate
+-> Commit
+-> Log.
+
+Simulation occurs before authoritative commit.
+
+For kernel/mechanism candidates, simulation must occur in a sandbox or equivalent containment environment.
+
+### 28.24 Fundamental selection invariant
+
+Selection must never create an inadmissible state.
+
+If:
+
+A_L(Psi) = empty,
+
+the system must not invent a transition.
+
+Hard stop is a valid result of the mathematical transition system.
+
+### 28.25 Strategic synthesis
+
+The accumulated architecture now has the following conceptual separation:
+
+World / external structure
+-> Observation / interaction
+-> Evidence / provenance
+-> Candidate generation
+-> Verification
+-> Endogenous admissibility/selection
+-> Resource scheduling
+-> Simulation
+-> Local commit
+-> Persistent history
+-> Recomputed transformation space.
+
+Across Gnozis instances:
+
+Network communication
+-> evidence/candidate/proposal exchange
+-> local verification
+-> local commit.
+
+For self-evolution:
+
+State evolution:
+Psi_t -> Psi_{t+1}
+
+Meta-evolution:
+K_t/L_t/T_t -> K_{t+1}/L_{t+1}/T_{t+1}
+
+with a protected verification boundary.
+
+The network can propagate evolution candidates, but not authority:
+
+Evolution can propagate; authority cannot.
+
+### 28.26 Context continuity requirement
+
+This entire section is explicitly preserved because earlier analytical work was lost between sessions. Future AI agents reading AI_CONTEXT.md must treat sections 28.1-28.26 as working architectural/mathematical context to be considered before proposing new architecture or implementation.
+
+They must not silently replace this context with a simplified summary.
+
+They must distinguish:
+- established repository facts;
+- mathematical definitions;
+- candidate derivations;
+- hypotheses;
+- implementation requirements;
+- open questions.
+
+The next analytical problem remains:
+
+Invariant Evolution and Proof-Preserving Relaxation:
+how Gnozis can discover that an existing invariant/law is insufficient and propose a lawful extension without being able to simply delete the constraint that blocks a desired transition.
+
+After that, the accumulated theory should be converted into the operational Task Registry and mapped against the actual repository state before implementation changes.
