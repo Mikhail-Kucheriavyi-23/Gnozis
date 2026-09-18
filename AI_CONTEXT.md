@@ -2107,3 +2107,11 @@ Contract: `AuthorityGain` must remain zero; `hard_stop` or `silence` blocks all 
 Added `tests/test_safety.py` for the bounded operation limit, authority-gain rejection, hard-stop/silence rejection, and fail-closed behavior.
 
 This makes the safety rule executable, but PM-18 still requires binding the gate to the canonical autonomous executor so no operation path can bypass it.
+
+## 56. PM-19 Bounded Execution Admission — 2026-09-18
+
+Repository search found no existing canonical operation runner to modify. Therefore no second executor was introduced. Added `core/execution_contract.py` with `ExecutionPlan`/`validate_execution_plan` as the single admission contract for any future canonical runner.
+
+The contract requires operation/cost cardinality, passes through `SafetyGate`, then charges `GasBudget` before execution can be admitted. Tests cover normal admission, operation-count overflow, gas exhaustion, and hard-stop rejection.
+
+PM-19 is NEAR-COMPLETE at contract level. It becomes COMPLETE only when a real canonical operation runner exists and is forced through this contract, with a no-bypass test.
