@@ -4,13 +4,13 @@ from dataclasses import dataclass, field
 from typing import Iterable
 
 from .engine import Engine
-from .evolution import Generator, Tester, evolutionary_psi_transition
+from .execution import CanonicalExecutor, Generator, Tester
 from .relation import Relation
 from .state import State
+from .history import AppendOnlyHistory
 
 
 def _unconfigured_transition(state: State) -> State:
-    """Prevent an unconfigured core from silently performing identity evolution."""
     raise RuntimeError(
         "Uroboros has no transition configured; provide an Engine or use Uroboros.evolutionary()."
     )
@@ -18,10 +18,17 @@ def _unconfigured_transition(state: State) -> State:
 
 @dataclass(frozen=True)
 class Uroboros:
-    """Recursive GNOSIS/UROBOROS computational core."""
+    """Recursive GNOSIS/UROBOROS computational core.
+
+    The evolutionary constructor uses CanonicalExecutor as the production
+    semantic path. State remains only the compatibility/adapter representation.
+    """
 
     state: State = field(default_factory=State)
     engine: Engine = field(default_factory=lambda: Engine(transition=_unconfigured_transition))
+    executor: CanonicalExecutor | None = None
+    generate: Generator | None = None
+    test: Tester | None = None
 
     @classmethod
     def evolutionary(
@@ -30,25 +37,50 @@ class Uroboros:
         generate: Generator,
         test: Tester,
         state: State | None = None,
+        kernel_version: str = "gnozis-core",
+        history: AppendOnlyHistory | None = None,
     ) -> "Uroboros":
-        """Create a core whose fundamental transition is Psi -> Psi."""
         initial = state or State()
-        # Fail early if the supplied State cannot represent the fundamental Ψ=(X,R).
         initial.to_psi()
         return cls(
             state=initial,
-            engine=Engine(transition=evolutionary_psi_transition(generate=generate, test=test)),
+            engine=Engine(transition=_unconfigured_transition),
+            executor=CanonicalExecutor(
+                history=history or AppendOnlyHistory(),
+                kernel_version=kernel_version,
+            ),
+            generate=generate,
+            test=test,
         )
 
     def step(self) -> "Uroboros":
-        """Perform one endogenous evolution step."""
+        if self.executor is not None:
+            if self.generate is None or self.test is None:
+                raise RuntimeError("Canonical executor requires generate and test.")
+            result = self.executor.evolve(
+                self.state.to_psi(),
+                self.generate,
+                self.test,
+            )
+            return Uroboros(
+                state=State.from_psi(result.psi),
+                engine=self.engine,
+                executor=self.executor,
+                generate=self.generate,
+                test=self.test,
+            )
         return Uroboros(state=self.engine.step(self.state), engine=self.engine)
 
     def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
-        """Return a new core with the same X and a canonical immutable relation tuple."""
         new_relations = tuple(relations)
         if any(not isinstance(relation, Relation) for relation in new_relations):
             raise TypeError("relations must contain Relation instances.")
         values = dict(self.state.values)
         values["relations"] = new_relations
-        return Uroboros(state=State(values=values), engine=self.engine)
+        return Uroboros(
+            state=State(values=values),
+            engine=self.engine,
+            executor=self.executor,
+            generate=self.generate,
+            test=self.test,
+        )
