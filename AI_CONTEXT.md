@@ -2531,3 +2531,9 @@ This sharpens the next architectural question: whether canonical transition func
 Captured the current hypothesis that useful transition context should not be prematurely classified as either canonical state or forbidden hidden state. Context is provisionally divided into intrinsic X/R state, explicitly declared higher-level execution context, undeclared mutable closure state, and infrastructure-only information.
 
 Added `docs/PSI_CONTEXT_SUPERPOSITION_ANALYSIS_2026-09-18.md`. No new component has been added to Ψ and no blanket closure ban has been introduced. The planning principle is to preserve viable representation choices until concrete context examples reveal their semantic role, while keeping the canonical Ψ boundary testable.
+
+## 117. Concrete Ψ Context Classification — 2026-09-18
+
+Added `docs/PSI_CONTEXT_CLASSIFICATION_2026-09-18.md` to classify concrete Gnozis context before changing the mathematical model. The working classes are: intrinsic X/R state; semantically relevant history; evaluation policy; generation policy; runtime resources; safety/provenance; persistence/transport infrastructure; hidden mutable closure; and external/user/world observations.
+
+The key distinction is now explicit: information may influence execution without being part of Ψ. For a strict `F: Ψ → Ψ` claim, context that changes F must either be explicit transition context with a qualified contract or have its semantically relevant portion represented in Ψ. Infrastructure and execution controls must not be silently promoted into Ψ.
