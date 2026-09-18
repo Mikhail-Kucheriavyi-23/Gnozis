@@ -2067,3 +2067,13 @@ The current implementation folds the accepted append-only history over the genes
 Added `tests/test_replay.py` for non-empty reconstruction and empty-history identity.
 
 PM-14 is NEAR-COMPLETE: kernel-version dispatch and explicit final state-hash equality still need to be bound to the replay contract. This is intentionally kept separate from persistence representation.
+
+## 52. PM-15 Certified Snapshot — 2026-09-18
+
+Added `core/snapshot.py` with `Snapshot` and `SnapshotCertificate`.
+
+A snapshot is explicitly a cache/observation, not semantic truth. Its certificate binds three identities: history head, reconstructed state hash, and kernel version. `is_cache_of()` rejects mismatches, preventing a stale snapshot from being treated as current semantic state.
+
+Added `tests/test_snapshot.py` covering all three certificate dimensions.
+
+PM-15 is NEAR-COMPLETE. Remaining work is to bind certification to the actual replay result and define explicit invalidation/rebuild semantics. SQLite remains deferred until the semantic contracts are complete.
