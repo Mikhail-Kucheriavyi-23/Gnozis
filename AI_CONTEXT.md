@@ -1831,3 +1831,21 @@ Coverage now demonstrates that the canonical evolutionary path cannot select a c
 PM-05 is still not globally COMPLETE. The remaining mathematical statement T41 is stronger than the current API: a freely callable `PsiTransition` can still be constructed externally without an Admission object. Therefore the current evidence supports a scoped claim: the canonical evolutionary implementation is proof/admission gated. It does not support the universal claim `Apply(Psi,c) => Admission(Psi,c)` for every possible PsiTransition implementation.
 
 Do not weaken the specification to match the code. The next architecture decision is whether PsiTransition itself must become an admission-carrying/validated transition type. This is a semantic API decision, not another mathematics layer.
+
+## 35. PM-05 Semantic Commit Refinement — 2026-09-18
+
+A key semantic distinction was established: PsiTransition is a pure candidate-transforming operator Psi -> Psi; it is not itself a semantic mutation/commit. Therefore making every PsiTransition object carry Admission would conflate computation with authorization.
+
+Implemented:
+- core/commit.py defines SemanticCommit(previous, admission) and commit(previous, admission).
+- SemanticCommit.apply() is fail-closed and accepts only an admitted Psi candidate.
+- tests/test_semantic_commit.py covers accepted, rejected, and non-Psi candidates.
+
+The intended separation is now:
+Generate/Transition -> Candidate Psi -> Proof -> Admission -> SemanticCommit -> Psi'
+
+PM-05 is NEAR-COMPLETE at the semantic commit boundary, but not globally COMPLETE until canonical evolution uses SemanticCommit and all semantic commit callers are audited.
+
+Do not force Admission into pure PsiTransition. The invariant is about semantic application/commit, not pure candidate calculation.
+
+Next: integrate SemanticCommit into the canonical evolutionary path, re-audit PM-05, then proceed to merge/conflict/resolution.
