@@ -16,7 +16,7 @@ This document is an audit map, not a proof claim.
 | PM-02 | State is an adapter, not second semantic model | State.to_psi()/from_psi() | PARTIAL | T3; adapter/extensionality tests | Remove/constrain competing State transition path |
 | PM-03 | Deep immutability | recursive _freeze() | IMPLEMENTED* | T4; nested mutation tests | *Only supported built-ins; custom payloads remain outside contract |
 | PM-04 | Generate -> Test -> proof/admission -> Select -> Transition | core/evolution.py, core/proof.py | PARTIAL | T5–T12; proof-gate tests | Separate explicit Admission from current proof-gated selection |
-| PM-05 | Apply cannot bypass Admission | No single explicit Adm API found | MISSING | T41 | Define canonical admission boundary |
+| PM-05 | Apply cannot bypass Admission | `core/admission.py` + proof-gated `core/evolution.py` path | PARTIAL | T41 | Extend boundary to all canonical semantic apply paths and adversarially prove non-bypass |
 | PM-06 | Selection is not an external oracle | endogenous selection + adversarial tests | IMPLEMENTED at tested path | T18–T23 | Formal proof, not only tests |
 | PM-07 | Partial-order/branch outcome allowed | documented in AI_CONTEXT; no canonical merge module found | MISSING/PARTIAL | merge theorem obligations | Implement only after gap/acceptance test |
 | PM-08 | Conflict is retained, not silently erased | documented concept; no conflict/merge core found | MISSING | T18–T23 | Create conflict/merge candidate model |
@@ -37,7 +37,7 @@ This document is an audit map, not a proof claim.
 
 ## Immediate evidence-backed gaps
 
-1. Explicit Admission boundary is not yet a first-class Core primitive.
+1. Explicit Admission is now a first-class Core primitive for the proof-gated evolutionary path, but universal non-bypass is not yet proven.
 2. Merge/conflict/resolution calculus has documentation but no canonical Core implementation was found.
 3. Meta-kernel/root-invariant/refinement proof layer is not established as a concrete implementation.
 4. Canonical persistence/history/replay/snapshot machinery is not established; current repository contains experiments and documentation rather than a confirmed SQLite state-history subsystem.
