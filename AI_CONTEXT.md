@@ -1902,3 +1902,20 @@ Added `tests/test_branch.py` covering sibling incomparability and ancestor relat
 This establishes the minimum representation needed to distinguish concurrent branches from ancestor/descendant transitions. It does not yet define a full partial-order merge algebra or deferred admissible outcomes.
 
 PM-07 remains PARTIAL. Next: integrate Branch identity into Merge/Conflict so conflicts retain branch provenance rather than only raw Psi values. Then connect resolution candidates to the semantic commit pipeline.
+
+## 40. PM-07/08 Branch-aware Conflict — 2026-09-18
+
+Merge/conflict provenance was upgraded from raw Psi pairs to explicit Branch objects.
+
+Implemented:
+- `core/merge.py::Conflict` now retains `left` and `right` Branch objects and exposes source Psi values.
+- `merge()` accepts Branch objects and never silently selects a non-identical branch.
+- `core/resolution.py::ResolutionCandidate` exposes source branches and source Psi provenance.
+- `tests/test_merge_conflict.py` verifies branch IDs and source states survive conflict creation.
+
+This establishes conflict lineage:
+Branch_A + Branch_B -> Conflict(Branch_A, Branch_B) -> ResolutionCandidate
+
+PM-07 is PARTIAL -> NEAR-COMPLETE; PM-08 is NEAR-COMPLETE.
+
+Remaining: define the minimal admissible semantics for deferred/parallel outcomes and route a resolution candidate through Proof -> Admission -> SemanticCommit. Do not introduce a new ranking or winner-selection mechanism merely to force merge completion.
