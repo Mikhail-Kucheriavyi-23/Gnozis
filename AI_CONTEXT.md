@@ -2257,3 +2257,9 @@ The theorem deliberately assumes the concrete invariant `I` and root predicate a
 Re-read the executable contract and regression/conformance evidence. `core/contract.py` defines Ψ-extensionality over `(X,R)`. Repository conformance documents report locality and causal-closure tests as GREEN, with transition behavior required to depend only on declared state and remain within the declared causal boundary.
 
 Added `formal/Locality.lean`. It defines `Local T` as equality-respecting transition behavior over canonical Psi and treats causal closure at the semantic boundary as the absence of an ambient external input to `T : Psi -> Psi`. This is intentionally a minimal proof-level encoding; it does not claim that all Python side channels have been formally eliminated. Runtime test evidence remains the empirical guard.
+
+## 78. Concrete I(Psi) Assembly — 2026-09-18
+
+Added `formal/ConcreteInvariant.lean` as the assembly point for the semantic invariant. It names the five obligations already identified: projection, test gate, selection, locality, and causal closure, and defines `I(Psi)` as their conjunction.
+
+Important status: the current leaf predicates are explicit placeholders (`True`) because the executable Python semantics are not yet represented in Lean as typed predicates. The file therefore establishes the architecture of the conjunction without falsely claiming machine-checked semantic equivalence. The next task is to replace each placeholder with its actual typed proposition, starting with projection/extensionality and then test/selection/locality/causal closure.
