@@ -2053,3 +2053,17 @@ History semantics:
 Added `tests/test_history.py` for chain integrity, genesis/sequence behavior, and rejection of unaccepted transitions.
 
 PM-12 is NEAR-COMPLETE: the data-level append-only contract exists, but it is not yet bound to the canonical SemanticCommit/persistence boundary. PM-17 is PARTIAL because kernel provenance is present in the record but not yet enforced at the commit boundary.
+
+## 51. PM-14 Replay Contract — 2026-09-18
+
+Added `core/replay.py` with deterministic `replay(genesis, history, apply)`.
+
+Semantic contract:
+
+`Replay(Genesis, History, KernelVersions) -> CurrentSemanticState`
+
+The current implementation folds the accepted append-only history over the genesis `Psi` and returns the reconstructed state plus the number of applied records. It does not introduce SQLite or snapshots as semantic truth.
+
+Added `tests/test_replay.py` for non-empty reconstruction and empty-history identity.
+
+PM-14 is NEAR-COMPLETE: kernel-version dispatch and explicit final state-hash equality still need to be bound to the replay contract. This is intentionally kept separate from persistence representation.
