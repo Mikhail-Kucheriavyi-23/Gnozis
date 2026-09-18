@@ -2297,3 +2297,9 @@ Added `formal/RuntimeConformance.lean` with an explicit semantic projection from
 Re-read `docs/PM-05_APPLY_PATH_AUDIT.md`. PM-05 is not universally complete: `PsiEngine(PsiTransition)` is canonical; generic `Engine(State -> State)` is legacy/generic compatibility; terminal bridge and CoreChat are adapters. The audit explicitly requires adversarial proof that compatibility paths cannot be mistaken for canonical Ψ mutations.
 
 Added `formal/CanonicalBoundary.lean` to separate the canonical semantic transition type from a compatibility transition type at the proof layer. This is a type-level boundary, not yet a Python import/runtime enforcement proof. Do not claim PM-05 COMPLETE until the runtime/adversarial acceptance criteria are satisfied.
+
+## 85. First Adversarial Canonical-Boundary Tests — 2026-09-18
+
+Added `tests/test_canonical_no_bypass_contract.py`. The tests structurally verify: canonical `PsiEngine/PsiTransition` typing, explicit legacy/generic classification, presence of Admission on the canonical evolution path, and the safety rule that global no-bypass must not be claimed before adversarial evidence is complete.
+
+This is deliberately a contract-level test, not yet a dynamic exploit test. It establishes a regression guard against documentation/code drift. PM-05 remains incomplete until a test can actually attempt an unadmitted canonical mutation and demonstrate fail-closed behavior, plus a caller audit of all canonical semantic mutation entry points.
