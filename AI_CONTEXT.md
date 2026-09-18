@@ -2239,3 +2239,9 @@ Added `formal/Viability.lean` after inspecting the exact `_viable()` implementat
 Added `formal/PoolCorrespondence.lean` and `formal/ProofGate.lean`. The finite executable candidate pool is now represented as `List Psi` with membership `p ∈ pool`, and the depth-1 viability predicate is expressed directly over that finite pool. A witness theorem shows that an executable pool member satisfying distinctness and the invariant yields formal viability. `ProofGate` separately proves that proof passage entails both candidate invariant satisfaction and viability.
 
 This closes the representation gap at the proof-gate level. It still does not prove Lean/CPython equivalence automatically; that requires a test/bridge convention for mapping runtime `State` objects to canonical `Psi` values.
+
+## 75. State ↔ Ψ Correspondence — 2026-09-18
+
+Inspected the exact `core/state.py`. Runtime `State.to_psi()` requires canonical `x` and `relations` and returns the fundamental `Psi`; `State.from_psi()` reconstructs an extended State containing exactly those semantic fields. Added `formal/StatePsi.lean` with proof-level `State`, `Psi`, `toPsi`, `fromPsi`, and round-trip theorems `from_to_psi` and `to_from_psi`.
+
+This establishes the intended canonical projection at the proof layer. It does not claim Python/Lean type-level equivalence for arbitrary `Any` payloads; that requires a typed encoding of runtime X and R when the concrete formal invariant is instantiated.
