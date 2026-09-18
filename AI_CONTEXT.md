@@ -2028,3 +2028,13 @@ The mathematical PM-10 chain is now explicit:
 `FixedPoint(F, psi)` remains a descriptive/dynamical property, not a gate on every evolution.
 
 PM-10 is now COMPLETE at the executable contract level. Remaining work before declaring overall mathematics 100% is a full cross-file proof-matrix audit: verify every mathematical obligation, identify any unclosed PM item, and distinguish executable witness contracts from universal proofs.
+
+## 49. PM-10 Closed / PM-11 Gas Bound Started — 2026-09-18
+
+Reconciled `docs/PROOF_MATRIX.md` with the implemented work: PM-08 is now marked COMPLETE for canonical resolution semantics, and PM-10 is COMPLETE for the executable meta-admission contract.
+
+Started PM-11 with `core/gas.py::GasBudget`: deterministic finite resource charging, remaining budget calculation, rejection of negative costs, and fail-closed exhaustion. Added `tests/test_gas.py`.
+
+PM-11 is NEAR-COMPLETE at contract level but is not COMPLETE until the budget is bound to the canonical autonomous-operation executor and bypass is tested.
+
+Important: overall mathematical completion is NOT 100%. PM-11–PM-22 contain additional mathematical/system invariants, including persistence/replay, provenance, hard-stop, non-bypass, protected memory, and machine-checked proof targets. The final 100% marker must wait for a cross-matrix audit after those are addressed.
