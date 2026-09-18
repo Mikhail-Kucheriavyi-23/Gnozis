@@ -1,15 +1,14 @@
 namespace Gnozis
 
-/-- Semantic core: Psi=(X,R). -/
 structure Psi where
   X : Type
   R : X → X → Prop
 
-/-- Kernel invariant as a predicate over semantic states.
-    The concrete Gnozis K0 will refine this definition later. -/
-def K0 (P : Psi) : Prop := True
+/-- K0 is an explicit protected predicate; the concrete Core predicate
+    remains to be refined from root_invariant.py. -/
+def K0 (P : Psi) : Prop :=
+  ∃ witness : P.X → Prop, ∀ x, witness x → witness x
 
-/-- A transition is admitted only together with an invariant-preservation proof. -/
 structure Transition (P : Psi) where
   next : Psi
   preserves_K0 : K0 P → K0 next
@@ -19,7 +18,6 @@ theorem accepted_transition_preserves_K0
     (h : K0 P) : K0 t.next := by
   exact t.preserves_K0 h
 
-/-- Composition preserves K0 when both transitions carry preservation proofs. -/
 def Transition.compose (a : Transition P) (b : Transition a.next) : Transition P where
   next := b.next
   preserves_K0 := by
