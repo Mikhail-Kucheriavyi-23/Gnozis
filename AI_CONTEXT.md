@@ -1849,3 +1849,15 @@ PM-05 is NEAR-COMPLETE at the semantic commit boundary, but not globally COMPLET
 Do not force Admission into pure PsiTransition. The invariant is about semantic application/commit, not pure candidate calculation.
 
 Next: integrate SemanticCommit into the canonical evolutionary path, re-audit PM-05, then proceed to merge/conflict/resolution.
+
+## 36. PM-05 COMPLETE — 2026-09-18
+
+Canonical Ψ evolution now crosses the semantic commit boundary: Generate -> Test/Proof -> Admission -> SemanticCommit -> Psi'.
+
+core/evolution.py now passes the selected Admission directly into commit(previous, admission) and only returns the result of SemanticCommit.apply().
+
+PM-05 is therefore COMPLETE for the canonical Ψ semantic surface. This claim is intentionally scoped: LegacyEngine(State -> State) remains compatibility/non-semantic and is not part of canonical Ψ semantics.
+
+The invariant is: SemanticApply(Ψ,c) => Admission(Ψ,c).
+
+Next mathematical/architectural gap: PM-07/PM-08 — merge, conflict retention, and resolution. No new mathematics is needed; implement only what is already specified and test the invariants.
