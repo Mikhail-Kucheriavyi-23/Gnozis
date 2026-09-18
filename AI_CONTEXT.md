@@ -2001,3 +2001,16 @@ This is intentionally a witnessed/executable obligation, not a universal theorem
 `tests/test_refinement.py` covers an accepted forward refinement and a rejected one.
 
 PM-10 is approximately 98% at contract level. Remaining mathematical work: connect this refinement obligation to `MetaTransition` itself and define closure/fixed-point conditions for self-evolution. Do not claim universal refinement from finite witnesses.
+
+## 47. PM-10 Closure + Fixed Point — 2026-09-18
+
+Added `core/dynamics.py` with two explicit obligations for a `PsiTransition`:
+
+- `ClosureObligation`: for supplied witnesses, an invariant holds on both the current Psi and its successor;
+- `FixedPointObligation`: for supplied witnesses, `F(psi) == psi`.
+
+Added `tests/test_dynamics.py`. Identity transition is both closed and fixed; a transition that adds a marker remains inside the invariant but is not a fixed point.
+
+These are deliberately distinct: closure means the evolution stays inside the admissible state space, while fixed point means the particular state does not change under F.
+
+PM-10 is approximately 99% at contract level. Remaining step: combine K0 + refinement + closure/fixed-point evidence into one explicit meta-transition admissibility contract, while preserving the distinction between finite witness evidence and a universal theorem.
