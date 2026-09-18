@@ -1892,3 +1892,13 @@ PM-08 is now PARTIAL -> NEAR-COMPLETE. It is not COMPLETE until a resolution can
 Important: do not add an autonomous conflict winner. The resolver may propose; the existing semantic commit gate decides admission.
 
 Next: connect one resolution candidate to the existing proof/admission/commit pipeline without bypassing it. Then audit whether PM-07 needs a branch/lineage object before moving on.
+
+## 39. PM-07 Branch Lineage — 2026-09-18
+
+Added `core/branch.py` with explicit immutable `Branch` identity, parent lineage, depth, ancestry and `incomparable(a,b)` relation.
+
+Added `tests/test_branch.py` covering sibling incomparability and ancestor relationships.
+
+This establishes the minimum representation needed to distinguish concurrent branches from ancestor/descendant transitions. It does not yet define a full partial-order merge algebra or deferred admissible outcomes.
+
+PM-07 remains PARTIAL. Next: integrate Branch identity into Merge/Conflict so conflicts retain branch provenance rather than only raw Psi values. Then connect resolution candidates to the semantic commit pipeline.
