@@ -2411,3 +2411,11 @@ Inspected `.github/workflows/test.yml`. The repository has a real CI test workfl
 A workflow-run lookup for the current commit returned no workflow runs. Therefore the final repository-wide regression suite has NOT been verified as passing in CI. Do not record 100% completion or claim full PASS yet. Architectural completion remains at the 99% gate until an actual successful regression run is available.
 
 Current verified state: canonical execution is integrated through `Uroboros.evolutionary()` → `CanonicalExecutor`; legacy evolution APIs are quarantined; history binding is present; targeted regression tests have been added. Remaining gate is empirical: execute the complete test suite and resolve any failures before finalizing PM-22 at 100%.
+
+## 102. Final-Gate Adversarial Finding — History Head Continuity — 2026-09-18
+
+During final-gate inspection of `commit_contract.py` and `history.py`, found a real remaining bypass: `commit_once()` enforced the record chain but did not prove that `SemanticCommit.previous` matched the current history head. A caller could therefore supply an unrelated previous Psi while still constructing a syntactically valid next record.
+
+Fixed `core/commit.py`: `SemanticCommit.apply()` now rejects a non-genesis commit when the previous Psi hash does not equal `history.head.state_hash`. State hashes are now deterministic SHA-256 hashes of the canonical `(x, relations)` representation instead of Python's process-randomized `hash()`.
+
+Added `tests/test_commit_history_continuity.py` covering forged previous-state rejection. This is a substantive final-gate correction, so the 100% claim remains blocked until the full test suite actually passes.
