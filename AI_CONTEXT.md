@@ -2163,3 +2163,9 @@ Important: this is an audit target, not proof of absence of bypass. A future sta
 Added `tools/bypass_scan.py`, an AST-based audit scanner that searches `core/**/*.py` for direct calls to commit/append/SemanticCommit symbols outside `canonical_chain.py`. Added `tests/test_bypass_scan.py`, which requires zero findings.
 
 This upgrades PM-19/20 integration from a manual audit target to an executable regression check. Limitation: AST scanning is not a complete interprocedural call-graph proof; aliases, dynamic dispatch, reflection, or external packages require additional analysis.
+
+## 63. Import-Aware Bypass Audit — 2026-09-18
+
+Added `tools/import_bypass_scan.py` and `tests/test_import_bypass_scan.py`. The scanner now rejects direct imports of semantic commit/history symbols from `core` outside `canonical_chain.py`, complementing the existing call-site AST scanner.
+
+This strengthens the local static invariant: semantic commit APIs are not imported directly by other core modules. It remains a local syntactic proof, not a complete dynamic/interprocedural proof.
