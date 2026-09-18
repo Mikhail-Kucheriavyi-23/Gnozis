@@ -2501,3 +2501,11 @@ Cross-checking the historical regression guidance against the current code found
 This means the executor is Ψ-shaped at its boundary but does not yet explicitly delegate to the declared `PsiTransition` operator. Because generic State callables can close over hidden external state, this prevents a clean Markov-sufficiency claim for canonical evolution.
 
 Added `docs/CANONICAL_PSITRANSITION_DELEGATION_AUDIT_2026-09-18.md`. Status OPEN. Required next decision: either make `PsiTransition` the explicit canonical operator boundary, or formally prove the existing State-based generate/test path is equivalent to the same F: Psi -> Psi semantics, including closure/external-state rules. Do not make a cosmetic type change without resolving the semantic contract.
+
+## 113. Explicit PsiTransition Step Boundary Restored — 2026-09-18
+
+Cross-checking `tests/test_canonical_execution.py` against `core/execution.py` exposed a concrete contract mismatch: the tests and canonical design expected `CanonicalExecutor.step(psi, transition, admission)`, while the implementation only exposed `evolve()` through generic `State` generator/test callables.
+
+Added `CanonicalExecutor.step()` as the explicit `Psi -> Psi` canonical commit boundary. It validates the `PsiTransition`, recomputes the candidate from the transition, rejects forged admission candidates that disagree with it, preserves state/history on rejected admission, and commits exactly one accepted transition.
+
+This does not yet remove the State-based `evolve()` compatibility path. The Markov/canonical-delegation audit remains OPEN until the production Uroboros evolutionary path is explicitly connected to this `PsiTransition` boundary or its equivalence is formally established.
