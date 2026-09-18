@@ -2263,3 +2263,9 @@ Added `formal/Locality.lean`. It defines `Local T` as equality-respecting transi
 Added `formal/ConcreteInvariant.lean` as the assembly point for the semantic invariant. It names the five obligations already identified: projection, test gate, selection, locality, and causal closure, and defines `I(Psi)` as their conjunction.
 
 Important status: the current leaf predicates are explicit placeholders (`True`) because the executable Python semantics are not yet represented in Lean as typed predicates. The file therefore establishes the architecture of the conjunction without falsely claiming machine-checked semantic equivalence. The next task is to replace each placeholder with its actual typed proposition, starting with projection/extensionality and then test/selection/locality/causal closure.
+
+## 79. I_projection No Longer Placeholder — 2026-09-18
+
+Replaced the first `True` leaf in `formal/ConcreteInvariant.lean`. `I_projection` now states the canonical semantic equality obligation over `Psi`: equality of declared `(X,R)` states is the identity boundary; no hidden runtime field is represented in `Psi`. The theorem `projection_invariant` proves the obligation directly from equality.
+
+This is intentionally modest: it formalizes the semantic identity boundary, not the stronger runtime theorem that arbitrary Python states with equal `psi_projection` always produce equal transitions. The latter remains the role of `assert_extensional_transition` and must eventually be connected by a typed bridge.
