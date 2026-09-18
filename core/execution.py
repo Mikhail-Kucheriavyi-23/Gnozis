@@ -8,6 +8,7 @@ from .admission import admit
 from .commit import commit
 from .history import AppendOnlyHistory
 from .proof import prove_transition
+from .psi_transition import PsiTransition
 from .state import Psi, State
 
 Generator = Callable[[State], Iterable[State]]
