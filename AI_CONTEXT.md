@@ -1977,3 +1977,13 @@ Added `tests/test_meta_transition.py` for valid K0-preserving transitions, root-
 PM-09 is COMPLETE for the K0 boundary. PM-10 is PARTIAL -> NEAR-COMPLETE: the proof-carrying gate exists, but its refinement obligations are still intentionally minimal and are not yet bound to a canonical self-evolution operator.
 
 Do not treat `RefinementProof.statement` as cryptographic/formal proof. It is currently an executable structural gate; stronger proof semantics are a later verification layer.
+
+## 45. PM-10 Refinement Obligation Strengthened — 2026-09-18
+
+Repository review found the canonical `PsiTransition` is already the endogenous fundamental operator F: Psi -> Psi, while the self-evolution contract explicitly requires characterizing admissible candidates, closure, fixed points, and endogenous change without an external operator.
+
+`core/meta_transition.py` was strengthened so `RefinementProof` can carry an executable `refinement(before, after)` predicate in addition to K0 preservation. `MetaTransition.admissible()` now requires the proof states to match exactly, K0 to hold before/after, and the optional refinement predicate to pass.
+
+`tests/test_meta_refinement.py` covers a valid refinement and a failed refinement that blocks application.
+
+This remains an executable refinement gate, not a universal theorem prover. PM-10 is now approximately 95% complete at the contract level. The remaining mathematical work is to define the canonical refinement relation for self-evolution (what property of F/F' must be preserved) and fixed-point/closure obligations, rather than adding more generic proof wrappers.
