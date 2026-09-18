@@ -4,9 +4,11 @@ structure Psi where
   X : Type
   R : X → X → Prop
 
-/-- Canonical semantic identity: no hidden field participates in Psi identity. -/
 def I_projection (p : Psi) : Prop :=
   ∀ q, p = q → p = q
+
+def TestValid (passed : Bool) : Prop :=
+  passed = true
 
 def I_test_gate (p : Psi) : Prop := True
 def I_selection (p : Psi) : Prop := True
@@ -23,6 +25,10 @@ def I (p : Psi) : Prop :=
 theorem projection_invariant (p : Psi) :
     I_projection p := by
   intro q h
+  exact h
+
+theorem test_valid_implies_true (passed : Bool)
+    (h : TestValid passed) : passed = true := by
   exact h
 
 theorem invariant_decomposition (p : Psi) :
