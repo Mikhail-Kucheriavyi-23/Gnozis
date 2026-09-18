@@ -2323,3 +2323,9 @@ Inspected the actual implementations of `core/evolution.py`, `core/commit.py`, `
 Finding: the canonical `evolutionary_psi_transition` path is correctly ordered Proof → Admission → Select → SemanticCommit. `SemanticCommit.apply()` is fail-closed. `PsiTransition` is the typed canonical transition surface. `LegacyEngine` remains an explicit competing State→State compatibility path, so PM-02 is still genuinely open. Replay/merge/refinement/snapshot/authority are not direct canonical commits in the inspected code, but require adversarial caller coverage before global no-bypass can be claimed.
 
 This audit also confirms that `next_psi` in `evolutionary_psi_transition` is computed but not used for commit; the committed value comes from `SemanticCommit.apply()`. Treat this as harmless redundancy for now, not semantic authority.
+
+## 89. PM-02 Legacy Semantic Boundary Finding — 2026-09-18
+
+Added `tests/test_legacy_semantic_boundary.py`. The test intentionally demonstrates the current PM-02 reality: `LegacyEngine(State -> State)` can change `State.to_psi()` without an Admission parameter. This is not a failure of the compatibility engine itself; it is evidence that the repository cannot honestly claim that *all* semantic Psi changes require Admission while this public legacy path remains available.
+
+Therefore PM-02 is now characterized concretely: the legacy path is a real semantic projection mutation surface, even though it is documented as noncanonical. Closing PM-02 requires either (a) a hard architectural boundary preventing legacy output from becoming canonical semantic state, or (b) explicit deprecation/removal/quarantine of the competing path, followed by regression tests.
