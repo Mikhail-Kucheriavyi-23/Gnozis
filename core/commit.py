@@ -1,15 +1,12 @@
-"""Canonical semantic commit boundary.
-
-PsiTransition computes a candidate Psi. It does not itself mutate semantic
-state. Only an admitted, explicitly canonical Psi candidate can cross this
-commit boundary.
-"""
+"""Canonical semantic commit boundary."""
 from __future__ import annotations
 
 from dataclasses import dataclass
 
 from .admission import Admission, require_admitted
 from .canonical_boundary import canonicalize_psi
+from .commit_contract import CommitResult, commit_once
+from .history import AppendOnlyHistory, TransitionRecord
 from .state import Psi
 
 
@@ -18,10 +15,23 @@ class SemanticCommit:
     previous: Psi
     admission: Admission
 
-    def apply(self) -> Psi:
+    def apply(
+        self,
+        history: AppendOnlyHistory | None = None,
+        record: TransitionRecord | None = None,
+    ) -> Psi:
         candidate = require_admitted(self.admission)
         canonical = canonicalize_psi(candidate)
-        return canonical.psi
+        if history is None or record is None:
+            return canonical.psi
+
+        result: CommitResult[Psi] = commit_once(
+            history,
+            record,
+            self.previous,
+            canonical.psi,
+        )
+        return result.value
 
 
 def commit(previous: Psi, admission: Admission) -> SemanticCommit:
