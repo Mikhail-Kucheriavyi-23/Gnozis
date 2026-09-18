@@ -26,6 +26,37 @@ class CanonicalExecutor:
     history: AppendOnlyHistory
     kernel_version: str
 
+
+    def step(
+        self,
+        psi: Psi,
+        transition: PsiTransition,
+        admission,
+    ) -> ExecutionResult:
+        """Commit one explicitly admitted PsiTransition result.
+
+        The admission candidate must equal the result of applying the supplied
+        transition to the exact current Psi. This prevents a caller from
+        presenting proof for one candidate while committing another.
+        """
+        if not isinstance(psi, Psi):
+            raise TypeError("psi must be Psi.")
+        if not isinstance(transition, PsiTransition):
+            raise TypeError("transition must be PsiTransition.")
+
+        expected = transition(psi)
+        admitted = admission.candidate
+        if admitted != expected:
+            raise ValueError("Admission candidate does not match PsiTransition result.")
+
+        committed, history = commit(
+            previous=psi,
+            admission=admission,
+            kernel_version=self.kernel_version,
+        ).apply(self.history)
+        self.history = history
+        return ExecutionResult(psi=committed, history=history)
+
     def evolve(
         self,
         psi: Psi,
