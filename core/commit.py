@@ -1,6 +1,7 @@
 """Canonical semantic commit boundary with mandatory causal history."""
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 
 from .admission import Admission, require_admitted
@@ -22,12 +23,17 @@ class SemanticCommit:
         head = history.head
         sequence = 0 if head is None else head.sequence + 1
         previous_hash = "genesis" if head is None else head.state_hash
+
+        if head is not None and _state_hash(self.previous) != head.state_hash:
+            raise ValueError("previous Psi does not match history head.")
+
+        next_hash = _state_hash(canonical.psi)
         record = TransitionRecord(
             sequence=sequence,
             previous_hash=previous_hash,
-            state_hash=_state_hash(canonical.psi),
+            state_hash=next_hash,
             kernel_version=self.kernel_version,
-            candidate_hash=_state_hash(canonical.psi),
+            candidate_hash=next_hash,
             admitted=True,
         )
         result: CommitResult[Psi] = commit_once(
@@ -40,7 +46,8 @@ class SemanticCommit:
 
 
 def _state_hash(psi: Psi) -> str:
-    return str(hash(repr((psi.x, psi.relations))))
+    payload = repr((psi.x, psi.relations)).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def commit(previous: Psi, admission: Admission, kernel_version: str) -> SemanticCommit:
