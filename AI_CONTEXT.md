@@ -2193,3 +2193,9 @@ Inspected the actual `core/meta_transition.py`. Its executable semantics already
 Added `formal/MetaAdmission.lean` to mirror this proof-carrying shape: a refinement proof contains a proposition plus an explicit preservation proof `K P -> K Q`, and the theorem `meta_admission_preserves_K0` derives `K Q` from `K P` and the proof. This is a direct formalization of the existing admission contract, not a new authority path.
 
 Remaining: replace the intermediate K0 predicate with the concrete protected-kernel invariant and prove correspondence between Python `MetaTransition.admissible()` and the formal admission relation.
+
+## 68. RootInvariant Semantics Alignment — 2026-09-18
+
+Inspected the exact executable `core/root_invariant.py`: `preserve_root(root,before,after)` is precisely `root.holds(before) and root.holds(after)`. Updated `formal/RootInvariant.lean` to expose the corresponding logical relation `preserves K before after := K before ∧ K after`, while retaining proof-carrying transition preservation and composition.
+
+This closes the semantic-shape gap between the Python preservation helper and the formal layer. It still does not prove that a particular concrete Gnozis kernel predicate is the intended K0; that requires selecting the actual protected-kernel predicate and proving its correspondence.
