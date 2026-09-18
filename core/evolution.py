@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Callable, Iterable
 
+from .admission import admit, require_admitted
 from .proof import prove_transition
 from .psi_transition import PsiTransition
 from .state import Psi, State
@@ -66,15 +67,23 @@ def evolutionary_psi_transition(generate: Generator, test: Tester) -> PsiTransit
             prove_transition(current, candidate, candidates, test)
             for candidate in candidates
         ]
-        valid = [
-            candidate
+        admissions = [
+            admit(candidate, proof)
             for candidate, proof in zip(candidates, proofs)
-            if proof.passed
+        ]
+        valid = [
+            admission
+            for admission in admissions
+            if admission.accepted
         ]
         if not valid:
             raise ValueError("No candidate state passed ProofObligation")
 
-        next_state = min(valid, key=_psi_score)
+        selected = min(
+            valid,
+            key=lambda admission: _psi_score(require_admitted(admission)),
+        )
+        next_state = require_admitted(selected)
         next_psi = next_state.to_psi()
         return next_psi.x, next_psi.relations
 
