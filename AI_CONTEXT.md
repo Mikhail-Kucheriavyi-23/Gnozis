@@ -2379,3 +2379,11 @@ Updated `core/commit.py::SemanticCommit.apply()` so callers may supply `history`
 Audited the integration point across `SemanticCommit`, `PsiTransition`, `Engine`, and `Uroboros`. Do not force `AppendOnlyHistory` into the mathematical `Psi -> Psi` transition: that would conflate pure dynamics with persistence. Added `docs/CANONICAL_HISTORY_INTEGRATION.md` defining the required execution-owner boundary.
 
 PM-12 remains open. The correct target is an execution owner that preserves pure `F: Psi -> Psi` while performing `Psi -> Proof/Admission -> SemanticCommit -> TransitionRecord -> AppendOnlyHistory`. The owner must create provenance internally, guarantee one record per accepted canonical step, create no record for rejected candidates, and keep replay non-authoritative.
+
+## 98. Canonical Execution Owner Implemented — 2026-09-18
+
+Added `core/execution.py::CanonicalExecutor`. It preserves the pure `PsiTransition: Psi -> Psi` contract while owning the persistence sequence: validate transition/admission → verify admitted candidate equals the transition result → `SemanticCommit` → internally generated `TransitionRecord` → `AppendOnlyHistory`.
+
+Added `tests/test_canonical_execution.py`: accepted step creates exactly one history record; rejected step creates none and preserves Psi; an admitted forged candidate that disagrees with the transition result is rejected.
+
+This closes the previously missing execution-owner layer in the architecture. PM-12 still needs integration with the actual canonical production entry point; the new executor is not yet proof that every production step uses it.
