@@ -2233,3 +2233,9 @@ Remaining gaps: formalize depth-1 viability precisely, connect the formal invari
 Added `formal/Viability.lean` after inspecting the exact `_viable()` implementation in `core/proof.py`. The formal definition requires a distinct continuation in the supplied candidate pool that satisfies the same invariant: `∃ continuation, pool continuation ∧ continuation ≠ candidate ∧ I continuation`.
 
 `ProofPasses` now mirrors the executable condition `invariant_ok ∧ viable_ok`. This closes the main semantic gap in `ProofObligation`. Remaining work is to connect the finite Python iterable pool to the formal `pool : Psi -> Prop` representation and prove the executable `_viable()` result corresponds to the witness formulation.
+
+## 74. Candidate Pool Correspondence — 2026-09-18
+
+Added `formal/PoolCorrespondence.lean` and `formal/ProofGate.lean`. The finite executable candidate pool is now represented as `List Psi` with membership `p ∈ pool`, and the depth-1 viability predicate is expressed directly over that finite pool. A witness theorem shows that an executable pool member satisfying distinctness and the invariant yields formal viability. `ProofGate` separately proves that proof passage entails both candidate invariant satisfaction and viability.
+
+This closes the representation gap at the proof-gate level. It still does not prove Lean/CPython equivalence automatically; that requires a test/bridge convention for mapping runtime `State` objects to canonical `Psi` values.
