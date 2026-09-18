@@ -2219,3 +2219,11 @@ Updated `formal/Sigma.lean` to mark `I(Psi)` as an explicit proof-layer placehol
 Inspected the actual `core/contract.py`, `core/evolution.py`, and `core/engine.py`. Evidence now supports three concrete proof obligations for the semantic layer: (1) Ψ extensionality is explicitly enforced by `assert_extensional_transition`; (2) canonical evolution implements Generate -> Test -> proof/admit -> Select -> semantic commit; (3) Engine repeatedly applies the transition and requires State outputs. Added `formal/PsiInvariants.lean` with proof-level definitions for extensionality and tested-candidate selection, plus a basic extensionality theorem.
 
 Important limitation: this is not yet a complete formalization of `I(Psi)` or a proof of Python/Lean equivalence. In particular, locality and the full proof/admission/commit semantics remain separate obligations.
+
+## 72. Proof → Admission → Commit Formal Gate — 2026-09-18
+
+Inspected actual `core/proof.py`, `core/admission.py`, and `core/commit.py`. The executable semantics establish a clear gate: `ProofObligation.passed` requires invariant success plus depth-1 viability; `admit()` converts that proof into immutable `Admission`; `require_admitted()` blocks rejected candidates; `SemanticCommit.apply()` accepts only an admitted `Psi` candidate.
+
+Added `formal/AdmissionCommit.lean` to model this gate and prove two obligations: a semantic commit implies admission, and an admitted semantic commit implies the candidate satisfies the invariant. This formalizes the existing proof/admission/commit boundary without adding a second runtime path.
+
+Remaining gaps: formalize depth-1 viability precisely, connect the formal invariant to the concrete Python invariant callable, and establish the locality/hidden-state/extensionality obligations as one compositional I(Psi).
