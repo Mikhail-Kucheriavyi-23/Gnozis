@@ -2329,3 +2329,9 @@ This audit also confirms that `next_psi` in `evolutionary_psi_transition` is com
 Added `tests/test_legacy_semantic_boundary.py`. The test intentionally demonstrates the current PM-02 reality: `LegacyEngine(State -> State)` can change `State.to_psi()` without an Admission parameter. This is not a failure of the compatibility engine itself; it is evidence that the repository cannot honestly claim that *all* semantic Psi changes require Admission while this public legacy path remains available.
 
 Therefore PM-02 is now characterized concretely: the legacy path is a real semantic projection mutation surface, even though it is documented as noncanonical. Closing PM-02 requires either (a) a hard architectural boundary preventing legacy output from becoming canonical semantic state, or (b) explicit deprecation/removal/quarantine of the competing path, followed by regression tests.
+
+## 90. Hard Legacy → Canonical Ψ Boundary — 2026-09-18
+
+Implemented `core/canonical_boundary.py` and `tests/test_canonical_boundary.py`. Canonical semantic input now requires an explicit `Psi` (or `CanonicalPsiInput`); a legacy `State` is rejected rather than implicitly promoted to canonical Ψ. This is the first runtime hard boundary for PM-02.
+
+Important limitation: this prevents implicit `State -> Psi` promotion at the new boundary, but it does not by itself prove that every existing canonical mutation caller uses this boundary. PM-02 is therefore reduced from an unguarded compatibility concern to a caller-integration task. Next: route the canonical commit/evolution path through this boundary and add a regression test proving legacy output cannot reach `SemanticCommit` through any public canonical entry point.
