@@ -2425,3 +2425,9 @@ Added `tests/test_commit_history_continuity.py` covering forged previous-state r
 Adversarial search found `core/resolution.py::commit_resolution()` as another semantic-commit construction surface. It does not instantiate `SemanticCommit` directly; it delegates to `commit()`, and the resulting `SemanticCommit.apply(history)` is now history-bound and verifies previous-state continuity. Therefore it cannot bypass the history contract, but it remains a separate mutation entry point from `CanonicalExecutor` and must not be counted as part of the canonical evolutionary production path.
 
 The remaining distinction is now explicit: conflict resolution may propose/admit a `Psi`, and if executed it must use the same history-bound `SemanticCommit` contract. `CanonicalExecutor` remains the sole owner of the Generate→Proof→Admission→Select evolutionary path. Full regression remains unverified; no 100% claim.
+
+## 104. Dual Canonical Mutation Boundary Finding — 2026-09-18
+
+Adversarial search of commit surfaces found that `core/canonical_chain.py::admit_transition()` and `core/execution.py::CanonicalExecutor.evolve()` are two distinct mutation boundaries. `canonical_chain` owns SafetyGate + GasBudget + Provenance + `commit_once`; `CanonicalExecutor` owns Ψ-specific Generate → Proof → Admission → Select → history-bound SemanticCommit.
+
+Do not claim that every canonical mutation uses one universal entrypoint yet. Added `docs/CANONICAL_MUTATION_BOUNDARY_AUDIT.md`. The next architectural decision is either to compose/unify these boundaries without weakening Ψ invariants, or explicitly document them as separate layers with a composition contract. Full regression remains pending.
