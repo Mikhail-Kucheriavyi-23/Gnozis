@@ -1961,3 +1961,19 @@ Added `core/root_invariant.py`:
 Added `tests/test_root_invariant.py` for preservation and fail-closed behavior.
 
 PM-09 is PARTIAL -> NEAR-COMPLETE. This is deliberately only the invariant boundary, not self-modification itself. The next step is to bind K0 to an explicit kernel representation and create the smallest meta-transition/refinement proof object (PM-10). Do not yet permit arbitrary code or repository mutation.
+
+## 44. PM-09/PM-10 Meta-Transition Proof Gate — 2026-09-18
+
+The self-evolution boundary now has a proof-carrying meta-transition abstraction.
+
+Added `core/meta_transition.py`:
+- `RefinementProof` binds one root invariant K0 to explicit before/after kernel states;
+- `RefinementProof.valid` requires a non-empty proof statement and K0 preservation before/after;
+- `MetaTransition.admissible()` requires the proof states to exactly match the proposed transition;
+- `MetaTransition.apply()` is fail-closed and cannot apply an unproved/root-breaking transition.
+
+Added `tests/test_meta_transition.py` for valid K0-preserving transitions, root-breaking transitions, and proof/state mismatch.
+
+PM-09 is COMPLETE for the K0 boundary. PM-10 is PARTIAL -> NEAR-COMPLETE: the proof-carrying gate exists, but its refinement obligations are still intentionally minimal and are not yet bound to a canonical self-evolution operator.
+
+Do not treat `RefinementProof.statement` as cryptographic/formal proof. It is currently an executable structural gate; stronger proof semantics are a later verification layer.
