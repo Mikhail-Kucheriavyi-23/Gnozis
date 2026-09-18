@@ -1919,3 +1919,15 @@ Branch_A + Branch_B -> Conflict(Branch_A, Branch_B) -> ResolutionCandidate
 PM-07 is PARTIAL -> NEAR-COMPLETE; PM-08 is NEAR-COMPLETE.
 
 Remaining: define the minimal admissible semantics for deferred/parallel outcomes and route a resolution candidate through Proof -> Admission -> SemanticCommit. Do not introduce a new ranking or winner-selection mechanism merely to force merge completion.
+
+## 41. PM-08 COMPLETE / PM-07 NEAR-COMPLETE — 2026-09-18
+
+Conflict resolution now has two explicit outcomes: `ResolutionCandidate` for a proposed reconciliation and `DeferredConflict` for retaining a conflict without selecting either branch.
+
+Resolution candidates are routed through `admit_resolution()` and `commit_resolution()`, which ultimately use the existing Proof -> Admission -> SemanticCommit boundary. A rejected resolution therefore cannot be semantically applied.
+
+`tests/test_resolution_pipeline.py` verifies deferred branch preservation, admitted resolution commit, and rejected resolution failure.
+
+PM-08 is COMPLETE for canonical conflict/resolution semantics. PM-07 remains NEAR-COMPLETE: branch lineage and deferred outcomes exist, but a formal parallel-outcome relation/merge algebra has not yet been added. Do not invent a winner or ranking to close this gap.
+
+Next: formalize the smallest parallel/deferred outcome relation required by the existing Ψ partial-order semantics, then test it. If the relation is already represented elsewhere, reuse it rather than creating a second order model.
