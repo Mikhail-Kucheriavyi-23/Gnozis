@@ -2087,3 +2087,13 @@ Semantics: a lower sequence is rejected; an identical existing head is an idempo
 Added `tests/test_commit_contract.py` for retry idempotence, conflicting replay, and normal next-sequence commit.
 
 PM-16 is NEAR-COMPLETE at the contract level. Remaining work is durable transaction/crash-boundary integration; the mathematical rule itself is now explicit.
+
+## 54. PM-17 Provenance Consistency — 2026-09-18
+
+Added `core/provenance.py` with `Provenance` and `attach_provenance()`.
+
+An accepted transition's candidate hash, evidence hash, and kernel version must agree exactly with its `TransitionRecord`. Missing provenance or any mismatch is rejected. This makes provenance an explicit consistency obligation rather than a documentation-only field.
+
+Added `tests/test_provenance.py` for successful attachment, evidence mismatch, and incomplete provenance.
+
+PM-17 is NEAR-COMPLETE at contract level. Remaining work is binding provenance creation to the canonical commit/persistence boundary. Overall mathematics is still below 100%.
