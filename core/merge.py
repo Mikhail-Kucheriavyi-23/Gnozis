@@ -1,13 +1,10 @@
-"""Candidate-level merge and conflict representation.
-
-Merge never directly mutates semantic state. It produces a candidate outcome
-which must enter the normal proof/admission/commit pipeline.
-"""
+"""Candidate-level merge and conflict representation."""
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Generic, TypeVar
 
+from .branch import Branch
 from .state import Psi
 
 T = TypeVar("T")
@@ -15,17 +12,19 @@ T = TypeVar("T")
 
 @dataclass(frozen=True)
 class Conflict:
-    """A retained incompatibility between two Psi branches."""
+    """A retained incompatibility between two branches."""
 
-    left: Psi
-    right: Psi
+    left: Branch
+    right: Branch
     reason: str
+
+    @property
+    def source_psis(self) -> tuple[Psi, Psi]:
+        return self.left.psi, self.right.psi
 
 
 @dataclass(frozen=True)
 class MergeCandidate(Generic[T]):
-    """Result of attempting to combine two branches."""
-
     candidate: T | None
     conflicts: tuple[Conflict, ...] = ()
 
@@ -34,15 +33,10 @@ class MergeCandidate(Generic[T]):
         return not self.conflicts
 
 
-def merge(a: Psi, b: Psi) -> MergeCandidate[Psi]:
-    """Perform only structurally unambiguous merge.
-
-    Equal X/R is trivially mergeable. Other differences are retained as an
-    explicit conflict rather than silently selecting one branch.
-    """
-    if a == b:
-        return MergeCandidate(candidate=a)
-
+def merge(a: Branch, b: Branch) -> MergeCandidate[Psi]:
+    """Merge branches without silently selecting a conflicting branch."""
+    if a.psi == b.psi:
+        return MergeCandidate(candidate=a.psi)
     return MergeCandidate(
         candidate=None,
         conflicts=(Conflict(left=a, right=b, reason="non-identical Psi branches"),),
