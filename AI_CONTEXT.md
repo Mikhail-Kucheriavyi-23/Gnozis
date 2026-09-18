@@ -2245,3 +2245,9 @@ This closes the representation gap at the proof-gate level. It still does not pr
 Inspected the exact `core/state.py`. Runtime `State.to_psi()` requires canonical `x` and `relations` and returns the fundamental `Psi`; `State.from_psi()` reconstructs an extended State containing exactly those semantic fields. Added `formal/StatePsi.lean` with proof-level `State`, `Psi`, `toPsi`, `fromPsi`, and round-trip theorems `from_to_psi` and `to_from_psi`.
 
 This establishes the intended canonical projection at the proof layer. It does not claim Python/Lean type-level equivalence for arbitrary `Any` payloads; that requires a typed encoding of runtime X and R when the concrete formal invariant is instantiated.
+
+## 76. Full Certified Transition Theorem — 2026-09-18
+
+Added `formal/FullTransition.lean`. This is the first composition point for the proof-layer work: a `CertifiedTransition` carries candidate, proof obligation, admission, semantic commit equality `next.psi = candidate`, and protected-root preservation. The theorem `full_transition_preserves` proves that a valid starting semantic/root invariant yields the full next-state invariant `J` after the certified transition.
+
+The theorem deliberately assumes the concrete invariant `I` and root predicate as parameters. It therefore composes the existing contracts without pretending that their concrete Python/formal equivalence is already solved. Remaining work is to instantiate I/root from executable semantics, formalize locality, and validate the bridge against runtime tests.
