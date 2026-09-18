@@ -1987,3 +1987,17 @@ Repository review found the canonical `PsiTransition` is already the endogenous 
 `tests/test_meta_refinement.py` covers a valid refinement and a failed refinement that blocks application.
 
 This remains an executable refinement gate, not a universal theorem prover. PM-10 is now approximately 95% complete at the contract level. The remaining mathematical work is to define the canonical refinement relation for self-evolution (what property of F/F' must be preserved) and fixed-point/closure obligations, rather than adding more generic proof wrappers.
+
+## 46. PM-10 Canonical F→F' Refinement — 2026-09-18
+
+The canonical self-evolution operator is `PsiTransition: Psi -> Psi`. Rather than inventing a second transition model, added `core/refinement.py` with `TransitionRefinement` implementing a witnessed forward-simulation obligation between two `PsiTransition` operators.
+
+For supplied witnesses ψ and relation R:
+
+`F_old ⊑_R F_new` is witnessed when `R(F_old(ψ), F_new(ψ))` holds for every supplied witness.
+
+This is intentionally a witnessed/executable obligation, not a universal theorem. The relation R is caller-supplied because the repository does not justify one universal behavioral equivalence for all future self-evolution changes.
+
+`tests/test_refinement.py` covers an accepted forward refinement and a rejected one.
+
+PM-10 is approximately 98% at contract level. Remaining mathematical work: connect this refinement obligation to `MetaTransition` itself and define closure/fixed-point conditions for self-evolution. Do not claim universal refinement from finite witnesses.
