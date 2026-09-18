@@ -16,7 +16,7 @@ This document is an audit map, not a proof claim.
 | PM-02 | State is an adapter, not second semantic model | State.to_psi()/from_psi() | PARTIAL | T3; adapter/extensionality tests | Remove/constrain competing State transition path |
 | PM-03 | Deep immutability | recursive _freeze() | IMPLEMENTED* | T4; nested mutation tests | *Only supported built-ins; custom payloads remain outside contract |
 | PM-04 | Generate -> Test -> proof/admission -> Select -> Transition | core/evolution.py, core/proof.py | PARTIAL | T5–T12; proof-gate tests | Separate explicit Admission from current proof-gated selection |
-| PM-05 | Apply cannot bypass Admission | `core/admission.py` + proof-gated `core/evolution.py` path | PARTIAL | T41 | Extend boundary to all canonical semantic apply paths and adversarially prove non-bypass |
+| PM-05 | Apply cannot bypass Admission | `core/admission.py`; canonical Ψ path; legacy State engine isolated as `core/legacy_engine.py` | PARTIAL→NEAR-COMPLETE | T41 | Verify all canonical callers and add non-bypass adversarial test; then close T41 |
 | PM-06 | Selection is not an external oracle | endogenous selection + adversarial tests | IMPLEMENTED at tested path | T18–T23 | Formal proof, not only tests |
 | PM-07 | Partial-order/branch outcome allowed | documented in AI_CONTEXT; no canonical merge module found | MISSING/PARTIAL | merge theorem obligations | Implement only after gap/acceptance test |
 | PM-08 | Conflict is retained, not silently erased | documented concept; no conflict/merge core found | MISSING | T18–T23 | Create conflict/merge candidate model |
