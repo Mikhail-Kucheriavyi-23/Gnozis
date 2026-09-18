@@ -2038,3 +2038,18 @@ Started PM-11 with `core/gas.py::GasBudget`: deterministic finite resource charg
 PM-11 is NEAR-COMPLETE at contract level but is not COMPLETE until the budget is bound to the canonical autonomous-operation executor and bypass is tested.
 
 Important: overall mathematical completion is NOT 100%. PM-11–PM-22 contain additional mathematical/system invariants, including persistence/replay, provenance, hard-stop, non-bypass, protected memory, and machine-checked proof targets. The final 100% marker must wait for a cross-matrix audit after those are addressed.
+
+## 50. PM-12 Append-Only History — 2026-09-18
+
+Added `core/history.py` with immutable `TransitionRecord` and `AppendOnlyHistory`.
+
+History semantics:
+- accepted transitions only;
+- contiguous sequence numbers;
+- each record carries `previous_hash` and `state_hash` to form a causal chain;
+- every accepted record requires `kernel_version`;
+- append returns a new history object; existing records are never mutated.
+
+Added `tests/test_history.py` for chain integrity, genesis/sequence behavior, and rejection of unaccepted transitions.
+
+PM-12 is NEAR-COMPLETE: the data-level append-only contract exists, but it is not yet bound to the canonical SemanticCommit/persistence boundary. PM-17 is PARTIAL because kernel provenance is present in the record but not yet enforced at the commit boundary.
