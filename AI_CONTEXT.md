@@ -1861,3 +1861,20 @@ PM-05 is therefore COMPLETE for the canonical Ψ semantic surface. This claim is
 The invariant is: SemanticApply(Ψ,c) => Admission(Ψ,c).
 
 Next mathematical/architectural gap: PM-07/PM-08 — merge, conflict retention, and resolution. No new mathematics is needed; implement only what is already specified and test the invariants.
+
+## 37. PM-07/PM-08 Merge and Conflict — first implementation step — 2026-09-18
+
+Repository search confirmed that merge/conflict behavior was specified in AI_CONTEXT but no canonical Core merge module existed before this step.
+
+Implemented:
+- `core/merge.py` defines `MergeCandidate` and retained `Conflict` objects.
+- identical Psi branches are trivially mergeable;
+- non-identical branches are NOT silently selected; they produce an explicit conflict and no semantic candidate;
+- `tests/test_merge_conflict.py` locks these invariants.
+
+This is intentionally a minimal structural merge. It does NOT yet implement general reconciliation, branch lineage, partial-order dominance, deferred execution, or resolution. Those remain PARTIAL/MISSING obligations.
+
+Critical rule preserved:
+Merge is a candidate operation, not semantic authority. Any future resolved merge candidate must pass the same Proof -> Admission -> SemanticCommit pipeline.
+
+Next: define the smallest resolution candidate representation for an explicit conflict without introducing a new mathematical layer.
