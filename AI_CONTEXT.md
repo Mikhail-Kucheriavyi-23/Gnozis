@@ -2335,3 +2335,9 @@ Therefore PM-02 is now characterized concretely: the legacy path is a real seman
 Implemented `core/canonical_boundary.py` and `tests/test_canonical_boundary.py`. Canonical semantic input now requires an explicit `Psi` (or `CanonicalPsiInput`); a legacy `State` is rejected rather than implicitly promoted to canonical Ψ. This is the first runtime hard boundary for PM-02.
 
 Important limitation: this prevents implicit `State -> Psi` promotion at the new boundary, but it does not by itself prove that every existing canonical mutation caller uses this boundary. PM-02 is therefore reduced from an unguarded compatibility concern to a caller-integration task. Next: route the canonical commit/evolution path through this boundary and add a regression test proving legacy output cannot reach `SemanticCommit` through any public canonical entry point.
+
+## 91. Canonical Boundary Integrated into SemanticCommit — 2026-09-18
+
+Integrated `canonicalize_psi()` directly into `core/commit.py::SemanticCommit.apply()`. The canonical commit gate now requires both: (1) Admission acceptance and (2) explicit canonical `Psi` typing. Added a regression test proving that even an `accepted=True` Admission containing a legacy `State` is rejected at the semantic commit boundary.
+
+This closes the immediate public-API path `LegacyEngine -> State -> Admission -> SemanticCommit`: the legacy State cannot cross the final canonical commit boundary merely by being wrapped in an accepted Admission. Remaining PM-02 work is caller inventory and proving all canonical public entry points terminate at this boundary.
