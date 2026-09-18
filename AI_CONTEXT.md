@@ -1821,3 +1821,13 @@ The compatibility decision was implemented as explicit isolation rather than del
 This is not yet T41 COMPLETE. The remaining requirement is an adversarial/non-bypass test and a final audit of canonical callers proving that canonical Ψ semantic mutation has exactly one trusted path through Admission. Do not claim global non-bypass until that test/audit is complete.
 
 Next: implement the smallest adversarial test for canonical Ψ non-bypass, then close PM-05 if it passes conceptually and by repository evidence. After PM-05, move to PM-07/PM-08 merge/conflict/resolution rather than adding new mathematics.
+
+## 34. PM-05 Adversarial Gate — 2026-09-18
+
+Added `tests/test_admission_non_bypass.py`.
+
+Coverage now demonstrates that the canonical evolutionary path cannot select a candidate when all ProofObligations fail, and a rejected Admission cannot be required/applied.
+
+PM-05 is still not globally COMPLETE. The remaining mathematical statement T41 is stronger than the current API: a freely callable `PsiTransition` can still be constructed externally without an Admission object. Therefore the current evidence supports a scoped claim: the canonical evolutionary implementation is proof/admission gated. It does not support the universal claim `Apply(Psi,c) => Admission(Psi,c)` for every possible PsiTransition implementation.
+
+Do not weaken the specification to match the code. The next architecture decision is whether PsiTransition itself must become an admission-carrying/validated transition type. This is a semantic API decision, not another mathematics layer.
