@@ -2537,3 +2537,9 @@ Added `docs/PSI_CONTEXT_SUPERPOSITION_ANALYSIS_2026-09-18.md`. No new component 
 Added `docs/PSI_CONTEXT_CLASSIFICATION_2026-09-18.md` to classify concrete Gnozis context before changing the mathematical model. The working classes are: intrinsic X/R state; semantically relevant history; evaluation policy; generation policy; runtime resources; safety/provenance; persistence/transport infrastructure; hidden mutable closure; and external/user/world observations.
 
 The key distinction is now explicit: information may influence execution without being part of Ψ. For a strict `F: Ψ → Ψ` claim, context that changes F must either be explicit transition context with a qualified contract or have its semantically relevant portion represented in Ψ. Infrastructure and execution controls must not be silently promoted into Ψ.
+
+## 118. Ψ State-vs-Context Decision Rules — 2026-09-18
+
+Added `docs/PSI_STATE_VS_CONTEXT_DECISION_RULES_2026-09-18.md`. Eight working rules now guide architecture reviews: state identity, explicit transition context, state-relevant observation, hidden-dependence detection, no state inflation, no hidden semantic state, preservation of optionality, and evidence-before-axiom.
+
+Current consequence: the closure finding alone does not justify changing Ψ. The canonical state remains exactly Ψ=(X,R). These rules should next be tested against concrete Gnozis flows including world observation, memory/learning, multi-agent interaction, and autonomous evolution before becoming core invariants.
