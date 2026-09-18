@@ -2361,3 +2361,9 @@ This does not delete the legacy transition. It establishes an explicit quarantin
 Inspected `core/state.py`, `core/psi_transition.py`, and `core/authority.py`. `State.to_psi()` is an explicit projection adapter; `PsiTransition.on_state()` adapts canonical Ψ transition output back into State; neither function performs SemanticCommit. Added `tests/test_adapter_authority_boundary.py` to verify that an adapted `State` cannot cross `canonicalize_psi()`, while direct `PsiTransition(Psi)` remains valid.
 
 `core/authority.py` independently classifies foreign evidence as non-authoritative (`admitted=False`). No `core/bridge.py`, `core/external.py`, `core/ports.py`, or `core/api.py` files were found at the inspected paths, so no claim is made about nonexistent adapters. Remaining external-boundary work is therefore limited to actual bridge/API modules if/when they are introduced or located elsewhere.
+
+## 95. Replay / Merge / Refinement / Snapshot Audit — 2026-09-18
+
+Inspected `core/replay.py`, `core/merge.py`, `core/refinement.py`, and `core/snapshot.py`. Findings: replay reconstructs a `Psi` only through an explicitly supplied transition applier; merge produces a candidate or an explicit conflict and never commits; refinement only evaluates witnessed transition behavior; snapshot is certificate-backed cache/observation. Added `tests/test_noncommit_surfaces.py` as regression coverage for these classifications.
+
+No inspected surface calls `SemanticCommit` or provides an independent canonical commit object. Remaining concern is not direct commit bypass in these modules, but whether external callers can treat their returned `Psi` as canonical truth without going through the commit/history authority boundary. This must be handled at API/integration level, not by falsely labeling these pure surfaces as semantic authorities.
