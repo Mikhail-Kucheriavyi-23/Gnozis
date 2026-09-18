@@ -2373,3 +2373,9 @@ No inspected surface calls `SemanticCommit` or provides an independent canonical
 Audited `core/commit_contract.py`: `commit_once()` already enforces sequence monotonicity, idempotent same-head replay, conflict rejection, and appends accepted `TransitionRecord` to `AppendOnlyHistory`. The previous gap was that `SemanticCommit.apply()` could complete without invoking this history contract.
 
 Updated `core/commit.py::SemanticCommit.apply()` so callers may supply `history` + `TransitionRecord`; when supplied, the canonical Psi is committed through `commit_once()`, making history binding explicit at the semantic commit boundary. The no-history form remains temporarily supported for compatibility, so PM-12 is improved but not fully closed: the next task is to make history binding mandatory on the canonical production path and construct the record from the admitted transition rather than accepting an arbitrary caller-provided record.
+
+## 97. Canonical History Integration Decision — 2026-09-18
+
+Audited the integration point across `SemanticCommit`, `PsiTransition`, `Engine`, and `Uroboros`. Do not force `AppendOnlyHistory` into the mathematical `Psi -> Psi` transition: that would conflate pure dynamics with persistence. Added `docs/CANONICAL_HISTORY_INTEGRATION.md` defining the required execution-owner boundary.
+
+PM-12 remains open. The correct target is an execution owner that preserves pure `F: Psi -> Psi` while performing `Psi -> Proof/Admission -> SemanticCommit -> TransitionRecord -> AppendOnlyHistory`. The owner must create provenance internally, guarantee one record per accepted canonical step, create no record for rejected candidates, and keep replay non-authoritative.
