@@ -2185,3 +2185,11 @@ Reconciled the machine-proof target with the actual repository. The executable p
 Inspected the actual `core/root_invariant.py` and `core/state.py`. `RootInvariant` is an executable predicate over an arbitrary kernel object; canonical `Psi` is the `(x, relations)` semantic pair. Added `formal/RootInvariant.lean` to encode the invariant as a predicate `K : Psi -> Prop`, require admitted transitions to carry `K P -> K next`, and prove sequential composition preserves K.
 
 This is the first explicit formal bridge between the executable RootInvariant concept and canonical Ψ. It does not yet prove equivalence to the Python implementation; the next step is to define a concrete K0 from the actual protected-kernel semantics and establish correspondence tests/lemmas.
+
+## 67. Proof-Carrying Meta-Admission — 2026-09-18
+
+Inspected the actual `core/meta_transition.py`. Its executable semantics already require a `RefinementProof` binding the exact before/after kernel states, a non-empty proof statement, root-invariant preservation, and optional refinement predicate; `MetaTransition.apply()` refuses non-admitted transitions.
+
+Added `formal/MetaAdmission.lean` to mirror this proof-carrying shape: a refinement proof contains a proposition plus an explicit preservation proof `K P -> K Q`, and the theorem `meta_admission_preserves_K0` derives `K Q` from `K P` and the proof. This is a direct formalization of the existing admission contract, not a new authority path.
+
+Remaining: replace the intermediate K0 predicate with the concrete protected-kernel invariant and prove correspondence between Python `MetaTransition.admissible()` and the formal admission relation.
