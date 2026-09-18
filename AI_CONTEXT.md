@@ -2291,3 +2291,9 @@ This closes the proof-layer chain from test/admission through selection to seman
 Checked `docs/PROOF_MATRIX.md` against the current implementation. PM-02, PM-04, PM-06 and PM-22 are explicitly still partial; PM-05 is complete only within its stated scope. Therefore the next phase is runtime conformance, not another abstract theorem.
 
 Added `formal/RuntimeConformance.lean` with an explicit semantic projection from a runtime state to `Psi`, a `Conforms` relation, and semantic equivalence at the Psi boundary. This is a formal bridge contract only. It does not claim that the current Python runtime automatically satisfies it. The runtime proof must be established by tests/inspection of the canonical paths and by adversarial no-bypass cases.
+
+## 84. Canonical vs Compatibility Boundary — 2026-09-18
+
+Re-read `docs/PM-05_APPLY_PATH_AUDIT.md`. PM-05 is not universally complete: `PsiEngine(PsiTransition)` is canonical; generic `Engine(State -> State)` is legacy/generic compatibility; terminal bridge and CoreChat are adapters. The audit explicitly requires adversarial proof that compatibility paths cannot be mistaken for canonical Ψ mutations.
+
+Added `formal/CanonicalBoundary.lean` to separate the canonical semantic transition type from a compatibility transition type at the proof layer. This is a type-level boundary, not yet a Python import/runtime enforcement proof. Do not claim PM-05 COMPLETE until the runtime/adversarial acceptance criteria are satisfied.
