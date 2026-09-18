@@ -2367,3 +2367,9 @@ Inspected `core/state.py`, `core/psi_transition.py`, and `core/authority.py`. `S
 Inspected `core/replay.py`, `core/merge.py`, `core/refinement.py`, and `core/snapshot.py`. Findings: replay reconstructs a `Psi` only through an explicitly supplied transition applier; merge produces a candidate or an explicit conflict and never commits; refinement only evaluates witnessed transition behavior; snapshot is certificate-backed cache/observation. Added `tests/test_noncommit_surfaces.py` as regression coverage for these classifications.
 
 No inspected surface calls `SemanticCommit` or provides an independent canonical commit object. Remaining concern is not direct commit bypass in these modules, but whether external callers can treat their returned `Psi` as canonical truth without going through the commit/history authority boundary. This must be handled at API/integration level, not by falsely labeling these pure surfaces as semantic authorities.
+
+## 96. SemanticCommit → AppendOnlyHistory Binding — 2026-09-18
+
+Audited `core/commit_contract.py`: `commit_once()` already enforces sequence monotonicity, idempotent same-head replay, conflict rejection, and appends accepted `TransitionRecord` to `AppendOnlyHistory`. The previous gap was that `SemanticCommit.apply()` could complete without invoking this history contract.
+
+Updated `core/commit.py::SemanticCommit.apply()` so callers may supply `history` + `TransitionRecord`; when supplied, the canonical Psi is committed through `commit_once()`, making history binding explicit at the semantic commit boundary. The no-history form remains temporarily supported for compatibility, so PM-12 is improved but not fully closed: the next task is to make history binding mandatory on the canonical production path and construct the record from the admitted transition rather than accepting an arbitrary caller-provided record.
