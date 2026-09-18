@@ -19,7 +19,7 @@ This document is an audit map, not a proof claim.
 | PM-05 | Apply cannot bypass Admission | `core/admission.py` + `core/commit.py`; canonical evolutionary Ψ path now crosses `SemanticCommit` | COMPLETE (canonical Ψ scope) | T41 | Keep adversarial regression coverage; audit future semantic callers against the boundary |
 | PM-06 | Selection is not an external oracle | endogenous selection + adversarial tests | IMPLEMENTED at tested path | T18–T23 | Formal proof, not only tests |
 | PM-07 | Partial-order/branch outcome allowed | `core/merge.py` retains non-identical branches as conflict candidates | PARTIAL | T18–T23 | Add branch identity/lineage and admissible deferred outcomes |
-| PM-08 | Conflict is retained, not silently erased | `core/merge.py::Conflict`, regression tests | PARTIAL | T18–T23 | Add resolution candidate path; conflict must remain inspectable |
+| PM-08 | Conflict is retained, not silently erased | `core/merge.py::Conflict` + `core/resolution.py::ResolutionCandidate` | PARTIAL→NEAR-COMPLETE | T18–T23 | Route resolution candidates through Proof→Admission→SemanticCommit and add lineage/partial-order tests |
 | PM-09 | Self-evolution has protected root invariant K0 | tests/docs mention self-modification, but no root-kernel implementation found in tree/search | PARTIAL | T24–T29, T38 | Locate/reconcile self-modification contract |
 | PM-10 | Meta-transition requires proof/refinement | core/proof.py is state-transition proof, not kernel-refinement proof | MISSING | T24–T29 | Add separate meta proof contract |
 | PM-11 | Resource/gas bound | no dedicated gas/kernel budget implementation found in current search | MISSING | T23/T29 | Define bounded execution contract |
