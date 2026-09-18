@@ -2169,3 +2169,9 @@ This upgrades PM-19/20 integration from a manual audit target to an executable r
 Added `tools/import_bypass_scan.py` and `tests/test_import_bypass_scan.py`. The scanner now rejects direct imports of semantic commit/history symbols from `core` outside `canonical_chain.py`, complementing the existing call-site AST scanner.
 
 This strengthens the local static invariant: semantic commit APIs are not imported directly by other core modules. It remains a local syntactic proof, not a complete dynamic/interprocedural proof.
+
+## 64. Machine-Checked Ψ Transition Model — 2026-09-18
+
+Updated `formal/MinimalCore.lean` successfully. The formal target now models `Psi = (X,R)`, defines a kernel invariant predicate `K0`, makes `Transition` carry an explicit preservation proof `K0 P -> K0 next`, and defines composition of two invariant-preserving transitions. The attempted additional theorem write was blocked by a missing SHA on the second update and is not counted as implemented.
+
+Important limitation: `K0 := True` is still a placeholder. The next mathematical step is to replace it with the actual protected Gnozis kernel invariant and prove preservation from the real admission/refinement semantics.
