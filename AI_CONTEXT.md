@@ -2403,3 +2403,11 @@ Audited `core/evolution.py` and the public exports in `core/__init__.py`. The le
 Added `tests/test_legacy_evolution_api.py` to verify deprecation and the non-commit property. This removes the previous ambiguity where a legacy transition could appear to be a canonical semantic authority.
 
 PM-12 production integration is now architecturally closed pending full repository regression execution. Final 100% gate requires validating all canonical, history, replay, adapter, and legacy-boundary tests together; only after that should this completion state be recorded as final.
+
+## 101. Final Regression Gate Status — 2026-09-18
+
+Inspected `.github/workflows/test.yml`. The repository has a real CI test workflow triggered by push, pull request to `main`, and manual `workflow_dispatch`; it installs pytest and runs `python -m pytest -q tests --ignore=tests/research`, failing the job on a non-zero pytest status and uploading `pytest-output.txt`.
+
+A workflow-run lookup for the current commit returned no workflow runs. Therefore the final repository-wide regression suite has NOT been verified as passing in CI. Do not record 100% completion or claim full PASS yet. Architectural completion remains at the 99% gate until an actual successful regression run is available.
+
+Current verified state: canonical execution is integrated through `Uroboros.evolutionary()` → `CanonicalExecutor`; legacy evolution APIs are quarantined; history binding is present; targeted regression tests have been added. Remaining gate is empirical: execute the complete test suite and resolve any failures before finalizing PM-22 at 100%.
