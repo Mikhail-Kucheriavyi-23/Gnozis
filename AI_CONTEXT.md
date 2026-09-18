@@ -2509,3 +2509,11 @@ Cross-checking `tests/test_canonical_execution.py` against `core/execution.py` e
 Added `CanonicalExecutor.step()` as the explicit `Psi -> Psi` canonical commit boundary. It validates the `PsiTransition`, recomputes the candidate from the transition, rejects forged admission candidates that disagree with it, preserves state/history on rejected admission, and commits exactly one accepted transition.
 
 This does not yet remove the State-based `evolve()` compatibility path. The Markov/canonical-delegation audit remains OPEN until the production Uroboros evolutionary path is explicitly connected to this `PsiTransition` boundary or its equivalence is formally established.
+
+## 114. Uroboros Canonical PsiTransition Path Connected — 2026-09-18
+
+The production Uroboros surface now has an explicit `canonical()` constructor accepting `PsiTransition`. Its `step()` path calls `CanonicalExecutor.step()` with the same Ψ and transition, rather than routing through `generate(State)`/`test(State)`.
+
+The existing `evolutionary()` constructor remains as a compatibility/evolutionary candidate path and is intentionally not relabeled as the canonical F: Ψ→Ψ path. `tests/test_uroboros_canonical_path.py` verifies that the canonical constructor preserves the explicit `PsiTransition` identity, evolves the Ψ state, and records exactly one history entry.
+
+This closes the concrete Uroboros-to-PsiTransition wiring gap. Markov sufficiency for the canonical path is now structurally stronger: the transition boundary is explicit and its domain is Ψ. Remaining work is to audit/adversarially test transition closures themselves and the admission/proof semantics; generic evolutionary compatibility remains a separate surface.
