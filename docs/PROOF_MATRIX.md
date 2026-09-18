@@ -25,7 +25,7 @@ This document is an audit map, not a proof claim.
 | PM-11 | Resource/gas bound | `core/gas.py::GasBudget` provides deterministic finite charging and fail-closed exhaustion | PARTIAL→NEAR-COMPLETE | T23/T29 | Bind gas budget to canonical autonomous operation executor; prove no bypass |
 | PM-12 | Append-only causal history H | `core/history.py::TransitionRecord` + `AppendOnlyHistory` enforce contiguous sequence and hash-linked append-only records | NEAR-COMPLETE | T30–T36 | Bind history append to canonical SemanticCommit; prove no mutation path |
 | PM-13 | SQLite is persistence representation, not semantic truth | documented in AI_CONTEXT; no SQLite persistence module found | MISSING | T30–T36 | Implement after schema/acceptance definition |
-| PM-14 | Replay(Genesis,History,KernelVersions)=State | tests cover trajectory reproducibility, but no canonical persistence replay found | PARTIAL | T30/T39 | Add replay object/contract |
+| PM-14 | Replay(Genesis,History,KernelVersions)=State | `core/replay.py::replay` deterministically folds accepted history from genesis | NEAR-COMPLETE | T30/T39 | Bind kernel-version dispatch and verify replay/state-hash equality |
 | PM-15 | Snapshot != source of truth | conceptual only; no canonical snapshot module found | MISSING | T31 | Define snapshot certificate |
 | PM-16 | Crash atomicity/idempotent commit | no canonical persistence commit layer found | MISSING | T35/T36 | Persistence phase |
 | PM-17 | Kernel version attached to accepted transition | `TransitionRecord.kernel_version` required for accepted records | PARTIAL | T34/T39 | Bind record creation to canonical commit/persistence boundary |
