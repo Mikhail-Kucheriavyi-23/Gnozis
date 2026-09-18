@@ -23,12 +23,12 @@ This document is an audit map, not a proof claim.
 | PM-09 | Self-evolution has protected root invariant K0 | `core/root_invariant.py::RootInvariant` + preservation tests + meta-transition gate | COMPLETE (K0 boundary) | T24–T29, T38 | Bind K0 to canonical kernel representation as self-evolution expands |
 | PM-10 | Meta-transition requires refinement proof | `MetaAdmission` unifies K0 + refinement + closure; FixedPoint remains descriptive | COMPLETE (executable contract scope) | T24–T29 | Distinguish witness evidence from universal proof; strengthen only if required by formal target |
 | PM-11 | Resource/gas bound | `core/gas.py::GasBudget` provides deterministic finite charging and fail-closed exhaustion | PARTIAL→NEAR-COMPLETE | T23/T29 | Bind gas budget to canonical autonomous operation executor; prove no bypass |
-| PM-12 | Append-only causal history H | docs describe history/audit; no canonical history store found in current tree search | PARTIAL | T30–T36 | Define history schema and commit semantics |
+| PM-12 | Append-only causal history H | `core/history.py::TransitionRecord` + `AppendOnlyHistory` enforce contiguous sequence and hash-linked append-only records | NEAR-COMPLETE | T30–T36 | Bind history append to canonical SemanticCommit; prove no mutation path |
 | PM-13 | SQLite is persistence representation, not semantic truth | documented in AI_CONTEXT; no SQLite persistence module found | MISSING | T30–T36 | Implement after schema/acceptance definition |
 | PM-14 | Replay(Genesis,History,KernelVersions)=State | tests cover trajectory reproducibility, but no canonical persistence replay found | PARTIAL | T30/T39 | Add replay object/contract |
 | PM-15 | Snapshot != source of truth | conceptual only; no canonical snapshot module found | MISSING | T31 | Define snapshot certificate |
 | PM-16 | Crash atomicity/idempotent commit | no canonical persistence commit layer found | MISSING | T35/T36 | Persistence phase |
-| PM-17 | Kernel version attached to accepted transition | no canonical transition record with kernel version found | MISSING | T34/T39 | Add provenance field at persistence boundary |
+| PM-17 | Kernel version attached to accepted transition | `TransitionRecord.kernel_version` required for accepted records | PARTIAL | T34/T39 | Bind record creation to canonical commit/persistence boundary |
 | PM-18 | Evidence/provenance separated from semantic commit | bridge has provenance/authority concepts; Core proof has evidence mapping | PARTIAL | T13–T17 | Formalize evidence type and commit barrier |
 | PM-19 | Hard stop when mandatory verification is unresolved | empty candidate/dead-end raises; fail-closed bridge exists | PARTIAL | T41 + stop semantics | Unify stop as explicit Core outcome |
 | PM-20 | No external actor gets semantic commit authority | tests cover selector injection/external boundaries; no universal commit API proof | PARTIAL | T41 | Prove canonical commit boundary |
