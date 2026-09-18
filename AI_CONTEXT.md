@@ -2634,3 +2634,93 @@ T_AB in {tau_1, tau_2, ..., tau_n}
 and evolution may reduce, transform, preserve, or increase this relational possibility space. The system should not prematurely collapse it merely to obtain a single deterministic architectural answer.
 
 This hypothesis is especially relevant to future multi-agent semantics and to the distinction between individual Ψ state and relational R state. No Core implementation change is made yet.
+
+
+## 124. Project Operating Format + Forward/Reverse Engineering — 2026-09-19
+
+### Agreed operating format
+
+For project-related progress messages, use three blocks:
+1. Current analytical information / findings.
+2. Immediate interpretation, implications, and next action from the information above.
+3. Project state: mandatory progress percentages, exploratory percentages, schedule estimate, and an overall progress figure derived from the selected categories.
+
+Percentages are orientation metrics only, not formal proof or a promise of completion. Mandatory and exploratory work must remain explicitly separated.
+
+### Project management principle
+
+The user acts as project client and project engineer/coordinator. The assistant maintains the analytical route, formal decomposition, architectural consistency, adversarial reasoning, and next-task selection. New user intuitions are first treated as hypotheses and mapped to mathematical/architectural consequences before implementation.
+
+### Forward Engineering + Reverse Architectural Analysis
+
+Run two complementary tracks in parallel.
+
+Forward Engineering: Requirement → hypothesis → invariant → architecture → implementation → test.
+
+Reverse Architectural Analysis (RAA): Existing code → runtime path → dependencies → actual invariants → observed behavior → architectural interpretation.
+
+RAA is analytical/read-oriented and must not automatically modify Core. Its purpose is to continuously update understanding of what the product actually is, identify gaps between target and implementation, and expose capabilities or constraints already present in the code. It is not a one-time phase and does not have to finish when a product version is released.
+
+When a product reaches a defined release/freeze boundary, that version can be considered complete while RAA continues to update the understanding of the completed product. New evidence becomes input to the next version rather than retroactively destabilizing the frozen version.
+
+### Two graphs and reconciliation
+
+Forward graph: Requirement → Invariant → Architecture → Implementation → Test.
+
+Reverse graph: Code → Runtime → Dependencies → Actual invariants → Observed behavior → Interpretation.
+
+Their intersection is confirmed alignment. Differences are treated as architectural gaps, undocumented behavior, or new discoveries requiring analysis.
+
+### Current staged project plan
+
+0. Foundation and context map — 1–2 days.
+1. Canonical Core / Proof / Admission / Commit — 2–4 days.
+2. Adversarial verification — 3–5 days.
+3. State / Context / Observation — 3–6 days.
+4. Persistence and protected memory — 4–7 days.
+5. World Bridge — 4–7 days.
+6. Multi-Agent semantics — 5–10 days.
+7. Different realities / tension / superposition — 5–10 days.
+8. Connected Gnozis network — 7–14 days.
+9. Autonomous evolution — 7–14 days.
+10. Controlled self-modification — 7–14 days.
+11. Security / recovery / audit — 5–10 days.
+12. Integrated research prototype — 7–14 days.
+13. Long-run experiments — 2–4 weeks.
+
+These are orientation windows, not fixed commitments. Research stages are judged by whether the architectural question is resolved, not by whether a predetermined feature was produced.
+
+### Current schedule orientation
+
+Near-term target: close Proof and canonical Core verification during late September. State/Context, Memory, and World Observation follow in early/mid October. Multi-Agent and different-realities research follows during October. Tension/superposition analysis follows once the relational model is sufficiently constrained. Autonomous evolution is targeted for November, with an integrated research prototype roughly in November–December if no fundamental architectural contradiction appears.
+
+### Current state snapshot
+
+| Category | Mandatory | Exploratory | Status |
+|---|---:|---:|---|
+| Ψ=(X,R) semantic boundary | ~95% | ~5% | Stable; adversarial testing continues |
+| Canonical PsiTransition | ~90% | ~10% | Boundary implemented; closure semantics remain open |
+| Admission / Proof / Commit | ~85% | ~15% | Candidate binding strengthened; Proof semantics still open |
+| Uroboros canonical wiring | ~90% | ~10% | Connected; regression verification required |
+| State-vs-context | ~65% | ~35% | Active research |
+| Markov sufficiency | ~45% | ~55% | Open semantic question |
+| Memory semantics | ~35% | ~65% | Classified; no premature Core promotion |
+| World observation | ~55% | ~45% | Boundary defined; implementation future stage |
+| Multi-agent semantics | ~20% | ~80% | Future research stage |
+| Superposition / ideality | ~20% | ~80% | Research hypothesis, not Core axiom |
+| Reverse Architectural Analysis | ~25% | ~75% | New continuous analytical track |
+
+### Overall progress metric
+
+For planning only, current mandatory architectural progress is approximately 62% across the selected mandatory categories above. This is not a percentage of the whole project and must not be presented as such. The exploratory research space remains intentionally much less resolved.
+
+### Immediate mandatory priority
+
+1. Audit actual Proof semantics in the canonical path; the local passed=True / invariant=True / viable=True construction is provisional and must not be mistaken for a completed proof system.
+2. Run/verify regression around the newly protected candidate-binding boundary.
+3. Continue Reverse Architectural Analysis in parallel, especially mapping actual runtime paths and existing capabilities without modifying Core.
+4. Only after this gate proceed to the next State/Context case.
+
+### Standing principle
+
+Preserve useful superposition/options in planning until semantic evidence requires collapse. Do not turn every newly discovered concept into a new Core primitive. Conversely, do not freeze the interpretation of the product: RAA may continuously improve our understanding while released product versions remain bounded and reproducible.
