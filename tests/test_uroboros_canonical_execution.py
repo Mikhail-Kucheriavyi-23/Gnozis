@@ -4,9 +4,11 @@ from core.uroboros import Uroboros
 
 
 def generate(state):
-    values = dict(state.values)
-    values["x"] = tuple(values.get("x", ())) + (1,)
-    yield State(values=values)
+    base = tuple(state.values.get("x", ()))
+    for value in (1, 2):
+        values = dict(state.values)
+        values["x"] = base + (value,)
+        yield State(values=values)
 
 
 def test_evolutionary_uroboros_uses_canonical_executor_and_history():
