@@ -3,7 +3,7 @@ import pytest
 from core.commit import commit
 from core.admission import Admission
 from core.proof import ProofObligation
-from core.state import Psi
+from core.state import Psi, State
 
 
 def test_canonical_commit_rejects_unadmitted_candidate():
@@ -43,3 +43,23 @@ def test_canonical_commit_accepts_admitted_psi():
     )
 
     assert commit(previous, admission).apply() == candidate
+
+
+def test_canonical_commit_rejects_legacy_state_even_if_admitted():
+    previous = Psi(x=(), relations=())
+    legacy_candidate = State.from_psi(Psi(x=(2,), relations=()))
+
+    proof = ProofObligation(
+        passed=True,
+        invariant=True,
+        viable=True,
+        evidence={"legacy-adversarial": True},
+    )
+    admission = Admission(
+        accepted=True,
+        candidate=legacy_candidate,
+        proof=proof,
+    )
+
+    with pytest.raises(TypeError, match="canonical"):
+        commit(previous, admission).apply()
