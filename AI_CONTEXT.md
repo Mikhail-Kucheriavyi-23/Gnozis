@@ -2461,3 +2461,11 @@ Adversarial repository search recovered `docs/REGRESSION_FAILURE_CLASSIFICATION_
 Therefore the previous wording that the full suite was merely 'unverified' is outdated/incomplete. There is historical empirical evidence of a failing full suite. The current repository still needs a fresh full CI run after the subsequent fixes. Do NOT claim 100% or infer that the old failure count remains current.
 
 The historical failures were classified into: obsolete State API compatibility, incomplete/non-Ψ fixtures, genuine semantic candidates (hidden closure dependence, Markov sufficiency, invalid-candidate handling, empty valid sets, selector sensitivity, hashability), and intentionally adversarial legacy-boundary behavior. The next work should prioritize semantic candidates and fixture migration, not blindly patch individual historical failures.
+
+## 109. Semantic Candidate Review — Hidden Closure / Fixed Point — 2026-09-18
+
+Reviewed the historical Cluster C candidates directly. `tests/test_extensional_transition_contract.py` already contains a direct extensionality check over `(X,R)` and rejects a hidden closure dependency. `tests/test_red_team_universal_state_sufficiency.py` intentionally documents the limitation of the legacy generic `Engine(State)->State` API; it must not be used as evidence against the canonical ΨTransition path.
+
+Also reviewed `docs/psi_transition_conformance.md`: empty-valid-set and relation/X evolution semantics are marked PASS, while accepted-unchanged-candidate fixed-point semantics remains explicitly PENDING CI confirmation. This is the next concrete semantic test gate rather than another architectural rewrite.
+
+No production change made in this step. The correct next action is to verify the fixed-point contract in the canonical Ψ path and then reassess the remaining Cluster C candidates against the canonical boundary, not the legacy generic API.
