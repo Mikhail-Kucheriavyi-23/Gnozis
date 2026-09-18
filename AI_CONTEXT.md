@@ -2115,3 +2115,14 @@ Repository search found no existing canonical operation runner to modify. Theref
 The contract requires operation/cost cardinality, passes through `SafetyGate`, then charges `GasBudget` before execution can be admitted. Tests cover normal admission, operation-count overflow, gas exhaustion, and hard-stop rejection.
 
 PM-19 is NEAR-COMPLETE at contract level. It becomes COMPLETE only when a real canonical operation runner exists and is forced through this contract, with a no-bypass test.
+
+## 57. PM-20 External Evidence Is Not Authority — 2026-09-18
+
+Added `core/authority.py` with an explicit boundary: `Evidence` from an external source can be input to proof/analysis, but `foreign_evidence_is_non_authoritative()` can never admit it as execution authority.
+
+Added `tests/test_authority.py` for this invariant.
+
+Formal rule:
+`ForeignEvidence -> Evidence`, never `ForeignEvidence -> Authority`.
+
+PM-20 is NEAR-COMPLETE at contract level. Remaining work is integration: all external evidence paths must pass through this boundary, and the canonical executor must have a no-bypass test.
