@@ -2137,3 +2137,9 @@ Formal distinction:
 `KernelMemory = protected invariant-bearing memory`; `Workspace = mutable operational data`.
 
 PM-21 is NEAR-COMPLETE at the type/contract level. Remaining work: bind protected kernel memory to the canonical state boundary and later persistence/encryption mechanisms without creating a second semantic state model.
+
+## 59. Full Mathematical Cross-Matrix Reconciliation — 2026-09-18
+
+Re-audited `docs/PROOF_MATRIX.md` against the repository changes from PM-11 through PM-22 and replaced the stale status table. Current evidence now records PM-11–PM-21 as executable contracts at various integration stages, PM-13 as intentionally missing until persistence is specified, and PM-22 as an initial machine-proof target only.
+
+Important correction: the percentage is a progress indicator, not a proof metric. Executable contracts are not universal mathematical proofs. The remaining work is concentrated in canonical integration/no-bypass, durable persistence/recovery, and replacing the minimal Lean placeholders with actual Core definitions and invariant-preservation proofs. PM-02, PM-04, and PM-06 remain independent formal/architectural gaps.
