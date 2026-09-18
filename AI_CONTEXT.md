@@ -2269,3 +2269,7 @@ Important status: the current leaf predicates are explicit placeholders (`True`)
 Replaced the first `True` leaf in `formal/ConcreteInvariant.lean`. `I_projection` now states the canonical semantic equality obligation over `Psi`: equality of declared `(X,R)` states is the identity boundary; no hidden runtime field is represented in `Psi`. The theorem `projection_invariant` proves the obligation directly from equality.
 
 This is intentionally modest: it formalizes the semantic identity boundary, not the stronger runtime theorem that arbitrary Python states with equal `psi_projection` always produce equal transitions. The latter remains the role of `assert_extensional_transition` and must eventually be connected by a typed bridge.
+
+## 80. Test Gate Typed Predicate — 2026-09-18
+
+Added the typed proof-level predicate `TestValid(passed) := passed = true` to `formal/ConcreteInvariant.lean`. This exposes the exact boolean acceptance boundary used by the executable proof gate. The `I_test_gate` leaf remains `True` because it is a state predicate and the runtime `passed` value belongs to a candidate proof obligation; the next bridge must quantify over transitions/candidates rather than incorrectly pretending a bare `Psi` contains a test result.
