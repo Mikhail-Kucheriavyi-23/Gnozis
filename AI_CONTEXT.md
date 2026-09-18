@@ -1725,3 +1725,47 @@ Do not reopen the mathematical model unless:
 4. an empirical result requires revising a clearly marked hypothesis.
 
 Otherwise proceed directly to specification/repository audit.
+
+
+## 30. First Evidence-Backed Specification Audit — 2026-09-18
+
+After the CLXI–CLXIV Mathematical Freeze, the repository was checked directly against the mathematical specification.
+
+A new audit artifact was added:
+docs/PROOF_MATRIX.md
+
+Key findings:
+
+1. Psi=(X,R) is concretely represented by core/state.py::Psi.
+2. State has to_psi()/from_psi() adapters and recursive freezing of supported built-in containers.
+3. The canonical PsiTransition path exists, but Engine still retains a State-callable compatibility path; this remains a partial canonicalization issue.
+4. core/evolution.py + core/proof.py implement a proof-gated candidate path, including invariant checking and depth-1 viability. This is evidence for the current tested path, not a general mathematical proof.
+5. A first-class universal Admission primitive was not found. Therefore theorem T41 (Apply => Admission) is not yet established as a concrete Core boundary.
+6. Merge/conflict/resolution mathematics is documented, but no canonical merge/conflict Core module was found in the current repository search.
+7. Meta-kernel/root-invariant/refinement verification is not yet established as a concrete implementation. Existing self-modification tests are evidence for narrower contracts, not proof of the CLXII meta-kernel calculus.
+8. No canonical SQLite persistence/state-history subsystem was found in the current repository search. Persistence-related material is currently documentation/research/experiments plus trajectory/memory tests, not evidence of the full CLXIII persistence calculus.
+9. No Lean/Coq/formal-prover artifact was found in the repository tree.
+10. Protected internal memory remains a documented GAP and must not be replaced by an invented implementation without recovering the intended specification.
+
+The next implementation gate is therefore explicitly:
+PM-05 — Admission Boundary.
+
+Required acceptance:
+- one canonical semantic commit/admission boundary;
+- every accepted semantic state mutation passes it;
+- bridge/AI/user/database paths cannot bypass it;
+- adversarial regression tests demonstrate non-bypass;
+- Task Registry and documentation identify the exact boundary.
+
+Important: absence of a search hit is not proof of nonexistence. The matrix records only what current repository evidence established.
+
+### Current progress after freeze
+
+Mathematics/specification: 100% planned.
+New mathematics remaining: ~0%.
+Machine-proven: 0%.
+Repository-to-spec mapping: first pass started.
+Proof matrix: created.
+Implementation work: NOT started from the matrix yet.
+
+Do not begin broad implementation. Resolve PM-05 with the smallest evidence-backed change, then rerun the matrix.
