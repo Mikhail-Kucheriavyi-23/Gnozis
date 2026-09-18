@@ -2077,3 +2077,13 @@ A snapshot is explicitly a cache/observation, not semantic truth. Its certificat
 Added `tests/test_snapshot.py` covering all three certificate dimensions.
 
 PM-15 is NEAR-COMPLETE. Remaining work is to bind certification to the actual replay result and define explicit invalidation/rebuild semantics. SQLite remains deferred until the semantic contracts are complete.
+
+## 53. PM-16 Atomic/Idempotent Commit Contract — 2026-09-18
+
+The repository already has the canonical semantic `commit.py::SemanticCommit`; therefore a second semantic commit model was NOT introduced. Added `core/commit_contract.py` as the persistence-facing contract `commit_once()`.
+
+Semantics: a lower sequence is rejected; an identical existing head is an idempotent no-op; the same sequence with a different state hash is rejected as conflict; only the next contiguous sequence is appended.
+
+Added `tests/test_commit_contract.py` for retry idempotence, conflicting replay, and normal next-sequence commit.
+
+PM-16 is NEAR-COMPLETE at the contract level. Remaining work is durable transaction/crash-boundary integration; the mathematical rule itself is now explicit.
