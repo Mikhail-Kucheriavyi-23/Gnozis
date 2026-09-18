@@ -2273,3 +2273,9 @@ This is intentionally modest: it formalizes the semantic identity boundary, not 
 ## 80. Test Gate Typed Predicate — 2026-09-18
 
 Added the typed proof-level predicate `TestValid(passed) := passed = true` to `formal/ConcreteInvariant.lean`. This exposes the exact boolean acceptance boundary used by the executable proof gate. The `I_test_gate` leaf remains `True` because it is a state predicate and the runtime `passed` value belongs to a candidate proof obligation; the next bridge must quantify over transitions/candidates rather than incorrectly pretending a bare `Psi` contains a test result.
+
+## 81. Test → Admission Bridge — 2026-09-18
+
+Added `formal/TestAdmissionBridge.lean`. The formal bridge now proves `ProofPasses -> TestValid`, `Admission -> TestValid`, and `Admission -> I(candidate)`. This keeps the test result attached to the candidate's proof obligation rather than incorrectly embedding it into `Psi`.
+
+The resulting gate is: `candidate -> test result -> proof pass -> admission -> invariant-valid candidate`. Remaining work is the selection/commit bridge and then runtime conformance of these formal contracts against the Python implementation.
