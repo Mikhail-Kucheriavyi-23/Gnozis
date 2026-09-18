@@ -20,7 +20,7 @@ This document is an audit map, not a proof claim.
 | PM-06 | Selection is not an external oracle | endogenous selection + adversarial tests | IMPLEMENTED at tested path | T18–T23 | Formal proof, not only tests |
 | PM-07 | Partial-order/branch outcome allowed | `Branch` ancestry + `incomparable()` + `ParallelOutcome` explicitly retain concurrent branches | COMPLETE (branch-order scope) | T18–T23 | Preserve regression coverage; broader merge algebra remains separate work if required |
 | PM-08 | Conflict is retained, not silently erased | `core/merge.py::Conflict` + `core/resolution.py::ResolutionCandidate` | PARTIAL→NEAR-COMPLETE | T18–T23 | Route resolution candidates through Proof→Admission→SemanticCommit and add lineage/partial-order tests |
-| PM-09 | Self-evolution has protected root invariant K0 | tests/docs mention self-modification, but no root-kernel implementation found in tree/search | PARTIAL | T24–T29, T38 | Locate/reconcile self-modification contract |
+| PM-09 | Self-evolution has protected root invariant K0 | `core/root_invariant.py::RootInvariant` + preservation tests | PARTIAL→NEAR-COMPLETE | T24–T29, T38 | Bind K0 to an explicit kernel representation and meta-transition gate |
 | PM-10 | Meta-transition requires proof/refinement | core/proof.py is state-transition proof, not kernel-refinement proof | MISSING | T24–T29 | Add separate meta proof contract |
 | PM-11 | Resource/gas bound | no dedicated gas/kernel budget implementation found in current search | MISSING | T23/T29 | Define bounded execution contract |
 | PM-12 | Append-only causal history H | docs describe history/audit; no canonical history store found in current tree search | PARTIAL | T30–T36 | Define history schema and commit semantics |
