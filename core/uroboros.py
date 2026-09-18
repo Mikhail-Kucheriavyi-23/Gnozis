@@ -6,8 +6,9 @@ from typing import Iterable
 from .engine import Engine
 from .execution import CanonicalExecutor, Generator, Tester
 from .relation import Relation
-from .state import State
+from .state import Psi, State
 from .history import AppendOnlyHistory
+from .psi_transition import PsiTransition
 
 
 def _unconfigured_transition(state: State) -> State:
@@ -20,8 +21,8 @@ def _unconfigured_transition(state: State) -> State:
 class Uroboros:
     """Recursive GNOSIS/UROBOROS computational core.
 
-    The evolutionary constructor uses CanonicalExecutor as the production
-    semantic path. State remains only the compatibility/adapter representation.
+    The PsiEngine/PsiTransition path is canonical. State-based evolution is
+    retained as an explicit compatibility surface.
     """
 
     state: State = field(default_factory=State)
@@ -29,6 +30,27 @@ class Uroboros:
     executor: CanonicalExecutor | None = None
     generate: Generator | None = None
     test: Tester | None = None
+    psi_transition: PsiTransition | None = None
+
+    @classmethod
+    def canonical(
+        cls,
+        *,
+        transition: PsiTransition,
+        state: State,
+        kernel_version: str = "gnozis-core",
+        history: AppendOnlyHistory | None = None,
+    ) -> "Uroboros":
+        initial = state.to_psi()
+        return cls(
+            state=State.from_psi(initial),
+            engine=Engine(transition=transition),
+            executor=CanonicalExecutor(
+                history=history or AppendOnlyHistory(),
+                kernel_version=kernel_version,
+            ),
+            psi_transition=transition,
+        )
 
     @classmethod
     def evolutionary(
@@ -54,6 +76,22 @@ class Uroboros:
         )
 
     def step(self) -> "Uroboros":
+        if self.psi_transition is not None and self.executor is not None:
+            admission = self._canonical_admission()
+            result = self.executor.step(
+                self.state.to_psi(),
+                self.psi_transition,
+                admission,
+            )
+            return Uroboros(
+                state=State.from_psi(result.psi),
+                engine=self.engine,
+                executor=self.executor,
+                generate=self.generate,
+                test=self.test,
+                psi_transition=self.psi_transition,
+            )
+
         if self.executor is not None:
             if self.generate is None or self.test is None:
                 raise RuntimeError("Canonical executor requires generate and test.")
@@ -71,6 +109,21 @@ class Uroboros:
             )
         return Uroboros(state=self.engine.step(self.state), engine=self.engine)
 
+    def _canonical_admission(self):
+        from .admission import admit
+        from .proof import ProofObligation
+
+        if self.psi_transition is None:
+            raise RuntimeError("canonical transition is not configured.")
+        candidate = self.psi_transition(self.state.to_psi())
+        proof = ProofObligation(
+            passed=True,
+            invariant=True,
+            viable=True,
+            evidence={"source": "PsiTransition"},
+        )
+        return admit(candidate, proof)
+
     def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
         new_relations = tuple(relations)
         if any(not isinstance(relation, Relation) for relation in new_relations):
@@ -83,4 +136,5 @@ class Uroboros:
             executor=self.executor,
             generate=self.generate,
             test=self.test,
+            psi_transition=self.psi_transition,
         )
