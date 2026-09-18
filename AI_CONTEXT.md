@@ -1769,3 +1769,32 @@ Proof matrix: created.
 Implementation work: NOT started from the matrix yet.
 
 Do not begin broad implementation. Resolve PM-05 with the smallest evidence-backed change, then rerun the matrix.
+
+
+## 31. PM-05 Admission Boundary — first implementation step — 2026-09-18
+
+PM-05 was advanced from MISSING to PARTIAL.
+
+Implemented:
+- core/admission.py introduces the explicit immutable Admission result.
+- admit(candidate, ProofObligation) is the semantic boundary between proof evaluation and accepted candidate.
+- require_admitted(admission) is fail-closed and refuses non-Admission or rejected results.
+- canonical evolutionary_psi_transition now routes proof results through Admission before selecting/applying the candidate.
+- tests/test_admission_boundary.py covers accepted/rejected admission, invalid proof input, and canonical evolutionary use.
+
+Important limitation:
+This does NOT yet prove the global theorem T41:
+Apply(Psi,c) => Admission(Psi,c).
+
+PsiTransition remains a general callable boundary and Engine retains a legacy State->State compatibility path. Therefore PM-05 is PARTIAL, not COMPLETE.
+
+Next gate:
+Audit every semantic mutation/apply path and either:
+1. route it through the same admission boundary, or
+2. explicitly classify it as a non-semantic adapter/helper and prove that classification.
+
+Do not remove the legacy path blindly; first enumerate callers and establish whether compatibility can be constrained without breaking canonical Psi semantics.
+
+Latest commits:
+- Admission implementation: 8853a9a959538c84848874690a619c07da949f36
+- Proof matrix update: 8a4f324e2718e8c625f1d9dcb78eaccdc5751bcf
