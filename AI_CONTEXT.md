@@ -2341,3 +2341,11 @@ Important limitation: this prevents implicit `State -> Psi` promotion at the new
 Integrated `canonicalize_psi()` directly into `core/commit.py::SemanticCommit.apply()`. The canonical commit gate now requires both: (1) Admission acceptance and (2) explicit canonical `Psi` typing. Added a regression test proving that even an `accepted=True` Admission containing a legacy `State` is rejected at the semantic commit boundary.
 
 This closes the immediate public-API path `LegacyEngine -> State -> Admission -> SemanticCommit`: the legacy State cannot cross the final canonical commit boundary merely by being wrapped in an accepted Admission. Remaining PM-02 work is caller inventory and proving all canonical public entry points terminate at this boundary.
+
+## 92. Canonical Commit Caller Audit — 2026-09-18
+
+Searched production code for `commit(`, `SemanticCommit(` and `to_psi()`. Direct production commit callers are currently `core/evolution.py` and `core/resolution.py`; the `SemanticCommit` constructor is confined to `core/commit.py`. Added `tests/test_canonical_commit_callers.py` as a regression inventory.
+
+`core/evolution.py` returns only `semantic_commit.apply()`. `core/resolution.py` checks that the Admission candidate matches the resolution candidate before delegating to `commit(previous, admission)`. This substantially closes the canonical commit caller audit.
+
+Remaining concern: `State.to_psi()` remains widely used as an adapter/observation mechanism, and the generic `evolutionary_transition` remains a legacy State→State semantic transition. These are not direct SemanticCommit callers, but PM-02 is not universally closed until their public authority is explicitly constrained.
