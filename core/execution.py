@@ -1,14 +1,17 @@
-"""Canonical execution owner: pure Psi transition plus proof/admission plus history."""
+"""Canonical execution owner: Generate -> Proof -> Admission -> Select -> Commit -> History."""
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Callable, Iterable
 
-from .admission import Admission
+from .admission import admit
 from .commit import commit
 from .history import AppendOnlyHistory
-from .proof import ProofObligation
-from .psi_transition import PsiTransition
-from .state import Psi
+from .proof import prove_transition
+from .state import Psi, State
+
+Generator = Callable[[State], Iterable[State]]
+Tester = Callable[[State], bool]
 
 
 @dataclass(frozen=True)
@@ -22,24 +25,48 @@ class CanonicalExecutor:
     history: AppendOnlyHistory
     kernel_version: str
 
-    def step(self, psi: Psi, transition: PsiTransition, admission: Admission) -> ExecutionResult:
+    def evolve(
+        self,
+        psi: Psi,
+        generate: Generator,
+        test: Tester,
+    ) -> ExecutionResult:
+        """Own one complete canonical evolution step."""
         if not isinstance(psi, Psi):
             raise TypeError("psi must be Psi.")
-        if not isinstance(transition, PsiTransition):
-            raise TypeError("transition must be PsiTransition.")
-        if not isinstance(admission, Admission):
-            raise TypeError("admission must be Admission.")
-        if not isinstance(admission.proof, ProofObligation):
-            raise TypeError("admission.proof must be ProofObligation.")
-        if admission.accepted and admission.candidate != transition(psi):
-            raise ValueError("admitted candidate does not match transition result.")
-        if not admission.accepted:
+
+        current = State.from_psi(psi)
+        candidates = list(generate(current))
+        if not candidates:
+            raise ValueError("Generator must produce at least one candidate state")
+
+        proofs = [
+            prove_transition(current, candidate, candidates, test)
+            for candidate in candidates
+        ]
+        admissions = [
+            admit(candidate, proof)
+            for candidate, proof in zip(candidates, proofs)
+        ]
+        valid = [item for item in admissions if item.accepted]
+
+        if not valid:
             return ExecutionResult(psi=psi, history=self.history)
+
+        selected = min(
+            valid,
+            key=lambda item: (
+                len(item.candidate.to_psi().relations),
+                repr(item.candidate.to_psi()),
+            ),
+        )
+        candidate_psi = selected.candidate.to_psi()
 
         committed, history = commit(
             previous=psi,
-            admission=admission,
+            admission=admit(candidate_psi, selected.proof),
             kernel_version=self.kernel_version,
         ).apply(self.history)
+
         self.history = history
         return ExecutionResult(psi=committed, history=history)
