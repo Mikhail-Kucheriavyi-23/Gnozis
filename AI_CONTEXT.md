@@ -2419,3 +2419,9 @@ During final-gate inspection of `commit_contract.py` and `history.py`, found a r
 Fixed `core/commit.py`: `SemanticCommit.apply()` now rejects a non-genesis commit when the previous Psi hash does not equal `history.head.state_hash`. State hashes are now deterministic SHA-256 hashes of the canonical `(x, relations)` representation instead of Python's process-randomized `hash()`.
 
 Added `tests/test_commit_history_continuity.py` covering forged previous-state rejection. This is a substantive final-gate correction, so the 100% claim remains blocked until the full test suite actually passes.
+
+## 103. Final-Gate Audit: Resolution Boundary — 2026-09-18
+
+Adversarial search found `core/resolution.py::commit_resolution()` as another semantic-commit construction surface. It does not instantiate `SemanticCommit` directly; it delegates to `commit()`, and the resulting `SemanticCommit.apply(history)` is now history-bound and verifies previous-state continuity. Therefore it cannot bypass the history contract, but it remains a separate mutation entry point from `CanonicalExecutor` and must not be counted as part of the canonical evolutionary production path.
+
+The remaining distinction is now explicit: conflict resolution may propose/admit a `Psi`, and if executed it must use the same history-bound `SemanticCommit` contract. `CanonicalExecutor` remains the sole owner of the Generate→Proof→Admission→Select evolutionary path. Full regression remains unverified; no 100% claim.
