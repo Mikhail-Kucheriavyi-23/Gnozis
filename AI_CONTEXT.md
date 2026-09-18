@@ -2207,3 +2207,9 @@ Search confirmed the earlier mathematical architecture had the stronger system s
 The file now separates semantic `Psi`, mutable workspace type `W`, and protected kernel type `K`; defines `Root`, `J`, abstract `Adm`, and a proof-carrying `CertifiedTransition` whose preservation theorem maps `J` from the old Sigma/kernel pair to the next one.
 
 This is a structural bridge, not yet the full theorem: the concrete `I(Psi)`, concrete root predicate, admission predicate, and actual transition semantics still need to be instantiated from the repository. No second runtime state model is introduced; this file is proof-level only.
+
+## 70. I(Psi) Reconciliation — 2026-09-18
+
+Read `PROJECT_STATE.md` as repository evidence. Its current documented invariants are: Ψ=(X,R) is the fundamental working projection (with the hidden-state limitation), evolution is state-transition based, accepted candidates pass tests, selection occurs inside the evolutionary path, extensionality is over the declared Ψ projection, locality is explicit, and memory is derived history unless promoted into dynamics. No single executable function currently defines all of these as one `I(Psi)` predicate.
+
+Updated `formal/Sigma.lean` to mark `I(Psi)` as an explicit proof-layer placeholder rather than falsely claiming a complete executable semantic invariant. This preserves the Sigma architecture while making the remaining gap explicit: derive concrete conjuncts from `core/contract.py`, `core/evolution.py`, `core/engine.py`, and the relevant tests, then encode them in Lean. A prior update attempt used a stale SHA and was rejected; the successful update used the current SHA.
