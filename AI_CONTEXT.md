@@ -2493,3 +2493,11 @@ This closes the specific fixed-point semantic contradiction. It does not establi
 Reviewed the historical Cluster C concern about hidden closure dependence and Markov sufficiency. The proof layer itself has no module-level mutable state and consumes explicit current/candidate/invariant inputs. However, the existing memory-independence tests target the legacy compatibility transition rather than the canonical CanonicalExecutor path.
 
 Added `docs/HIDDEN_STATE_MARKOV_AUDIT_2026-09-18.md`. The canonical claim remains OPEN until adversarial tests demonstrate that, for fixed declared inputs, unrelated external mutable memory cannot alter the accepted set or selected Psi. This is an evidence gap, not an observed production hidden-state bug.
+
+## 112. Canonical PsiTransition Delegation Gap — 2026-09-18
+
+Cross-checking the historical regression guidance against the current code found that `core/psi_transition.py` declares the fundamental canonical operator `PsiTransition: Psi -> Psi`, while `core/execution.py::CanonicalExecutor.evolve()` currently operates through `generate(State)` and `test(State)` and only converts the selected candidate back to `Psi` before commit.
+
+This means the executor is Ψ-shaped at its boundary but does not yet explicitly delegate to the declared `PsiTransition` operator. Because generic State callables can close over hidden external state, this prevents a clean Markov-sufficiency claim for canonical evolution.
+
+Added `docs/CANONICAL_PSITRANSITION_DELEGATION_AUDIT_2026-09-18.md`. Status OPEN. Required next decision: either make `PsiTransition` the explicit canonical operator boundary, or formally prove the existing State-based generate/test path is equivalent to the same F: Psi -> Psi semantics, including closure/external-state rules. Do not make a cosmetic type change without resolving the semantic contract.
