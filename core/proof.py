@@ -31,8 +31,16 @@ def _invariant(invariant: Invariant, candidate: Any) -> bool:
     return _strict_bool(invariant(candidate), name="Invariant")
 
 
-def _viable(candidate: Any, candidates: Iterable[Any], invariant: Invariant) -> bool:
-    """Depth-1 viability: a distinct invariant-valid continuation exists."""
+def _viable(
+    current: Any,
+    candidate: Any,
+    candidates: Iterable[Any],
+    invariant: Invariant,
+) -> bool:
+    """Depth-1 viability: fixed points are valid; changes need continuation."""
+    if candidate == current:
+        return True
+
     for continuation in candidates:
         if continuation == candidate:
             continue
@@ -49,16 +57,23 @@ def prove_transition(
 ) -> ProofObligation:
     """Return a reproducible depth-1 proof for a proposed transition.
 
-    `current` is included in the evidence so the proof describes the actual
-    transition boundary, but viability is evaluated from the supplied pool.
+    An invariant-valid unchanged candidate is a fixed point. An invariant-valid
+    changing candidate requires a distinct invariant-valid continuation.
     No generation, selection, or hidden state occurs here.
     """
     pool = tuple(candidates)
     invariant_ok = _invariant(invariant, candidate)
-    viable_ok = invariant_ok and _viable(candidate, pool, invariant)
+    fixed_point = candidate == current
+    viable_ok = invariant_ok and _viable(current, candidate, pool, invariant)
+    has_distinct_continuation = any(
+        continuation != candidate and _invariant(invariant, continuation)
+        for continuation in pool
+    )
+
     evidence = {
         "candidate_count": len(pool),
-        "has_distinct_continuation": viable_ok,
+        "has_distinct_continuation": has_distinct_continuation,
+        "fixed_point": fixed_point,
         "depth": 1,
     }
     return ProofObligation(
