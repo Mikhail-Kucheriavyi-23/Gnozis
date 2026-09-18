@@ -701,3 +701,163 @@ The central research question remains:
 What is the smallest lawful recursive relational structure from which the required higher-level capabilities naturally emerge?
 
 The target is not a beautiful formula by itself. The target is a mathematically coherent generative architecture whose implementation is smaller, safer, more compositional, and more evolvable because the higher-level mechanisms are derived rather than separately invented.
+
+
+## 25. New analytical conclusions — 2026-09-18 — recursive law and unified transition
+
+### 25.1 Self-reference is not self-evolution
+
+A structure may contain a representation of itself:
+R(Psi, Enc(Psi)).
+This is self-reference, not yet self-evolution.
+
+Self-evolution requires a validated transformation of the representation/dynamics:
+Psi_t -> M_t -> M_{t+1} -> Psi_{t+1}.
+
+### 25.2 Typed recursion
+
+To avoid naive self-membership paradoxes, recursive structures can be treated through typed levels S_0, S_1, ... where S_{n+1} contains structures over S_n.
+
+The architectural goal is not to force literal X in X, but to determine whether a closed/self-describing relational representation can be constructed safely.
+
+### 25.3 Structural identity
+
+Identity should not necessarily mean preservation of the same concrete elements.
+
+If f: X_t -> X_{t+1} preserves the required relational organization, then two different concrete states may share organizational identity:
+(X_t,R_t) ~= (X_{t+1},R_{t+1}).
+
+Candidate interpretation:
+identity = preserved organization under admissible transformation.
+
+This remains a theorem-candidate, not a proven universal definition.
+
+### 25.4 Growth and emergence
+
+If f: X_t -> X_{t+1} preserves existing structure while X_{t+1} contains additional elements/relations, the system can express structural growth.
+
+Candidate emergence:
+P(Psi_t)=false and P(Psi_{t+1})=true for a property P not already explicitly present at the prior description level.
+
+Need counterexamples to distinguish genuine emergence from merely hidden/re-described properties.
+
+### 25.5 Tension as constraint incompatibility
+
+For contexts A and B with constraints C_A and C_B:
+K_AB = {Psi | C_A(Psi) and C_B(Psi)}.
+
+If K_AB is empty, the constraints are jointly unsatisfiable in the current representational space.
+
+Partial tension can be represented by a restricted/nonempty overlap.
+
+Do not assume universal tau -> 0. A productive transformation may require changing the representational space.
+
+### 25.6 Creativity as lawful expansion
+
+If the current admissible transformation space is T^I_old(Psi), a candidate creative transformation changes the lawful representation/admissibility so that:
+T^I_new(Psi) properly contains T^I_old(Psi).
+
+This is a candidate definition only. Novelty alone is not evolution; invariants and lawful structure must remain meaningful.
+
+### 25.7 Evolution should be represented as a verified transition graph
+
+Define an evolution edge:
+e_t = (Psi_t, tau_t, Psi_{t+1}, pi_t)
+where pi_t is a verification/proof artifact.
+
+The evolution graph G_E=(V,E) can represent branching futures, alternative hypotheses, and later convergence/integration.
+
+Therefore:
+Psi_0 -> {Psi_A, Psi_B}
+does not require an immediate global selector if both branches are admissible and non-dominated.
+
+### 25.8 Selection need not be a primitive oracle
+
+Prefer:
+Max_preorder A(Psi)
+or the full set of admissible/non-dominated continuations,
+rather than a hidden universal score or selector.
+
+If multiple candidates remain incomparable, preserving multiple branches is mathematically legitimate.
+
+### 25.9 Observation can restrict future transformations
+
+Observation y can be modeled not only as restriction of states but as:
+T_y(Psi) subseteq T(Psi).
+
+Information can therefore be interpreted as restriction/distinguishability of possible transformations.
+
+Later structural reorganization may expand the lawful possibility space again.
+
+### 25.10 Law may be represented as a class of admissible structures
+
+Instead of hard-coding a list of immutable variables, a law may define a class:
+C = {Psi | P(Psi)=true}.
+
+Evolution remains inside C while variable structure changes.
+
+This is potentially more natural than a collection of ad-hoc immutable flags.
+
+### 25.11 Candidate unified process
+
+Current compact candidate:
+Psi
+-> interaction/constraint C
+-> admissible set A(Psi,C)
+-> if A is empty: STOP
+-> otherwise search/retain admissible Psi'
+-> verify required invariants
+-> transition
+-> update relational structure.
+
+Hard stop is therefore mathematically meaningful: if no admissible transition exists, the system must not invent one.
+
+### 25.12 Path/variational formulation
+
+For a trajectory gamma=(Psi_0,...,Psi_n), candidate:
+S[gamma] = sum_k F(Psi_k,Psi_{k+1}).
+
+A lawful path may be selected through:
+gamma* = Ext_{gamma in Gamma_L} S[gamma].
+
+Do not assume min/max or invent F as a fitness function. The research task is to determine whether F can be derived from structure, information, constraints, invariants, or a deeper law.
+
+### 25.13 Self-evolution as transformation-space evolution
+
+Ordinary evolution:
+Psi_t -> Psi_{t+1}.
+
+Higher-order evolution:
+(Psi_t, L_t) -> (Psi_{t+1}, L_{t+1})
+or equivalently a change in the lawful transformation space.
+
+This is the mathematical target behind software self-evolution. Code editing is only an implementation layer and must follow validated mathematical evolution.
+
+### 25.14 Current minimality test
+
+The architecture should be evaluated against the hypothesis that:
+Psi=(X,R)
+is the smallest fundamental structure,
+while World, Agent, Memory, Knowledge, Trust, Tension, Creativity, Autopoiesis, and possibly Law are derived structures/relations/predicates.
+
+A concept should become primitive only when counterexamples demonstrate that it cannot be derived from the lower-level vocabulary.
+
+### 25.15 Four mathematical closure families to compare next
+
+The next analytical block must compare:
+1. recursive/fixed-point closure;
+2. variational dynamics;
+3. symmetry/conservation structures;
+4. algebraic/category-theoretic closure.
+
+The comparison criterion is not elegance. It is the smallest structure capable of expressing:
+state + relation + law + constraint + branching + emergence + self-maintenance + self-modification.
+
+### 25.16 Critical research warning
+
+Do not retrofit the existing repository into the mathematics merely because it already exists.
+
+Required order:
+mathematical derivation -> counterexamples -> minimal specification -> mapping to existing code -> implementation changes -> verification.
+
+The existing Core is evidence about engineering history, not proof of mathematical optimality.
