@@ -2555,3 +2555,47 @@ Added `docs/PSI_CONTEXT_CASE_MEMORY_2026-09-18.md`. Three models remain delibera
 Applied the state-vs-context rules to the external-world/bridge boundary. Raw bridge/network data is infrastructure/input, not Ψ. Accepted observations may become candidate state material and only become canonical Ψ after explicit transition/proof/admission. Rejected or untrusted observations remain outside Ψ.
 
 Added `docs/PSI_CONTEXT_CASE_WORLD_OBSERVATION_2026-09-18.md`. This establishes an important staging concept: observation can remain a candidate among possible interpretations without becoming hidden mutable state or immediately inflating X/R. Direct Bridge → Core mutation remains excluded.
+
+## 121. Current Research Stage + Mandatory/Optional Progress Model — 2026-09-18
+
+### Current stage
+
+We are in the Ψ State-vs-Context research stage after reconnecting Uroboros → PsiTransition → CanonicalExecutor and after identifying the closure/Markov boundary. Current research cases: closure dependence, memory, and world observation. The next planned case is multi-agent interaction.
+
+The working hypothesis is that architectural planning should preserve useful superposition/options until semantic evidence justifies collapse into a concrete design. This is a planning heuristic, not yet a Core axiom.
+
+### Mandatory vs exploratory progress percentages
+
+The percentages below are planning estimates, not formal completion metrics. They apply only to what is mandatory for the current Core/architecture path; exploratory research is tracked separately and must not masquerade as required implementation.
+
+| Area | Mandatory estimate | Exploratory estimate | Status |
+|---|---:|---:|---|
+| Ψ=(X,R) semantic boundary | ~95% | ~5% | Stable, still adversarially tested |
+| Canonical PsiTransition boundary | ~90% | ~10% | Implemented; closure semantics remain open |
+| Admission / Proof / Commit boundary | ~85% | ~15% | Implemented and under semantic audit |
+| Uroboros canonical wiring | ~90% | ~10% | Connected; requires regression verification |
+| State-vs-context classification | ~65% | ~35% | Active research |
+| Markov sufficiency | ~45% | ~55% | Important unresolved semantic property |
+| Memory integration semantics | ~35% | ~65% | Classification only; no Core mutation |
+| World observation boundary | ~55% | ~45% | Boundary defined; implementation remains future work |
+| Multi-agent semantics | ~20% | ~80% | Not yet resolved; research case next |
+| Superposition/ideality planning principle | ~20% | ~80% | Hypothesis only; not a Core invariant |
+
+### Mandatory work rule
+
+For planning purposes, distinguish:
+
+- MANDATORY — required to establish the protected canonical architecture and its correctness claims.
+- RESEARCH — useful for determining future architecture but not a prerequisite for claiming the current Core boundary.
+- OPTIONAL — can be deferred without invalidating the current canonical model.
+
+Do not interpret the percentages as a promise that the project is X% complete. They are relative confidence/progress estimates for individual required properties and are expected to change as adversarial evidence appears.
+
+### Current mandatory priority
+
+1. Verify canonical PsiTransition semantics and closure independence/explicit-context contract.
+2. Verify Admission/Proof/Commit cannot bypass the Ψ transition boundary.
+3. Run fresh regression after the recent Uroboros canonical-path changes.
+4. Continue concrete context classification only where it can affect a mandatory architectural decision.
+
+Memory, world exploration, multi-agent federation, and the ideality/superposition hypothesis remain important research layers but must not force premature Core changes.
