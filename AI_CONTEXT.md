@@ -2477,3 +2477,13 @@ Cross-checking `docs/psi_transition_conformance.md` against `core/proof.py` expo
 This is not a fixture issue. The proof predicate and the documented trichotomy disagree. The intended correction is to make viability explicitly bifurcate: an invariant-valid unchanged candidate is viable as a fixed point; a changing candidate requires a distinct invariant-valid continuation under the current depth-1 rule. The correction must preserve rejection of a changing dead-end candidate.
 
 Do not claim the proof contract is closed until this contradiction is resolved and covered by tests. Full regression remains blocked.
+
+## 110. Fixed-Point Proof Contract Corrected — 2026-09-18
+
+The open semantic contradiction from block 109 is now resolved in production code. `core/proof.py::_viable()` explicitly treats `candidate == current` as viable, provided the candidate satisfies the invariant. Changing candidates still require a distinct invariant-valid continuation under the depth-1 rule.
+
+`prove_transition()` now records separate `fixed_point` and `has_distinct_continuation` evidence; the latter is no longer incorrectly used as the fixed-point viability signal.
+
+Added `tests/test_fixed_point_proof.py` covering both sides of the boundary: an invariant-valid unchanged candidate is accepted as a fixed point, while an invariant-valid changing candidate with no distinct continuation remains rejected.
+
+This closes the specific fixed-point semantic contradiction. It does not establish full-suite PASS; the next gate is regression execution against the historical failure classes.
