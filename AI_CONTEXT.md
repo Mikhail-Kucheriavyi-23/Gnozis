@@ -2724,3 +2724,22 @@ For planning only, current mandatory architectural progress is approximately 62%
 ### Standing principle
 
 Preserve useful superposition/options in planning until semantic evidence requires collapse. Do not turn every newly discovered concept into a new Core primitive. Conversely, do not freeze the interpretation of the product: RAA may continuously improve our understanding while released product versions remain bounded and reproducible.
+
+
+## 125. Intensive Proof Reconciliation Finding — 2026-09-19
+
+RAA confirmed that the canonical `PsiTransition` is only `F: Psi -> Psi`: it accepts one `Psi` and returns one `Psi`. It does not expose a candidate pool or invariant. Therefore the existing `prove_transition(current, candidate, candidates, invariant)` cannot simply be inserted into `Uroboros._canonical_admission()` without inventing missing semantics.
+
+This is a critical architectural distinction. The evolutionary path has a candidate pool and tester/invariant, so depth-1 viability is meaningful there. The canonical `PsiTransition` path currently has only a deterministic transition result. Its Proof contract must therefore be resolved before integration; do not fabricate an invariant, candidate pool, selector, or hidden continuation mechanism merely to make the API fit.
+
+Current canonical sequence:
+`Psi -> PsiTransition -> candidate -> Proof/Admission -> Commit`.
+
+Current evolutionary sequence:
+`State -> Generate(candidate pool) -> prove_transition(invariant + depth-1 viability) -> Admission -> selection -> Commit`.
+
+The two paths should not be conflated. The next mandatory question is whether canonical transition admissibility should be defined by (a) an explicit proof/invariant supplied as part of the canonical execution context, (b) a proof-carrying transition contract, or (c) a deliberately weaker structural proof at this stage. This decision must be made from existing Ψ semantics and adversarial requirements, not convenience.
+
+Additional security observation: `ProofObligation` is currently a public frozen data container and `Admission` accepts a supplied `ProofObligation`. Tests construct `passed=True` obligations directly. This is acceptable for unit fixtures but means the container itself is not cryptographic/authenticated evidence. We must distinguish executable proof computation from a manually constructed proof record before claiming that Proof prevents forgery.
+
+Do not modify canonical Core to solve this yet. First establish the canonical proof contract and its required inputs, then write adversarial tests against that contract.
