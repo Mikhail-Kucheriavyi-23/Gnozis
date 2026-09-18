@@ -2227,3 +2227,9 @@ Inspected actual `core/proof.py`, `core/admission.py`, and `core/commit.py`. The
 Added `formal/AdmissionCommit.lean` to model this gate and prove two obligations: a semantic commit implies admission, and an admitted semantic commit implies the candidate satisfies the invariant. This formalizes the existing proof/admission/commit boundary without adding a second runtime path.
 
 Remaining gaps: formalize depth-1 viability precisely, connect the formal invariant to the concrete Python invariant callable, and establish the locality/hidden-state/extensionality obligations as one compositional I(Psi).
+
+## 73. Depth-1 Viability Formalization — 2026-09-18
+
+Added `formal/Viability.lean` after inspecting the exact `_viable()` implementation in `core/proof.py`. The formal definition requires a distinct continuation in the supplied candidate pool that satisfies the same invariant: `∃ continuation, pool continuation ∧ continuation ≠ candidate ∧ I continuation`.
+
+`ProofPasses` now mirrors the executable condition `invariant_ok ∧ viable_ok`. This closes the main semantic gap in `ProofObligation`. Remaining work is to connect the finite Python iterable pool to the formal `pool : Psi -> Prop` representation and prove the executable `_viable()` result corresponds to the witness formulation.
