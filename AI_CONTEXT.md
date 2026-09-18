@@ -2175,3 +2175,7 @@ This strengthens the local static invariant: semantic commit APIs are not import
 Updated `formal/MinimalCore.lean` successfully. The formal target now models `Psi = (X,R)`, defines a kernel invariant predicate `K0`, makes `Transition` carry an explicit preservation proof `K0 P -> K0 next`, and defines composition of two invariant-preserving transitions. The attempted additional theorem write was blocked by a missing SHA on the second update and is not counted as implemented.
 
 Important limitation: `K0 := True` is still a placeholder. The next mathematical step is to replace it with the actual protected Gnozis kernel invariant and prove preservation from the real admission/refinement semantics.
+
+## 65. K0 Source Reconciliation — 2026-09-18
+
+Reconciled the machine-proof target with the actual repository. The executable protected invariant is `core/root_invariant.py::RootInvariant`, not a separate invented semantic model. `formal/MinimalCore.lean` was updated to remove the `K0 := True` placeholder and require an explicit predicate witness. This is still an intermediate bridge: the next step is to encode the actual RootInvariant semantics over the canonical `Psi` representation rather than introduce a parallel invariant definition.
