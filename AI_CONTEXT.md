@@ -2872,3 +2872,12 @@ Added `tests/test_admission_regimes.py` covering fundamental acceptance without 
 Formal `AdmissionCommit.lean` now names `FundamentalAdmission` and `EvolutionaryAdmission`; legacy `Admission` remains an alias for evolutionary admission to minimize compatibility impact. This is a deliberate first bridge, not final parity: canonical Uroboros still contains the hand-written proof stub and must be updated only after the new admission regime is exercised end-to-end.
 
 RME status: bottom-up chain is now Implementation -> Tests -> Admission -> Formal model. Next step is to inspect/execute the canonical Uroboros path against this boundary, then reconcile any concrete failure upward before further architectural changes.
+
+
+## 137. Bottom-Up Canonical Wiring Result — 2026-09-19
+
+Canonical `Uroboros._canonical_admission()` has now been routed through `prove_fundamental_transition()` instead of constructing the previous hard-coded `passed=True, invariant=True, viable=True` proof. It computes the actual candidate from `PsiTransition`, constructs fundamental evidence with viability marked not applicable, and sends that evidence through the regime-aware `admit()` boundary.
+
+Added `tests/test_uroboros_canonical_proof.py` verifying that canonical Uroboros uses the fundamental regime and does not fabricate viability. The transition binding check in `CanonicalExecutor.step()` remains the final candidate/result consistency barrier.
+
+Important limitation: the canonical path currently supplies a permissive invariant (`lambda _: True`) because no canonical root/semantic invariant injection is wired into Uroboros yet. This is now the next concrete lower-layer issue to investigate; do not claim canonical semantic invariants are complete. The former fake viability stub is removed, but invariant semantics are still intentionally incomplete.
