@@ -2890,3 +2890,14 @@ The repository search did not expose a separate canonical invariant module at th
 This means the next P0 is an API provenance question: where should the semantic invariant come from? Candidate sources must be evaluated against the existing architecture before implementation: (a) a canonical invariant supplied explicitly to `Uroboros.canonical`, (b) an invariant owned by the `PsiTransition`, or (c) a kernel/root invariant already present elsewhere. The choice must preserve one source of truth and must not create a second state model.
 
 Bottom-up rule: do not modify the API until the existing invariant definitions and tests are located and their intended ownership is established. Current canonical proof path is therefore structurally corrected but semantically permissive.
+
+
+## 139. Invariant Ownership Resolved by Reverse Audit — 2026-09-19
+
+Reverse search found the actual canonical invariant abstractions. `core/dynamics.py` defines the semantic `Invariant = Callable[[Psi], bool]` and closure checks explicitly evaluate both `invariant(psi)` and `invariant(transition(psi))`. This is the correct semantic-layer type, not `RootInvariant`.
+
+`core/root_invariant.py::RootInvariant` is explicitly a protected kernel boundary (`K0`) for meta-evolution and must NOT be reused as the ordinary Ψ candidate invariant. `formal/ConcreteInvariant.lean` defines a concrete formal `I : Psi -> Prop` as a decomposition into projection/test/selection/locality/causal predicates, but several components are still placeholders (`True`); therefore it is not yet a safe executable replacement for the Python semantic invariant.
+
+Existing repository rules also explicitly state that evaluation policy/test criteria belong to explicit proof context and must not silently become Ψ, while Rule 8 says a classification becomes a core invariant only after evidence. Therefore the current canonical Uroboros should NOT hard-wire `RootInvariant` or the placeholder Lean `I`.
+
+Correct next P0: expose the semantic `Invariant` as explicit configuration/context at the canonical execution boundary (or reuse an already existing semantic invariant provider if found), with a fail-closed default rather than `lambda _: True`. Preserve RootInvariant exclusively for meta/kernel admission. This is now an ownership decision grounded in actual code rather than a speculative API choice.
