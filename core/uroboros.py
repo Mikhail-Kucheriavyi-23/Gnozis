@@ -111,16 +111,16 @@ class Uroboros:
 
     def _canonical_admission(self):
         from .admission import admit
-        from .proof import ProofObligation
+        from .proof import prove_fundamental_transition
 
         if self.psi_transition is None:
             raise RuntimeError("canonical transition is not configured.")
-        candidate = self.psi_transition(self.state.to_psi())
-        proof = ProofObligation(
-            passed=True,
-            invariant=True,
-            viable=True,
-            evidence={"source": "PsiTransition"},
+        current = self.state.to_psi()
+        candidate = self.psi_transition(current)
+        proof = prove_fundamental_transition(
+            current=current,
+            candidate=candidate,
+            invariant=lambda _: True,
         )
         return admit(candidate, proof)
 
