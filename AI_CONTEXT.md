@@ -2815,3 +2815,19 @@ Direct inspection of `core/proof.py` resolves the meaning of `viable`: it is spe
 This confirms that `viable` must NOT be required for the fundamental `PsiTransition F:Ψ→Ψ` path, because that path has no candidate pool. It belongs to the evolutionary proof regime. The formal `ProofObligation.viable : Prop` should therefore be interpreted as an evolutionary obligation, not a universal property of every transition.
 
 P0 consequence: before changing `Admission`, reconcile the Python/formal model so ordinary fundamental proofs are not forced to invent viability. A clean direction is to distinguish proof regimes explicitly (e.g. evolutionary proof vs fundamental semantic proof) while preserving existing APIs as far as possible. Do not set `viable=True` as a semantic lie. Also preserve the documented fixed-point rule and test it; the repository's own AI_CONTEXT notes that the conformance document and current proof implementation have a fixed-point contradiction that remains to be resolved.
+
+
+## 132. RME — Viability Formalization Contradiction Is Real and Scoped — 2026-09-19
+
+Inspection of `formal/Viability.lean`, `formal/ProofGate.lean`, and `formal/FullTransition.lean` confirms that formal viability is currently defined as a distinct continuation witness for every candidate. Unlike Python `_viable()`, the formal definitions do NOT encode the Python fixed-point exception `candidate == current -> viable=True`.
+
+Therefore the repository currently has a genuine Python/formal semantic divergence:
+
+Python: `candidate == current` is viable (provided invariant holds).
+Formal: `Viable(I,candidate,pool)` always requires an explicit distinct continuation.
+
+This must be resolved before claiming formal/Python proof parity. The least invasive interpretation is that fixed-point acceptance is a property of the *transition regime* rather than the generic viability predicate: ordinary fundamental/fixed-point transitions can bypass evolutionary viability, while evolutionary candidate selection uses the distinct-continuation predicate. Do not silently modify formal Viable or Python `_viable()` until the regime boundary is explicit.
+
+`FullTransition.lean` further confirms the intended composition: candidate invariant proof, admission, candidate-to-next binding, and root preservation are separate obligations. This supports the emerging architecture of regime-specific proof obligations with a common certified-transition/admission shape.
+
+P0 decision sequence is now: (1) explicitly classify fundamental fixed-point/transition proof vs evolutionary viability; (2) preserve formal Viable as candidate-pool continuation unless evidence requires changing it; (3) introduce the smallest explicit regime distinction; (4) only then reconcile Python and Lean and remove canonical proof stubs.
