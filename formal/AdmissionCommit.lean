@@ -11,8 +11,14 @@ structure ProofObligation (I : Psi → Prop) (candidate : Psi) where
   invariant_ok : I candidate
   viable : Prop
 
-def Admission (I : Psi → Prop) (candidate : Psi) (proof : ProofObligation I candidate) : Prop :=
+def FundamentalAdmission (I : Psi → Prop) (candidate : Psi) (proof : ProofObligation I candidate) : Prop :=
+  proof.passed = true ∧ proof.invariant_ok
+
+def EvolutionaryAdmission (I : Psi → Prop) (candidate : Psi) (proof : ProofObligation I candidate) : Prop :=
   proof.passed = true ∧ proof.invariant_ok ∧ proof.viable
+
+def Admission (I : Psi → Prop) (candidate : Psi) (proof : ProofObligation I candidate) : Prop :=
+  EvolutionaryAdmission I candidate proof
 
 def SemanticCommit (I : Psi → Prop) (previous candidate : Psi)
     (proof : ProofObligation I candidate) : Prop :=
