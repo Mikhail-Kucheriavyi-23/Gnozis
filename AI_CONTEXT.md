@@ -2795,3 +2795,14 @@ Inspection of `core/meta_admission.py` resolves part of the previous ambiguity. 
 Therefore, for META/kernel evolution, the repository intentionally uses a two-state root-validity contract plus closure/refinement. This should not automatically be imposed on ordinary `PsiTransition` evolution. RME now distinguishes: ordinary semantic admission (candidate invariant + transition binding), meta admission (before root validity + after root validity + closure + refinement), and evolutionary viability (candidate pool continuation). These are three separate proof regimes.
 
 This is a strong architectural simplification: do not generalize MetaAdmission into ordinary Proof. Instead, use it as evidence that Gnozis already has a pattern for explicit, fail-closed, proof-carrying admission. The next P0 task is to compare ordinary Admission with MetaAdmission and identify the minimum common algebraic interface without collapsing their semantics.
+
+
+## 130. RME Result — Ordinary Admission Is Weaker Than Formal Admission — 2026-09-19
+
+Direct comparison of `core/admission.py` with `formal/AdmissionCommit.lean` reveals the next concrete contract mismatch. Python `admit(candidate, proof)` checks only that `proof` is a `ProofObligation` and that `proof.passed` is a bool; it sets `accepted=proof.passed`. It does NOT independently require `proof.invariant`/`invariant_ok` or `proof.viable`. The formal contract defines Admission as `passed=true ∧ invariant_ok ∧ viable`.
+
+Therefore the common admission algebra cannot yet be defined as merely `accepted == passed`. The semantic gate must eventually enforce the evidence predicates that the formal layer claims are prerequisites. This is a stronger finding than the previous generic reconciliation task.
+
+The safe target is not to make ordinary Admission identical to MetaAdmission. Instead establish a shared logical shape: an admission object is accepted iff its proof/evidence satisfies the regime-specific obligations. Ordinary regime: transition binding + candidate invariant + whatever viability semantics apply. Meta regime: proof binding + root(before) + root(after) + refinement + closure. The exact Python representation can differ.
+
+Do not implement this fix yet until the ordinary ProofObligation fields are reconciled with their formal meanings and the `viable` field's semantics for fundamental transitions are explicitly resolved. This is now the primary P0 before removing the canonical `passed=True` stub.
