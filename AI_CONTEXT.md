@@ -2881,3 +2881,12 @@ Canonical `Uroboros._canonical_admission()` has now been routed through `prove_f
 Added `tests/test_uroboros_canonical_proof.py` verifying that canonical Uroboros uses the fundamental regime and does not fabricate viability. The transition binding check in `CanonicalExecutor.step()` remains the final candidate/result consistency barrier.
 
 Important limitation: the canonical path currently supplies a permissive invariant (`lambda _: True`) because no canonical root/semantic invariant injection is wired into Uroboros yet. This is now the next concrete lower-layer issue to investigate; do not claim canonical semantic invariants are complete. The former fake viability stub is removed, but invariant semantics are still intentionally incomplete.
+
+
+## 138. Bottom-Up Invariant Source Audit — 2026-09-19
+
+The repository search did not expose a separate canonical invariant module at the expected paths; therefore no new invariant architecture is invented at this step. The current concrete fact is that `Uroboros.canonical()` accepts only `transition`, `state`, `kernel_version`, and `history`, while `_canonical_admission()` supplies `lambda _: True` as the invariant.
+
+This means the next P0 is an API provenance question: where should the semantic invariant come from? Candidate sources must be evaluated against the existing architecture before implementation: (a) a canonical invariant supplied explicitly to `Uroboros.canonical`, (b) an invariant owned by the `PsiTransition`, or (c) a kernel/root invariant already present elsewhere. The choice must preserve one source of truth and must not create a second state model.
+
+Bottom-up rule: do not modify the API until the existing invariant definitions and tests are located and their intended ownership is established. Current canonical proof path is therefore structurally corrected but semantically permissive.
