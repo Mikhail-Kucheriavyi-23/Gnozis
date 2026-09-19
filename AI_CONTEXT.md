@@ -2852,3 +2852,12 @@ Target semantics:
 `prove_fundamental_transition(current, candidate, invariant)` computes only candidate invariant validity and returns evidence identifying `regime=fundamental`, with no candidate-pool viability calculation. The existing `prove_transition()` remains the evolutionary/candidate-pool constructor for now.
 
 This is the first executable boundary between the two proof regimes. After tests establish its behavior, the next reverse step is to connect canonical Uroboros to this constructor and remove its hand-written `passed=True/invariant=True/viable=True` proof. Admission must be changed only after the regime semantics are executable and tested.
+
+
+## 135. Bottom-Up Implementation Result — Fundamental Proof Constructor + Tests — 2026-09-19
+
+Implemented the first regime boundary without changing Psi, Admission, Uroboros, or the ProofObligation dataclass. Added `prove_fundamental_transition(current, candidate, invariant)` in `core/proof.py`. It computes only candidate invariant validity, records `regime=fundamental`, and explicitly records `viability=not_applicable`; the existing evolutionary `prove_transition()` remains unchanged.
+
+Added `tests/test_fundamental_proof.py` covering: no candidate pool required, valid fixed point, invariant failure, and strict-bool fail-closed behavior. This is intentionally a bottom-up checkpoint. The canonical Uroboros stub remains untouched until this constructor's semantics are reconciled with Admission and the formal bridge.
+
+RME workflow status: implementation -> tests -> contract reconciliation is now active. If the next test/formal comparison reveals a contradiction, move upward from that concrete failure before changing architecture.
