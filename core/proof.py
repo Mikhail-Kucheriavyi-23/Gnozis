@@ -49,6 +49,30 @@ def _viable(
     return False
 
 
+
+def prove_fundamental_transition(
+    current: Any,
+    candidate: Any,
+    invariant: Invariant,
+) -> ProofObligation:
+    """Prove a fundamental Psi transition without evolutionary viability.
+
+    Fundamental transitions have no candidate pool. Their semantic proof is
+    therefore limited to the candidate invariant; transition/result binding is
+    enforced by the canonical executor.
+    """
+    invariant_ok = _invariant(invariant, candidate)
+    return ProofObligation(
+        passed=invariant_ok,
+        invariant=invariant_ok,
+        viable=False,
+        evidence={
+            "regime": "fundamental",
+            "fixed_point": candidate == current,
+            "viability": "not_applicable",
+        },
+    )
+
 def prove_transition(
     current: Any,
     candidate: Any,
