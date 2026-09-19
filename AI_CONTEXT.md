@@ -2901,3 +2901,82 @@ Reverse search found the actual canonical invariant abstractions. `core/dynamics
 Existing repository rules also explicitly state that evaluation policy/test criteria belong to explicit proof context and must not silently become Ψ, while Rule 8 says a classification becomes a core invariant only after evidence. Therefore the current canonical Uroboros should NOT hard-wire `RootInvariant` or the placeholder Lean `I`.
 
 Correct next P0: expose the semantic `Invariant` as explicit configuration/context at the canonical execution boundary (or reuse an already existing semantic invariant provider if found), with a fail-closed default rather than `lambda _: True`. Preserve RootInvariant exclusively for meta/kernel admission. This is now an ownership decision grounded in actual code rather than a speculative API choice.
+
+
+## 140. Mathematical Reverse Addendum — 2026-09-19
+
+This section records the results of the 18–19 September mathematical/adversarial reverse that were not yet present in AI_CONTEXT. Preserve these as scoped research conclusions; do not promote open questions to VERIFIED.
+
+### 140.1 Minimal Root Contract candidate
+The current minimal mathematical candidate is Psi=(X,R), with admissible transition requiring a mechanically checkable proof. Let K be the minimal trusted proof kernel and F the current formal transition/proof semantics.
+
+Candidate acceptance: Transition(Psi,Psi') iff exists pi such that K(pi)=True and pi |-F (Psi -> Psi'). This does not by itself prove semantic safety or universal truth.
+
+### 140.2 Proof kernel vs semantics
+K is the trusted proof-checking boundary. F is evolvable formal semantics. Psi is the current state. AI, human, search, mutation, or another agent may propose candidates/proofs, but proposal is not acceptance. Trusted-kernel status is an explicit assumption. Formal correctness relative to K/F is not universal truth.
+
+### 140.3 Structural evolution is not growth
+Evolution does not require X' to contain X or R' to contain R. Valid changes may include X-change, R-change, simultaneous change, relation deletion, and R'=empty when permitted. Branching is optional, not a goal. Selector and global clock are not fundamental requirements.
+
+### 140.4 Stop and branching
+For T subseteq S x S, define E(Psi)={Psi' | (Psi,Psi') in T}. A natural hard stop is Stop(Psi) iff E(Psi)=empty. Possible cases are |E(Psi)|=0, 1, or >1. No universal selector is required by the ontology.
+
+### 140.5 Test is not selection
+Test(Psi,Psi')->{True,False} must not be conflated with Select(Psi,E(Psi))->Psi'. A system may verify admissibility without introducing a global authority that selects one successor.
+
+### 140.6 Local proof validity is not global semantic safety
+Adversarial construction showed that even if every local proof satisfies K(pi_i)=True, this does not imply preservation of an arbitrary semantic property P across a chain. Therefore proof continuity != semantic continuity. Local proofs also do not imply transitivity of T. If global composition is required, a composition operation must exist that turns proofs of Psi0->Psi1 and Psi1->Psi2 into a proof of Psi0->Psi2.
+
+### 140.7 Semantic drift
+A change F_t->F_{t+1} can be individually proof-valid while changing the meaning or admissible consequences of the system. Syntactic continuity != semantic continuity. Candidate semantic invariant M(F), expressing meta-properties that must survive semantic evolution, is OPEN and not proven.
+
+### 140.8 Kernel preservation vs contract preservation
+Separate K-preservation (trusted kernel remains the root verification boundary) from contract preservation (M(F_t)->M(F_{t+1}) under an allowed semantic change). K-preservation alone does not prove absence of semantic drift.
+
+### 140.9 Self-modification
+Code_t->Code_{t+1} can be treated as a special case of proof-preserving evolution. It does not require a separate mathematical primitive. Mutable layers may include Psi, F, code and workspace; K is the intended immutable root unless formally changed later.
+
+### 140.10 Persistence, logs, crypto, bridges
+Persistence stores evidence/recovery/history; logs store provenance; cryptography provides integrity/authenticity/tamper evidence; Internet/world bridges provide external inputs/candidates. None is the mathematical source of semantic truth. Preferred boundary: external input -> candidate -> proof/test/admission -> transition.
+
+### 140.11 Multi-agent and cloning
+Multiple agents can independently propose transitions without a global controller. A clone can be represented as a provenance-bearing transition from one instance to another; descendants can form a connected evolution graph rather than isolated copies.
+
+### 140.12 Autonomy
+Current precise working definition: Autonomy = internal generation + proof-constrained transition. Autonomy does not mean arbitrary self-authorization.
+
+### 140.13 Root Contract limitation
+The minimal candidate RC1=Psi=(X,R), RC2=proof-required transition, RC3=trusted-kernel proof acceptance establishes a formal acceptance boundary only. It does not by itself prove semantic safety, preservation of arbitrary invariants, absence of semantic drift, or universal correctness.
+
+### 140.14 Refinement/conservative extension
+Next candidate: model F_{t+1} as a proof-preserving refinement or conservative extension of F_t. This is not yet the final rule. It requires a Gnozis-specific definition and adversarial counterexample search.
+
+### 140.15 Bottom-up implementation discipline
+Use: concrete evidence -> smallest affected layer -> tests -> contract reconciliation -> higher layer. Do not jump to architecture-wide rewrites when a lower-level contradiction is found.
+
+### 140.16 Repository proof-regime distinction
+Repository evidence supports three regimes: (1) fundamental semantic transition: candidate invariant + transition binding/commit equality, without fabricated candidate-pool viability; (2) evolutionary viability: candidate-pool continuation witness, not intrinsic to every F:Psi->Psi transition; (3) meta/kernel evolution: root(before)+root(after)+closure/refinement as represented by MetaAdmission. Do not collapse these regimes.
+
+### 140.17 Python/formal viability divergence
+Python _viable() accepts candidate==current as a fixed point when the invariant holds. Formal Viability currently requires an explicit distinct continuation witness. Do not silently change either side. First make the regime boundary explicit, then reconcile formal/Python semantics.
+
+### 140.18 Admission reconciliation
+Python admission was weaker than the formal admission contract because it did not independently enforce all formal evidence predicates. Regime-aware admission has now been introduced: fundamental acceptance does not fabricate viability; evolutionary acceptance retains viability; meta admission remains separate.
+
+### 140.19 Canonical Uroboros progress
+Canonical Uroboros now routes through the fundamental proof constructor and regime-aware admission. The former hard-coded passed=True/invariant=True/viable=True proof stub is removed. Current limitation: canonical execution still supplies a permissive invariant (lambda _: True), so semantic admissibility is not complete.
+
+### 140.20 Invariant ownership
+Reverse audit found core/dynamics.py::Invariant as the semantic candidate invariant abstraction. core/root_invariant.py::RootInvariant is the protected K0/meta-evolution boundary and must not be reused as the ordinary Psi candidate invariant. formal/ConcreteInvariant.lean contains a formal I:Psi->Prop but several components remain placeholders/True, so it is not yet a safe executable replacement. Evaluation policy/test criteria belong to explicit proof context and must not silently become Psi.
+
+### 140.21 Current P0 invariant task
+Determine how semantic Invariant is supplied to canonical execution while preserving Psi=(X,R), avoiding selector authority and avoiding a second hidden source of truth. Candidate approaches must be audited against existing ownership before API changes. Preferred direction: explicit semantic invariant provider/context with fail-closed default rather than lambda _: True, but implementation must follow repository evidence.
+
+### 140.22 Mathematical research frontier
+Active frontier: M(F) -> formal refinement/conservative-extension definition -> adversarial counterexample search -> proof of preservation if possible. If a counterexample exists, refine M from the bottom. If preservation can be proved, record exact assumptions and theorem scope.
+
+### 140.23 Status discipline
+Future AI agents must label claims as DEFINITION / OBSERVED / DERIVED / VERIFIED / REJECTED / OPEN. In particular M(F) is OPEN; semantic-drift prevention is NOT proven; trusted K is an explicit assumption; proof continuity is NOT automatically semantic continuity; local proof validity is NOT automatically compositional without a composition rule.
+
+### 140.24 Reverse continuation point
+Do not return to module accumulation before completing the mathematical falsification loop. Next reverse: F_t->F_{t+1} as candidate proof-preserving refinement/conservative extension. Attempt to construct a counterexample in which the candidate refinement passes K but destroys M(F), semantic identity, or future proof-preserving evolution. Only after this boundary is resolved should implementation architecture be expanded.
