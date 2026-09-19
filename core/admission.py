@@ -35,8 +35,19 @@ def admit(candidate: Any, proof: ProofObligation) -> Admission:
         raise TypeError("Admission requires a ProofObligation.")
     if type(proof.passed) is not bool:
         raise TypeError("ProofObligation.passed must be bool.")
+    if type(proof.invariant) is not bool:
+        raise TypeError("ProofObligation.invariant must be bool.")
+    if type(proof.viable) is not bool:
+        raise TypeError("ProofObligation.viable must be bool.")
+
+    regime = proof.evidence.get("regime")
+    if regime == "fundamental":
+        accepted = proof.passed and proof.invariant
+    else:
+        accepted = proof.passed and proof.invariant and proof.viable
+
     return Admission(
-        accepted=proof.passed,
+        accepted=accepted,
         candidate=candidate,
         proof=proof,
     )
