@@ -2831,3 +2831,14 @@ This must be resolved before claiming formal/Python proof parity. The least inva
 `FullTransition.lean` further confirms the intended composition: candidate invariant proof, admission, candidate-to-next binding, and root preservation are separate obligations. This supports the emerging architecture of regime-specific proof obligations with a common certified-transition/admission shape.
 
 P0 decision sequence is now: (1) explicitly classify fundamental fixed-point/transition proof vs evolutionary viability; (2) preserve formal Viable as candidate-pool continuation unless evidence requires changing it; (3) introduce the smallest explicit regime distinction; (4) only then reconcile Python and Lean and remove canonical proof stubs.
+
+
+## 133. RME — Do Not Introduce a New Proof Regime Type Yet — 2026-09-19
+
+`formal/FullTransition.lean` shows that the existing certified-transition composition already keeps candidate invariant proof, admission, commit equality, and root preservation separate. `formal/ProofGate.lean` and `formal/Viability.lean` already isolate `ProofPasses`/`Viable` as the candidate-pool regime. Therefore the minimum next step is not a new FundamentalProof class/type.
+
+Instead, preserve the current ProofObligation shape long enough to split the semantic gate at the call boundary: fundamental transition proof should establish `I(candidate)` plus binding/commit equality and should not fabricate a viability witness; evolutionary proof uses `ProofPasses = I(candidate) ∧ Viable(I,candidate,pool)`. This can be expressed with regime-specific constructors/functions before any dataclass/type proliferation.
+
+Important RME correction: the repository already contains a formal composition point (`CertifiedTransition`) capable of carrying both regimes' shared outer structure. The missing part is explicit regime selection and a correct executable/formal bridge for the pool witness. Do not redesign the whole proof architecture; add the smallest regime-aware proof construction and tests.
+
+Next P0: implement/tests at constructor/function level first, then reconcile `Admission` so it cannot accept a fundamental proof by pretending `viable=True`. Only after tests pass should canonical Uroboros be changed.
