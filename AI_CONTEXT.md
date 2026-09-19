@@ -2842,3 +2842,13 @@ Instead, preserve the current ProofObligation shape long enough to split the sem
 Important RME correction: the repository already contains a formal composition point (`CertifiedTransition`) capable of carrying both regimes' shared outer structure. The missing part is explicit regime selection and a correct executable/formal bridge for the pool witness. Do not redesign the whole proof architecture; add the smallest regime-aware proof construction and tests.
 
 Next P0: implement/tests at constructor/function level first, then reconcile `Admission` so it cannot accept a fundamental proof by pretending `viable=True`. Only after tests pass should canonical Uroboros be changed.
+
+
+## 134. Bottom-Up Implementation Step — Fundamental Proof Constructor Boundary — 2026-09-19
+
+Following the new bottom-up error-refinement rule, the next change is intentionally confined to `core/proof.py`. Do not alter Uroboros or Admission yet. Introduce a dedicated fundamental-transition proof construction function rather than encoding the regime distinction in a new dataclass.
+
+Target semantics:
+`prove_fundamental_transition(current, candidate, invariant)` computes only candidate invariant validity and returns evidence identifying `regime=fundamental`, with no candidate-pool viability calculation. The existing `prove_transition()` remains the evolutionary/candidate-pool constructor for now.
+
+This is the first executable boundary between the two proof regimes. After tests establish its behavior, the next reverse step is to connect canonical Uroboros to this constructor and remove its hand-written `passed=True/invariant=True/viable=True` proof. Admission must be changed only after the regime semantics are executable and tested.
