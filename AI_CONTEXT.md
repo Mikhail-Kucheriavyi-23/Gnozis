@@ -2806,3 +2806,12 @@ Therefore the common admission algebra cannot yet be defined as merely `accepted
 The safe target is not to make ordinary Admission identical to MetaAdmission. Instead establish a shared logical shape: an admission object is accepted iff its proof/evidence satisfies the regime-specific obligations. Ordinary regime: transition binding + candidate invariant + whatever viability semantics apply. Meta regime: proof binding + root(before) + root(after) + refinement + closure. The exact Python representation can differ.
 
 Do not implement this fix yet until the ordinary ProofObligation fields are reconciled with their formal meanings and the `viable` field's semantics for fundamental transitions are explicitly resolved. This is now the primary P0 before removing the canonical `passed=True` stub.
+
+
+## 131. RME Viability Semantics Resolved — 2026-09-19
+
+Direct inspection of `core/proof.py` resolves the meaning of `viable`: it is specifically a depth-1 continuation property over an explicit candidate pool. `_viable()` returns true for `candidate == current` (fixed point); for a changing candidate it requires another candidate in the supplied pool that satisfies the same invariant. `prove_transition()` therefore has the exact semantics `invariant_ok ∧ viable_ok`, with `viable` inseparable from candidate-pool evolution.
+
+This confirms that `viable` must NOT be required for the fundamental `PsiTransition F:Ψ→Ψ` path, because that path has no candidate pool. It belongs to the evolutionary proof regime. The formal `ProofObligation.viable : Prop` should therefore be interpreted as an evolutionary obligation, not a universal property of every transition.
+
+P0 consequence: before changing `Admission`, reconcile the Python/formal model so ordinary fundamental proofs are not forced to invent viability. A clean direction is to distinguish proof regimes explicitly (e.g. evolutionary proof vs fundamental semantic proof) while preserving existing APIs as far as possible. Do not set `viable=True` as a semantic lie. Also preserve the documented fixed-point rule and test it; the repository's own AI_CONTEXT notes that the conformance document and current proof implementation have a fixed-point contradiction that remains to be resolved.
