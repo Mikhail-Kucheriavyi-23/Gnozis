@@ -2861,3 +2861,14 @@ Implemented the first regime boundary without changing Psi, Admission, Uroboros,
 Added `tests/test_fundamental_proof.py` covering: no candidate pool required, valid fixed point, invariant failure, and strict-bool fail-closed behavior. This is intentionally a bottom-up checkpoint. The canonical Uroboros stub remains untouched until this constructor's semantics are reconciled with Admission and the formal bridge.
 
 RME workflow status: implementation -> tests -> contract reconciliation is now active. If the next test/formal comparison reveals a contradiction, move upward from that concrete failure before changing architecture.
+
+
+## 136. Bottom-Up Admission Boundary Implemented — 2026-09-19
+
+The lower-layer result was strong enough to change the admission boundary. `core/admission.py` now validates `passed`, `invariant`, and `viable` as strict booleans and applies regime-specific acceptance: `fundamental` requires `passed ∧ invariant`; all other proofs retain `passed ∧ invariant ∧ viable`. A forged non-fundamental proof with `passed=True, invariant=True, viable=False` is rejected.
+
+Added `tests/test_admission_regimes.py` covering fundamental acceptance without viability, fundamental invariant failure, evolutionary rejection without continuation, and forged-proof rejection.
+
+Formal `AdmissionCommit.lean` now names `FundamentalAdmission` and `EvolutionaryAdmission`; legacy `Admission` remains an alias for evolutionary admission to minimize compatibility impact. This is a deliberate first bridge, not final parity: canonical Uroboros still contains the hand-written proof stub and must be updated only after the new admission regime is exercised end-to-end.
+
+RME status: bottom-up chain is now Implementation -> Tests -> Admission -> Formal model. Next step is to inspect/execute the canonical Uroboros path against this boundary, then reconcile any concrete failure upward before further architectural changes.
