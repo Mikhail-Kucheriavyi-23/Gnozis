@@ -1,0 +1,26 @@
+id: C-0057
+type: claim
+status: FORMALIZED
+title: Verification-relevant semantic projection must be explicit and versioned
+scope: Research Library provenance and verification history; concerns the canonical projection used to derive immutable claim-state identity.
+statement: The set of claim-state fields treated as verification-relevant must itself be explicitly specified, versioned, and provenance-bound; otherwise changes in canonicalization rules can silently change content identity or cause distinct epistemic states to collide.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0056
+  - type: REFERENCES
+    target: C-0055
+  - type: REFERENCES
+    target: C-0051
+evidence: []
+engineering:
+  consequence: "Canonical claim identity must reference a versioned semantic-projection specification. Changes to that specification require explicit compatibility analysis and must not silently reinterpret historical content identities."
+  gap: "A formal semantic-projection schema, version transition rules, and backward-compatibility semantics have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
