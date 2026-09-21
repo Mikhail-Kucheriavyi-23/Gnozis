@@ -1,0 +1,26 @@
+id: C-0074
+type: claim
+status: FORMALIZED
+title: Epistemic contradiction is scope-, assumption-, and compatibility-relative
+scope: Research Library provenance and verification history; concerns formal identification of contradictions between claims and decisions.
+statement: Epistemic contradiction cannot be inferred solely from syntactic difference or opposing values; contradiction must be evaluated relative to the claims' semantic scope, assumptions, temporal/contextual conditions, and an explicit compatibility relation.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0073
+  - type: REFERENCES
+    target: C-0072
+  - type: REFERENCES
+    target: C-0065
+evidence: []
+engineering:
+  consequence: "Contradiction analysis should compare normalized semantic projections together with scope, assumptions, temporal/contextual qualifiers, and an explicit compatibility predicate. Raw text inequality or opposite literals must not be sufficient for contradiction classification."
+  gap: "Formal compatibility predicates, contradiction classes, qualifier handling, and deterministic contradiction-detection rules have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
