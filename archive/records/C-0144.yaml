@@ -1,0 +1,28 @@
+id: C-0144
+type: claim
+status: FORMALIZED
+title: Model-challenge stopping requires residual-uncertainty accounting rather than challenge-count thresholds alone
+scope: Research Library provenance and verification history; concerns stopping rules, residual uncertainty, untested model alternatives, and diminishing information gain.
+statement: Stopping a search-space model challenge cannot be justified solely by the number of challenges performed or achieved modeled coverage. A stopping decision must account for residual uncertainty, relevant untested alternatives, remaining blind-spot hypotheses, and the materiality of possible omitted regions. Diminishing marginal information gain may inform stopping but does not by itself establish adequacy.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0143
+  - type: REFERENCES
+    target: C-0142
+  - type: REFERENCES
+    target: C-0141
+  - type: REFERENCES
+    target: C-0139
+evidence: []
+engineering:
+  consequence: "Record stopping rationale, residual-uncertainty state, untested model alternatives, unresolved blind-spot hypotheses, and materiality assumptions. Treat marginal information gain as supporting evidence, not as a standalone adequacy proof."
+  gap: "Formal residual-uncertainty representation, materiality model, alternative-space accounting, stopping authority, and termination proof obligations have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
