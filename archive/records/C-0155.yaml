@@ -1,0 +1,28 @@
+id: C-0155
+type: claim
+status: FORMALIZED
+title: Authorization policy is a distinct control layer and must not be conflated with verification evidence
+scope: Research Library provenance and verification history; concerns authorization policy, commit control, verification evidence, trust boundaries, and action permission.
+statement: A policy that determines whether a residual verification state is permitted to commit is a distinct control layer from the evidence and verification result used to describe that state. Authorization policy may legitimately encode action constraints beyond truth or verification status, but its provenance, authority, scope, and decision rationale must remain explicit. A commit authorization decision must not be represented as additional verification evidence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0154
+  - type: REFERENCES
+    target: C-0153
+  - type: REFERENCES
+    target: C-0152
+  - type: REFERENCES
+    target: C-0130
+evidence: []
+engineering:
+  consequence: "Represent verification evidence, residual assessment, authorization policy, and commit decision as distinct typed artifacts with separate provenance and authority. Prevent authorization outcomes from entering the evidence set as if they were truth observations."
+  gap: "Formal authorization-policy schema, authority model, trust-boundary rules, conflict handling between verification and policy, and commit-decision provenance have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
