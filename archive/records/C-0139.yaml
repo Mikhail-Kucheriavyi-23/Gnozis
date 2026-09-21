@@ -1,0 +1,28 @@
+id: C-0139
+type: claim
+status: FORMALIZED
+title: Epistemic integrity requires detecting forbidden justification paths, not merely graph cycles
+scope: Research Library provenance and verification history; concerns circular justification, self-support paths, and typed epistemic dependency graphs.
+statement: A cycle is not by itself an epistemic violation. Integrity analysis must identify paths in which a claim, directly or transitively, contributes to generating, selecting, validating, or otherwise supporting evidence that is then used to justify the same claim. Such forbidden justification paths constitute circular self-support even when the graph contains legitimate feedback cycles elsewhere.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0138
+  - type: REFERENCES
+    target: C-0137
+  - type: REFERENCES
+    target: C-0136
+  - type: REFERENCES
+    target: C-0135
+evidence: []
+engineering:
+  consequence: "Define integrity checks over typed justification paths. A path should be rejected or isolated when claim-derived influence returns to evidence that materially supports the originating claim, while legitimate evolutionary feedback remains representable."
+  gap: "Formal influence relation, forbidden-path predicate, material self-support criterion, path-cut semantics, and interaction with adaptive selection have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
