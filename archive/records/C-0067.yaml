@@ -1,0 +1,26 @@
+id: C-0067
+type: claim
+status: FORMALIZED
+title: Normalization applicability decisions must remain distinct from their supporting inputs
+scope: Research Library provenance and verification history; concerns epistemic separation between context facts, applicability criteria, and the resulting authorization decision.
+statement: A normalization applicability decision is a derived result and must remain distinct from the facts, semantic context, invariance contract, and criteria that support it; storing an accepted decision does not constitute evidence for the decision itself.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0066
+  - type: REFERENCES
+    target: C-0065
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Applicability records should distinguish supporting inputs from the evaluation rule and derived decision. Provenance must allow the decision to be recomputed or independently audited without treating the decision field itself as evidence."
+  gap: "A formal applicability-decision schema, evidence/criterion separation, and recomputation requirements have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
