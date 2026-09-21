@@ -1,0 +1,28 @@
+id: C-0095
+type: claim
+status: FORMALIZED
+title: Aggregate verification must preserve unresolved conflicts rather than collapse them into false certainty
+scope: Research Library provenance and verification history; concerns conflicting local verification results and aggregate status computation.
+statement: Conflicting verification results must remain explicitly represented as a conflict or unresolved state until an authorized, scoped conflict-resolution procedure determines their relation and effect; aggregation must not collapse disagreement into VERIFIED or FAIL merely to produce a single status.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0094
+  - type: REFERENCES
+    target: C-0093
+  - type: REFERENCES
+    target: C-0082
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Verification aggregation should expose conflict as an explicit state or relation and preserve the conflicting results, scopes, provenance, and resolution status. Conflict resolution must be deterministic or explicitly governed and auditable."
+  gap: "Formal conflict-state semantics, resolution authority, precedence rules, reconciliation procedure, and aggregation behavior under unresolved conflict have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
