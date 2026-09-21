@@ -1,0 +1,28 @@
+id: C-0147
+type: claim
+status: FORMALIZED
+title: Observed blind-spot escape does not establish complete escape from the model boundary
+scope: Research Library provenance and verification history; concerns reachable-space differences, blind-spot discovery, residual uncertainty, and limits of adversarial challenge.
+statement: Finding challenges or evidence outside the current model demonstrates observed reachability beyond that model but does not establish complete coverage of the real search space. Conversely, failure to observe such escape does not establish that blind spots are absent. Blind-spot assessment must therefore preserve residual uncertainty and distinguish observed reachability expansion from completeness claims.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0146
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0144
+  - type: REFERENCES
+    target: C-0142
+evidence: []
+engineering:
+  consequence: "Represent reachability expansion and completeness as separate claims. Preserve residual-uncertainty records even when alternative generators find regions outside the current model, and never infer absence of blind spots solely from failure to discover an escape."
+  gap: "Formal reachable-space representation, residual-uncertainty model, completeness claim semantics, and criteria for material reachability expansion have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
