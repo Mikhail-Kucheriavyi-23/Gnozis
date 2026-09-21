@@ -1,0 +1,26 @@
+id: C-0073
+type: claim
+status: FORMALIZED
+title: Structural lineage validity and epistemic consistency are distinct validation layers
+scope: Research Library provenance and verification history; concerns separation of graph-structural validation from semantic or epistemic consistency analysis.
+statement: A decision lineage graph can be structurally valid while containing semantically incompatible claims or decisions; therefore relation-graph validity and epistemic consistency must be represented and evaluated as distinct validation layers.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0072
+  - type: REFERENCES
+    target: C-0071
+  - type: REFERENCES
+    target: C-0067
+evidence: []
+engineering:
+  consequence: "Graph validation should separately report structural validity of nodes/edges and semantic consistency of the claims/decisions represented by the graph. Structural acceptance must not imply epistemic consistency."
+  gap: "Formal semantic-consistency predicates, contradiction taxonomy, and the interface between graph validation and epistemic validation have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
