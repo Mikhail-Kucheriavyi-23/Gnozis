@@ -1,0 +1,28 @@
+id: C-0093
+type: claim
+status: FORMALIZED
+title: Aggregate verification status is a derived claim over scoped property-level results
+scope: Research Library provenance and verification history; concerns aggregation of property-level verification results into a higher-level status.
+statement: An aggregate verification status over a claim, failure mode, or artifact is a derived claim over scoped property-level verification results and requires an explicit aggregation rule; local PASS results must not be treated as global VERIFIED without establishing that all required properties and conditions for the declared scope are covered.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0092
+  - type: REFERENCES
+    target: C-0091
+  - type: REFERENCES
+    target: C-0086
+  - type: REFERENCES
+    target: C-0073
+evidence: []
+engineering:
+  consequence: "Verification aggregation should define required properties, coverage criteria, treatment of UNKNOWN and UNVERIFIED results, and explicit rules for producing aggregate statuses. The aggregate result should retain its scope and provenance to underlying checks."
+  gap: "Formal aggregate-status lattice, required-property semantics, unknown propagation rules, and aggregation operators have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
