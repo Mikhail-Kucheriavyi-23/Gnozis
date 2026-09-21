@@ -1,0 +1,28 @@
+id: C-0117
+type: claim
+status: FORMALIZED
+title: Correct inference within a model does not establish model adequacy for the claim
+scope: Research Library provenance and verification history; concerns adequacy of dependency/impact models used for epistemic conclusions.
+statement: A conclusion may be correctly derived under a given model while the model itself remains inadequate for the claim or scope; model adequacy therefore requires separate assessment of relevant assumptions, omitted dependency classes, scope coverage, failure modes, and known limitations.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0116
+  - type: REFERENCES
+    target: C-0115
+  - type: REFERENCES
+    target: C-0103
+  - type: REFERENCES
+    target: C-0083
+evidence: []
+engineering:
+  consequence: "Model-based conclusions should carry model identity and adequacy status. Validation of inference execution must be separated from assessment of whether the model captures the dependency/failure domains relevant to the claim."
+  gap: "Formal model-adequacy predicate, scope-coverage criteria, omitted-domain representation, model validation evidence, and model-change/revalidation rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
