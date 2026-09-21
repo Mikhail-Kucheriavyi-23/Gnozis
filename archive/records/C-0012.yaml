@@ -1,0 +1,23 @@
+id: C-0012
+type: claim
+status: FORMALIZED
+title: Counterexample minimization improves failure diagnosis but does not prove causality
+scope: Verification reverse-analysis; concerns reduction of a failing case and the distinction between isolating a minimal failure condition and establishing a causal explanation.
+statement: Reducing a counterexample to a smaller or minimal failing case can improve localization and diagnosis, but minimality of the observed failure does not by itself establish causal sufficiency or identify the unique cause.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0011
+    target: C-0010
+evidence: []
+engineering:
+  consequence: "Counterexample reduction should be treated as a diagnostic aid, not as automatic causal proof. Engineering remediation requires a separately justified causal hypothesis and verification that the proposed correction removes the failure without violating other required properties."
+  gap: "A formal minimality criterion, causal model, and remediation-verification protocol have not yet been defined for Gnozis."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
