@@ -1,0 +1,28 @@
+id: C-0130
+type: claim
+status: FORMALIZED
+title: Verification budget optimization can introduce selection bias and must preserve coverage against low-yield failure classes
+scope: Research Library provenance and verification history; concerns adaptive allocation of finite verification resources and systematic under-sampling of difficult or rare failure classes.
+statement: An optimizer that allocates verification resources according to observed test yield, ease of discovery, or current model estimates can systematically under-sample rare, latent, adversarial, or low-yield failure classes. Budget allocation therefore requires explicit coverage constraints or diversification mechanisms so optimization of search yield does not become a substitute for coverage.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0129
+  - type: REFERENCES
+    target: C-0128
+  - type: REFERENCES
+    target: C-0118
+  - type: REFERENCES
+    target: C-0115
+evidence: []
+engineering:
+  consequence: "Adaptive verification allocation should retain explicit exploration/diversification or minimum coverage constraints and expose selection logic, low-yield classes, and untested regions. Search yield must not be treated as a proxy for verification adequacy."
+  gap: "Formal coverage constraints, allocation objective, exploration/exploitation balance, rare-failure protection, adversarial scheduling, and audit semantics for allocation decisions have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
