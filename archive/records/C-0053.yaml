@@ -1,0 +1,26 @@
+id: C-0053
+type: claim
+status: FORMALIZED
+title: Current applicability is time- and state-relative, not determined by the latest verification record alone
+scope: Research Library provenance and verification history; concerns evaluating whether a historical verification result applies to a current claim and criterion.
+statement: Current applicability of a verification result must be evaluated against the criterion version and the relevant claim state at the applicable time; the latest verification record alone is insufficient because later claim changes, dependency changes, scope changes, assumption changes, or criterion transitions may affect applicability.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0052
+  - type: REFERENCES
+    target: C-0051
+  - type: REFERENCES
+    target: C-0038
+evidence: []
+engineering:
+  consequence: "Applicability evaluation should bind verification records to claim version/state, criterion version, dependency state, assumptions, scope, and relevant temporal/provenance context. A latest-record shortcut must not override these bindings."
+  gap: "Formal claim-version/state schema and machine-checkable applicability rules have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
