@@ -1,0 +1,24 @@
+id: C-0019
+type: claim
+status: FORMALIZED
+title: A new observable is useful only if it increases semantic discrimination
+scope: Verification reverse-analysis; concerns whether adding an observation channel actually resolves an existing semantic blind spot.
+statement: Adding a technically distinct observable does not by itself remove an observability blind spot; the new observable must distinguish at least some semantically relevant states that were previously indistinguishable under the existing observation boundary.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0018
+  - type: REFERENCES
+    target: C-0017
+evidence: []
+engineering:
+  consequence: "New verification observables should be evaluated for incremental semantic discrimination rather than counted as independent merely because they use a different implementation or data channel."
+  gap: "A formal semantic-discrimination criterion and measurable notion of incremental information gain have not yet been defined for Gnozis."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
