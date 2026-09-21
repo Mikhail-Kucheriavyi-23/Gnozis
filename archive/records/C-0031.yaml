@@ -1,0 +1,26 @@
+id: C-0031
+type: claim
+status: FORMALIZED
+title: Transition authority must itself be provenance-bound
+scope: Research Library provenance and verification history; concerns establishing why a particular actor or mechanism was authorized to perform a specific evidence-state transition.
+statement: Authority to perform an evidence-state transition should itself be traceable to an explicit policy, role assignment, credential, governance decision, or other authorized provenance; an actor label alone is insufficient evidence of transition authority.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0030
+  - type: REFERENCES
+    target: C-0029
+  - type: REFERENCES
+    target: C-0028
+evidence: []
+engineering:
+  consequence: "A transition record should identify the actor/mechanism and the provenance that authorizes the specific transition. Role names or repository permissions alone should not be treated as sufficient authorization evidence."
+  gap: "A formal authority-provenance schema and verification procedure for transition authorization have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
