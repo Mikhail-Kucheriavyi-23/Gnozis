@@ -1,0 +1,30 @@
+id: C-0100
+type: claim
+status: FORMALIZED
+title: Evidence independence is a dependency property, not merely a provenance-label property
+scope: Research Library provenance and verification history; concerns independence of evidence paths used to validate generated rules and verification claims.
+statement: Independence between validation evidence paths cannot be established solely by distinct provenance labels or separate records; shared data, assumptions, generators, transformations, failure models, or common-mode mechanisms may create epistemic dependence. Independence must therefore be evaluated relative to the claim and declared validation scope.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0099
+  - type: REFERENCES
+    target: C-0098
+  - type: REFERENCES
+    target: C-0083
+  - type: REFERENCES
+    target: C-0085
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Evidence records should expose relevant dependency factors: shared datasets, assumptions, generators, transformations, failure models, and common-mode risks. Validation should assess effective independence for the specific claim and scope rather than infer it from record separation."
+  gap: "Formal dependency graph, independence predicate, common-mode taxonomy, shared-assumption analysis, and quantitative or qualitative thresholds for sufficient independence have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
