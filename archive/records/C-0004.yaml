@@ -1,0 +1,24 @@
+id: C-0004
+type: claim
+status: FORMALIZED
+title: Test validity does not imply test adequacy
+scope: Mathematical and verification reverse-analysis; distinguishes correctness of an executed test from sufficiency of the test set to establish the intended property.
+statement: A test can be correct and valid for the behavior it exercises while the overall test strategy remains inadequate to establish the intended system property.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0002
+  - type: REFERENCES
+    target: C-0003
+evidence: []
+engineering:
+  consequence: "Core verification must distinguish test correctness from test adequacy. Passing tests must not be treated as sufficient evidence of a property unless the exercised scope, blind spots, counterexamples, and adequacy criteria are explicitly addressed."
+  gap: "No complete project-wide adequacy criterion has yet been established for the relevant semantic properties; correlated evidence, blind spots, and common-mode failure remain open verification concerns."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
