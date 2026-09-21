@@ -1,0 +1,26 @@
+id: C-0063
+type: claim
+status: FORMALIZED
+title: Semantic comparison requires deterministic normalization
+scope: Research Library provenance and verification history; concerns false semantic differences caused by representational variation between equivalent claim states.
+statement: Semantic diff must apply deterministic normalization rules before comparison so that representation-level differences do not become false epistemic differences; normalization rules must be explicit, versioned, and provenance-bound.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0062
+  - type: REFERENCES
+    target: C-0057
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Semantic comparison should use a deterministic normalization pipeline before diffing verification-relevant projections. The normalization specification must be versioned so historical diffs remain reproducible."
+  gap: "Formal normalization rules, equivalence classes, and version-transition semantics have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
