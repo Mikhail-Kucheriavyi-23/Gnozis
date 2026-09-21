@@ -1,0 +1,30 @@
+id: C-0140
+type: claim
+status: FORMALIZED
+title: Selection and allocation influence become epistemically relevant when claim-dependent decisions alter the evidence search space
+scope: Research Library provenance and verification history; concerns claim-dependent selection, filtering, sampling, test generation, validator configuration, and budget allocation.
+statement: Selection, filtering, sampling, test-generation, validator-configuration, and budget-allocation decisions are epistemically relevant influence edges when they depend materially on the claim under verification and alter which evidence can be produced, observed, retained, or evaluated. Such influence must be represented when assessing circular justification and evidence independence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0139
+  - type: REFERENCES
+    target: C-0130
+  - type: REFERENCES
+    target: C-0131
+  - type: REFERENCES
+    target: C-0135
+  - type: REFERENCES
+    target: C-0136
+evidence: []
+engineering:
+  consequence: "Represent claim-dependent selection and allocation as typed influence relations. Independence and circularity checks must include changes to the accessible evidence search space, not only direct evidence provenance."
+  gap: "Formal influence predicate, materiality threshold, counterfactual search-space test, selection provenance schema, and integration with budget/allocation records have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
