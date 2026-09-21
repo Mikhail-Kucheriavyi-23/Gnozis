@@ -1,0 +1,28 @@
+id: C-0118
+type: claim
+status: FORMALIZED
+title: Model adequacy requires challenge beyond the model's own inference semantics
+scope: Research Library provenance and verification history; concerns anti-circular validation of models used for dependency, impact, and containment conclusions.
+statement: Assessment of model adequacy should include challenge evidence that is not reducible to the model's own inference semantics; otherwise a model may validate the assumptions and omissions that define its own search space without independently exposing blind spots.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0117
+  - type: REFERENCES
+    target: C-0116
+  - type: REFERENCES
+    target: C-0115
+  - type: REFERENCES
+    target: C-0083
+evidence: []
+engineering:
+  consequence: "Model adequacy assessments should incorporate independent or structurally different challenge mechanisms such as alternative models, counterexamples, omitted-domain probes, adversarial cases, invariant checks, or empirical/domain evidence."
+  gap: "Formal independence/diversity criteria for adequacy challenges, challenge sufficiency, common-mode failure detection, and aggregation rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
