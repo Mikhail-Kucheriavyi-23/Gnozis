@@ -1,0 +1,28 @@
+id: C-0182
+type: claim
+status: FORMALIZED
+title: Verification stopping thresholds should be precommitted or otherwise constrained before result evaluation, with explicit governance for justified revision
+scope: Research Library provenance and verification history; concerns stopping criteria, precommitment, threshold adaptation, verification overfitting, and controlled revision.
+statement: A stopping threshold selected after observing verification results can be adapted to fit the evidence and weaken the meaning of completion. Therefore stopping criteria should be precommitted or constrained before result evaluation. Revision may be necessary when the original criterion is demonstrably inapplicable, but such revision must have an explicit, traceable basis and must not be selected merely to accept the observed result.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0181
+  - type: REFERENCES
+    target: C-0180
+  - type: REFERENCES
+    target: C-0179
+  - type: REFERENCES
+    target: C-0169
+evidence: []
+engineering:
+  consequence: "Record stopping criteria before result evaluation where practical; treat post-result threshold changes as governed revisions with explicit rationale, provenance, and impact analysis."
+  gap: "Formal precommitment schema, admissible revision triggers, anti-overfitting checks, and governance for threshold changes have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
