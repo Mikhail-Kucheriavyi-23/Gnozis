@@ -1,0 +1,26 @@
+id: C-0036
+type: claim
+status: FORMALIZED
+title: Corrections must distinguish artifact, provenance, and semantic claim changes
+scope: Research Library provenance and verification history; concerns classifying corrections to recorded text, provenance metadata, evidence linkage, or the semantic content of a claim.
+statement: A correction event must identify whether it changes presentation, provenance, evidence linkage, scope, assumptions, or the semantic claim itself; these correction classes have different effects on validity and must not be collapsed into a single generic edit.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0035
+  - type: REFERENCES
+    target: C-0028
+  - type: REFERENCES
+    target: C-0027
+evidence: []
+engineering:
+  consequence: "Archive correction events should classify the affected layer: presentation, provenance, evidence linkage, scope, assumptions, or semantic claim. Semantic changes require a new version or explicit transition rather than silent mutation."
+  gap: "A formal correction taxonomy and state-transition semantics for each correction class have not yet been fully specified."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
