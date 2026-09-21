@@ -1,0 +1,24 @@
+id: C-0007
+type: claim
+status: FORMALIZED
+title: Verification optimization can overfit the verification criteria
+scope: Verification and evolution reverse-analysis; concerns systems that optimize against explicit verification criteria rather than the broader semantic property those criteria are intended to measure.
+statement: Optimizing a system or evolution process to satisfy a fixed verification criterion does not by itself establish preservation or improvement of the broader intended property; the criterion can become an optimization target and cease to be an adequate proxy for the target property.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0006
+  - type: REFERENCES
+    target: C-0003
+evidence: []
+engineering:
+  consequence: "Core evolution and verification must distinguish the measured criterion from the intended semantic property and include checks against criterion overfitting or proxy gaming. Passing a known verification target must not be treated as proof of unrestricted semantic improvement."
+  gap: "No complete project-specific anti-overfitting criterion has yet been formalized for the semantic properties under study."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
