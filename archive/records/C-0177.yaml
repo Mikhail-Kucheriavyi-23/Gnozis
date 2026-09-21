@@ -1,0 +1,28 @@
+id: C-0177
+type: claim
+status: FORMALIZED
+title: Historical evidence requires temporal transport justification before supporting claims about an evolved system state
+scope: Research Library provenance and verification history; concerns temporal transportability, system evolution, evidence validity, invariant preservation, and stale evidence.
+statement: Evidence established for a system state at time t does not automatically support the same claim for a later evolved state. Transport across time requires justification that relevant invariants, dependencies, observation conditions, and failure modes remain sufficiently preserved; otherwise historical evidence must retain a bounded temporal scope and residual uncertainty about its applicability.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0176
+  - type: REFERENCES
+    target: C-0175
+  - type: REFERENCES
+    target: C-0173
+  - type: REFERENCES
+    target: C-0164
+evidence: []
+engineering:
+  consequence: "Version evidence by system state and record temporal transport assumptions. Significant evolution should trigger reassessment of which historical evidence remains applicable and which claims require re-verification."
+  gap: "Formal state-difference relevance model, temporal transport criterion, invariant-preservation test, evidence invalidation/revalidation policy, and stale-evidence detector have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
