@@ -1,0 +1,24 @@
+id: C-0009
+type: claim
+status: FORMALIZED
+title: Verification diversity does not eliminate common-mode failure
+scope: Verification reverse-analysis; concerns shared dependencies or assumptions that can cause multiple apparently diverse verification mechanisms to fail together.
+statement: Even verification mechanisms that differ in implementation or procedure can share a common dependency, assumption, model, data source, or semantic blind spot; such shared structure can produce common-mode failure and invalidate apparent independence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0005
+  - type: REFERENCES
+    target: C-0008
+evidence: []
+engineering:
+  consequence: "Verification architecture must identify shared dependencies and common assumptions across verification mechanisms. Mechanism diversity alone is insufficient when all mechanisms depend on the same model, oracle, fixture, transformation, or semantic interpretation."
+  gap: "A complete dependency graph and common-mode-failure analysis for Gnozis verification mechanisms has not yet been established."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
