@@ -80,3 +80,14 @@ Open questions:
 Determine the explicit semantic Invariant provider for canonical execution. Preserve Ψ=(X,R), do not reuse RootInvariant for ordinary Ψ semantics, avoid a second state model, and fail closed rather than using an always-true invariant.
 
 Research status vocabulary: DEFINITION / OBSERVED / DERIVED / VERIFIED / REJECTED / OPEN.
+
+## Archive record contract
+
+Machine-readable archive records are governed by **Archive Record Schema v1**:
+
+- schema: `archive/schema/record.schema.json`
+- version: `1.0.0`
+- record directory: `archive/records/`
+- archive index: `archive/INDEX.yaml`
+
+The existing research index remains a research-navigation layer. It is not itself evidence of verification or acceptance.
