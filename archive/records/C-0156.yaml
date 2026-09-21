@@ -1,0 +1,28 @@
+id: C-0156
+type: claim
+status: FORMALIZED
+title: Conflicts between verification status and authorization policy must remain explicit rather than rewriting verification results
+scope: Research Library provenance and verification history; concerns verification-policy conflicts, epistemic integrity, authorization, and tension preservation.
+statement: When verification status and authorization policy produce conflicting outcomes, the conflict is itself an explicit system state. Authorization constraints must not rewrite, downgrade, or upgrade verification results merely to eliminate the conflict. The system should preserve the independent provenance and semantics of both states and route the tension to an explicit resolution or escalation mechanism.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0155
+  - type: REFERENCES
+    target: C-0154
+  - type: REFERENCES
+    target: C-0149
+  - type: REFERENCES
+    target: C-0140
+evidence: []
+engineering:
+  consequence: "Represent verification result and authorization decision as separate typed states with a conflict relation. Require explicit resolution/escalation for material conflicts and prohibit policy-driven mutation of verification evidence or status."
+  gap: "Formal conflict-state schema, resolution authority, escalation protocol, policy/evidence precedence rules, and liveness constraints for unresolved conflicts have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
