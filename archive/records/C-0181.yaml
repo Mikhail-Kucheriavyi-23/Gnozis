@@ -1,0 +1,28 @@
+id: C-0181
+type: claim
+status: FORMALIZED
+title: Verification requires an explicit scoped stopping criterion and should terminate at sufficient justification with bounded residual uncertainty
+scope: Research Library provenance and verification history; concerns verification stopping criteria, sufficient justification, uncertainty budgets, recursive validation, and epistemic scope.
+statement: Verification cannot be treated as complete merely because a procedure has terminated, nor must it recurse indefinitely. Completion should be defined relative to a claim, assumptions, evidence scope, and an explicit uncertainty tolerance or stopping criterion. A completed verification establishes sufficient justification within that scope while preserving residual uncertainty rather than asserting absolute truth.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0180
+  - type: REFERENCES
+    target: C-0179
+  - type: REFERENCES
+    target: C-0177
+  - type: REFERENCES
+    target: C-0169
+evidence: []
+engineering:
+  consequence: "Require every verification workflow to declare claim scope, assumptions, evidence boundary, stopping condition, and residual uncertainty. Do not equate procedure completion with absolute proof."
+  gap: "Formal sufficient-justification criterion, uncertainty budget semantics, stopping-rule governance, and escalation behavior when the budget cannot be satisfied have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
