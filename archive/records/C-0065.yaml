@@ -1,0 +1,26 @@
+id: C-0065
+type: claim
+status: FORMALIZED
+title: Normalization invariance must be established relative to the semantic projection and applicable context
+scope: Research Library provenance and verification history; concerns whether a normalization rule preserves the meaning represented by a specific claim projection under its declared context.
+statement: A normalization rule's semantic invariance is meaningful only relative to a specified semantic projection and applicability context; generic claims that a transformation is safe are insufficient because the same transformation may preserve meaning for one projection or context and alter it for another.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0064
+  - type: REFERENCES
+    target: C-0063
+  - type: REFERENCES
+    target: C-0057
+evidence: []
+engineering:
+  consequence: "Normalization invariance contracts should bind each rule to projection version, semantic domain, and applicability conditions. A rule proven invariant in one context must not be generalized automatically to other projections or contexts."
+  gap: "Formal context binding, invariance proof obligations, and applicability evaluation for normalization rules have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
