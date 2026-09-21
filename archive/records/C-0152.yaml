@@ -1,0 +1,28 @@
+id: C-0152
+type: claim
+status: FORMALIZED
+title: Control nodes are epistemically material when their decisions can alter the evidence space or verification status
+scope: Research Library provenance and verification history; concerns control nodes, epistemic influence, evidence-space modification, allocation, validation, and stopping.
+statement: A control node is epistemically material when changing its decision can materially alter the accessible or selected evidence space, candidate/test allocation, validator configuration, stopping point, or resulting verification status. Control-node correctness as software behavior is distinct from epistemic adequacy of the allocation or control policy.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0151
+  - type: REFERENCES
+    target: C-0140
+  - type: REFERENCES
+    target: C-0130
+  - type: REFERENCES
+    target: C-0144
+evidence: []
+engineering:
+  consequence: "Represent materially influential control nodes in the verification dependency graph and record their decision provenance, counterfactual alternatives, and effects on accessible or selected evidence. Separate implementation correctness from epistemic adequacy."
+  gap: "Formal counterfactual control test, materiality predicate, control-policy provenance schema, and quantitative/qualitative effect estimation have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
