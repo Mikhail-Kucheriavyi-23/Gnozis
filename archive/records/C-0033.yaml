@@ -1,0 +1,24 @@
+id: C-0033
+type: claim
+status: FORMALIZED
+title: Authorization scope must be canonical and unambiguous
+scope: Research Library provenance and verification history; concerns whether a scoped authorization can be reliably matched to the intended object or claim without ambiguity.
+statement: A scoped authorization is only enforceable when its target scope has a canonical, stable, and unambiguous identity; ambiguous, mutable, or overlapping scope representations can permit unintended authority expansion or make transition validation indeterminate.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0032
+  - type: REFERENCES
+    target: C-0031
+evidence: []
+engineering:
+  consequence: "Authorization targets should use canonical identifiers or immutable references, with explicit rules for aliases, inheritance, overlap, and version changes. Transition validation should fail closed when scope resolution is ambiguous."
+  gap: "A canonical scope identity scheme and formal rules for scope overlap, aliasing, inheritance, and version migration have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
