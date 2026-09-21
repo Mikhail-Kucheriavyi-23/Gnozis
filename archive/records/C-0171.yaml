@@ -1,0 +1,28 @@
+id: C-0171
+type: claim
+status: FORMALIZED
+title: Unresolved shared-dependency hypotheses should remain explicit and can guide discriminating verification
+scope: Research Library provenance and verification history; concerns unknown dependencies, competing hypotheses, discriminating evidence, adaptive verification, and residual uncertainty.
+statement: When available evidence cannot determine whether a common dependency exists, the system should preserve competing hypotheses rather than treating the dependency as absent. Verification may then prioritize tests or observations with the capacity to discriminate between those hypotheses, while preserving residual uncertainty until the evidence supports a justified update.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0170
+  - type: REFERENCES
+    target: C-0169
+  - type: REFERENCES
+    target: C-0165
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Represent unresolved dependency hypotheses explicitly and allow verification selection to target discriminating evidence. Record hypothesis updates, evidence provenance, and residual uncertainty."
+  gap: "Formal hypothesis representation, discrimination utility, update semantics, competing-hypothesis registry, and stopping criteria have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
