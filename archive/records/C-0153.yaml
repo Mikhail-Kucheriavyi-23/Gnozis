@@ -1,0 +1,28 @@
+id: C-0153
+type: claim
+status: FORMALIZED
+title: Stopping rules are epistemic control decisions because they determine which future evidence remains unobserved
+scope: Research Library provenance and verification history; concerns early stopping, unobserved future evidence, verification provenance, and termination policy.
+statement: A stopping rule is epistemically material when termination prevents potentially relevant future evidence or challenges from being observed. Termination must therefore be represented as part of verification provenance, with the stopping rationale, remaining candidate evidence space, unresolved high-impact hypotheses, and material assumptions preserved. Unexecuted future evidence must not be treated as irrelevant merely because the process stopped before observing it.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0152
+  - type: REFERENCES
+    target: C-0144
+  - type: REFERENCES
+    target: C-0141
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Persist termination provenance: stopping rule/version, trigger, unresolved challenges, remaining candidate evidence, and material assumptions. Treat post-stop unobserved regions as an explicit epistemic state rather than silently collapsing them into irrelevant or negative evidence."
+  gap: "Formal stopping-rule schema, future-evidence representation, termination materiality test, restart/reopen semantics, and interaction with commit authorization have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
