@@ -1,0 +1,28 @@
+id: C-0143
+type: claim
+status: FORMALIZED
+title: Search-space models require their own challenge process to bound model blind spots
+scope: Research Library provenance and verification history; concerns search-space model adequacy, model challenge, systematic blind spots, and meta-adequacy.
+statement: Coverage and verification results conditional on a search-space model cannot establish adequacy of that model by themselves. The model requires an independent or adversarial challenge process capable of exposing omitted, misclassified, or systematically inaccessible regions. Model adequacy is therefore a distinct verification target from claim verification within the model.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0142
+  - type: REFERENCES
+    target: C-0141
+  - type: REFERENCES
+    target: C-0139
+  - type: REFERENCES
+    target: C-0129
+evidence: []
+engineering:
+  consequence: "Treat search-space-model adequacy as a separate verification target with explicit challenge procedures, alternative models, adversarial discovery, and provenance of model revisions."
+  gap: "Formal model-challenge protocol, independence requirements, alternative-model generation, stopping conditions, and composition rule between model adequacy and claim adequacy have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
