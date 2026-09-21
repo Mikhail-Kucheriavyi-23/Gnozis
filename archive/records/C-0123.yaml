@@ -1,0 +1,30 @@
+id: C-0123
+type: claim
+status: FORMALIZED
+title: Epistemic status and operational acceptance are distinct dimensions
+scope: Research Library provenance and verification history; concerns separation of truth/evidence status from governance or operational-use decisions.
+statement: An operational acceptance threshold may determine whether an epistemically uncertain or bounded claim is permitted for a specified use, but it must not alter the underlying epistemic status or retroactively convert unresolved or uncertain evidence into verification.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0122
+  - type: REFERENCES
+    target: C-0121
+  - type: REFERENCES
+    target: C-0107
+  - type: REFERENCES
+    target: C-0106
+  - type: REFERENCES
+    target: C-0104
+evidence: []
+engineering:
+  consequence: "Represent epistemic state and operational acceptance as separate fields/relations. Acceptance decisions must reference the epistemic state, scope, residual uncertainty, policy version, and intended operation without mutating the evidential status."
+  gap: "Formal separation schema, policy-to-operation mapping, authority boundary, acceptance revocation/reassessment rules, and conflict behavior between epistemic state and operational policy have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
