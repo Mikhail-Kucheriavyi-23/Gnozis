@@ -1,0 +1,26 @@
+id: C-0040
+type: claim
+status: FORMALIZED
+title: Remediated dependencies and replacement dependencies are distinct evidence paths
+scope: Research Library provenance and verification history; concerns the evidentiary distinction between repairing a failed prerequisite and replacing it with a different independently validated prerequisite.
+statement: A re-evaluation that restores a previously failed dependency and a re-evaluation that replaces that dependency with a distinct validated prerequisite are different evidence paths; the archive must preserve which path occurred rather than treating both as an undifferentiated revalidation.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0039
+  - type: REFERENCES
+    target: C-0038
+  - type: REFERENCES
+    target: C-0026
+evidence: []
+engineering:
+  consequence: "Re-evaluation provenance should classify dependency resolution as remediation of the original prerequisite, validated continuation of the original path, or replacement by a distinct prerequisite. Dependency lineage and validation evidence must remain explicit."
+  gap: "Formal semantics and acceptance criteria for remediation versus replacement have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
