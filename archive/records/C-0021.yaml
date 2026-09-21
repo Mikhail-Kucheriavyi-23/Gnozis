@@ -1,0 +1,26 @@
+id: C-0021
+type: claim
+status: FORMALIZED
+title: Absence of observed counterexamples does not establish semantic completeness
+scope: Verification reverse-analysis; concerns claims that a verification observation set is complete because known counterexamples have not been found.
+statement: Failure to find counterexamples within a tested observation and search domain does not by itself establish that the observation set captures all semantically relevant distinctions or that no unobserved semantic failure exists outside that domain.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0020
+  - type: REFERENCES
+    target: C-0010
+  - type: REFERENCES
+    target: C-0017
+evidence: []
+engineering:
+  consequence: "Verification reports must state the tested search domain and observation boundary. 'No counterexample found' must not be promoted to semantic completeness without an explicit completeness argument, bounded exhaustive proof, or other justified coverage criterion."
+  gap: "A formal completeness criterion for the relevant Gnozis semantic domain and counterexample search space has not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
