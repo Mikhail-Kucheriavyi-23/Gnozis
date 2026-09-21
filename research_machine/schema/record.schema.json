@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Mikhail-Kucheriavyi-23/Gnozis/blob/main/research_machine/schema/record.schema.json",
   "title": "Gnozis Research Machine Record",
-  "description": "Machine-readable development-memory and evidence record for Gnozis Research Machine. Archive is non-authoritative for current Core mutation.",
+  "description": "Machine-readable development-memory and evidence record for Gnozis Research Machine. Research Machine is non-authoritative for current Core mutation.",
   "type": "object",
   "additionalProperties": false,
   "required": [
