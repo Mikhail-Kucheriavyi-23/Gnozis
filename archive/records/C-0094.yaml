@@ -1,0 +1,28 @@
+id: C-0094
+type: claim
+status: FORMALIZED
+title: Aggregate verification requires explicit propagation semantics for result states and scope exclusions
+scope: Research Library provenance and verification history; concerns deterministic aggregation of property-level verification results.
+statement: An aggregation rule must explicitly define how PASS, FAIL, UNKNOWN, UNVERIFIED, and scope exclusions propagate to the aggregate result; otherwise identical local results may yield materially different aggregate conclusions through implicit logic.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0093
+  - type: REFERENCES
+    target: C-0092
+  - type: REFERENCES
+    target: C-0086
+  - type: REFERENCES
+    target: C-0073
+evidence: []
+engineering:
+  consequence: "Aggregation specifications should provide explicit propagation rules for each result state and distinguish out-of-scope properties from missing or unverified properties. Aggregate status computation should be deterministic and auditable."
+  gap: "Formal state-propagation table, scope-exclusion semantics, conflict precedence, and aggregation algebra have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
