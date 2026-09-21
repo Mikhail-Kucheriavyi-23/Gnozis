@@ -1,0 +1,28 @@
+id: C-0112
+type: claim
+status: FORMALIZED
+title: Replay order must not erase causal concurrency
+scope: Research Library provenance and verification history; concerns preservation of concurrent epistemic events during deterministic replay.
+statement: A deterministic total order used for replay or projection must not be treated as evidence of causal precedence when events are concurrent; causal relations and replay tie-breaking must remain distinguishable, and any conflict-resolution rule for concurrent events must be explicit.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0111
+  - type: REFERENCES
+    target: C-0110
+  - type: REFERENCES
+    target: C-0109
+  - type: REFERENCES
+    target: C-0107
+evidence: []
+engineering:
+  consequence: "Represent causal links separately from deterministic replay order. Concurrent events must remain identifiable as concurrent, and projection must apply an explicit conflict-resolution rule when their effects are not commutative."
+  gap: "Formal causal relation model, concurrency detection, conflict-resolution semantics, commutativity rules, and merge/replay guarantees have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
