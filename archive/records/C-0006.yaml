@@ -1,0 +1,24 @@
+id: C-0006
+type: claim
+status: FORMALIZED
+title: Verification procedures require meta-verification
+scope: Verification reverse-analysis; concerns the possibility that a verification method can systematically miss its own failure modes or blind spots.
+statement: A verification procedure cannot establish its own adequacy solely by producing successful results under that same procedure; the verification process itself requires independent or structurally distinct checks for blind spots, failure modes, and adequacy assumptions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0004
+  - type: REFERENCES
+    target: C-0005
+evidence: []
+engineering:
+  consequence: "Core verification architecture should include explicit meta-verification or independently structured checks of the verification process itself, especially where verification results are used to justify claims about adequacy or safety."
+  gap: "The project does not yet have a complete formal meta-verification criterion defining independence, structural distinction, or sufficient coverage for the verification process itself."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
