@@ -4,4 +4,7 @@ authority: "NON_AUTHORITATIVE_FOR_CORE_MUTATION"
 record_schema: "research_machine/schema/record.schema.json"
 records_path: "research_machine/records/"
 index_status: "INITIALIZED"
-records: []
+records_count: 185
+records_path_verified: true
+legacy_archive_path: null
+migration_status: PHYSICAL_RENAME_COMPLETE
