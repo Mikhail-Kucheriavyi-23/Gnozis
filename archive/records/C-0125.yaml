@@ -1,0 +1,30 @@
+id: C-0125
+type: claim
+status: FORMALIZED
+title: Material epistemic revisions should trigger selective reassessment of affected operational acceptances
+scope: Research Library provenance and verification history; concerns propagation of material epistemic changes to dependent operational permissions.
+statement: A material change to evidence, model, scope, invariant status, or epistemic state should trigger reassessment only for operational acceptances whose declared dependencies or validity conditions are affected or uncertain; unaffected acceptances should remain unchanged unless a demonstrated global invariant or authority dependency requires broader propagation.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0124
+  - type: REFERENCES
+    target: C-0123
+  - type: REFERENCES
+    target: C-0115
+  - type: REFERENCES
+    target: C-0114
+  - type: REFERENCES
+    target: C-0103
+evidence: []
+engineering:
+  consequence: "Represent dependencies between epistemic claims and operational acceptances so revisions can propagate selectively. Unknown impact should be represented explicitly and escalated according to policy rather than silently treated as unaffected."
+  gap: "Formal materiality predicate, acceptance dependency graph, uncertainty propagation, global-invariant escalation, and selective-reassessment algorithm have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
