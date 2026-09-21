@@ -1,0 +1,26 @@
+id: C-0051
+type: claim
+status: FORMALIZED
+title: Verification criteria must be versioned and provenance-bound
+scope: Research Library provenance and verification history; concerns changes to the rule or criterion used to determine whether a claim satisfies verification requirements.
+statement: A verification criterion is part of the epistemic conditions under which a verification result is valid; therefore criteria must have stable versioned identity and provenance, and changing a criterion must not silently alter the status or meaning of a prior verification result.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0050
+  - type: REFERENCES
+    target: C-0034
+  - type: REFERENCES
+    target: C-0035
+evidence: []
+engineering:
+  consequence: "Verification results should reference an immutable criterion/version identifier. Criterion changes should create a new criterion version and trigger explicit re-evaluation of affected claims where required."
+  gap: "A formal criterion schema, version transition model, and impact propagation rules for criterion changes have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
