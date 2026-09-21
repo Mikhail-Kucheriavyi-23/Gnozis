@@ -1,0 +1,26 @@
+id: C-0062
+type: claim
+status: FORMALIZED
+title: Semantic diff must operate on an explicit verification-relevant projection
+scope: Research Library provenance and verification history; concerns deterministic comparison of claim states for transition classification.
+statement: Semantic transition analysis must compare an explicitly defined verification-relevant semantic projection rather than arbitrary storage fields; otherwise transition classification can vary with representation changes that do not alter claim semantics.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0061
+  - type: REFERENCES
+    target: C-0057
+  - type: REFERENCES
+    target: C-0056
+evidence: []
+engineering:
+  consequence: "Semantic diff should consume canonical verification-relevant projections with explicit schema/version and deterministic comparison semantics. Representation-only changes must not be classified as epistemic changes."
+  gap: "A formal semantic-diff schema, comparison normalization rules, and deterministic transition-class derivation procedure have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
