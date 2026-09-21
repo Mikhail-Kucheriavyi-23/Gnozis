@@ -1,0 +1,28 @@
+id: C-0104
+type: claim
+status: FORMALIZED
+title: Verification-depth stopping requires a claim-scoped adequacy criterion
+scope: Research Library provenance and verification history; concerns stopping criteria for recursive verification of evidence independence and analysis adequacy.
+statement: Recursive verification of independence and analysis adequacy requires a stopping criterion defined relative to the claim, scope, relevant failure modes, and residual uncertainty; stopping cannot be justified solely by a fixed global depth or by the absence of further detected dependencies.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0103
+  - type: REFERENCES
+    target: C-0102
+  - type: REFERENCES
+    target: C-0100
+  - type: REFERENCES
+    target: C-0083
+evidence: []
+engineering:
+  consequence: "A verification-depth decision should record the claim scope, relevant risk coverage, remaining uncertainty, stopping rationale, and any excluded verification domains. Global depth limits may constrain resources but should not by themselves establish adequacy."
+  gap: "Formal stopping predicate, residual-risk representation, diminishing-return criterion, resource-bound interaction, and audit requirements for stopping decisions have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
