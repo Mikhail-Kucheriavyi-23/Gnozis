@@ -1,0 +1,28 @@
+id: C-0076
+type: claim
+status: FORMALIZED
+title: Changes in compatibility classification require attribution to projection, context, inputs, or compatibility specification
+scope: Research Library provenance and verification history; concerns causal attribution of changed semantic compatibility results across evaluations.
+statement: When compatibility classification changes across evaluations, provenance must distinguish whether the change arose from semantic projection changes, normalized inputs, context changes, compatibility-specification changes, or other declared evaluation inputs; otherwise the archive cannot attribute the source of the classification transition.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0075
+  - type: REFERENCES
+    target: C-0074
+  - type: REFERENCES
+    target: C-0065
+  - type: REFERENCES
+    target: C-0063
+evidence: []
+engineering:
+  consequence: "Compatibility evaluation records should bind all classification-relevant inputs by identity/version and preserve a transition attribution record when a later evaluation differs from a predecessor."
+  gap: "Formal attribution taxonomy, change-detection procedure, and causal comparison model for compatibility evaluations have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
