@@ -1,0 +1,28 @@
+id: C-0169
+type: claim
+status: FORMALIZED
+title: Claims of independence or non-circularity require separately justified evidence and explicit residual uncertainty
+scope: Research Library provenance and verification history; concerns independence claims, non-circular validation, trust boundaries, meta-evidence, and residual uncertainty.
+statement: A claim that an evidence source is independent or that a validation path is non-circular cannot be established solely by the mechanism under evaluation. The claim requires separately justified evidence about relevant dependencies and validation boundaries; where such justification is incomplete, residual uncertainty must remain explicit rather than being converted into a binary trust state.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0168
+  - type: REFERENCES
+    target: C-0164
+  - type: REFERENCES
+    target: C-0163
+  - type: REFERENCES
+    target: C-0152
+evidence: []
+engineering:
+  consequence: "Represent independence and non-circularity as scoped claims with supporting dependency evidence and residual uncertainty. Avoid binary trust states when validation-boundary assumptions remain unresolved."
+  gap: "Formal trust-boundary schema, residual-uncertainty representation, dependency-evidence requirements, and stopping criteria for independence assessment have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
