@@ -1,0 +1,28 @@
+id: C-0101
+type: claim
+status: FORMALIZED
+title: Evidence diversity must account for shared dependency ancestors and correlated failure modes
+scope: Research Library provenance and verification history; concerns dependency-graph effects on effective independence of evidence.
+statement: When multiple evidence paths share dependency ancestors, their observations may be correlated through common failure mechanisms even when no direct dependency exists between the final tests; assessment of evidence diversity must therefore account for shared ancestors and relevant common-mode failure paths in the dependency graph.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0100
+  - type: REFERENCES
+    target: C-0099
+  - type: REFERENCES
+    target: C-0085
+  - type: REFERENCES
+    target: C-0083
+evidence: []
+engineering:
+  consequence: "Evidence dependency graphs should represent shared ancestors and common-mode risk. Diversity analysis should inspect upstream overlap rather than only direct edges between evidence records."
+  gap: "Formal ancestor-overlap metric, correlated-failure model, common-mode taxonomy, and criteria for sufficient evidence diversity have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
