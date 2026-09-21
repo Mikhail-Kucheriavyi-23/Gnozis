@@ -1,0 +1,28 @@
+id: C-0162
+type: claim
+status: FORMALIZED
+title: Adversarial sampling can create blind spots by overconcentrating challenge generation on selected failure regions
+scope: Research Library provenance and verification history; concerns adversarial sampling bias, alternative failure regions, sampling blind spots, and diversity of challenge generators.
+statement: A deliberately adversarial sampling policy can improve discovery in a targeted region while simultaneously reducing effective exploration of alternative failure regions. Therefore tail-focused or failure-directed sampling requires explicit diversity and alternative-region checks; success in one adversarial region does not establish adequate exploration of other regions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0161
+  - type: REFERENCES
+    target: C-0147
+  - type: REFERENCES
+    target: C-0148
+  - type: REFERENCES
+    target: C-0145
+evidence: []
+engineering:
+  consequence: "Track adversarial sampling concentration, generator diversity, uncovered alternative regions, and independent challenge sources. Require explicit coverage/uncertainty reporting for regions not targeted by the current adversarial policy."
+  gap: "Formal alternative-region discovery method, generator-diversity metric, concentration threshold, adaptive deconcentration rule, and residual tail uncertainty model have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
