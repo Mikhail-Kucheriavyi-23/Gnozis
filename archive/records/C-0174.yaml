@@ -1,0 +1,28 @@
+id: C-0174
+type: claim
+status: FORMALIZED
+title: A new observation regime must demonstrate genuine discriminative expansion rather than merely re-encoding existing observations
+scope: Research Library provenance and verification history; concerns observation-regime design, expressiveness gain, re-encoding, identifiability, and blind-spot reduction.
+statement: Changing representation, implementation, or presentation does not by itself establish a new observation regime. A proposed regime should be evaluated for whether it exposes distinctions between hypotheses that were not accessible under the prior regime. Without such demonstrated discriminative expansion, the apparent regime change may only re-encode existing information and leave the original observational blind spot intact.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0173
+  - type: REFERENCES
+    target: C-0172
+  - type: REFERENCES
+    target: C-0171
+  - type: REFERENCES
+    target: C-0164
+evidence: []
+engineering:
+  consequence: "Require provenance showing what previously unresolved distinctions become observable under a proposed new regime. Distinguish new information channels from re-encoding, formatting, or duplicated measurements."
+  gap: "Formal observation-regime representation, discriminative-expansion criterion, information-channel dependency analysis, and empirical validation protocol have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
