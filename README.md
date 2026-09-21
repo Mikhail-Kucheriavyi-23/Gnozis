@@ -29,7 +29,7 @@ Not every research result becomes Core functionality.
 
 ## Status distinction
 
-Research descriptions may use broad mathematical, philosophical and analogical language. That language is part of discovery and is not a defect merely because it is not yet code.
+Research descriptions may use broad mathematical, mathematical, conceptual and exploratory language. That language is part of discovery and is not a defect merely because it is not yet code.
 
 Research ≠ Implementation
 Research ≠ Verification
