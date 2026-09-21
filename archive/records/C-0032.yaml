@@ -1,0 +1,26 @@
+id: C-0032
+type: claim
+status: FORMALIZED
+title: Transition authority must be scoped to the authorized object and operation
+scope: Research Library provenance and verification history; concerns preventing authority granted for one class of evidence or transition from being generalized to unrelated claims, objects, or operations.
+statement: Authorization for an actor or mechanism must specify the object or claim scope and permitted operation; authority to perform one evidence transition or verify one domain does not automatically authorize transitions over unrelated evidence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0031
+  - type: REFERENCES
+    target: C-0030
+  - type: REFERENCES
+    target: C-0023
+evidence: []
+engineering:
+  consequence: "Authorization records should encode at least actor/mechanism, permitted operation, target scope, validity interval or version, and authorization provenance. Transition validation should reject authority escalation through scope mismatch."
+  gap: "A formal scoped-authorization schema and machine-checkable scope matching rules have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
