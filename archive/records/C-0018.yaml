@@ -1,0 +1,24 @@
+id: C-0018
+type: claim
+status: FORMALIZED
+title: Repeated observations within one equivalence class do not remove the blind spot
+scope: Verification reverse-analysis; concerns repeated tests or measurements that use an observation function unable to distinguish relevant semantic states.
+statement: If an observation mechanism collapses semantically distinct states into the same observable result, repeating measurements that remain within the same observation boundary does not by itself resolve the hidden distinction.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0017
+  - type: REFERENCES
+    target: C-0005
+evidence: []
+engineering:
+  consequence: "Increasing the number of tests using the same observation function is not sufficient to close an observability blind spot. Verification must introduce a genuinely new observable, assumption set, or structurally distinct mechanism when the existing oracle collapses relevant semantic states."
+  gap: "A formal criterion for when an additional observable is sufficiently independent or semantically discriminating has not yet been defined for Gnozis."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
