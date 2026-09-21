@@ -1,22 +1,22 @@
-# Gnozis Archive
+# Gnozis Research Machine
 
 ## Role
 
-Gnozis Archive is the machine-readable development memory and evidence base for Gnozis.
+Gnozis Research Machine is the machine-readable development memory and evidence base for Gnozis.
 
 It is not the current Gnozis Core, not an alternative implementation, and not an authority source for Core mutation.
 
 ## Authority boundary
 
 ```
-Archive → retrieve / inform / provide provenance
-Archive -X→ direct Core mutation or authorization
+Research Machine → retrieve / inform / provide provenance
+Research Machine -X→ direct Core mutation or authorization
 ```
 
 Any influence on Gnozis Core must pass through the explicit engineering admission path:
 
 ```
-Archive record
+Research Machine record
 → scope/evidence review
 → engineering consequence
 → requirement
@@ -43,7 +43,7 @@ Record content may be superseded, but historical identity and provenance are pre
 - A — audit
 - T — transition
 
-The schema is defined in `archive/schema/record.schema.json`.
+The schema is defined in `research_machine/schema/record.schema.json`.
 
 ## Historical artifacts
 
@@ -55,7 +55,7 @@ The current executable and verified system is maintained separately in the Gnozi
 
 ## Integrity rule
 
-Archive records must distinguish:
+Research Machine records must distinguish:
 
 ```
 stored ≠ canonical
