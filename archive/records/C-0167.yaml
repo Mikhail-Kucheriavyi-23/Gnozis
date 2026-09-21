@@ -1,0 +1,28 @@
+id: C-0167
+type: claim
+status: FORMALIZED
+title: Verification budget policy is itself part of the verification system and can create systematic blind spots
+scope: Research Library provenance and verification history; concerns verification-budget allocation, sampling distributions, policy-induced blind spots, observability, and meta-verification.
+statement: The policy that allocates verification budget influences which regions receive evidence and therefore forms part of the effective verification system. Because that policy can systematically under-sample or exclude regions, its assumptions and allocation decisions require observability and meta-verification rather than being treated as an external neutral mechanism.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0166
+  - type: REFERENCES
+    target: C-0165
+  - type: REFERENCES
+    target: C-0163
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Record budget-allocation decisions, inputs, assumptions, deferred regions, and resulting sampling distribution. Introduce meta-verification of allocation policy to detect systematic exclusion or concentration."
+  gap: "Formal meta-verification boundary, policy observability schema, allocation adequacy criteria, and non-circular validation method have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
