@@ -1,0 +1,28 @@
+id: C-0183
+type: claim
+status: FORMALIZED
+title: Verification criterion revision is a distinct epistemic event requiring independent provenance and impact analysis
+scope: Research Library provenance and verification history; concerns criterion revision, evidence evaluation, role separation, authority control, and result contamination.
+statement: Changing a verification criterion after evidence has been observed changes the conditions under which the evidence is evaluated and must therefore be represented as a distinct epistemic event. Its rationale, authorization, available evidence, and effect on prior results should be separately recorded. Criterion revision should not be silently merged into ordinary evidence evaluation.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0182
+  - type: REFERENCES
+    target: C-0181
+  - type: REFERENCES
+    target: C-0179
+  - type: REFERENCES
+    target: C-0169
+evidence: []
+engineering:
+  consequence: "Persist criterion revisions as first-class events with provenance, authorization, and impact on previously evaluated evidence. Preserve the original criterion and evaluation history."
+  gap: "Formal event schema, authorization separation, revision impact calculation, and safeguards against result-contaminating criterion changes have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
