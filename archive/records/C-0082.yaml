@@ -1,0 +1,28 @@
+id: C-0082
+type: claim
+status: FORMALIZED
+title: Evidence aggregation must distinguish additive, redundant, and correlated support
+scope: Research Library provenance and verification history; concerns aggregation of multiple evidence items and avoidance of inflated support from dependent evidence.
+statement: Aggregation of evidential support must distinguish independent/additive evidence from redundant or correlated evidence; support strength or adequacy must not be increased by simple counting or summation when evidence items share provenance, assumptions, failure modes, or common sources.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0081
+  - type: REFERENCES
+    target: C-0080
+  - type: REFERENCES
+    target: C-0061
+  - type: REFERENCES
+    target: C-0062
+evidence: []
+engineering:
+  consequence: "Evidence aggregation should preserve provenance/dependency structure and model correlation or shared failure modes. Multiple evidence records from a common source or assumption should not be treated as independent confirmations without justification."
+  gap: "Formal evidence-correlation model, aggregation semantics, independence criteria, and adequacy calculation have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
