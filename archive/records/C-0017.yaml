@@ -1,0 +1,24 @@
+id: C-0017
+type: claim
+status: FORMALIZED
+title: Observational equivalence can hide semantic distinctions
+scope: Verification reverse-analysis; concerns equivalence induced by a restricted observation mechanism.
+statement: If an oracle or observation function maps distinct system states to the same observable result, those states are observationally equivalent under that oracle even though they may remain semantically distinct; verification based only on that oracle cannot distinguish the hidden semantic difference.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0016
+  - type: REFERENCES
+    target: C-0015
+evidence: []
+engineering:
+  consequence: "Verification claims must state the observation boundary of each oracle. If distinct semantic states collapse to the same observation, additional observables or independent verification mechanisms are required to distinguish the relevant property."
+  gap: "A project-specific observational-equivalence relation and mapping from semantic distinctions to required observables have not yet been formalized."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
