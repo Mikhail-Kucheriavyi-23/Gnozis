@@ -1,0 +1,28 @@
+id: C-0079
+type: claim
+status: FORMALIZED
+title: Causal attribution is itself a derived claim subject to independent provenance
+scope: Research Library provenance and verification history; concerns recursive provenance requirements for explanations of compatibility-classification changes.
+statement: A causal attribution is a derived claim and therefore requires its own provenance, evidence scope, and validation status; references to the attributed classification result or to the attribution itself cannot serve as its sole supporting evidence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0078
+  - type: REFERENCES
+    target: C-0077
+  - type: REFERENCES
+    target: C-0067
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Causal attribution records should identify their own supporting observations/evidence, inference rule or causal model, scope, and validation status. Recursive provenance must terminate in independently sourced observations or explicitly declared assumptions."
+  gap: "Formal causal-claim schema, inference-rule representation, recursive provenance termination criteria, and validation workflow have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
