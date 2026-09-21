@@ -1,0 +1,28 @@
+id: C-0106
+type: claim
+status: FORMALIZED
+title: Risk acceptance cannot upgrade the epistemic status of an underlying claim
+scope: Research Library provenance and verification history; concerns separation of governance outcomes from epistemic verification states.
+statement: Acceptance of a residual risk is a governance outcome and must not change the epistemic status of the underlying claim; UNKNOWN, UNVERIFIED, or UNRESOLVED evidence states remain such unless independently satisfied by evidence and verification criteria.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0105
+  - type: REFERENCES
+    target: C-0104
+  - type: REFERENCES
+    target: C-0097
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Represent epistemic status and governance disposition as separate fields or orthogonal states. Risk acceptance must preserve underlying uncertainty and cannot be used as evidence for verification."
+  gap: "Formal dual-state model, transition constraints, governance authority schema, and audit rules preventing epistemic-status upgrades through risk acceptance have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
