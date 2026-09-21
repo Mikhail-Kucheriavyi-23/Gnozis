@@ -1,0 +1,28 @@
+id: C-0109
+type: claim
+status: FORMALIZED
+title: Revalidation or revocation must be represented as a new event without rewriting historical transitions
+scope: Research Library provenance and verification history; concerns revalidation, revocation, and historical integrity after semantics changes.
+statement: When changed verification semantics make a historical epistemic transition insufficient for current use, the system should record an explicit revalidation, supersession, or revocation event rather than mutate the historical transition; historical validity and current operational applicability must remain separately auditable.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: e16ddf87849df7180718bca9625b6165a699cd9f
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0108
+  - type: REFERENCES
+    target: C-0107
+  - type: REFERENCES
+    target: C-0106
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Use append-only revalidation/revocation events linked to the historical transition. Preserve original semantics, evidence, and provenance; expose current applicability separately."
+  gap: "Formal event types, transition rules for revalidation/supersession/revocation, current-applicability model, and audit semantics have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
