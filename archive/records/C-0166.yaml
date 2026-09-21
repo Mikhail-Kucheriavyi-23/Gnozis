@@ -1,0 +1,28 @@
+id: C-0166
+type: claim
+status: FORMALIZED
+title: Adaptive verification requires starvation detection for unresolved regions under persistent attention concentration
+scope: Research Library provenance and verification history; concerns adaptive verification, attention concentration, starvation, residual risk, and unresolved-region preservation.
+statement: An adaptive verification process should detect when unresolved regions are persistently deprioritized while attention remains concentrated on known failure modes. Prolonged deferral must remain explicit, preserve residual-risk state, and require a recorded reason rather than being silently converted into apparent coverage.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0165
+  - type: REFERENCES
+    target: C-0164
+  - type: REFERENCES
+    target: C-0160
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Track attention concentration, unresolved-region age, deferred verification reasons, residual risk, and starvation indicators. Prevent indefinite silent deferral of unresolved regions."
+  gap: "Formal starvation predicate, attention concentration metric, deferral budget, fairness policy, and escalation behavior have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
