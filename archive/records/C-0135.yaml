@@ -1,0 +1,28 @@
+id: C-0135
+type: claim
+status: FORMALIZED
+title: Shared evidence creates a dependency across claims and verification paths
+scope: Research Library provenance and verification history; concerns common evidence dependencies, apparent independence, and evidence reuse across multiple claims.
+statement: When multiple claims or verification paths rely materially on the same evidence source, transformation, assumption, or derived artifact, that shared dependency must be represented explicitly. Distinct paths using shared evidence must not be counted as fully independent evidence merely because their downstream verification procedures differ.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0134
+  - type: REFERENCES
+    target: C-0120
+  - type: REFERENCES
+    target: C-0119
+  - type: REFERENCES
+    target: C-0118
+evidence: []
+engineering:
+  consequence: "Model shared evidence and derived artifacts as explicit dependency nodes in provenance/common-mode graphs. Evidence aggregation should account for shared ancestry, shared transformations, and common assumptions."
+  gap: "Formal evidence-dependency graph, material-sharing predicate, correlated-evidence aggregation rule, and transitive dependency treatment have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
