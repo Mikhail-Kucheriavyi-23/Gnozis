@@ -1,0 +1,28 @@
+id: C-0168
+type: claim
+status: FORMALIZED
+title: Meta-verification of a policy that controls evidence selection requires explicit non-circular validation boundaries
+scope: Research Library provenance and verification history; concerns self-reference, circular evidence, policy-controlled sampling, meta-verification boundaries, and independent validation.
+statement: When a verification or budget policy controls the selection of evidence used to assess that same policy, the assessment can become circular. Trust in the policy must therefore not rely exclusively on evidence selected by the policy itself. A non-circular validation boundary requires explicit external, structurally independent, frozen, or otherwise separately justified evidence sources and assumptions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0167
+  - type: REFERENCES
+    target: C-0166
+  - type: REFERENCES
+    target: C-0164
+  - type: REFERENCES
+    target: C-0152
+evidence: []
+engineering:
+  consequence: "Separate policy-controlled evidence from evidence used to validate the policy. Record the validation boundary, dependency rationale, and assumptions for any claimed non-circular validation."
+  gap: "Formal validation-boundary taxonomy, acceptable independence criteria, frozen-reference protocol, and non-circular meta-verification procedure have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
