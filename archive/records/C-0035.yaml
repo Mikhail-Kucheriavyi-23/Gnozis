@@ -1,0 +1,26 @@
+id: C-0035
+type: claim
+status: FORMALIZED
+title: Supersession is distinct from invalidation
+scope: Research Library provenance and verification history; concerns semantic distinction between replacing an artifact with a newer version and establishing that the earlier artifact was false or invalid.
+statement: A newer version of a claim, model, evidence interpretation, or artifact can supersede an earlier version without proving that the earlier version was historically invalid; supersession and invalidation must therefore be represented as distinct state transitions and provenance relations.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0034
+  - type: REFERENCES
+    target: C-0028
+  - type: REFERENCES
+    target: C-0027
+evidence: []
+engineering:
+  consequence: "Archive state and relation schemas should distinguish SUPERSEDES from INVALIDATES/RETRACTS. A superseded artifact remains historically valid as a record of what was asserted under its prior scope and assumptions unless separate evidence establishes invalidity."
+  gap: "Formal state-transition and relation semantics for supersession, invalidation, retraction, and correction have not yet been fully specified."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
