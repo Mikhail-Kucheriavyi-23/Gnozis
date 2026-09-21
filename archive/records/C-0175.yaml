@@ -1,0 +1,28 @@
+id: C-0175
+type: claim
+status: FORMALIZED
+title: Interventional observation can improve identifiability while changing the observed system, requiring explicit separation of baseline, response, and intervention-induced effects
+scope: Research Library provenance and verification history; concerns intervention, causal observation, identifiability, system perturbation, baseline evidence, and interpretation of post-intervention evidence.
+statement: An intervention may expose distinctions that passive observation cannot, but the intervention can also alter the state or behavior of the system. Evidence obtained after intervention must therefore distinguish baseline properties, response-to-intervention, and changes induced by the intervention itself. Post-intervention observations cannot be treated as direct observations of the unperturbed system without additional justification.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0174
+  - type: REFERENCES
+    target: C-0173
+  - type: REFERENCES
+    target: C-0172
+  - type: REFERENCES
+    target: C-0169
+evidence: []
+engineering:
+  consequence: "Record baseline state, intervention specification, intervention response, and post-intervention state separately. Do not collapse response evidence into baseline evidence without an explicit invariance or transport justification."
+  gap: "Formal intervention model, baseline/response schema, invariance conditions, transportability criteria, and intervention side-effect detection have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
