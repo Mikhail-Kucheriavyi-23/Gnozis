@@ -1,0 +1,30 @@
+id: C-0124
+type: claim
+status: FORMALIZED
+title: Epistemic revision requires operational reassessment without rewriting historical acceptance decisions
+scope: Research Library provenance and verification history; concerns lifecycle of operational permissions after changes to epistemic state.
+statement: When the epistemic status, evidence scope, residual uncertainty, or relevant model changes materially, affected operational acceptances should be re-evaluated under the current policy; prior acceptance decisions remain historical records bound to their original epistemic state, policy version, scope, and authority and must not be rewritten as if they reflected later knowledge.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0123
+  - type: REFERENCES
+    target: C-0122
+  - type: REFERENCES
+    target: C-0121
+  - type: REFERENCES
+    target: C-0107
+  - type: REFERENCES
+    target: C-0106
+evidence: []
+engineering:
+  consequence: "Model acceptance as versioned decisions with explicit validity conditions. Epistemic revisions should trigger impact analysis and reassessment of dependent permissions while preserving append-only historical acceptance records."
+  gap: "Formal invalidation/reassessment triggers, dependency propagation, acceptance validity intervals, revocation semantics, and policy/evidence version compatibility rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
