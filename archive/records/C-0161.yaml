@@ -1,0 +1,28 @@
+id: C-0161
+type: claim
+status: FORMALIZED
+title: Verification sampling may intentionally differ from world distribution, but sampled frequencies cannot be interpreted as world frequencies without separate inference
+scope: Research Library provenance and verification history; concerns adversarial sampling, tail oversampling, sampling intent, evidence interpretation, and distinction between verification and world distributions.
+statement: Verification sampling can be intentionally non-representative, including tail-focused, adversarial, stress, or counterexample-oriented sampling. Such sampling can improve failure discovery but changes the relationship between observed sample frequencies and real-world frequencies. Sampling intent and selection mechanism must therefore be preserved, and verification observations must not be interpreted as estimates of world frequency without an explicit inference model and assumptions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0160
+  - type: REFERENCES
+    target: C-0159
+  - type: REFERENCES
+    target: C-0146
+  - type: REFERENCES
+    target: C-0145
+evidence: []
+engineering:
+  consequence: "Persist sampling mode, selection mechanism, and intended inferential meaning. Separate adversarial evidence from prevalence estimates and require explicit assumptions for any transfer from verification-sample frequency to world frequency."
+  gap: "Formal sampling-mode schema, selection-bias model, reweighting/inference rules, prevalence-estimation criteria, and assumptions registry have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
