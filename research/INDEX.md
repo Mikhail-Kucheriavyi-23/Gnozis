@@ -53,3 +53,30 @@ Research should reference engineering tasks when a concrete consequence exists. 
 
 ## Next
 Normalize the existing E-series/reverse-analysis sequence into this index and record format.
+## Reverse-analysis continuity
+
+The current reverse-analysis sequence is preserved in historical `AI_CONTEXT.md` and is being normalized into stable research records. Current indexed block: RME 126–140.
+
+### Current frontier
+
+`F_t → F_{t+1}` as a proof-preserving refinement/conservative extension.
+
+Open questions:
+1. Define the minimum semantic contract M(F).
+2. Define admissible refinement/conservative extension.
+3. Construct adversarial counterexamples.
+4. Determine whether M(F) is preserved.
+5. Record exact assumptions for any preservation result.
+
+### Non-claims
+- Proof continuity is not semantic continuity.
+- Local proof validity does not imply global semantic safety.
+- K-preservation does not prove contract preservation.
+- Trusted-kernel status is an explicit assumption.
+- M(F) is OPEN.
+- Semantic-drift prevention is NOT VERIFIED.
+
+### Current engineering bridge
+Determine the explicit semantic Invariant provider for canonical execution. Preserve Ψ=(X,R), do not reuse RootInvariant for ordinary Ψ semantics, avoid a second state model, and fail closed rather than using an always-true invariant.
+
+Research status vocabulary: DEFINITION / OBSERVED / DERIVED / VERIFIED / REJECTED / OPEN.
