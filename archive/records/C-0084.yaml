@@ -1,0 +1,28 @@
+id: C-0084
+type: claim
+status: FORMALIZED
+title: Evidence independence must be evaluated against a declared relevant dimension and scope
+scope: Research Library provenance and verification history; concerns operational definition of independence for verification and evidence aggregation.
+statement: Independence assessment need not establish unrestricted independence across every possible dependency dimension; it must identify the dimension or dimensions relevant to the verification claim and evaluate independence within an explicitly declared scope.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0083
+  - type: REFERENCES
+    target: C-0082
+  - type: REFERENCES
+    target: C-0081
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Independence assessments should declare the relevant dimension(s), such as source, measurement, model, transformation, or failure-mode independence, together with scope and rationale. Verification criteria should require only the independence properties necessary for the stated claim."
+  gap: "Formal independence dimensions, selection criteria for relevant dimensions, scope syntax, and mapping from verification claims to required independence properties have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
