@@ -1,0 +1,28 @@
+id: C-0150
+type: claim
+status: FORMALIZED
+title: Bottleneck detection is itself a verification dependency when it controls challenge selection
+scope: Research Library provenance and verification history; concerns bottleneck detection, adaptive challenge selection, selection bias, and meta-verification.
+statement: When an automated bottleneck detector determines which epistemic challenge is selected next, the detector becomes part of the verification dependency graph. Its classification can systematically bias challenge allocation toward dimensions that are easier to improve or observe while leaving high-impact but difficult uncertainties under-tested. Bottleneck detection therefore requires provenance, challengeability, and bias analysis.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0149
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0140
+  - type: REFERENCES
+    target: C-0130
+evidence: []
+engineering:
+  consequence: "Treat bottleneck detection as a typed decision node with provenance. Record alternative bottleneck hypotheses, selection rationale, rejected alternatives, and whether the detector is itself independently challenged."
+  gap: "Formal bottleneck detector schema, bias tests, alternative-hypothesis protocol, challenge allocation constraints, and meta-verification stopping rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
