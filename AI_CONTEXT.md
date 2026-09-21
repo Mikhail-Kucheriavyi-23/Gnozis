@@ -1,3 +1,12 @@
+
+## RESEARCH LIBRARY ROLE — 2026-09-21
+
+This repository is the Gnozis Research Library: the public research/archive line containing discovered principles, reverse-analysis, mathematical models, experimental Python implementations and research material for researchers and enthusiasts. It is not the current production Core. Gnozis-V2 is the future canonical engineering Core foundation.
+
+Research findings may become V2 requirements only after pattern extraction, definition/formalization, engineering mapping and evidence. Historical code in this repository is not automatically canonical V2 implementation.
+
+Intended lineage: Research Library → Gnozis Core → specialized research kernels → user/commercial versions.
+
 # AI_CONTEXT.md — Gnozis Strategic Mathematical Context
 ## 2026-09-18 consolidation
 
