@@ -1,0 +1,28 @@
+id: C-0184
+type: claim
+status: FORMALIZED
+title: Adaptive verification provenance must track information availability at evidence-generation time to detect temporal leakage
+scope: Research Library provenance and verification history; concerns adaptive verification, temporal provenance, information availability, future leakage, evidence generation, and evaluation integrity.
+statement: In adaptive verification, evidence validity depends not only on the observed result and evaluation criterion but also on what information was available when the evidence was generated. If future observations, revised criteria, or later system states influence the construction or selection of earlier evidence without explicit designation, the resulting claim may suffer temporal leakage and lose the intended evidentiary independence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0183
+  - type: REFERENCES
+    target: C-0182
+  - type: REFERENCES
+    target: C-0179
+  - type: REFERENCES
+    target: C-0177
+evidence: []
+engineering:
+  consequence: "Record evidence-generation time and relevant information availability; detect or explicitly mark use of future information, revised criteria, or post-hoc selection during evidence construction."
+  gap: "Formal information-set model, temporal leakage detector, adaptive evidence-selection semantics, and permissible look-ahead rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
