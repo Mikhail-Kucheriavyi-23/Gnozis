@@ -1,0 +1,26 @@
+id: C-0025
+type: claim
+status: FORMALIZED
+title: Hidden shared assumptions create correlation between apparently separate proofs
+scope: Verification reverse-analysis; concerns dependence between proof artifacts that appear distinct but rely on an untracked common assumption, dependency, oracle, model, or transformation.
+statement: Proof artifacts can be formally separate yet epistemically correlated when they depend on the same unverified assumption, dependency, oracle, model, transformation, or semantic interpretation; their agreement therefore does not provide independent confirmation of the shared dependency.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0024
+  - type: REFERENCES
+    target: C-0009
+  - type: REFERENCES
+    target: C-0008
+evidence: []
+engineering:
+  consequence: "Proof provenance should expose shared assumptions and dependencies so that the archive can identify common-mode structure across otherwise separate proof artifacts. Agreement between correlated proofs must not be treated as independent confirmation."
+  gap: "A machine-readable dependency graph and correlation classification for proof artifacts have not yet been fully formalized."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
