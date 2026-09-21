@@ -1,0 +1,28 @@
+id: C-0134
+type: claim
+status: FORMALIZED
+title: Evidence reuse across verification-contract revisions requires relevance and validity checks and does not inherit verification status
+scope: Research Library provenance and verification history; concerns reuse of prior evidence after changes to scope, coverage, thresholds, budget, or policy.
+statement: Evidence produced under a prior verification contract may be reused under a revised contract only after checking its provenance, scope compatibility, assumptions, failure-class coverage, and validity under the new contract. Reused evidence may contribute to a new assessment but must not automatically transfer the prior verification or adequacy status.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0133
+  - type: REFERENCES
+    target: C-0132
+  - type: REFERENCES
+    target: C-0124
+  - type: REFERENCES
+    target: C-0122
+evidence: []
+engineering:
+  consequence: "Track evidence provenance and contract compatibility explicitly. Reuse should produce a new evidence-assessment relation under the new contract rather than copying verification status."
+  gap: "Formal compatibility predicate, evidence transformation semantics, invalidation conditions, provenance graph, and recomputation rules for reused evidence have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
