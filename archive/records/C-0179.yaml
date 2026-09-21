@@ -1,0 +1,28 @@
+id: C-0179
+type: claim
+status: FORMALIZED
+title: Evidence-applicability assessment after evolution is itself an epistemic claim requiring provenance and constrained validation
+scope: Research Library provenance and verification history; concerns change-impact analysis, applicability claims, constrained validation, self-assessment, and residual uncertainty.
+statement: The classification of historical evidence as still applicable, conditional, requiring revalidation, invalidated, or unknown is itself an epistemic claim. Its basis must therefore be traceable to evidence, dependencies, assumptions, and validation constraints. An evolving system should not silently convert unresolved applicability into continued validity using only its current policy state.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0178
+  - type: REFERENCES
+    target: C-0177
+  - type: REFERENCES
+    target: C-0169
+  - type: REFERENCES
+    target: C-0168
+evidence: []
+engineering:
+  consequence: "Record provenance for applicability decisions and constrain automated retention of historical claims. Unresolved applicability must remain explicit rather than being silently promoted to valid."
+  gap: "Formal applicability-assessment schema, constrained validator design, escalation conditions, and evidence lineage requirements have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
