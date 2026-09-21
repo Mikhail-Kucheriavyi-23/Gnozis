@@ -1,0 +1,28 @@
+id: C-0078
+type: claim
+status: FORMALIZED
+title: Causal attribution is evidence-scoped and cannot substitute for compatibility evidence
+scope: Research Library provenance and verification history; concerns epistemic scope of causal explanations for changed compatibility classifications.
+statement: A causal attribution explaining why a compatibility classification changed is a derived explanation with its own evidence and provenance scope; it does not by itself establish the truth of the underlying claims, their compatibility, or contradiction.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0077
+  - type: REFERENCES
+    target: C-0076
+  - type: REFERENCES
+    target: C-0074
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Causal attribution records should declare their evidence scope and provenance independently from compatibility classification. A well-supported explanation of a classification transition must not be promoted into evidence that the classified semantic relation itself is true."
+  gap: "Formal evidence-scope schema, causal attribution confidence/status, and separation rules between causal explanation and compatibility evidence have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
