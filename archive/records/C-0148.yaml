@@ -1,0 +1,28 @@
+id: C-0148
+type: claim
+status: FORMALIZED
+title: Verification status should remain multidimensional unless aggregation commensurability is established
+scope: Research Library provenance and verification history; concerns epistemic status vectors, scalar scores, coverage, diversity, independence, adversarial reach, and residual uncertainty.
+statement: Verification status should preserve distinct dimensions such as modeled coverage, evidence diversity, dependency independence, adversarial reach, assumptions, and residual uncertainty unless a validated aggregation rule establishes that these dimensions are commensurable without material information loss. A single scalar score can conceal compensating weaknesses across dimensions and therefore cannot be treated as a neutral summary by default.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0147
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0135
+  - type: REFERENCES
+    target: C-0131
+evidence: []
+engineering:
+  consequence: "Store verification status as a structured vector or typed record. Any scalar aggregation must expose its rule, assumptions, loss of information, and sensitivity to correlated dimensions."
+  gap: "Formal dimension schema, aggregation admissibility criteria, partial-order semantics, and information-loss analysis for scalarization have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
