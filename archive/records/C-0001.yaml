@@ -1,0 +1,20 @@
+id: C-0001
+type: claim
+status: FORMALIZED
+title: Proof continuity does not imply semantic continuity
+scope: Mathematical reverse-analysis of evolving formal models; applies only where proof obligations and semantic interpretation are explicitly distinguished.
+statement: Preservation or continuity of a proof-level property across a model transition does not, by itself, establish preservation or continuity of the model's full semantics.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+evidence: []
+engineering:
+  consequence: "Core evolution must not treat proof continuity, invariant preservation, or structural validity alone as sufficient evidence of semantic continuity. Semantic preservation requires an explicitly scoped semantic contract and a corresponding verification obligation."
+  gap: "A concrete semantic invariant M(F), its preservation relation, and adversarial counterexample set remain to be specified for the relevant Gnozis transition model."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
