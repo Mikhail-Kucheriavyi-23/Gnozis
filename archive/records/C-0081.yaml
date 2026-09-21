@@ -1,0 +1,28 @@
+id: C-0081
+type: claim
+status: FORMALIZED
+title: Evidential support is scoped and graded rather than a bare binary relation
+scope: Research Library provenance and verification history; concerns semantic adequacy and scope of evidence-support relations.
+statement: An evidence-support relation must preserve the claim scope, evidence type, relevance, independence or dependency conditions, and an explicit support or adequacy status; the existence of a SUPPORTS edge alone must not be interpreted as proof or sufficient verification.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0080
+  - type: REFERENCES
+    target: C-0079
+  - type: REFERENCES
+    target: C-0073
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Evidence-support edges should carry scope and typed metadata such as relevance, independence/dependence, support status, and where appropriate adequacy or strength. Verification logic must not equate edge existence with proof."
+  gap: "Formal support-strength vocabulary, evidence types, adequacy semantics, and validation rules for SUPPORTS relations have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
