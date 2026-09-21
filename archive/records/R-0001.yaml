@@ -1,0 +1,18 @@
+id: R-0001
+type: research
+status: HISTORICAL
+title: GNOSIS/UROBOROS Ψ-Core v33 research layer
+scope: historical GNOSIS/UROBOROS research repository
+statement: This record identifies the historical research layer documented in the archive repository. The source material explicitly distinguishes hypothesis, experiment, result, validation, and established finding, and requires reproducibility/provenance where practical.
+source:
+  kind: repository
+  location: research/README.md
+  commit: 979eace73f41ed2ddf18a98a726937b6337c7584
+relations: []
+evidence: []
+engineering:
+  consequence: "The historical research layer should be preserved as research/provenance and must not be treated as current Core implementation authority."
+  gap: "Individual research findings have not yet been atomized into claim/evidence records."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
