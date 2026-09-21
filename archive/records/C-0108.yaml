@@ -1,0 +1,28 @@
+id: C-0108
+type: claim
+status: FORMALIZED
+title: Historical epistemic transitions must retain the semantics version under which they were evaluated
+scope: Research Library provenance and verification history; concerns versioning and immutability of transition predicates.
+statement: An epistemic state transition must retain the versioned transition semantics, verification predicate, or rule definition under which its admissibility was evaluated; later changes to transition semantics must not silently reinterpret historical transitions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 301ad0956a9daa9766d0087c49fcb1ed4f464501
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0107
+  - type: REFERENCES
+    target: C-0106
+  - type: REFERENCES
+    target: C-0098
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Persist transition-semantics identity/version and the evidence/provenance used for each epistemic transition. Later predicate changes may create new semantics or require re-verification, but must not silently rewrite the historical meaning of prior transitions."
+  gap: "Formal semantics-version model, compatibility rules, migration/reverification policy, and audit requirements for historical transition interpretation have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
