@@ -1,0 +1,26 @@
+id: C-0068
+type: claim
+status: FORMALIZED
+title: Applicability decisions are state-relative derived artifacts
+scope: Research Library provenance and verification history; concerns staleness and validity of normalization applicability decisions when their inputs evolve.
+statement: A normalization applicability decision is valid only relative to the specific versions or states of its projection, semantic context, invariance contract, criteria, and relevant inputs; changes to any verification-relevant input may invalidate or require re-evaluation of the prior decision.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0067
+  - type: REFERENCES
+    target: C-0066
+  - type: REFERENCES
+    target: C-0053
+evidence: []
+engineering:
+  consequence: "Applicability decisions should bind to immutable input identities/versions and expose a validity or re-evaluation state. Changes in relevant inputs must not silently preserve a prior ACCEPTED decision."
+  gap: "Formal decision-version schema, invalidation triggers, validity semantics, and re-evaluation workflow have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
