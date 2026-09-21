@@ -1,0 +1,24 @@
+id: C-0022
+type: claim
+status: FORMALIZED
+title: Bounded exhaustive verification can establish a scoped property when the domain is finite and exhaustively covered
+scope: Verification reverse-analysis; concerns the conditions under which exhaustive checking over a finite, explicitly defined domain supports a complete claim for that domain.
+statement: If a verification domain is finite or otherwise exhaustively enumerable, its boundaries are explicit, the checking procedure is sound for the property, and every element of the declared domain is actually checked, absence of a counterexample can establish the property for that bounded domain; this does not automatically extend the result beyond the declared domain.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0021
+  - type: REFERENCES
+    target: C-0002
+evidence: []
+engineering:
+  consequence: "A bounded exhaustive verification result may be admitted as a scoped proof only when domain definition, enumeration completeness, checker soundness, and execution coverage are all established. The resulting claim must retain its domain boundary."
+  gap: "Gnozis-specific criteria for domain finiteness/enumerability, checker soundness, exhaustive execution coverage, and promotion from bounded result to formal proof have not yet been fully specified."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
