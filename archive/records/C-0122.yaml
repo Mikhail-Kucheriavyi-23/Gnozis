@@ -1,0 +1,30 @@
+id: C-0122
+type: claim
+status: FORMALIZED
+title: Model adequacy requires a bounded stopping condition rather than an absolute proof of no blind spots
+scope: Research Library provenance and verification history; concerns stopping criteria for recursive adequacy and common-mode challenge.
+statement: Verification of model adequacy cannot generally establish the absence of every possible blind spot; acceptance therefore requires an explicit bounded stopping condition tied to claim scope, relevant failure classes, challenge coverage, residual uncertainty, and permitted risk, with unresolved out-of-scope uncertainty retained rather than converted into certainty.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0121
+  - type: REFERENCES
+    target: C-0120
+  - type: REFERENCES
+    target: C-0118
+  - type: REFERENCES
+    target: C-0105
+  - type: REFERENCES
+    target: C-0104
+evidence: []
+engineering:
+  consequence: "Define a claim-scoped adequacy stopping predicate that records scope, failure classes considered, challenge depth/diversity, residual unknowns, and acceptance conditions. Do not represent unchallenged or out-of-scope blind spots as disproven."
+  gap: "Formal stopping predicate, residual-risk semantics, challenge budget, escalation rules, and governance interaction have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
