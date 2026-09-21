@@ -1,0 +1,28 @@
+id: C-0089
+type: claim
+status: FORMALIZED
+title: Failure-model evolution must preserve lineage across duplicate, refinement, and correction relations
+scope: Research Library provenance and verification history; concerns historical comparability across evolving failure-model representations.
+statement: When a discovered failure is classified as a duplicate, refinement, or correction of an existing failure mode, the evolved representation must preserve lineage to the prior identity and relation classification so historical verification results remain interpretable across failure-model versions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0088
+  - type: REFERENCES
+    target: C-0087
+  - type: REFERENCES
+    target: C-0086
+  - type: REFERENCES
+    target: C-0070
+evidence: []
+engineering:
+  consequence: "Failure-mode identities should be stable enough for lineage, while model versions record representation changes. Duplicate/refinement/correction events should retain predecessor identity, relation type, evidence, and affected verification references."
+  gap: "Formal failure-mode identity policy, lineage relation taxonomy, version migration semantics, and historical verification impact rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
