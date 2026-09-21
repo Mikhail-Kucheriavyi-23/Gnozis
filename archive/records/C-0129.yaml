@@ -1,0 +1,28 @@
+id: C-0129
+type: claim
+status: FORMALIZED
+title: Verification budget creates a breadth-depth tradeoff that must be explicit in bounded robustness claims
+scope: Research Library provenance and verification history; concerns allocation of limited verification resources across counterfactual classes, adversarial search, common-mode challenge, and model adequacy.
+statement: Under finite verification resources, coverage breadth, challenge depth, adversarial search, and common-mode/model-adequacy analysis compete for budget. A bounded robustness claim must therefore record the tested domains, budget allocation or stopping basis, and relevant unexplored regions rather than treating the observed test count as equivalent to completeness.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0128
+  - type: REFERENCES
+    target: C-0127
+  - type: REFERENCES
+    target: C-0122
+  - type: REFERENCES
+    target: C-0115
+evidence: []
+engineering:
+  consequence: "Verification planning should expose budget allocation and tradeoffs among breadth, depth, adversarial search, common-mode challenge, and model adequacy. Acceptance should preserve untested regions and residual uncertainty."
+  gap: "Formal budget model, utility/coverage objective, allocation policy, minimum challenge requirements, and stopping rule under budget constraints have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
