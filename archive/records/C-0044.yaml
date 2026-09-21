@@ -1,0 +1,26 @@
+id: C-0044
+type: claim
+status: FORMALIZED
+title: Equivalence evidence must expose dependency on the original artifact
+scope: Research Library provenance and verification history; concerns circular or hidden dependency when evidence for semantic equivalence of a replacement dependency relies on the original dependency being replaced.
+statement: Evidence supporting semantic equivalence between a replacement dependency and the original must explicitly expose any dependence on the original artifact; otherwise the equivalence evidence may create a circular or falsely independent justification for substitution.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0043
+  - type: REFERENCES
+    target: C-0025
+  - type: REFERENCES
+    target: C-0026
+evidence: []
+engineering:
+  consequence: "Semantic-equivalence evidence must declare whether it uses the original dependency, its outputs, assumptions, oracle, or interpretation as a prerequisite. Circular support must not be represented as independent evidence."
+  gap: "Formal cycle detection and independence classification for equivalence evidence have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
