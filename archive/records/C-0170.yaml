@@ -1,0 +1,28 @@
+id: C-0170
+type: claim
+status: FORMALIZED
+title: Independence assessment is bounded by the adequacy of dependency discovery and must preserve uncertainty about undiscovered common causes
+scope: Research Library provenance and verification history; concerns dependency discovery, undiscovered dependencies, epistemic independence, common causes, and residual uncertainty.
+statement: Failure to identify a dependency does not establish its absence. Claims of epistemic independence are therefore bounded by the adequacy and scope of the dependency-discovery process, including its own blind spots. Where common dependencies may remain undiscovered, residual uncertainty about independence must remain explicit.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0169
+  - type: REFERENCES
+    target: C-0168
+  - type: REFERENCES
+    target: C-0164
+  - type: REFERENCES
+    target: C-0152
+evidence: []
+engineering:
+  consequence: "Record dependency-discovery scope, methods, blind spots, and unresolved common-cause hypotheses. Independence claims should carry residual uncertainty tied to dependency-discovery adequacy."
+  gap: "Formal dependency-discovery completeness model, common-cause hypothesis registry, discovery-diversity requirements, and independence stopping criteria have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
