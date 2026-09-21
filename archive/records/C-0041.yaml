@@ -1,0 +1,26 @@
+id: C-0041
+type: claim
+status: FORMALIZED
+title: A replacement dependency must satisfy the proof interface contract
+scope: Research Library provenance and verification history; concerns replacing a prerequisite while preserving the assumptions and input/output contract required by dependent proof artifacts.
+statement: Replacing a dependency with a distinct dependency is insufficient merely because the replacement is independently valid; the replacement must also satisfy the interface, assumptions, semantic contract, and scope required by each dependent proof, or those proofs must be re-derived.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0040
+  - type: REFERENCES
+    target: C-0039
+  - type: REFERENCES
+    target: C-0024
+evidence: []
+engineering:
+  consequence: "Dependency replacement must validate compatibility at the proof boundary: inputs, outputs, semantics, assumptions, scope, and failure behavior. If the contract is not preserved, dependent proofs cannot retain their prior validity without re-derivation."
+  gap: "A formal dependency interface-contract schema and compatibility test for proof substitution have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
