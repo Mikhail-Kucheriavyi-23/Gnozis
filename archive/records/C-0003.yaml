@@ -1,0 +1,24 @@
+id: C-0003
+type: claim
+status: FORMALIZED
+title: Structural evolution is not equivalent to semantic growth
+scope: Mathematical reverse-analysis of evolving systems; distinguishes changes in structure, state space, or representation from demonstrated improvement of the system's intended semantics.
+statement: An evolution step that increases, changes, or reorganizes structural state does not by itself establish semantic growth, improvement, or preservation of the intended system property.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0001
+  - type: REFERENCES
+    target: C-0002
+evidence: []
+engineering:
+  consequence: "Core evolution must not use structural expansion, added state, new relations, or increased implementation complexity as a proxy for semantic improvement. Any claimed improvement requires an explicit semantic property and verification obligation."
+  gap: "The project-specific semantic ordering or improvement relation has not yet been fully formalized for the relevant evolution domain."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
