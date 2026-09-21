@@ -1,0 +1,26 @@
+id: C-0061
+type: claim
+status: FORMALIZED
+title: Transition classification requires explicit provenance and derivation criteria
+scope: Research Library provenance and verification history; concerns classification of changes between claim states and content identities.
+statement: A transition class must not be treated as authoritative merely because it is stored as metadata; its assignment must reference explicit comparison criteria, relevant state fields, and provenance sufficient to reconstruct why the transition was classified as identity-only, semantic, canonicalization-related, correction-related, or another defined class.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0060
+  - type: REFERENCES
+    target: C-0058
+  - type: REFERENCES
+    target: C-0056
+evidence: []
+engineering:
+  consequence: "Transition classification should be derived from an explicit semantic-diff procedure or justified by recorded comparison evidence. The archive must preserve the inputs, rule/version, and result used to derive the classification."
+  gap: "A formal transition taxonomy, semantic-diff procedure, and machine-checkable derivation schema have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
