@@ -1,0 +1,28 @@
+id: C-0039
+type: claim
+status: FORMALIZED
+title: Re-evaluation must preserve trigger provenance and cannot restore confidence through the same failed prerequisite
+scope: Research Library provenance and verification history; concerns re-evaluation after a dependency, assumption, scope, or evidence failure.
+statement: A re-evaluation must identify the concrete trigger that caused review and must not be treated as independent confirmation when it relies on the same prerequisite, oracle, evidence path, or assumption that caused or remains capable of causing the original failure.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0038
+  - type: REFERENCES
+    target: C-0025
+  - type: REFERENCES
+    target: C-0026
+  - type: REFERENCES
+    target: C-0037
+evidence: []
+engineering:
+  consequence: "Re-evaluation events must record their trigger and dependency set. If the trigger identifies a failed prerequisite, the re-evaluation must demonstrate resolution through changed or independently validated prerequisites rather than merely repeating the failed path."
+  gap: "Formal rules for independence, remediation, and acceptable replacement evidence during re-evaluation have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
