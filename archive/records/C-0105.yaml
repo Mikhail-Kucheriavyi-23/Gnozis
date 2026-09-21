@@ -1,0 +1,28 @@
+id: C-0105
+type: claim
+status: FORMALIZED
+title: Residual uncertainty must not be silently reclassified as accepted residual risk
+scope: Research Library provenance and verification history; concerns stopping decisions under incomplete dependency knowledge.
+statement: Verification stopping must distinguish residual uncertainty about unknown or unobserved failure/dependency conditions from explicitly accepted residual risk; an unknown dependency or unverified condition cannot be treated as acceptable residual risk merely because analysis stopped or resources were exhausted.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0104
+  - type: REFERENCES
+    target: C-0103
+  - type: REFERENCES
+    target: C-0102
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Stopping records should distinguish UNKNOWN/UNRESOLVED conditions from accepted residual risk and identify the authority, rationale, scope, and criteria supporting any risk acceptance."
+  gap: "Formal residual-risk model, uncertainty taxonomy, risk-acceptance authority, acceptance thresholds, and transition rules from UNKNOWN to ACCEPTED_RISK have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
