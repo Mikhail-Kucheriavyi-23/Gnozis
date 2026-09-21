@@ -1,0 +1,28 @@
+id: C-0114
+type: claim
+status: FORMALIZED
+title: Unresolved epistemic conflict should be contained to its affected scope unless it invalidates a declared global invariant
+scope: Research Library provenance and verification history; concerns containment of unresolved concurrent conflicts and prevention of unjustified global state effects.
+statement: An unresolved epistemic conflict should affect only the state and claims within its demonstrated dependency/impact scope; it should not automatically force a global stop or global invalidation unless the conflict reaches a declared global invariant, authority boundary, or dependency required by the global claim.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0113
+  - type: REFERENCES
+    target: C-0112
+  - type: REFERENCES
+    target: C-0103
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Represent conflict impact/containment scope explicitly. Permit unaffected state regions to continue only when dependency analysis establishes non-impact; escalate to global invalidation or hard stop when a required global invariant or trust boundary is affected."
+  gap: "Formal impact graph, containment rules, global-invariant dependency model, escalation predicates, and proof requirements for non-impact have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
