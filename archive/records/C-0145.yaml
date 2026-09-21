@@ -1,0 +1,28 @@
+id: C-0145
+type: claim
+status: FORMALIZED
+title: Challenge selection should account for potential invalidation, not only expected information gain
+scope: Research Library provenance and verification history; concerns adversarial challenge selection, falsification potential, model challenge prioritization, and verification robustness.
+statement: Selection of subsequent model or evidence challenges should consider their potential to materially alter, weaken, or invalidate the current verification status in addition to expected information gain. A process optimized only for information gain can repeatedly explore low-impact regions while leaving high-impact falsification paths insufficiently challenged.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0144
+  - type: REFERENCES
+    target: C-0143
+  - type: REFERENCES
+    target: C-0142
+  - type: REFERENCES
+    target: C-0139
+evidence: []
+engineering:
+  consequence: "Challenge prioritization should record expected information gain and potential invalidation impact as separate dimensions, while preserving adversarial alternatives and unresolved high-impact paths."
+  gap: "Formal invalidation-impact metric, challenge utility function, adversarial search policy, tie-breaking rules, and stopping interaction have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
