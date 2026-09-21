@@ -1,0 +1,28 @@
+id: C-0178
+type: claim
+status: FORMALIZED
+title: Evolution should trigger claim-scoped evidence impact analysis rather than indiscriminate historical evidence reset
+scope: Research Library provenance and verification history; concerns evolutionary change, evidence impact analysis, selective revalidation, knowledge continuity, claim dependencies, and evidence invalidation.
+statement: A change in system state does not by itself invalidate all historical evidence. Evidence applicability after evolution should be assessed per claim using the dependencies and conditions relevant to that claim. The resulting impact analysis should classify historical evidence as still applicable, conditionally applicable, requiring revalidation, invalidated, or applicability unknown.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0177
+  - type: REFERENCES
+    target: C-0176
+  - type: REFERENCES
+    target: C-0169
+  - type: REFERENCES
+    target: C-0164
+evidence: []
+engineering:
+  consequence: "Version claims and evidence against system states; compute claim-scoped impact after significant evolution and maintain an explicit revalidation set instead of resetting historical knowledge wholesale."
+  gap: "Formal claim-dependency graph, change-impact algorithm, evidence applicability states, revalidation prioritization, and automatic stale-evidence detection have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
