@@ -1,7 +1,7 @@
 schema_version: "1.0.0"
-archive_role: "machine-readable development memory and evidence base"
+research_machine_role: "machine-readable development memory and evidence base"
 authority: "NON_AUTHORITATIVE_FOR_CORE_MUTATION"
-record_schema: "archive/schema/record.schema.json"
-records_path: "archive/records/"
+record_schema: "research_machine/schema/record.schema.json"
+records_path: "research_machine/records/"
 index_status: "INITIALIZED"
 records: []
