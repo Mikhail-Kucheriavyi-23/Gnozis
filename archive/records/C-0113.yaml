@@ -1,0 +1,28 @@
+id: C-0113
+type: claim
+status: FORMALIZED
+title: Conflict resolution for concurrent epistemic transitions is part of transition semantics
+scope: Research Library provenance and verification history; concerns explicit, versioned, auditable resolution of non-commutative concurrent epistemic events.
+statement: When concurrent epistemic transitions are non-commutative or otherwise incompatible, the rule used to resolve their interaction is part of the transition semantics and must be explicit, versioned, and auditable; deterministic replay tie-breaking alone cannot constitute epistemic justification for selecting one outcome over another.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0112
+  - type: REFERENCES
+    target: C-0111
+  - type: REFERENCES
+    target: C-0108
+  - type: REFERENCES
+    target: C-0107
+evidence: []
+engineering:
+  consequence: "Conflict resolution should record the competing events, causal/concurrency status, selected rule version, resolution rationale, and resulting transition. Replay order may provide deterministic execution but not substantive epistemic authority."
+  gap: "Formal conflict classes, resolution-rule schema, precedence/merge semantics, fairness requirements, and re-resolution/revalidation behavior have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
