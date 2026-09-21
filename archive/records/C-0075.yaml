@@ -1,0 +1,26 @@
+id: C-0075
+type: claim
+status: FORMALIZED
+title: Compatibility relations must be explicit and versioned
+scope: Research Library provenance and verification history; concerns reproducibility and auditability of semantic compatibility and contradiction classification.
+statement: Compatibility and contradiction classification must depend on an explicit, versioned compatibility relation or rule set whose identity is preserved with each classification; hidden or mutable comparison logic makes historical classifications non-reproducible.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0074
+  - type: REFERENCES
+    target: C-0073
+  - type: REFERENCES
+    target: C-0063
+evidence: []
+engineering:
+  consequence: "Contradiction analysis should bind each result to a compatibility specification/version, normalized semantic inputs, and relevant context so the classification can be deterministically reproduced and audited."
+  gap: "A formal compatibility specification, versioning scheme, rule provenance, and reproducibility contract have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
