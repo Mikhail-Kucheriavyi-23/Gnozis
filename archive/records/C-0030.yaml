@@ -1,0 +1,26 @@
+id: C-0030
+type: claim
+status: FORMALIZED
+title: Evidence-state transitions require explicit authority boundaries
+scope: Research Library provenance and verification history; concerns who or what may create, verify, invalidate, or otherwise transition evidence and claim states.
+statement: An evidence-state transition is valid only when performed or authorized by an actor or mechanism permitted for that transition; possession of write access to the archive is not equivalent to epistemic authority to alter evidence validity.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0029
+  - type: REFERENCES
+    target: C-0028
+  - type: REFERENCES
+    target: C-0002
+evidence: []
+engineering:
+  consequence: "The Research Library transition model should define authorized actors/mechanisms and permitted transitions. Repository write capability must be separated from authority to assert, verify, invalidate, or promote evidence."
+  gap: "A complete actor-role matrix and machine-checkable authorization policy for archive evidence transitions have not yet been formalized."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
