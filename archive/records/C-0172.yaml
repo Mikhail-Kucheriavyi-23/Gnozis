@@ -1,0 +1,28 @@
+id: C-0172
+type: claim
+status: FORMALIZED
+title: Pairwise hypothesis discrimination does not establish global separation when alternative hypotheses remain observationally unresolved
+scope: Research Library provenance and verification history; concerns competing hypotheses, discriminating tests, pairwise discrimination, global hypothesis separation, and residual alternatives.
+statement: A test designed to distinguish one pair of hypotheses can leave other admissible hypotheses observationally unresolved. Therefore pairwise discrimination must not be interpreted as global hypothesis separation unless the relevant alternative hypothesis space has also been addressed or explicitly bounded.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0171
+  - type: REFERENCES
+    target: C-0170
+  - type: REFERENCES
+    target: C-0165
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Track the hypothesis set relevant to each discriminating test and preserve alternatives not separated by the result. Report local discrimination separately from global hypothesis-space resolution."
+  gap: "Formal hypothesis-space representation, equivalence classes under observations, global discrimination criteria, and alternative-generation procedure have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
