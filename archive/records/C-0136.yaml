@@ -1,0 +1,28 @@
+id: C-0136
+type: claim
+status: FORMALIZED
+title: Absence of direct evidence sharing does not establish independence under transitive or cyclic dependencies
+scope: Research Library provenance and verification history; concerns dependency closure, indirect common ancestry, and circular evidence reuse across verification paths.
+statement: Two verification paths can lack a direct shared evidence source while remaining dependent through shared ancestors, derived artifacts, common assumptions, intermediate claims, or cycles in the provenance graph. Independence assessment therefore requires analysis of relevant transitive dependency closure and detection of circular evidence reuse, not only direct edge inspection.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0135
+  - type: REFERENCES
+    target: C-0121
+  - type: REFERENCES
+    target: C-0120
+  - type: REFERENCES
+    target: C-0119
+evidence: []
+engineering:
+  consequence: "Independence analysis should operate on provenance/dependency closure, detect cycles, and preserve shared ancestry or common assumptions as explicit dependencies."
+  gap: "Formal dependency closure, cycle semantics, material indirect-dependency predicate, and treatment of cyclic evidence in aggregation/verification have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
