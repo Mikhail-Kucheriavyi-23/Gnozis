@@ -1,0 +1,28 @@
+id: C-0110
+type: claim
+status: FORMALIZED
+title: Current epistemic state must be reconstructible as a deterministic projection of immutable history
+scope: Research Library provenance and verification history; concerns current-state derivation from append-only epistemic events.
+statement: The current epistemic state of a claim should be derivable from its immutable ordered history through an explicit deterministic projection function; current-state storage may be an optimization but must not become the sole source of epistemic truth or permit silent divergence from the recorded event history.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: e827aa49f606635b0b8ba0655fdc095809f9b713
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0109
+  - type: REFERENCES
+    target: C-0108
+  - type: REFERENCES
+    target: C-0107
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Define a deterministic history-to-state projection and validate any materialized current-state cache against it. Historical events remain immutable and authoritative for reconstruction."
+  gap: "Formal event ordering, projection function, conflict resolution, replay guarantees, snapshot/checkpoint semantics, and cache-consistency rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
