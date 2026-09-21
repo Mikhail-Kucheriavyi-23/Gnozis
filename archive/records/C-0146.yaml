@@ -1,0 +1,28 @@
+id: C-0146
+type: claim
+status: FORMALIZED
+title: Adversarial challenge generators constrained by the current model can inherit the model's blind spots
+scope: Research Library provenance and verification history; concerns adversarial challenge generation, model independence, blind-spot escape, and circular model challenge.
+statement: An adversarial challenge generator whose reachable search space is determined solely or materially by the model under challenge can inherit that model's blind spots and fail to expose omitted regions. Model challenge therefore requires explicit analysis of generator dependence and, where material, alternative or independent challenge mechanisms.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0144
+  - type: REFERENCES
+    target: C-0143
+  - type: REFERENCES
+    target: C-0139
+evidence: []
+engineering:
+  consequence: "Track challenge-generator provenance and model dependence. Where blind-spot escape is required, introduce materially different generators, alternative models, external perturbations, or other mechanisms capable of reaching regions excluded by the current model."
+  gap: "Formal generator-independence criterion, reachable-space relation, challenge diversity metric, independence evidence, and admissible external perturbation model have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
