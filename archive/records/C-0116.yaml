@@ -1,0 +1,28 @@
+id: C-0116
+type: claim
+status: FORMALIZED
+title: Model disagreement must be distinguished from direct claim conflict
+scope: Research Library provenance and verification history; concerns differing dependency/impact models used by multiple agents.
+statement: When agents derive different containment or impact conclusions from different dependency models, the disagreement must first be represented as a model-level disagreement; it must not be classified as a direct contradiction in the underlying claim unless the agents share sufficiently equivalent assumptions, scope, and semantics and still derive incompatible claim states.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0115
+  - type: REFERENCES
+    target: C-0114
+  - type: REFERENCES
+    target: C-0113
+  - type: REFERENCES
+    target: C-0103
+evidence: []
+engineering:
+  consequence: "Record model identity, assumptions, scope, dependency semantics, and rule versions with each impact/containment assessment. Compare model compatibility before aggregating or classifying agent conclusions as a claim conflict."
+  gap: "Formal model identity schema, equivalence/compatibility criteria, disagreement taxonomy, cross-model reconciliation, and escalation rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
