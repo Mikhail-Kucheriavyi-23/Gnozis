@@ -1,0 +1,24 @@
+id: C-0014
+type: claim
+status: FORMALIZED
+title: Regression suites can overfit known counterexamples
+scope: Verification reverse-analysis; concerns post-remediation test suites that optimize against previously observed failures without adequately probing nearby or novel failure modes.
+statement: Adding regression tests that reproduce known failures can prevent recurrence of those exact cases, but a regression suite can become overfit to known counterexamples and remain inadequate against novel or structurally related failures.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0013
+  - type: REFERENCES
+    target: C-0007
+evidence: []
+engineering:
+  consequence: "Post-remediation verification should combine known regression cases with generative, boundary, adversarial, metamorphic, or otherwise structurally distinct checks so that the suite does not merely optimize against its historical failures."
+  gap: "A complete anti-overfitting strategy for Gnozis verification, including selection and independence criteria for novel checks, has not yet been formalized."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
