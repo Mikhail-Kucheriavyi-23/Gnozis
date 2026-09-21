@@ -1,0 +1,24 @@
+id: C-0011
+type: claim
+status: FORMALIZED
+title: Counterexample discovery does not by itself localize the failure
+scope: Verification reverse-analysis; concerns the distinction between detecting a violated property and identifying the responsible layer, assumption, transition, dependency, or oracle.
+statement: Finding a counterexample establishes that a candidate property or verification expectation fails for some case, but does not by itself identify the cause, responsible layer, or minimal failing condition.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0010
+  - type: REFERENCES
+    target: C-0009
+evidence: []
+engineering:
+  consequence: "Verification infrastructure should preserve enough provenance and decomposition to localize failures to a transition, invariant, assumption, dependency, oracle, or semantic layer rather than treating counterexample discovery as complete diagnosis."
+  gap: "A complete failure-localization model and minimal-counterexample reduction strategy have not yet been formalized for Gnozis."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
