@@ -1,15 +1,15 @@
-# Archive Record Schema v1
+# Research Machine Record Schema v1
 
 **Version:** 1.0.0  
 **Status:** CANONICAL
 
 ## Purpose
 
-Schema v1 defines the minimum machine-readable identity and provenance contract for Gnozis Archive records.
+Schema v1 defines the minimum machine-readable identity and provenance contract for Gnozis Research Machine records.
 
 ## Required fields
 
-- `id` — immutable globally unique archive record identifier.
+- `id` — immutable globally unique research machine record identifier.
 - `type` — canonical record class.
 - `status` — current epistemic/lifecycle status.
 - `title` — concise human-readable label.
@@ -44,4 +44,4 @@ A research result without an engineering consequence remains research.
 
 ## Current Core boundary
 
-Archive records do not authorize source changes, activation, governance, or deployment.
+Research Machine records do not authorize source changes, activation, governance, or deployment.
