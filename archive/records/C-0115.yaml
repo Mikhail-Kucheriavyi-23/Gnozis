@@ -1,0 +1,28 @@
+id: C-0115
+type: claim
+status: FORMALIZED
+title: Containment boundaries require scoped reachability evidence and must distinguish unobserved reachability from demonstrated non-impact
+scope: Research Library provenance and verification history; concerns proving that an unresolved conflict does not affect claims outside its containment boundary.
+statement: A containment boundary for an unresolved epistemic conflict requires evidence that relevant impact paths have been examined within the declared dependency model and scope; failure to find an outgoing path does not by itself establish absence of impact outside the analyzed domain.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0114
+  - type: REFERENCES
+    target: C-0113
+  - type: REFERENCES
+    target: C-0103
+  - type: REFERENCES
+    target: C-0102
+evidence: []
+engineering:
+  consequence: "Containment assessments should record the dependency model, traversal scope/depth, examined paths, excluded domains, assumptions, and residual uncertainty. A boundary should not be treated as proven merely because traversal returned no additional nodes."
+  gap: "Formal reachability semantics, impact-edge taxonomy, completeness criteria, hidden-edge handling, and admissibility thresholds for non-impact claims have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
