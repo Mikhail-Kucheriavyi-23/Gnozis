@@ -1,0 +1,26 @@
+id: C-0050
+type: claim
+status: FORMALIZED
+title: Surviving support is sufficient only relative to the claim's verification criterion
+scope: Research Library provenance and verification history; concerns determining whether remaining evidence paths after a dependency failure still satisfy the verification requirements of a specific claim.
+statement: The sufficiency of surviving evidentiary support must be evaluated against the explicit verification criterion of the target claim; the number of surviving paths, their apparent diversity, or their existence alone does not establish that the claim remains verified.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0049
+  - type: REFERENCES
+    target: C-0048
+  - type: REFERENCES
+    target: C-0038
+evidence: []
+engineering:
+  consequence: "Each claim should expose an explicit verification criterion or admissibility rule. Post-failure analysis must evaluate surviving support against that criterion rather than using path count or generic confidence as a substitute."
+  gap: "A formal verification-criterion schema and machine-checkable support-sufficiency semantics have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
