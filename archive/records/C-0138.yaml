@@ -1,0 +1,28 @@
+id: C-0138
+type: claim
+status: FORMALIZED
+title: Cycle validity depends on node roles as well as edge types and claim scope
+scope: Research Library provenance and verification history; concerns epistemic dependency graphs, typed node roles, typed relations, and circular justification.
+statement: Determining whether a dependency cycle is epistemically admissible requires the roles of source and target nodes in addition to edge type and claim scope. The same relation type can have different consequences when connecting evidence, claims, models, transformations, validators, or decisions. Therefore cycle analysis must operate on typed node-role and edge-role semantics rather than graph topology alone.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0137
+  - type: REFERENCES
+    target: C-0136
+  - type: REFERENCES
+    target: C-0134
+  - type: REFERENCES
+    target: C-0133
+evidence: []
+engineering:
+  consequence: "Model epistemic provenance as a typed graph with explicit node roles and edge roles. Cycle checks should distinguish legitimate state/evolution feedback from circular justification or self-support."
+  gap: "Formal node-role taxonomy, edge-role taxonomy, cycle admissibility matrix, self-support predicate, and graph-level proof obligations have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
