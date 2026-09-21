@@ -1,0 +1,28 @@
+id: C-0157
+type: claim
+status: FORMALIZED
+title: Conflict resolution requires explicit conflict type, materiality, authority boundary, and action context
+scope: Research Library provenance and verification history; concerns conflict resolution between verification and authorization, authority boundaries, materiality, and action-specific policy.
+statement: Resolution of a conflict between verification status and authorization policy should not impose an unconditional precedence of either side. Resolution should depend on the identified conflict type, materiality of the unresolved state, applicable authority boundary, and the action being requested. Resolution outcomes must preserve the independent provenance of verification and authorization states.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0156
+  - type: REFERENCES
+    target: C-0155
+  - type: REFERENCES
+    target: C-0154
+  - type: REFERENCES
+    target: C-0152
+evidence: []
+engineering:
+  consequence: "Classify conflicts explicitly and evaluate them against action-specific constraints and authority. Keep resolution as a control artifact, never as replacement evidence for the underlying verification state."
+  gap: "Formal conflict taxonomy, materiality predicate, authority lattice, action-risk model, and resolution protocol have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
