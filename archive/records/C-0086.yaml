@@ -1,0 +1,28 @@
+id: C-0086
+type: claim
+status: FORMALIZED
+title: Verification coverage is relative to the declared failure model
+scope: Research Library provenance and verification history; concerns completeness claims for verification and independence coverage.
+statement: Verification and independence coverage can be assessed only relative to an explicitly declared failure model; if failure modes are unknown, incomplete, or evolving, the result may establish coverage against the declared model but cannot by itself establish complete coverage of all possible failure modes.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0085
+  - type: REFERENCES
+    target: C-0084
+  - type: REFERENCES
+    target: C-0083
+  - type: REFERENCES
+    target: C-0073
+evidence: []
+engineering:
+  consequence: "Verification reports should identify the failure-model version or scope against which coverage was assessed and distinguish covered, uncovered, unknown, and newly discovered failure modes. Claims of complete verification must not exceed the declared failure-model scope."
+  gap: "Formal failure-model schema, versioning, completeness criteria, discovery/update process, and mapping from failure modes to verification dimensions have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
