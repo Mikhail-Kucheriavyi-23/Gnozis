@@ -1,0 +1,28 @@
+id: C-0176
+type: claim
+status: FORMALIZED
+title: Interventional discrimination does not by itself justify transport of post-intervention evidence to baseline or other system states
+scope: Research Library provenance and verification history; concerns interventional evidence, transportability, invariance, baseline inference, state dependence, and evidence scope.
+statement: Evidence that distinguishes hypotheses under an intervention establishes a claim about the intervention-conditioned system unless additional assumptions justify transport. Applying that evidence to an unperturbed baseline or another system state requires explicit invariance, transportability, or equivalence conditions; absent such justification, the broader inference must retain residual uncertainty.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0175
+  - type: REFERENCES
+    target: C-0174
+  - type: REFERENCES
+    target: C-0173
+  - type: REFERENCES
+    target: C-0169
+evidence: []
+engineering:
+  consequence: "Tag intervention-conditioned evidence with explicit state and intervention scope. Require a recorded transport or invariance justification before using it to support baseline or cross-state claims."
+  gap: "Formal transportability model, invariance conditions, state-equivalence criteria, and intervention side-effect classification have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
