@@ -1,0 +1,28 @@
+id: C-0103
+type: claim
+status: FORMALIZED
+title: Independence assessment adequacy is relative to the common-mode risks relevant to the verification claim
+scope: Research Library provenance and verification history; concerns adequacy of dependency analysis used to support evidence-independence claims.
+statement: An independence assessment is adequate only relative to the dependency domains and common-mode failure risks relevant to the verification claim and declared scope; absence of detected dependency after an inadequate or irrelevant analysis cannot provide sufficient support for treating evidence paths as independent.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0102
+  - type: REFERENCES
+    target: C-0101
+  - type: REFERENCES
+    target: C-0100
+  - type: REFERENCES
+    target: C-0083
+evidence: []
+engineering:
+  consequence: "Independence reviews should be risk- and scope-directed: identify relevant common-mode mechanisms first, then assess whether the dependency analysis can detect them. A generic 'no dependency found' result should not increase evidence weight unless analysis adequacy is established."
+  gap: "Formal common-mode risk taxonomy, adequacy criteria, risk-directed search strategy, and thresholds for sufficient independence evidence have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
