@@ -1,0 +1,28 @@
+id: C-0087
+type: claim
+status: FORMALIZED
+title: Failure models are versioned hypotheses of failure space, not complete authoritative enumerations
+scope: Research Library provenance and verification history; concerns evolution of failure models and historical verification scope.
+statement: A failure model represents a scoped and versioned model of anticipated or identified failure modes, not an authoritative enumeration of all possible failures; newly discovered failure modes should evolve the model without retroactively rewriting the scope or result of historical verification.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0086
+  - type: REFERENCES
+    target: C-0085
+  - type: REFERENCES
+    target: C-0079
+  - type: REFERENCES
+    target: C-0070
+evidence: []
+engineering:
+  consequence: "Failure-model evolution should be append-only/versioned: discovered modes create new model versions or revisions, while historical verification remains bound to the model version against which it was performed. Reports should distinguish historical validity from current coverage."
+  gap: "Formal failure-model versioning, revision semantics, discovery linkage, migration rules, and criteria for reopening prior verification have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
