@@ -1,0 +1,24 @@
+id: C-0010
+type: claim
+status: FORMALIZED
+title: Verification requires adversarial counterexample search
+scope: Verification reverse-analysis; concerns attempts to falsify a candidate property rather than only accumulating confirming results.
+statement: For a candidate semantic or safety property, verification that only seeks confirming evidence is incomplete; an explicit search for counterexamples is required to test the boundary and failure conditions of the property.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0005
+  - type: REFERENCES
+    target: C-0009
+evidence: []
+engineering:
+  consequence: "Verification workflows for critical Core properties should include explicit adversarial falsification and counterexample generation/search, not only regression and positive-case testing."
+  gap: "A complete counterexample-generation strategy and acceptance rule for exhaustion or bounded adequacy have not yet been formalized."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
