@@ -1,0 +1,28 @@
+id: C-0077
+type: claim
+status: FORMALIZED
+title: Compatibility result changes may have multiple simultaneous changed inputs
+scope: Research Library provenance and verification history; concerns attribution when multiple classification-relevant inputs change between evaluations.
+statement: When multiple compatibility-evaluation inputs change between evaluations, provenance must preserve the full set of changed inputs and must not collapse them into a single causal explanation unless an independently supported causal analysis establishes such attribution.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0076
+  - type: REFERENCES
+    target: C-0075
+  - type: REFERENCES
+    target: C-0074
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "Attribution records should represent changed-input sets explicitly and distinguish observed co-change from causal attribution. A classification transition may remain causally unresolved even when all changed inputs are known."
+  gap: "Formal changed-input set schema, causal attribution criteria, interaction handling, and unresolved-attribution status have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
