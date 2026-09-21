@@ -1,0 +1,26 @@
+id: C-0047
+type: claim
+status: FORMALIZED
+title: Shared upstream dependencies require impact classification
+scope: Research Library provenance and verification history; concerns classification of shared dependencies between evidence paths by whether they can jointly determine or materially affect the supported conclusion.
+statement: Shared upstream dependencies should be classified by evidentiary impact rather than treated as a binary condition; a shared dependency may be critical, material, or peripheral depending on whether failure of the shared component can jointly invalidate, materially weaken, or only contextually affect the evidence paths.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0046
+  - type: REFERENCES
+    target: C-0025
+  - type: REFERENCES
+    target: C-0026
+evidence: []
+engineering:
+  consequence: "Independence analysis should record shared dependency identity and impact class. Critical shared dependencies must prevent dependent evidence paths from being counted as independent support until the dependency is separately validated."
+  gap: "Formal impact categories, thresholds, and propagation semantics for shared upstream dependencies have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
