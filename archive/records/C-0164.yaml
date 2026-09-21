@@ -1,0 +1,28 @@
+id: C-0164
+type: claim
+status: FORMALIZED
+title: Epistemic independence is claim-, failure-mode-, and scope-relative rather than an absolute property of evidence sources
+scope: Research Library provenance and verification history; concerns epistemic independence, common-mode failure, claim scope, failure-mode scope, and evidence interpretation.
+statement: Independence between evidence sources or challenge generators should be stated relative to a specified claim, failure mode, and scope. Sources may be independent with respect to one failure mode while sharing assumptions or dependencies relevant to another. Therefore an unqualified global independence claim is insufficient for verification adequacy.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0163
+  - type: REFERENCES
+    target: C-0162
+  - type: REFERENCES
+    target: C-0148
+  - type: REFERENCES
+    target: C-0142
+evidence: []
+engineering:
+  consequence: "Represent independence assertions with explicit claim, failure-mode, and scope references. Do not aggregate source counts as independent evidence unless relevant shared dependencies have been assessed for the target failure mode."
+  gap: "Formal conditional-independence representation, dependency-scope model, failure-mode ontology, and practical independence assessment protocol have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
