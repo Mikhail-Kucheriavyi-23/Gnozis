@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Mikhail-Kucheriavyi-23/Gnozis/blob/main/archive/schema/record.schema.json",
+  "title": "Gnozis Archive Record",
+  "description": "Machine-readable development-memory and evidence record for Gnozis Archive. Archive is non-authoritative for current Core mutation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "status",
+    "title",
+    "scope",
+    "statement",
+    "source",
+    "relations",
+    "evidence",
+    "engineering",
+    "created_at",
+    "schema_version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[RCEXDAT]-[0-9]{4,}$"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "research",
+        "claim",
+        "evidence",
+        "counterexample",
+        "decision",
+        "audit",
+        "transition"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HYPOTHESIS",
+        "FORMALIZED",
+        "EVIDENCE_PENDING",
+        "SUPPORTED",
+        "UNVERIFIED",
+        "VERIFIED",
+        "REJECTED",
+        "SUPERSEDED",
+        "ACCEPTED",
+        "HISTORICAL",
+        "OPEN"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "location"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "repository",
+            "commit",
+            "file",
+            "test",
+            "ci",
+            "runtime",
+            "audit",
+            "conversation",
+            "external"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "target"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PARENT",
+              "DERIVED_FROM",
+              "SUPPORTS",
+              "CONTRADICTS",
+              "SUPERSEDES",
+              "SUPERSEDED_BY",
+              "DEPENDS_ON",
+              "VERIFIES",
+              "REFERENCES"
+            ]
+          },
+          "target": {
+            "type": "string",
+            "pattern": "^[RCEXDAT]-[0-9]{4,}$"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["record_id", "role"],
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "pattern": "^E-[0-9]{4,}$"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "SUPPORTING",
+              "LIMITING",
+              "CONTRADICTING",
+              "CONTEXT"
+            ]
+          }
+        }
+      }
+    },
+    "engineering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consequence", "gap", "core_admissibility"],
+      "properties": {
+        "consequence": {
+          "type": ["string", "null"]
+        },
+        "gap": {
+          "type": ["string", "null"]
+        },
+        "core_admissibility": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "RESEARCH_ONLY",
+            "CANDIDATE",
+            "ADMITTED"
+          ]
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    }
+  }
+}
