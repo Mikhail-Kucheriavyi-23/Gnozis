@@ -1,0 +1,28 @@
+id: C-0132
+type: claim
+status: FORMALIZED
+title: Insufficient verification budget cannot be represented as adequate verification
+scope: Research Library provenance and verification history; concerns infeasible mandatory coverage requirements, budget exhaustion, escalation, and explicit scope reduction.
+statement: When available verification budget is insufficient to satisfy mandatory coverage requirements, no valid allocation exists for the declared verification scope. The system must not represent budget exhaustion as adequacy; it must escalate, defer, or explicitly reduce the claim scope and create a new bounded claim whose requirements are feasible.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0131
+  - type: REFERENCES
+    target: C-0129
+  - type: REFERENCES
+    target: C-0122
+  - type: REFERENCES
+    target: C-0125
+evidence: []
+engineering:
+  consequence: "Represent infeasible verification plans explicitly. Scope reduction must be versioned and auditable; the reduced-scope claim must not inherit adequacy status from the broader unverified claim."
+  gap: "Formal escalation authority, scope-reduction protocol, feasibility predicate, budget negotiation semantics, and inheritance rules for evidence/adequacy after scope changes have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
