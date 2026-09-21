@@ -1,0 +1,26 @@
+id: C-0038
+type: claim
+status: FORMALIZED
+title: Re-evaluation requires a recorded outcome and fresh provenance
+scope: Research Library provenance and verification history; concerns the evidence and state transition produced after a dependent claim is re-evaluated.
+statement: Marking a claim or proof as requiring re-evaluation is not itself a verification result; the archive must record the outcome of the re-evaluation, the evidence and assumptions used, the responsible authority, and the resulting state transition.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0037
+  - type: REFERENCES
+    target: C-0029
+  - type: REFERENCES
+    target: C-0030
+evidence: []
+engineering:
+  consequence: "REVIEW_REQUIRED must be a non-terminal state. Re-evaluation should produce an explicit outcome with fresh provenance and a transition to a defined state such as REVALIDATED, INVALIDATED, or another authorized result."
+  gap: "A complete re-evaluation state machine and mandatory outcome/provenance fields have not yet been specified for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
