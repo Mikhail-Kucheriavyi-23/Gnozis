@@ -1,0 +1,28 @@
+id: C-0158
+type: claim
+status: FORMALIZED
+title: Independent authorization of component actions does not imply authorization of their composition when composition changes material effect
+scope: Research Library provenance and verification history; concerns compositional authorization, action decomposition, policy circumvention, and aggregate external effect.
+statement: Authorization of individual actions does not by itself authorize their composition when the combined execution can produce a materially different effect, risk, or state transition. Authorization analysis must therefore account for relevant compositions, dependencies, ordering, shared resources, and aggregate effects rather than evaluating only isolated atomic actions.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0157
+  - type: REFERENCES
+    target: C-0155
+  - type: REFERENCES
+    target: C-0154
+  - type: REFERENCES
+    target: C-0152
+evidence: []
+engineering:
+  consequence: "Track action lineage and composition context for materially related operations. Authorization gates should evaluate aggregate effects where decomposition can circumvent policy or create new material state transitions."
+  gap: "Formal action-equivalence relation, composition model, aggregate-effect semantics, ordering/dependency rules, and tractable composition-checking strategy have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
