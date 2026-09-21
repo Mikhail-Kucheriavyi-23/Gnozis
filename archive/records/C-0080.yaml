@@ -1,0 +1,28 @@
+id: C-0080
+type: claim
+status: FORMALIZED
+title: Provenance dependency and evidential support are distinct relations
+scope: Research Library provenance and verification history; concerns the semantic distinction between derivation lineage and evidence sufficiency.
+statement: A provenance dependency records which artifacts or inputs contributed to the derivation of an artifact, while evidential support asserts that an item supports the truth or validity of a claim; provenance dependency alone does not establish evidential sufficiency.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0079
+  - type: REFERENCES
+    target: C-0078
+  - type: REFERENCES
+    target: C-0067
+  - type: REFERENCES
+    target: C-0061
+evidence: []
+engineering:
+  consequence: "The Research Library should use distinct relation types for derivation/provenance and evidential support. A derived artifact may depend on another artifact computationally or semantically without that dependency being sufficient evidence for the artifact's truth."
+  gap: "Formal provenance-dependency versus evidence-support relation semantics, admissibility rules, and graph validation constraints have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
