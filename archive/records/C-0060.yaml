@@ -1,0 +1,26 @@
+id: C-0060
+type: claim
+status: FORMALIZED
+title: Content identity change does not by itself establish proposition change
+scope: Research Library provenance and verification history; concerns distinguishing changes in canonical content identity from changes in the proposition itself.
+statement: A change in claim-state ContentID does not by itself establish that the proposition, scope, assumptions, or verification semantics changed; ContentID may change solely because canonicalization or semantic-projection rules changed. Proposition change must therefore be established from explicit semantic comparison or lineage metadata, not inferred from ContentID inequality alone.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0059
+  - type: REFERENCES
+    target: C-0058
+  - type: REFERENCES
+    target: C-0055
+evidence: []
+engineering:
+  consequence: "The archive must distinguish content-identity transitions from semantic claim transitions. A changed ContentID should trigger comparison/review, not automatic classification as a changed proposition or invalidated verification."
+  gap: "Formal semantic-diff rules and transition taxonomy separating identity-only changes from proposition, scope, assumption, dependency, and criterion changes have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
