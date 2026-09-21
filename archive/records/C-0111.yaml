@@ -1,0 +1,28 @@
+id: C-0111
+type: claim
+status: FORMALIZED
+title: Epistemic history projection requires canonical deterministic event ordering
+scope: Research Library provenance and verification history; concerns event ordering for deterministic reconstruction of current epistemic state.
+statement: If event order can affect the result of history projection, current epistemic state requires a canonical deterministic event ordering that does not depend on wall-clock time, message arrival order, database iteration order, or other incidental runtime ordering.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0110
+  - type: REFERENCES
+    target: C-0109
+  - type: REFERENCES
+    target: C-0107
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Projection should consume an explicitly ordered event sequence with deterministic tie-breaking and stable identifiers. Wall-clock timestamps may be metadata but should not be the sole ordering authority when semantic order matters."
+  gap: "Canonical ordering key, concurrency semantics, tie-breaking rules, late-event handling, fork/merge semantics, and replay determinism have not yet been formally defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
