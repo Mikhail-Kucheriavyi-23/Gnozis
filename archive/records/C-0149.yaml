@@ -1,0 +1,28 @@
+id: C-0149
+type: claim
+status: FORMALIZED
+title: Epistemic progress should target limiting dimensions rather than maximize undirected information gain
+scope: Research Library provenance and verification history; concerns multidimensional verification state, epistemic bottlenecks, challenge selection, and targeted uncertainty reduction.
+statement: When verification status is multidimensional, selection of the next challenge should account for the current epistemic bottleneck or limiting dimension rather than maximizing undirected information gain alone. A challenge that materially reduces uncertainty in the dimension constraining the current claim can provide greater epistemic progress than one producing more information in an already well-supported dimension.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0148
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0144
+  - type: REFERENCES
+    target: C-0140
+evidence: []
+engineering:
+  consequence: "Represent verification dimensions and identify current bottlenecks. Challenge selection should expose expected uncertainty reduction and potential claim-impact by dimension, preserving unresolved tensions rather than collapsing them into one score."
+  gap: "Formal bottleneck predicate, dimension dependency graph, challenge utility across dimensions, stopping interaction, and conflict/tension representation have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
