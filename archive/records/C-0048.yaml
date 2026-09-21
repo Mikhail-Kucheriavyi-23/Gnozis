@@ -1,0 +1,26 @@
+id: C-0048
+type: claim
+status: FORMALIZED
+title: Dependency impact classification must be derived from propagation to the supported claim
+scope: Research Library provenance and verification history; concerns whether a shared dependency is critical, material, or peripheral to a specific claim.
+statement: The impact class of a shared dependency must be determined relative to a target claim by analyzing whether failure of that dependency propagates to loss, material weakening, or no material change in the claim's evidentiary support; the class must not be assigned solely by metadata or subjective labeling.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0047
+  - type: REFERENCES
+    target: C-0027
+  - type: REFERENCES
+    target: C-0046
+evidence: []
+engineering:
+  consequence: "Impact classification should be computed or justified from a dependency/propagation graph rooted at the target claim. The archive should preserve the propagation path and failure assumptions used to derive the classification."
+  gap: "Formal propagation semantics, impact thresholds, and a machine-checkable derivation procedure have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
