@@ -1,0 +1,26 @@
+id: C-0015
+type: claim
+status: FORMALIZED
+title: Relational or metamorphic verification can test properties without a complete oracle
+scope: Verification reverse-analysis; concerns properties expressible as relations between executions or transformations when an exact expected output is unavailable.
+statement: When a complete oracle for the correct output is unavailable, a verification relation between multiple executions, transformed inputs, states, or outputs can provide a falsifiable property to test, but satisfaction of that relation does not by itself establish the full intended semantics.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0004
+  - type: REFERENCES
+    target: C-0007
+  - type: REFERENCES
+    target: C-0014
+evidence: []
+engineering:
+  consequence: "Where a complete oracle is unavailable, Core verification may use metamorphic or relational properties, but each relation must have explicit scope and must not be promoted to a complete semantic oracle."
+  gap: "The project-specific set of metamorphic relations and their adequacy relative to intended semantic properties has not yet been formalized."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
