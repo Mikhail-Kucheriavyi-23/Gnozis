@@ -1,0 +1,26 @@
+id: C-0034
+type: claim
+status: FORMALIZED
+title: Authorization does not automatically transfer across object versions
+scope: Research Library provenance and verification history; concerns authorization validity when the target claim, evidence artifact, or object changes version.
+statement: Authorization bound to a specific object version must not automatically apply to a later or materially different version unless an explicit and traceable rule permits the transfer and establishes that the authorized scope remains valid.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0033
+  - type: REFERENCES
+    target: C-0032
+  - type: REFERENCES
+    target: C-0028
+evidence: []
+engineering:
+  consequence: "Authorization records should bind to immutable object/version identifiers. A version change should require re-authorization, explicit inheritance, or a machine-checkable equivalence rule; silent authorization carry-over must be rejected."
+  gap: "Formal version-transition semantics, authorization inheritance rules, and equivalence criteria have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
