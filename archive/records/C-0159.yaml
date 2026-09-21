@@ -1,0 +1,28 @@
+id: C-0159
+type: claim
+status: FORMALIZED
+title: Compositional coverage requires explicit sampling of aggregate-risk regions when exhaustive action-space verification is infeasible
+scope: Research Library provenance and verification history; concerns action-composition spaces, sampling, aggregate risk, local versus compositional coverage, and control-driven test selection.
+statement: When exhaustive verification of all relevant action compositions is infeasible, sampled compositional verification does not establish complete compositional safety. Composition sampling should prioritize materially distinct aggregate-effect regions, dependency/order interactions, shared-resource interactions, and combinations with high potential to invalidate authorization assumptions. Sampling decisions themselves require provenance.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0158
+  - type: REFERENCES
+    target: C-0157
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0144
+evidence: []
+engineering:
+  consequence: "Represent composition-space sampling strategy and rationale. Preserve untested composition classes and prioritize aggregate-risk, order-sensitive, dependency-sensitive, and shared-resource combinations rather than sampling only by action frequency."
+  gap: "Formal composition equivalence classes, aggregate-effect model, risk prioritization, tractable coverage criteria, and stopping conditions for composition sampling have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
