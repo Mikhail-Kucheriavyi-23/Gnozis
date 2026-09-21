@@ -1,0 +1,26 @@
+id: C-0046
+type: claim
+status: FORMALIZED
+title: Acyclic provenance does not establish evidence independence
+scope: Research Library provenance and verification history; concerns apparently separate evidence paths that converge on shared upstream sources, oracles, assumptions, transformations, or infrastructure.
+statement: An acyclic support or dependency graph does not by itself establish independence between evidence paths; two or more paths may remain correlated through a shared upstream source, oracle, assumption, transformation, dataset, implementation, or trust boundary.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0045
+  - type: REFERENCES
+    target: C-0025
+  - type: REFERENCES
+    target: C-0026
+evidence: []
+engineering:
+  consequence: "Independence analysis must inspect shared upstream dependencies and trust boundaries, not only directed cycles. Evidence paths should expose common sources, assumptions, or infrastructure so correlated support can be detected."
+  gap: "A formal common-upstream analysis and independence metric/classification have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
