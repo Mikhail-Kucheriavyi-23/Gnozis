@@ -1,0 +1,30 @@
+id: C-0126
+type: claim
+status: FORMALIZED
+title: Semantic impact propagation must account for acceptance logic, not merely graph adjacency
+scope: Research Library provenance and verification history; concerns determining which operational acceptances are materially affected by epistemic revisions.
+statement: A dependency edge between an epistemic claim and an operational acceptance does not by itself establish material impact. Reassessment must account for the acceptance's logical dependency structure, policy conditions, and whether the revised claim can change the acceptance result within its declared scope.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f966e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0125
+  - type: REFERENCES
+    target: C-0124
+  - type: REFERENCES
+    target: C-0123
+  - type: REFERENCES
+    target: C-0115
+  - type: REFERENCES
+    target: C-0114
+evidence: []
+engineering:
+  consequence: "Represent acceptance predicates or dependency semantics sufficiently to determine whether a revision can alter an acceptance decision. Avoid blanket invalidation based solely on graph adjacency."
+  gap: "Formal acceptance-expression language, semantic influence predicate, monotonic/non-monotonic policy behavior, and efficient minimal-reassessment algorithm have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
