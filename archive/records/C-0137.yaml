@@ -1,0 +1,28 @@
+id: C-0137
+type: claim
+status: FORMALIZED
+title: Dependency graphs require typed edge semantics for cycle validity and epistemic interpretation
+scope: Research Library provenance and verification history; concerns typed provenance/dependency graphs, legitimate evolutionary feedback, and prohibited self-support cycles.
+statement: Dependency edges must carry semantic types because cycle admissibility and epistemic meaning depend on whether an edge represents derivation, support, validation, dependency, feedback, or another relation. A global rule forbidding all cycles would incorrectly reject legitimate evolutionary feedback, while allowing all cycles could permit evidence self-support. Cycle policy must therefore be defined per edge type and claim/provenance role.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0136
+  - type: REFERENCES
+    target: C-0135
+  - type: REFERENCES
+    target: C-0133
+  - type: REFERENCES
+    target: C-0120
+evidence: []
+engineering:
+  consequence: "Represent provenance/dependency relations with explicit edge types and cycle policy. Distinguish allowed feedback loops from invalid epistemic self-support and prevent graph traversal from collapsing semantically distinct relations."
+  gap: "Formal edge taxonomy, cycle admissibility matrix, self-support definition, graph traversal semantics, and relation to core state-transition rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
