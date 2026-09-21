@@ -1,0 +1,28 @@
+id: C-0160
+type: claim
+status: FORMALIZED
+title: Verification priority should not be determined by occurrence frequency when rare compositions have materially higher aggregate impact
+scope: Research Library provenance and verification history; concerns rare action compositions, aggregate impact, invalidation potential, frequency-based sampling, and verification priority.
+statement: Low occurrence frequency is not sufficient evidence of low verification priority. Rare action compositions may require elevated verification priority when their aggregate effect, invalidation potential, shared-resource interaction, or residual uncertainty is materially higher than ordinary compositions. Frequency is one contextual factor, not a complete priority criterion.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0159
+  - type: REFERENCES
+    target: C-0158
+  - type: REFERENCES
+    target: C-0145
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Composition-priority records should separate occurrence frequency from aggregate impact, invalidation potential, uncertainty, and interaction characteristics. Rare high-impact classes should remain visible to sampling and authorization controls."
+  gap: "Formal priority dimensions, aggregate-impact estimator, rare-event challenge generator, frequency/impact trade-off policy, and stopping conditions have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
