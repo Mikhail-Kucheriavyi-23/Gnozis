@@ -1,0 +1,28 @@
+id: C-0133
+type: claim
+status: FORMALIZED
+title: Scope, mandatory coverage, and budget changes constitute verification-contract changes rather than ordinary progress
+scope: Research Library provenance and verification history; concerns integrity of verification runs under changing scope, coverage requirements, and resource constraints.
+statement: Changes to declared claim scope, mandatory coverage requirements, acceptance thresholds, or verification budget alter the verification contract and must be versioned and explicitly attributed. They must not be recorded merely as progress within the same verification run, because doing so can make adequacy appear to improve through silent relaxation of requirements.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0132
+  - type: REFERENCES
+    target: C-0131
+  - type: REFERENCES
+    target: C-0122
+  - type: REFERENCES
+    target: C-0124
+evidence: []
+engineering:
+  consequence: "Version verification contracts and bind evidence/results to the exact scope, mandatory coverage, acceptance thresholds, budget assumptions, and policy version used. Requirement relaxation must create a new contract/run rather than mutate the old one."
+  gap: "Formal contract schema, immutable run identity, change-control authority, compatibility rules, and comparison semantics between verification runs have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
