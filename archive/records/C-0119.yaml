@@ -1,0 +1,28 @@
+id: C-0119
+type: claim
+status: FORMALIZED
+title: Apparent verification diversity does not establish independence when challenge paths share common-mode failure sources
+scope: Research Library provenance and verification history; concerns correlation and common-mode failure across multiple model adequacy challenges.
+statement: Multiple verification or challenge paths should not be treated as independent merely because their implementations or agents differ; shared assumptions, evidence sources, model components, omitted domains, or infrastructure can create common-mode failure that invalidates naive independence claims.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0118
+  - type: REFERENCES
+    target: C-0117
+  - type: REFERENCES
+    target: C-0116
+  - type: REFERENCES
+    target: C-0083
+evidence: []
+engineering:
+  consequence: "Track relevant shared dependencies and common-mode factors across evidence/challenge paths. Independence or diversity claims should be scoped and justified against identified correlations rather than inferred from agent, implementation, or surface-level variation."
+  gap: "Formal dependency/correlation model, common-mode taxonomy, independence criteria, correlation detection, and aggregation adjustment rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
