@@ -1,0 +1,28 @@
+id: C-0180
+type: claim
+status: FORMALIZED
+title: Evolution can affect verification infrastructure validity, requiring versioned validator scope and impact analysis
+scope: Research Library provenance and verification history; concerns validator evolution, verification infrastructure, temporal validity, validator scope, and recursive trust dependencies.
+statement: System evolution can alter assumptions, dependencies, observation conditions, or invariants on which verification infrastructure itself relies. Therefore a validator or verification procedure at time t cannot automatically be treated as valid for later system states. Validator scope, dependencies, and applicability should be versioned and subject to impact analysis when relevant system changes occur.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0179
+  - type: REFERENCES
+    target: C-0178
+  - type: REFERENCES
+    target: C-0177
+  - type: REFERENCES
+    target: C-0169
+evidence: []
+engineering:
+  consequence: "Version validators with their assumptions and dependencies; perform impact analysis on verification infrastructure after relevant evolution rather than assuming validator continuity."
+  gap: "Formal validator dependency graph, validator-version semantics, infrastructure impact algorithm, and criteria for validator requalification have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
