@@ -1,0 +1,28 @@
+id: C-0154
+type: claim
+status: FORMALIZED
+title: A verification pass does not by itself authorize commit when materially relevant challenge paths remain unresolved
+scope: Research Library provenance and verification history; concerns verification pass semantics, stopping, unresolved evidence, and execution authorization.
+statement: A positive verification result establishes only the scope represented by that result. If materially relevant evidence or challenge paths remain unresolved because of stopping, unavailable resources, excluded tests, model uncertainty, or control-policy effects, commit authorization requires an additional condition addressing that residual state. Verification pass and commit eligibility are distinct claims.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0153
+  - type: REFERENCES
+    target: C-0144
+  - type: REFERENCES
+    target: C-0141
+  - type: REFERENCES
+    target: C-0139
+evidence: []
+engineering:
+  consequence: "Separate verification outcome from commit authorization. Commit gates must inspect unresolved material paths and their provenance rather than treating PASS as sufficient. Authorization should record the residual state and applicable conditions."
+  gap: "Formal commit-eligibility predicate, unresolved-path severity model, reopen semantics, authorization evidence schema, and interaction with core state transitions have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
