@@ -1,0 +1,28 @@
+id: C-0142
+type: claim
+status: FORMALIZED
+title: Coverage claims are conditional on the declared search-space model
+scope: Research Library provenance and verification history; concerns modeled search spaces, coverage claims, model incompleteness, and unknown regions.
+statement: A coverage claim establishes coverage only relative to the declared model of the relevant evidence or test space. If the model is incomplete, mis-specified, or excludes relevant regions, high modeled coverage does not establish equivalent coverage of the underlying real search space. Coverage claims must therefore identify the search-space model and its scope.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0141
+  - type: REFERENCES
+    target: C-0140
+  - type: REFERENCES
+    target: C-0136
+  - type: REFERENCES
+    target: C-0129
+evidence: []
+engineering:
+  consequence: "Bind coverage metrics to an explicit search-space model/version and expose model scope and known exclusions in verification results. Do not interpret modeled coverage as unconditional real-space coverage."
+  gap: "Formal search-space model schema, model-completeness criteria, model-version compatibility, unknown-region representation, and coverage translation rules have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
