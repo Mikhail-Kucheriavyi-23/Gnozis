@@ -1,0 +1,28 @@
+id: C-0185
+type: claim
+status: FORMALIZED
+title: Evidence count does not equal independent support count when evidence shares dependencies, assumptions, channels, adaptive ancestry, or failure modes
+scope: Research Library provenance and verification history; concerns evidence dependence, independence, common causes, correlated observations, shared assumptions, adaptive ancestry, and verification strength.
+statement: Individually valid evidence items do not necessarily constitute independent supports for a claim. Evidence can share observation channels, assumptions, data sources, causal mechanisms, adaptive selection history, or failure modes. Verification strength therefore depends on evidence dependency structure and diversity, not merely on the number of passing observations.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0184
+  - type: REFERENCES
+    target: C-0183
+  - type: REFERENCES
+    target: C-0173
+  - type: REFERENCES
+    target: C-0165
+evidence: []
+engineering:
+  consequence: "Represent evidence lineage and relevant dependency classes; avoid treating repeated or correlated evidence as additive independent support. Verification summaries should expose common channels and assumptions."
+  gap: "Formal independence semantics, dependency graph model, evidence diversity metric, common-mode failure model, and aggregation rule for correlated evidence have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
