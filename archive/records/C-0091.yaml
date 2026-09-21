@@ -1,0 +1,28 @@
+id: C-0091
+type: claim
+status: FORMALIZED
+title: Verification coverage transfer across failure-model lineage requires an explicit relation-specific rule
+scope: Research Library provenance and verification history; concerns transfer of historical verification coverage to evolved failure-mode representations.
+statement: Verification coverage established for a predecessor failure mode must not be transferred automatically to a successor representation; any transfer requires a relation-specific rule and evidence that the properties relevant to the verification objective are preserved within the declared scope.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0090
+  - type: REFERENCES
+    target: C-0089
+  - type: REFERENCES
+    target: C-0086
+  - type: REFERENCES
+    target: C-0073
+evidence: []
+engineering:
+  consequence: "Coverage transfer should be represented as a derived relation carrying predecessor verification, lineage relation, transfer rule, preserved properties, scope, and validation status. Absent such a rule, the successor should remain independently unverified."
+  gap: "Formal transfer rules by lineage type, property-preservation criteria, transfer evidence schema, and audit procedure have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
