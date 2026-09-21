@@ -1,0 +1,28 @@
+id: C-0083
+type: claim
+status: FORMALIZED
+title: Evidence independence is a derived property requiring explicit basis and scope
+scope: Research Library provenance and verification history; concerns determination of evidential independence and its effect on aggregation.
+statement: Evidential independence is not established merely by separate records, distinct labels, or nominally different sources; independence is a derived property requiring explicit analysis of shared provenance, inputs, assumptions, transformations, models, and relevant failure modes within a declared scope.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0082
+  - type: REFERENCES
+    target: C-0081
+  - type: REFERENCES
+    target: C-0061
+  - type: REFERENCES
+    target: C-0062
+evidence: []
+engineering:
+  consequence: "Independence assessments should identify the relevant independence dimension and scope, inspect shared dependencies and common failure modes, and preserve the basis for the independence classification."
+  gap: "Formal independence dimensions, dependency-analysis procedure, failure-mode taxonomy, and scoped independence status have not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
