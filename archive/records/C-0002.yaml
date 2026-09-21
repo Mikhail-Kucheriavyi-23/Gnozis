@@ -1,0 +1,22 @@
+id: C-0002
+type: claim
+status: FORMALIZED
+title: Local proof validity does not establish global semantic safety
+scope: Mathematical reverse-analysis of model evolution and verification; concerns the distinction between a locally valid proof obligation and a system-wide semantic safety property.
+statement: A proof that is valid for a local transition, local invariant, or bounded proof obligation does not by itself establish global semantic safety of the resulting evolving system.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0001
+evidence: []
+engineering:
+  consequence: "Verification of Core evolution must state its scope and cannot promote a local proof result to a global safety claim without an explicit composition argument or global semantic contract."
+  gap: "A formal composition rule connecting local proof obligations to the intended global semantic property is not yet established."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
