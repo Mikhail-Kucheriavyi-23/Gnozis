@@ -83,11 +83,11 @@ Research status vocabulary: DEFINITION / OBSERVED / DERIVED / VERIFIED / REJECTE
 
 ## Archive record contract
 
-Machine-readable archive records are governed by **Archive Record Schema v1**:
+Machine-readable Research Machine records are governed by **Research Machine Record Schema v1**:
 
-- schema: `archive/schema/record.schema.json`
+- schema: `research_machine/schema/record.schema.json`
 - version: `1.0.0`
-- record directory: `archive/records/`
-- archive index: `archive/INDEX.yaml`
+- record directory: `research_machine/records/`
+- Research Machine index: `research_machine/INDEX.yaml`
 
 The existing research index remains a research-navigation layer. It is not itself evidence of verification or acceptance.
