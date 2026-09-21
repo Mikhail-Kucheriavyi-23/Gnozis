@@ -1,0 +1,28 @@
+id: C-0102
+type: claim
+status: FORMALIZED
+title: Failure to detect shared dependencies does not establish evidence independence
+scope: Research Library provenance and verification history; concerns uncertainty and scope in independence assessment.
+statement: Absence of an identified shared ancestor or common-mode mechanism does not establish evidence independence; independence assessment must retain its scope, assumptions, search coverage, and uncertainty, and should distinguish no detected dependency from demonstrated independence.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0101
+  - type: REFERENCES
+    target: C-0100
+  - type: REFERENCES
+    target: C-0085
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Independence assessments should expose examined dependency domains, excluded domains, assumptions, search depth, and residual uncertainty. A result such as NO_DETECTED_DEPENDENCY should not be normalized to INDEPENDENT without additional evidence."
+  gap: "Formal independence-state taxonomy, dependency-search completeness criteria, uncertainty representation, and admissibility thresholds for claiming independence have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
