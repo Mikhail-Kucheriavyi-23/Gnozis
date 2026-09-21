@@ -1,0 +1,26 @@
+id: C-0037
+type: claim
+status: FORMALIZED
+title: Scope or assumption changes require re-evaluation of dependent claims
+scope: Research Library provenance and verification history; concerns claims whose semantic text is unchanged while their declared scope or assumptions change.
+statement: A change to the scope, assumptions, prerequisites, or interpretation boundary of a claim or its supporting proof can alter the conditions under which the claim is valid; dependent claims and evidence must therefore be re-evaluated even when the claim text itself remains unchanged.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0036
+  - type: REFERENCES
+    target: C-0027
+  - type: REFERENCES
+    target: C-0024
+evidence: []
+engineering:
+  consequence: "Changes to scope, assumptions, prerequisites, or semantic interpretation must propagate a review/revalidation event through the dependency graph. Textual equality of a claim is insufficient to preserve its previous verification status."
+  gap: "A formal trigger model for scope/assumption changes and automated re-evaluation propagation has not yet been defined for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
