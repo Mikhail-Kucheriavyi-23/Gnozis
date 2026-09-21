@@ -1,0 +1,28 @@
+id: C-0173
+type: claim
+status: FORMALIZED
+title: Observational equivalence under a verification regime can require a new observation regime rather than additional samples
+scope: Research Library provenance and verification history; concerns hypothesis identifiability, observational equivalence, observation expressiveness, sampling, and verification regime design.
+statement: When admissible hypotheses remain observationally equivalent under the current observation regime, increasing sample count within that same regime does not guarantee further identification. The verification process must distinguish insufficient sampling from insufficient observational expressiveness and may require a new observation regime capable of exposing previously invisible differences.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405e5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0172
+  - type: REFERENCES
+    target: C-0171
+  - type: REFERENCES
+    target: C-0165
+  - type: REFERENCES
+    target: C-0162
+evidence: []
+engineering:
+  consequence: "Track the observation regime used by each verification result and distinguish sample insufficiency from regime insufficiency. Permit research-level proposals for new observation mechanisms when unresolved hypotheses remain equivalent under the current regime."
+  gap: "Formal observation-regime model, identifiability criterion, regime-change trigger, and method for validating that a new regime adds independent observational expressiveness have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
