@@ -1,0 +1,28 @@
+id: C-0165
+type: claim
+status: FORMALIZED
+title: Adaptive verification after a new failure must preserve alternative unresolved regions to prevent attention-induced blind spots
+scope: Research Library provenance and verification history; concerns adaptive verification, attention allocation, reprioritization, unresolved regions, and verification blind spots.
+statement: Discovering a new failure mode can legitimately reprioritize verification toward the newly exposed region, but adaptive verification must retain explicit representation of alternative unresolved regions. Reprioritization must not silently convert untested or weakly tested regions into resolved status. Verification strategy changes require provenance and residual-coverage reporting.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: 0717671589facc8ca51e3943c11a1a405f5e
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0164
+  - type: REFERENCES
+    target: C-0162
+  - type: REFERENCES
+    target: C-0160
+  - type: REFERENCES
+    target: C-0149
+evidence: []
+engineering:
+  consequence: "Maintain an explicit unresolved-region registry and record verification-priority changes. Adaptive focus may increase effort on newly discovered failures while preserving residual uncertainty for displaced regions."
+  gap: "Formal unresolved-region representation, reprioritization policy, attention-budget accounting, starvation detection, and adaptive coverage stopping criteria have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
