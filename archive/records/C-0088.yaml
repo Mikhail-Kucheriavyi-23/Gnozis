@@ -1,0 +1,28 @@
+id: C-0088
+type: claim
+status: FORMALIZED
+title: New failure discoveries require relation classification before failure-model evolution
+scope: Research Library provenance and verification history; concerns classification of newly discovered failure modes and avoidance of artificial model inflation.
+statement: A newly observed failure candidate must be related to the existing failure model before being added as a distinct failure mode; the relation may be an extension, refinement, duplicate, correction, or conflict, and this classification must be preserved as provenance for subsequent model evolution.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0087
+  - type: REFERENCES
+    target: C-0086
+  - type: REFERENCES
+    target: C-0080
+  - type: REFERENCES
+    target: C-0079
+evidence: []
+engineering:
+  consequence: "Failure-model evolution should classify each discovered candidate against existing modes before creating a new node. The relation classification and its basis should remain auditable and should determine whether the model is extended, refined, deduplicated, corrected, or placed in conflict."
+  gap: "Formal relation taxonomy, equivalence/refinement criteria, deduplication rules, conflict semantics, and provenance schema for failure-mode discovery have not yet been defined."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
