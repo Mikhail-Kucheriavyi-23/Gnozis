@@ -1,0 +1,26 @@
+id: C-0055
+type: claim
+status: FORMALIZED
+title: Claim state requires immutable content identity
+scope: Research Library provenance and verification history; concerns distinguishing exact claim content/state versions despite stable logical claim identity.
+statement: Each immutable claim state must have a content identity derived from its canonical semantic content and relevant verification-bound metadata; a stable logical claim identifier alone must not be sufficient to identify the exact proposition that was verified.
+source:
+  kind: file
+  location: AI_CONTEXT.md#140
+  commit: a596a3f5a9bfc420c72435ba359c3463c12a7a75
+relations:
+  - type: DERIVED_FROM
+    target: R-0002
+  - type: REFERENCES
+    target: C-0054
+  - type: REFERENCES
+    target: C-0053
+  - type: REFERENCES
+    target: C-0051
+evidence: []
+engineering:
+  consequence: "Claim states should have canonical serialized content and a stable content identifier/hash. Verification records should bind to that immutable content identity; mutable labels or logical IDs must not substitute for exact state identity."
+  gap: "Canonical claim serialization, content hashing, and the exact set of verification-bound fields have not yet been formally specified for the Research Library."
+  core_admissibility: RESEARCH_ONLY
+created_at: "2026-09-21T00:00:00Z"
+schema_version: "1.0.0"
