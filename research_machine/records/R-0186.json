@@ -1,0 +1,25 @@
+{
+  "id": "R-0186",
+  "type": "research",
+  "status": "OBSERVED",
+  "title": "Evolution workflow must treat implementation, evidence and readiness as separate state",
+  "scope": "Gnozis-V2 evolution workflow and self-optimization",
+  "statement": "The evolution process should be resumable from a universal trigger and should select the next contract from repository evidence rather than from conversational sequence. Contract progress is measured against explicit acceptance/evidence blocks. Implementation, verification evidence, and evolution readiness are separate statistics. Self-learning and self-optimization share one Candidate→Test→Verify→Shadow→Governance→Commit trust path. Directory optimization must remain read-only until duplicate identity, usage, protection, provenance and candidate binding are established.",
+  "source": {
+    "kind": "commit",
+    "location": "Gnozis-V2: docs/EVOLUTION_CONTRACT_TRIGGER.md and self-optimization branch",
+    "commit": "59883820e10378399d90ed06e00dbc1d17a5781e"
+  },
+  "relations": [
+    {"type": "DERIVED_FROM", "target": "R-0185"},
+    {"type": "REFERENCES", "target": "R-0184"}
+  ],
+  "evidence": [],
+  "engineering": {
+    "consequence": "Use contract-based autonomous task selection, separate Implementation/Evidence/Evolution Readiness metrics, and preserve the shared trust path for self-learning and self-optimization.",
+    "gap": "CI and end-to-end provenance/audit integration for directory optimization remain to be verified.",
+    "core_admissibility": "RESEARCH_ONLY"
+  },
+  "created_at": "2026-09-23T05:10:00Z",
+  "schema_version": "1.0.0"
+}
