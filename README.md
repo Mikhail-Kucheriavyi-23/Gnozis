@@ -4,14 +4,14 @@
 
 **Role:** public research and information library for the Gnozis project.
 
-This repository is the historical and exploratory research line of Gnozis. It preserves discovered ideas, reverse-analysis, mathematical models, experimental Python implementations, examples and other material intended for researchers, developers and enthusiasts.
+This repository is the historical and exploratory research line of Gnozis and is now treated as legacy research/archive material. It preserves discovered ideas, reverse-analysis, mathematical models, experimental Python implementations, examples and other material intended for researchers, developers and enthusiasts.
 
-It is **not the production Core repository**. The current engineering Core is developed in **Gnozis-V2**, intended to become the canonical reusable foundation from which specialized research kernels and commercial user versions can be built.
+It is **not the production Core repository**. The current engineering Core is developed in **Gnozis Core**, intended to become the canonical reusable foundation from which specialized research kernels and commercial user versions can be built.
 
 ## Repository roles
 
 Research Library → discovered principles / reverse-analysis / mathematical models / experimental Python / research notes
-→ Gnozis-V2 Core Foundation → specialized research kernels → commercial user versions
+→ Gnozis Core Core Foundation → specialized research kernels → commercial user versions
 
 The research library may contain incomplete, experimental, historical or superseded implementations. Their presence does not mean that the corresponding mechanism is part of the current Core.
 
@@ -23,7 +23,7 @@ The repository retains UROBOROS — Ψ-Core v33 as an important historical resea
 
 The library makes discoveries inspectable and reusable. Research may move through:
 
-Observation → Pattern → Principle → Mathematical/conceptual model → Experiment → Evidence → Candidate Core requirement → Gnozis-V2 implementation
+Observation → Pattern → Principle → Mathematical/conceptual model → Experiment → Evidence → Candidate Core requirement → Gnozis Core implementation
 
 Not every research result becomes Core functionality.
 
@@ -35,9 +35,9 @@ Research ≠ Implementation
 Research ≠ Verification
 Research ≠ Product Capability
 
-## Relationship to Gnozis-V2
+## Relationship to Gnozis Core
 
-Gnozis-V2 is the future canonical Core foundation. This repository supplies research context, experiments and discovered principles to that Core; it does not automatically authorize their implementation.
+Gnozis Core is the canonical Core foundation. This repository supplies research context, experiments and discovered principles to that Core; it does not automatically authorize their implementation.
 
 The intended long-term structure is:
 
