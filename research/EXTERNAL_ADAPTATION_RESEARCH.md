@@ -259,6 +259,213 @@ The Core remains the trusted state/transition boundary.
 
 Research and adaptation mechanisms may evolve around the Core without becoming hidden second state models or unauthorized selectors.
 
+
+## EWA-032..073 — Transferable Opportunity Hypothesis and experiment evaluation
+
+The research sequence established that an Opportunity Hypothesis must be a structured research object rather than a free-form instruction.
+
+Minimum conceptual fields:
+- ID
+- SOURCE
+- OBSERVATION
+- PROBLEM
+- HYPOTHESIS
+- EXPECTED_CAPABILITY
+- ASSUMPTIONS
+- ALTERNATIVES
+- CONTRADICTIONS
+- COUNTEREXAMPLES
+- RISKS
+- AFFECTED_INVARIANTS
+- REQUIRED_EVIDENCE
+- FALSIFICATION_CONDITIONS
+- EXPERIMENT
+- STATUS
+- PROVENANCE
+
+Important separations:
+- observation is not interpretation;
+- interpretation is not hypothesis;
+- hypothesis is not a technical task;
+- sandbox task is not a mutation;
+- mutation is not verification;
+- verification is not governance;
+- governance is not automatic commit.
+
+The Opportunity Hypothesis is intended to travel between Research, Core Knowledge and Sandbox while preserving provenance and semantic boundaries.
+
+### Experiment result classes
+
+A positive execution result is not automatically evidence of adaptation.
+
+Working result classes:
+- **R1 Negative** — expected capability absent.
+- **R2 Local positive** — capability demonstrated, but robustness/generalization remains insufficient.
+- **R3 Robust positive** — capability demonstrated with stronger independent evidence, perturbation resistance and constraint preservation.
+
+A successful experiment may also reduce uncertainty, localize failure, discover constraints or generate a new opportunity. Therefore failure is not necessarily no value.
+
+### Evidence object
+
+A significant research result should conceptually preserve:
+- claim;
+- environment;
+- experiment;
+- baseline;
+- result;
+- assumptions;
+- limitations;
+- counterexamples;
+- reproducibility;
+- independence;
+- provenance.
+
+Evidence should distinguish evidence count from evidence diversity.
+
+A set of tests sharing the same data, model, assumption or mechanism may constitute correlated evidence rather than independent confirmation.
+
+### Evidence graph
+
+For complex claims, evidence is better represented conceptually as a graph:
+
+Claim -> Evidence -> Experiment
+
+with explicit counterevidence:
+
+Claim -> Counterevidence -> Experiment
+
+Counterevidence must remain visible rather than being reduced to an ordinary test failure.
+
+### Adaptation criterion — working hypothesis
+
+Adaptation should not be identified with code change or feature addition.
+
+Working interpretation:
+
+capability change + environmental relevance + evidence + constraint preservation
+
+This is a research hypothesis, not a final mathematical definition.
+
+### Local adaptation and overfitting
+
+A capability demonstrated only in one experimental configuration may be local adaptation rather than robust adaptation.
+
+Research should distinguish:
+- experimental environment;
+- perturbed environment;
+- independent environment.
+
+Passing several tests is insufficient when the tests share common assumptions.
+
+## EWA-074..099 — Independent external feedback and causal attribution
+
+A major problem was identified: if Gnozis generates the hypothesis, designs the experiment, chooses the criterion and judges the result, the loop can become self-confirming.
+
+### Independence dimensions
+
+Independence should be examined across:
+- data;
+- environment;
+- method;
+- evaluation criterion;
+- evaluator/agent;
+- source.
+
+Independent evidence increases evidentiary strength but does not itself prove truth.
+
+### Generator / Evaluator separation
+
+Where practical, the mechanism that generates a hypothesis or experiment should be separated from the mechanism that evaluates the resulting claim.
+
+A second AI is not automatically an independent evaluator. Shared sources, context, assumptions or methods can create common-mode failure.
+
+### Common causes and blind spots
+
+Important research objects:
+- COMMON_CAUSES
+- BLIND_SPOTS
+
+Examples of blind spots:
+- unseen environments;
+- correlated test data;
+- untested failure modes;
+- unverified assumptions;
+- evaluator dependence;
+- long-term degradation;
+- resource exhaustion.
+
+### Attribution
+
+Observed change is not automatically caused by the mutation that preceded it.
+
+A working Attribution research object may contain:
+- observed change;
+- candidate cause;
+- alternative causes;
+- evidence for;
+- evidence against;
+- confidence scope;
+- unresolved uncertainty.
+
+Counterfactual comparison, baselines, replay, matched environments and controlled perturbation are possible ways to investigate attribution, each with assumptions and limitations.
+
+### Temporal and co-evolution effects
+
+Some capabilities require temporal verification.
+
+The external world may also respond to Gnozis and change itself:
+
+Gnozis -> World -> World responds -> Gnozis adapts
+
+Therefore the environment may be dynamic rather than static. This introduces co-evolution and counter-adaptation as research concerns.
+
+### External Feedback Contract
+
+Working concept: **External Feedback Contract (EFC)**.
+
+An EFC describes what counts as external feedback and under what conditions it can be interpreted.
+
+Candidate fields:
+- action;
+- observable outcome;
+- measurement;
+- environment scope;
+- attribution assumptions;
+- baseline;
+- expected response;
+- failure conditions;
+- external variables;
+- provenance.
+
+### Evolutionary error amplification
+
+A self-modifying loop can amplify an early evaluation error:
+
+M1 -> self-evaluation -> M2 -> self-evaluation -> M3
+
+Therefore significant evolutionary changes require epistemic checkpoints before knowledge is admitted as a basis for further mutation.
+
+### Reversibility and blast radius
+
+When evidence is uncertain, reversible and low-blast-radius experiments are structurally safer than irreversible high-impact mutations.
+
+Working experimental preference:
+- minimum mutation;
+- minimum permissions;
+- minimum data;
+- minimum external effects;
+- minimum persistence.
+
+This is a research principle, not a universal implementation rule.
+
+### Current evolutionary hypothesis
+
+A working hypothesis from EWA-074..099:
+
+> The system should seek not maximum mutation count, but maximum acquisition of verifiable evolutionary knowledge with minimum uncontrolled impact.
+
+This remains open to adversarial testing.
+
 ## Current research sequence
 
 Completed exploratory blocks:
@@ -270,51 +477,10 @@ Completed exploratory blocks:
 - EWA-006 — external capability / research / mutation loop
 - EWA-007..016 — external-world classes and EIA concept
 - EWA-017..031 — opportunity discovery, contradiction, surprise, opportunity budget, capability vs improvement, rejection and research memory
+- EWA-032..051 — structured Opportunity Hypothesis, provenance, assumptions, alternatives, contradictions, counterexamples, falsification, evidence thresholds and Research/MRO/Sandbox separation
+- EWA-052..073 — experiment success classes, overfitting, evidence diversity, baseline, regression analysis, Evidence Object, Evidence Graph, counterevidence and uncertainty reduction
+- EWA-074..099 — evaluator independence, common causes, blind spots, attribution, counterfactuals, temporal effects, co-evolution, External Feedback Contract, epistemic checkpoints, reversibility and blast radius
 
 Next block:
 
-**EWA-032 — formalize Opportunity Hypothesis as a transferable object between Research, Core Knowledge and Sandbox without collapsing their semantic boundaries.**
-
-## Research status discipline
-
-Use:
-
-'DEFINITION / OBSERVED / DERIVED / VERIFIED / REJECTED / OPEN'
-
-Do not promote:
-- research to implementation;
-- analogy to proof;
-- capability to improvement;
-- agent agreement to independent evidence;
-- repository presence to semantic validity.
-
-## Long-term candidate architecture
-
-'EXTERNAL WORLD'
--> 'OBSERVATION'
--> 'LIMITATION / CONTRADICTION / SURPRISE'
--> 'OPPORTUNITY HYPOTHESIS'
--> 'ALTERNATIVE GENERATION'
--> 'PHILOSOPHICAL / STRUCTURAL ANALYSIS'
--> 'COUNTEREXAMPLES'
--> 'MRO'
--> 'SANDBOX TASK'
--> 'EXPERIMENT'
--> 'VERIFICATION'
--> 'GOVERNANCE'
--> 'NEW VERIFIED CAPABILITY'
--> 'EXTERNAL WORLD'
-
-This is an exploratory architecture only. It must be reverse-tested before implementation.
-
-## 2026-09-23 registration note
-
-This branch is intentionally registered in the Gnozis Research Library alongside the philosophical research direction.
-
-The philosophical branch studies patterns and hypotheses about knowledge, transformation, conflict, observation and related structures.
-
-This branch studies **how Gnozis can discover, evaluate and safely develop new ways of interacting with the external world**, including mutations of code that could enable those interactions.
-
-Both branches share the same research principle:
-
-**research result -> recorded knowledge -> possible technical task -> sandbox -> verification -> only then possible Core evolution.**
+**EWA-100 — convert external feedback into a bounded generator of new mutation-search areas without creating an uncontrolled self-modification loop.**
