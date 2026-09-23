@@ -11,7 +11,7 @@ It is **not the production Core repository**. The current engineering Core is de
 ## Repository roles
 
 Research Library → discovered principles / reverse-analysis / mathematical models / experimental Python / research notes
-→ Gnozis Core Core Foundation → specialized research kernels → commercial user versions
+→ Gnozis Core Foundation → specialized research kernels → commercial user versions
 
 The research library may contain incomplete, experimental, historical or superseded implementations. Their presence does not mean that the corresponding mechanism is part of the current Core.
 
