@@ -1,0 +1,55 @@
+{
+  "schema": "gnozis-research-math-0.1",
+  "status": "RECONSTRUCTION_BASELINE",
+  "authority": "research_reference_only",
+  "source_window": "2026-09-01 onward",
+  "state": {
+    "formula": "Psi = (X, R)",
+    "status": "DERIVED"
+  },
+  "transition": {
+    "formula": "Psi_t -> c -> Psi_(t+1)",
+    "chain": ["Candidate","Test","Verify","Authorize","Commit"],
+    "status": "SUPPORTED"
+  },
+  "protected_invariants": {
+    "symbol": "I_P",
+    "formula": "I_P(Psi_t) and Allowed(c) => I_P(Psi_(t+1))",
+    "status": "DERIVED"
+  },
+  "epistemic_boundaries": [
+    "Evidence != Truth",
+    "Evidence != Authority",
+    "Verification != Authorization",
+    "Persistence != CanonicalAuthority",
+    "Pattern != Proof",
+    "Correlation != Causation",
+    "Tension != Authority"
+  ],
+  "fixed_point": {
+    "empty": "ValidSet(Psi)=empty => NoTransition",
+    "fixed": "V(Psi) and Psi'=Psi => FixedPoint",
+    "evolution": "V(Psi') and Psi'!=Psi => Evolution",
+    "status": "OPEN"
+  },
+  "authority": {
+    "formula": "StateEvolution != AuthorityEvolution",
+    "ordinary_evolution": "Delta(ProtectedActionSpace)=0",
+    "status": "DERIVED"
+  },
+  "concurrency": {
+    "formula": "Valid(A) and Valid(B) does not imply Valid(Merge(A,B))",
+    "status": "SUPPORTED"
+  },
+  "reality_coupling": {
+    "path": ["Environment","Observation","Evidence","Claim","Governance","Candidate"],
+    "status": "HYPOTHESIS"
+  },
+  "tension": {
+    "path": ["Tension","BoundaryRepresentation","Experiment","Evidence"],
+    "formula": "Tension does not imply Authority",
+    "status": "DERIVED"
+  },
+  "status_vocabulary": ["PROVEN","DERIVED","SUPPORTED","HYPOTHESIS","COUNTEREXAMPLE","CONTRADICTED","OPEN","UNPROVEN"],
+  "note": "Machine-readable reconstruction baseline. Not a proof and not a runtime implementation claim."
+}
