@@ -1,0 +1,38 @@
+schema_version: "1.0.0"
+classification_id: "RM-RECORD-CLASSIFICATION-R1"
+source_ref: "main"
+record_count: 186
+
+type_distribution:
+  claim: 183
+  research: 3
+  evidence: 0
+  counterexample: 0
+  decision: 0
+  audit: 0
+  transition: 0
+
+priority:
+  P0:
+    rule: "claims and research records with direct engineering consequence, explicit provenance, and unresolved/verified status"
+    initial_records:
+      - "R-0001"
+      - "R-0002"
+      - "R-0186"
+  P1:
+    rule: "remaining claim records after validation of status, provenance, relations and engineering consequence"
+  P2:
+    rule: "historical/raw material requiring atomization into evidence, counterexample, decision or transition records"
+
+critical_finding:
+  "The current corpus is heavily claim-dominant (183/186). It does not yet contain typed E/X/D/A/T records in the current record directory scan."
+  implication: "Do not treat the corpus as a complete learning/evidence base. Before promotion, claims need typed evidence, counterexamples and decisions where applicable."
+
+migration_rule:
+  "Preserve original IDs and provenance. Do not convert a claim into verified knowledge merely by migration."
+
+next:
+  - "validate all C- records against schema"
+  - "identify claims with missing/empty evidence"
+  - "extract candidate E/X/D/A/T records from existing audits/history only when provenance supports them"
+  - "then generate P0 transfer subset"
