@@ -1,0 +1,17 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R3"
+claims: ["C-0007","C-0008","C-0009","C-0010","C-0011"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0007","C-0008","C-0009","C-0010","C-0011"]
+  promotion_blocked: true
+  findings:
+    C-0007: "anti-overfitting criterion remains unspecified"
+    C-0008: "verification diversity taxonomy remains unspecified"
+    C-0009: "common-mode dependency graph remains incomplete"
+    C-0010: "adversarial counterexample strategy exists as an engineering requirement, but no complete bounded adequacy criterion is established by this claim"
+    C-0011: "failure localization and minimal-counterexample reduction remain formal gaps"
+  evidence_policy: "Related tests or existing counterexample infrastructure are not promoted to evidence unless their exact tested property matches the claim."
+next:
+  - "continue C-0012 onward"
+  - "mine V2 audits and failure-injection artifacts for independently typed X/A/D/T evidence"
