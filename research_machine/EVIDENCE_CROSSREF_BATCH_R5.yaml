@@ -1,0 +1,13 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R5"
+claims: ["C-0017","C-0018","C-0019","C-0020","C-0021"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0017","C-0018","C-0019","C-0020","C-0021"]
+  promotion_blocked: true
+  finding: "All five claims explicitly declare evidence: [] and remain RESEARCH_ONLY. Their statements are formalized research constraints, not verified Core properties."
+  structural_value: "The batch forms a coherent dependency chain: hidden semantic distinction -> repeated same-boundary observations remain blind -> new observable must discriminate -> joint observables refine but do not prove completeness -> absence of counterexamples does not prove completeness."
+  evidence_requirement: "Future E-records must point to an exact tested/formally proved property; related implementation is insufficient."
+next:
+  - "continue C-0022 onward"
+  - "after a bounded batch, mine V2 audits/failure-injection records for X/A/D/T"
