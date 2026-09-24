@@ -1,0 +1,23 @@
+schema_version: "1.0.0"
+review_id: "RM-CLAIM-QUALITY-R1"
+scope: "sample-based semantic quality review of current 186-record corpus"
+sample:
+  records: ["C-0001","C-0002","C-0003","C-0004","C-0005","C-0006","C-0007","C-0008","C-0009","C-0010","C-0011","C-0012","C-0013","C-0014","C-0015","R-0001","R-0002","R-0186"]
+findings:
+  schema_shape: "records observed conform to the declared record schema shape"
+  provenance: "sampled claims have explicit source locations and source commits"
+  evidence_links: "sampled C records have empty evidence arrays"
+  admissibility: "sampled C records are RESEARCH_ONLY, preventing direct Core admission"
+  engineering_value: "sampled claims contain explicit engineering consequences and gaps"
+  chain_quality: "sampled claims form a coherent DERIVED_FROM/REFERENCES chain around R-0002"
+critical_gap:
+  "The corpus has strong provenance and engineering annotations but lacks typed evidence/counterexample/decision records in the current records directory. Therefore claim quality cannot be promoted to verified knowledge solely from the claim corpus."
+classification:
+  P0_TRANSFER: ["R-0001","R-0002","R-0186"]
+  P0_RESEARCH_CLAIMS: ["C-0001","C-0002","C-0003","C-0004","C-0005","C-0006","C-0007","C-0008","C-0009","C-0010","C-0011","C-0012","C-0013","C-0014","C-0015"]
+  REVIEW_REQUIRED: "remaining C-* records"
+promotion_rule: "No claim becomes VERIFIED or CORE_ELIGIBLE through migration alone."
+next:
+  - "scan all C-* records for status, evidence emptiness, provenance and relations"
+  - "cross-reference claims with current Gnozis-V2 tests/audits/evidence"
+  - "materialize supported E/X/D/A/T records with provenance"
