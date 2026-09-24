@@ -1,0 +1,54 @@
+schema_version: "1.0.0"
+inventory_id: "RM-TRANSFER-INVENTORY-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis"
+source_ref: "main"
+source_snapshot_basis: "current tree"
+purpose: "machine-readable inventory for migration into Gnozis-Research-Memory"
+
+counts:
+  research_machine_paths: 194
+  indexed_records_declared: 185
+  record_files_present: 188
+  index_discrepancy: 3
+
+discrepancy_action:
+  status: "REVIEW_REQUIRED"
+  rule: "do not silently alter or discard records"
+  next: "reconcile INDEX.yaml against actual record files before migration"
+
+transfer_priority:
+  P0:
+    - "research_machine/records/*.yaml"
+    - "research_machine/INDEX.yaml"
+    - "research_machine/schema/*"
+    - "research_machine/TRANSFER_MANIFEST_R1.md"
+  P1:
+    - "contracts"
+    - "mathematics/formal"
+    - "counterexamples"
+    - "audits"
+    - "provenance"
+    - "evidence"
+  P2:
+    - "research"
+    - "AI_CONTEXT"
+    - "decisions"
+    - "evolution history"
+  P3:
+    - "raw historical material"
+
+classification:
+  transfer: "machine-readable knowledge/evidence that can support candidate generation or verification"
+  transfer_review: "useful but requiring normalization, conflict resolution, or provenance repair"
+  keep_core: "runtime implementation and executable tests"
+  archive: "historical source retained for traceability but excluded from active retrieval"
+  exclude: "duplicate/obsolete/unsupported material"
+
+hard_rule:
+  "Research-Memory is a knowledge provider, not an authority to mutate Core."
+
+next:
+  - "reconcile 185 vs 188 records"
+  - "extract per-record type/status/provenance/dependencies"
+  - "produce transfer manifest with record-level decisions"
+  - "create dedicated Gnozis-Research-Memory repository"
