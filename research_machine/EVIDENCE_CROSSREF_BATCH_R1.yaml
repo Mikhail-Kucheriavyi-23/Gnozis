@@ -1,0 +1,26 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R1"
+scope:
+  claims: ["C-0001"]
+  v2_sources:
+    - "tests/test_fixed_point_proof.py"
+    - "tests/test_fundamental_proof.py"
+    - "tests/test_proof_obligation_v1.py"
+    - "tests/test_refinement.py"
+    - "tests/test_psi_transition_boundary.py"
+    - "tests/test_pure_transition.py"
+    - "tests/test_provenance.py"
+
+result:
+  status: "NO_DIRECT_EVIDENCE_CONFIRMED"
+  reason: "The cited tests are relevant to proof obligations and transition integrity, but relevance alone does not establish the specific semantic-continuity claim C-0001."
+  claim_status: "RESEARCH_ONLY"
+  promotion: "BLOCKED"
+
+important_distinction:
+  "A test proving a related invariant must not be promoted to evidence for a stronger semantic claim without an explicit trace from claim to tested property."
+
+next:
+  - "inspect candidate tests for exact property coverage"
+  - "create E record only if the tested property matches the claim"
+  - "otherwise retain the claim as research and record the missing semantic invariant as a gap"
