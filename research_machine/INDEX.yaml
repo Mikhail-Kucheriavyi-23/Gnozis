@@ -4,7 +4,9 @@ authority: "NON_AUTHORITATIVE_FOR_CORE_MUTATION"
 record_schema: "research_machine/schema/record.schema.json"
 records_path: "research_machine/records/"
 index_status: "INITIALIZED"
-records_count: 185
+records_count: 187
 records_path_verified: true
+record_count_reconciled: true
+reconciled_at: "2026-09-25T00:00:00Z"
 legacy_archive_path: null
 migration_status: PHYSICAL_RENAME_COMPLETE
