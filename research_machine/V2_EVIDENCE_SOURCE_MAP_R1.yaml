@@ -1,0 +1,40 @@
+schema_version: "1.0.0"
+map_id: "RM-V2-EVIDENCE-SOURCE-MAP-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+purpose: "identify authoritative V2 evidence sources for enriching Research-Memory claims"
+
+authoritative_sources:
+  contracts:
+    - "docs/EVIDENCE_PROVENANCE_CONTRACT.md"
+    - "docs/EVIDENCE_REFERENCE_CONTRACT.md"
+    - "docs/RESEARCH_MACHINE_REFERENCE_CONTRACT_R1.4.md"
+    - "docs/LEARNING_EVIDENCE_ADMISSION_CONTRACT.md"
+    - "docs/EVOLUTION_MEMORY_ADMISSION_CONTRACT.md"
+  runtime_evidence:
+    - "diagnostic_corpus/"
+    - "AUDIT.md"
+    - "tests/"
+  learning_boundary:
+    - "docs/architecture/LEARNING_MEMORY_TRUST_BOUNDARY_CONTRACT.md"
+    - "docs/architecture/LEARNING_INPUT_ISOLATION_CONTRACT.md"
+    - "docs/architecture/LEARNING_OUTCOME_COMMIT_GATE_CONTRACT.md"
+    - "docs/architecture/LEARNING_RULE_PROMOTION_GOVERNANCE_CONTRACT.md"
+  evolution:
+    - "docs/architecture/CANDIDATE_CONTRACT_GENERATION_CONTRACT.md"
+    - "docs/architecture/CONTROLLED_CORE_COMMIT_CONTRACT.md"
+    - "docs/architecture/END_TO_END_LEARNING_EXECUTION_REPLAY_CONTRACT.md"
+
+classification:
+  E: "test, diagnostic, audit or runtime result with traceable source and result"
+  X: "counterexample, failure injection, rejected transition or adversarial finding"
+  D: "explicit governance/acceptance/rejection decision"
+  A: "audit finding/attestation with provenance"
+  T: "documented state transition/evolution event"
+
+promotion_rule:
+  "A claim may be linked to evidence only when the evidence source is traceable. No evidence record is synthesized from an unsupported claim."
+
+next:
+  - "cross-reference C-* claims against these V2 sources"
+  - "create only provenance-backed E/X/D/A/T records"
+  - "prioritize claims with direct relevance to self-learning and Core safety"
