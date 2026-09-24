@@ -1,0 +1,17 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R4"
+claims: ["C-0012","C-0013","C-0014","C-0015","C-0016"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0012","C-0013","C-0014","C-0015","C-0016"]
+  promotion_blocked: true
+  findings:
+    C-0012: "minimal counterexample is diagnostic aid, not causal proof; causal model absent"
+    C-0013: "post-remediation adequacy protocol not fully formalized"
+    C-0014: "anti-overfitting strategy for novel checks not formalized"
+    C-0015: "metamorphic relation set and adequacy not formalized"
+    C-0016: "semantic observability model and proxy-to-property mapping absent"
+  note: "These claims are useful research constraints. Existing V2 mechanisms may operationalize parts of them, but exact claim-to-property evidence has not been established in this batch."
+next:
+  - "continue C-0017 onward"
+  - "begin targeted audit mining for X/A/D/T records"
