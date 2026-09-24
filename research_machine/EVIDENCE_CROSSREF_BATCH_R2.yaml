@@ -1,0 +1,20 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R2"
+claims: ["C-0002","C-0003","C-0004","C-0005","C-0006"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0002","C-0003","C-0004","C-0005","C-0006"]
+  promotion_blocked: true
+  reason: "Candidate V2 tests cover related proof, transition, safety and verification mechanisms, but exact semantic properties claimed by these records are not established by name/topic relevance alone."
+  evidence_gap:
+    C-0002: "global composition rule absent"
+    C-0003: "semantic improvement ordering absent"
+    C-0004: "project-wide test adequacy criterion absent"
+    C-0005: "formal evidence diversity/independence criterion absent"
+    C-0006: "formal meta-verification criterion absent"
+interpretation:
+  "The five claims are useful development constraints and gap definitions, but remain research knowledge until matching properties are explicitly tested or formally proved."
+next:
+  - "continue claims C-0007 onward"
+  - "when an exact test/property match is found, create provenance-backed E record"
+  - "separately mine existing audits for X/A/D/T records"
