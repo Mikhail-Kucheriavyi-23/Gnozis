@@ -1,0 +1,106 @@
+# Mathematical Reverse Mapping Contract — MRM-01
+
+**Date:** 2026-09-24  
+**Status:** ACTIVE — analytical, evidence-gated  
+**Purpose:** mathematically map the current Gnozis ecosystem, its participants, project-state dimensions, dependencies and tensions before optimizing the next execution contracts.
+
+## 1. Principle
+
+This contract does **not** build a mathematical economy or assign permanent economic value to participants.
+
+It creates a minimal formal reverse map:
+
+`CurrentState + Actors + Contributions + Constraints + Evidence -> DevelopmentGraph`
+
+The output must be sufficient to determine which contracts can proceed in parallel, which are blocked, and which missing invariants must be implemented before the next transition.
+
+## 2. Actor model
+
+For actor `i` record:
+
+`A_i = (Role_i, Contribution_i, Evidence_i, Authority_i, Dependencies_i)`
+
+Actors are evaluated by their role and verified contribution within a contract graph, not by personal worth or a global ranking.
+
+Candidate classes include owner, developer, AI platform, auditor, researcher, partner, tester, user, external service, independent Core and future agent.
+
+## 3. Project state vector
+
+Maintain separate dimensions rather than collapsing maturity into one score:
+
+`G = (K,L,C,P,A,I,M)`
+
+- `K` Core integrity/completeness
+- `L` Self-Learning evidence
+- `C` Contract maturity
+- `P` Provenance
+- `A` Authority/security
+- `I` Integration readiness
+- `M` Market readiness
+
+Every value must be backed by repository evidence, tests, CI evidence, or an explicitly marked UNVERIFIED/THEORETICAL state.
+
+## 4. Relationship weight
+
+For a relationship between actors/domains `i,j`:
+
+`W_ij = f(Evidence, Authority, Dependency, Risk, Contribution, ContractStatus)`
+
+The result is a dependency/trust/permission map, not a political, personal or financial ranking.
+
+## 5. Contract transition
+
+Every proposed development transition must be representable as:
+
+`S_t -> S_(t+1)`
+
+with Preconditions, Contract, Required Evidence, Acceptance criteria, Dependencies, and Rollback/failure condition.
+
+No roadmap step is credited as implemented merely because it is documented.
+
+## 6. Tension reverse map
+
+For each material contradiction:
+
+`Tension -> Constraints -> CandidateProposals -> Verification -> SelectableTransition`
+
+Hard constraints remain non-negotiable. Optimization occurs only inside the permitted solution space.
+
+## 7. Contribution provenance
+
+Where contribution hashing is applicable:
+
+`Contribution -> Evidence -> Hash -> Parent/Dependency Graph -> Verified Result`
+
+A contribution hash is evidence of provenance, not an automatic claim of legal ownership, future value or revenue.
+
+## 8. Parallelism rule
+
+Contracts may execute in parallel only when their dependency sets do not require an unverified predecessor:
+
+`CanParallel(C_i,C_j) = Dependencies(C_i) ∩ Blockers(C_j) = ∅`
+
+Shared mutable boundaries, authority issuance, schema migrations and other non-commutative operations require explicit sequencing.
+
+## 9. Required output
+
+The reverse analysis must produce:
+
+1. Actor Weight Map
+2. Project State Vector
+3. Contradiction/Gap Map
+4. Dependency Graph
+5. Parallelizable Contract Set
+6. Blocked Contract Set
+7. Minimal next-state route
+8. Evidence gaps preventing stronger conclusions
+
+## 10. Acceptance
+
+MRM-01 is complete only when the route can explain **why** each next contract is required, what it depends on, what evidence will close it, and which contracts can proceed concurrently.
+
+No single global percentage may substitute for this map.
+
+## 11. Next
+
+After MRM-01 reaches VERIFIED status, optimize the existing contract registry against the resulting dependency graph. Do not introduce a new economic scoring system before this reverse map is complete.
