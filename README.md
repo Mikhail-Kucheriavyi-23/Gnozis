@@ -1,46 +1,375 @@
-# GNOSIS — Research Library
+# GNOZIS
 
-## Research archive for Gnozis architecture, mathematics and experiments
+## Public registry of machine-generated opportunities, contracts and evidence
 
-**Role:** public research and information library for the Gnozis project.
+**Gnozis** is the public product and evidence surface of a system designed to turn technical requirements into specialized, testable modules and partner-ready opportunities.
 
-This repository is the historical and exploratory research line of Gnozis and is now treated as legacy research/archive material. It preserves discovered ideas, reverse-analysis, mathematical models, experimental Python implementations, examples and other material intended for researchers, developers and enthusiasts.
+The production factory behind this surface is **Genesis**. Genesis is intended to remain a protected engineering environment rather than the primary public interface.
 
-It is **not the production Core repository**. The current engineering Core is developed in **Gnozis Core**, intended to become the canonical reusable foundation from which specialized research kernels and commercial user versions can be built.
+Gnozis is where selected outputs become inspectable: proposals, contracts, modules, evidence, provenance and partnership opportunities.
 
-## Repository roles
+> **Genesis produces. Gnozis exposes, verifies and records.**
 
-Research Library → discovered principles / reverse-analysis / mathematical models / experimental Python / research notes
-→ Gnozis Core Core Foundation → specialized research kernels → commercial user versions
+---
 
-The research library may contain incomplete, experimental, historical or superseded implementations. Their presence does not mean that the corresponding mechanism is part of the current Core.
+## Product model
 
-## UROBOROS / Ψ-Core v33
+```text
+                         GENESIS
+                    protected factory
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+       module creation             adaptation /
+       and proposals                 learning
+              │                         │
+              └────────────┬────────────┘
+                           ▼
+                    verification
+                           │
+                           ▼
+                        GNOZIS
+                 public product surface
+                           │
+        ┌──────────────────┼──────────────────┐
+        ▼                  ▼                  ▼
+     RESEARCH           VALIDATED         COMMERCIAL
+     proposals           modules          candidates
+        │                  │                  │
+        └──────────────────┼──────────────────┘
+                           ▼
+                    contracts / evidence
+                           │
+                           ▼
+                       partners
+```
 
-The repository retains UROBOROS — Ψ-Core v33 as an important historical research baseline and executable research specimen. It is a research/reference implementation rather than the current production Core.
+The public repository is therefore not intended to expose the protected factory itself. It exposes the **results and evidence that are appropriate to share**.
 
-## Research purpose
+---
 
-The library makes discoveries inspectable and reusable. Research may move through:
+## What Gnozis is building
 
-Observation → Pattern → Principle → Mathematical/conceptual model → Experiment → Evidence → Candidate Core requirement → Gnozis Core implementation
+The long-term product direction is a controlled machine-production cycle:
 
-Not every research result becomes Core functionality.
+```text
+Technical brief
+      ↓
+Requirement formalization
+      ↓
+Specialized module creation
+      ↓
+Adaptation / learning
+      ↓
+Independent evaluation
+      ↓
+Regression and security gates
+      ↓
+Controlled release
+      ↓
+Runtime evidence
+      ↓
+Commercial / partner opportunity
+```
 
-## Status distinction
+The four levels must remain distinct:
 
-Research descriptions may use broad mathematical, mathematical, conceptual and exploratory language. That language is part of discovery and is not a defect merely because it is not yet code.
+1. **Factory creation** — Genesis creates a specialized candidate.
+2. **Module adaptation** — the candidate may be configured, trained, supplied with knowledge, or otherwise adapted within an authorized scope.
+3. **Module operation** — the released module performs bounded tasks.
+4. **Factory/Core evolution** — changes to the protected factory or its governing mechanisms require a separate authority and evidence chain.
 
-Research ≠ Implementation
-Research ≠ Verification
-Research ≠ Product Capability
+Creating autonomous modules does **not** automatically grant the factory permission to rewrite its own protected core.
 
-## Relationship to Gnozis Core
+---
 
-Gnozis Core is the canonical Core foundation. This repository supplies research context, experiments and discovered principles to that Core; it does not automatically authorize their implementation.
+## Public opportunity catalogue
 
-The intended long-term structure is:
+Gnozis is intended to expose machine-generated opportunities in a form that testers, researchers, partners and potential investors can inspect.
 
-Research Library → Canonical Gnozis Core → Specialized Research Kernel → User / Commercial Version
+A proposal can progress through evidence stages such as:
 
-Existing licensing terms remain governed by the repository license documents.
+```text
+EARLY
+  ↓
+RESEARCH
+  ↓
+VALIDATED
+  ↓
+COMMERCIAL
+```
+
+These are **maturity/evidence stages, not rankings**. A higher stage means that a different level of evidence and readiness has been established; it does not mean that one proposal is inherently more valuable than another.
+
+Example catalogue entry:
+
+```text
+GZ-C-0042
+Data Normalization Module
+
+TYPE
+Data Processing
+
+STAGE
+Validated
+
+EVIDENCE
+✓ Functional evaluation
+✓ Holdout evaluation
+✓ Regression checks
+✓ Provenance
+
+STATUS
+Open for pilot
+
+CAPABILITIES
+• structured data transformation
+• schema validation
+
+LIMITATIONS
+• bounded execution environment
+• no unrestricted external network
+```
+
+The exact registry schema and status vocabulary are part of the evolving product contracts.
+
+---
+
+## Contracts
+
+A Gnozis contract is a machine-readable description of a proposed capability, module, partnership or other bounded commitment.
+
+A contract may include:
+
+- contract identifier and version;
+- requirements and acceptance criteria;
+- allowed capabilities;
+- limitations and budgets;
+- provenance;
+- evaluation evidence;
+- artifact identifiers;
+- status and lifecycle;
+- applicable trust and data boundaries.
+
+Where appropriate, contracts and evidence can be represented by cryptographic hashes so that a particular version can be independently identified.
+
+Example:
+
+```text
+Contract ID:       GZ-C-0042
+Contract version:  1.2
+Module artifact:   <hash>
+Evidence root:     <hash>
+Provenance root:   <hash>
+```
+
+A hash identifies a specific artifact or evidence state. It does not by itself prove that the underlying claim is true; the evidence and verification process remain separate.
+
+---
+
+## Evidence before claims
+
+Gnozis separates:
+
+```text
+Documentation
+    ≠
+Source
+    ≠
+Test
+    ≠
+CI evidence
+    ≠
+Runtime evidence
+    ≠
+Audit
+```
+
+Likewise:
+
+```text
+CHANGE
+  ≠
+IMPROVEMENT
+```
+
+A candidate module must not be presented as improved merely because its code changed or because it passed a known test set.
+
+The intended evaluation model includes:
+
+- preserved baselines;
+- independent or hidden holdout cases where practical;
+- adversarial cases;
+- regression checks;
+- security and capability boundaries;
+- resource limits;
+- runtime observations;
+- provenance linking source → learning → artifact → evaluation.
+
+Failed candidates are evidence too. A rejected candidate should remain traceable rather than silently replacing the baseline.
+
+---
+
+## Partner data boundary
+
+Partner data is not automatically global learning material.
+
+```text
+ACCESS
+  ≠
+COPY
+  ≠
+TRAIN
+  ≠
+PUBLISH
+  ≠
+REUSE
+```
+
+Partner information may remain private to an agreed trust boundary. Eligibility for learning, reuse or publication requires an explicit policy and provenance path.
+
+The intended learning boundary is:
+
+```text
+Partner / Research Material
+            ↓
+     Eligibility Check
+            ↓
+       Authorized scope
+            ↓
+      Learning / Adaptation
+            ↓
+       Independent evaluation
+            ↓
+        Evidence / result
+```
+
+Unknown provenance or unknown permission is not treated as permission by default.
+
+---
+
+## Research-Memory
+
+**Gnozis-Research-Memory** is the machine-readable research and context layer associated with the product.
+
+Its role is to preserve and organize:
+
+- research material;
+- historical project context;
+- mathematical models;
+- formal definitions and contracts;
+- evidence and provenance;
+- AI-readable context;
+- candidate knowledge for future implementation.
+
+Research-Memory is **not itself the authority for changing Genesis**. It supplies structured context and candidate material subject to the relevant contracts and gates.
+
+The intended relationship is:
+
+```text
+Gnozis-Research-Memory
+          ↓
+ candidate knowledge / evidence
+          ↓
+      eligibility
+          ↓
+        Genesis
+          ↓
+     generated outputs
+          ↓
+       Gnozis
+```
+
+---
+
+## Public repository vs protected factory
+
+The product deliberately separates public visibility from protected execution.
+
+### Public: Gnozis
+
+- opportunity catalogue;
+- contracts;
+- selected modules;
+- evidence;
+- provenance;
+- research-facing materials;
+- partnership surface.
+
+### Research: Gnozis-Research-Memory
+
+- machine-readable research;
+- historical context;
+- mathematical corpus;
+- evidence archive;
+- development context.
+
+### Protected: Genesis
+
+- module factory;
+- controlled generation;
+- learning/adaptation pipeline;
+- internal orchestration;
+- protected evolution mechanisms.
+
+The protected factory should not be treated as the public product interface.
+
+---
+
+## Commercial pathway
+
+The intended commercial path is:
+
+```text
+Machine-generated proposal
+        ↓
+Evidence
+        ↓
+Partner review
+        ↓
+Pilot
+        ↓
+Validated module
+        ↓
+Commercial contract
+        ↓
+Deployment / partnership
+```
+
+The public repository is designed to answer practical questions before a partnership:
+
+- What was proposed?
+- What was actually tested?
+- Which version produced the evidence?
+- What capabilities are allowed?
+- What limitations exist?
+- What failed?
+- What was learned?
+- Which contract is being offered?
+- What can a partner test?
+
+Commercial readiness is not inferred from the existence of documentation or a repository. It requires evidence from the relevant pilot, evaluation and contractual process.
+
+---
+
+## Current status
+
+This repository describes the **target public product architecture** as it is being formalized. Some parts of the public registry, autonomous module factory, learning pipeline, partner workflow and commercial lifecycle remain under implementation and verification.
+
+Do not interpret the presence of a documented workflow as proof that the complete end-to-end workflow is already operational.
+
+For implementation status and evidence, consult the current repository artifacts and project contracts.
+
+---
+
+## Development principle
+
+> Produce a bounded candidate. Preserve its provenance. Test it independently. Record what happened. Only then promote it.
+
+```text
+FACTORY → produces candidates
+EVIDENCE → establishes what happened
+CONTRACT → defines what is allowed
+GNOZIS → exposes verified opportunities
+PARTNERS → decide what to adopt
+```
