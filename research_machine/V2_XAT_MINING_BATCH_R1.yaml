@@ -1,0 +1,39 @@
+schema_version: "1.0.0"
+mining_id: "RM-V2-XAT-MINING-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+sources:
+  X:
+    - id: "GNV2-003"
+      source: "logs/audit/GNV2-003_BYPASS_FINDING.md"
+      classification: "historical adversarial bypass finding"
+      status: "corrective implementation present; fresh runtime/CI pending"
+      claim_link_candidates: ["C-0001","C-0010","C-0011"]
+  A:
+    - id: "GNV2-PERSIST-003"
+      source: "logs/audit/GNV2-PERSIST-003_RECOVERY_PROVENANCE.md"
+      classification: "provenance gap audit finding"
+      status: "gap identified; runtime verification pending"
+      claim_link_candidates: ["C-0027","C-0029","C-0039"]
+  D:
+    - id: "GNV2-001-GATE"
+      source: "logs/audit/GNV2-001_RUNTIME_VERIFICATION.md"
+      classification: "explicit verification gate/status decision"
+      status: "READY, not DONE"
+      claim_link_candidates: ["C-0038","C-0039"]
+  T:
+    - id: "GNV2-PERSIST-001"
+      source: "logs/audit/GNV2-PERSIST-001_TRANSITION_INTEGRITY.md"
+      classification: "documented transition/persistence lifecycle"
+      status: "implementation review; runtime verification pending"
+      claim_link_candidates: ["C-0038","C-0040","C-0041"]
+
+admission_rule:
+  "These are source-backed candidate X/A/D/T records, not runtime VERIFIED evidence. Their status remains bounded by the source documents."
+
+critical_finding:
+  "V2 contains explicit negative evidence and verification gates, which is more valuable for Research-Memory than promoting claims without proof."
+
+next:
+  - "extract exact source excerpts/commit provenance"
+  - "link X/A/D/T candidates to individual claims"
+  - "separate historical findings from current verified runtime results"
