@@ -1,0 +1,44 @@
+schema_version: "1.0.0"
+assessment_id: "RM-E7-107-REUSE-ASSESSMENT-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+
+reuse:
+  provenance:
+    module: "gnosis/evolution/provenance.py"
+    decision: "REUSE"
+    role: "identity/digest binding for candidate, parent state, proposed state and evidence"
+  audit:
+    module: "gnosis/evolution/audit.py"
+    decision: "REUSE"
+    role: "append-only chained audit records and fail-closed cross-check"
+  audit_package:
+    module: "gnosis/self_learning/audit_package.py"
+    decision: "REUSE"
+    role: "evidence export boundary where applicable"
+  learning_commit_gate:
+    module: "gnosis/self_learning/learning_commit_gate.py"
+    decision: "REUSE AS AUTHORITY BOUNDARY ONLY"
+    role: "must not be treated as readiness or scheduler"
+  provenance_closure:
+    module: "gnosis/self_learning/provenance_closure.py"
+    decision: "REUSE FOR REPLAY/CLOSURE SUPPORT"
+
+new_e7_107_logic_required:
+  - "explicit readiness state machine"
+  - "13-check preflight evaluation"
+  - "exact target commit resolution"
+  - "environment identity record without secrets"
+  - "evidence-capture preflight"
+  - "deterministic stop/retry rules"
+  - "READY→EXECUTING handoff"
+  - "target-commit invalidation"
+  - "interruption/recovery continuity"
+
+safety_boundary:
+  "Existing primitives are evidence/provenance infrastructure; none grants autonomous execution authority."
+
+implementation_order:
+  1: "E7.107 readiness record/state machine"
+  2: "adversarial tests"
+  3: "E7.108 authoritative execution record"
+  4: "proof-run only after both are verified"
