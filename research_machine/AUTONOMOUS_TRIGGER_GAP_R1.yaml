@@ -1,0 +1,24 @@
+schema_version: "1.0.0"
+assessment_id: "RM-AUTONOMOUS-TRIGGER-GAP-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+checked_at: "2026-09-25"
+
+workflow_findings:
+  watcher_5m: "observation only; permissions are read-only"
+  observer_1h: "regression + diagnostic generation; no learning-cycle invocation"
+  self_diagnostic: "large learning/evolution test suite; no production learning-cycle invocation"
+  ci: "tests only"
+
+trigger_gap:
+  status: "CONFIRMED_IN_REVIEWED_WORKFLOWS"
+  missing:
+    - "scheduled call to build_verified_cycle or equivalent production learning entrypoint"
+    - "automatic candidate generation from live evidence"
+    - "automatic governance-to-commit path"
+    - "runtime execution receipt produced by a scheduled learning run"
+
+safety_interpretation:
+  "This gap prevents the current automation from being mistaken for autonomous self-modification. The existing workflows are intentionally read-only/verification-oriented."
+
+recommended_next_stage:
+  "Design, if desired, a bounded autonomous-learning trigger as a separate contract; do not modify the existing watcher/observer to mutate Core implicitly."
