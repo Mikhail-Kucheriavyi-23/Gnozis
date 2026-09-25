@@ -1,0 +1,13 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R8"
+claims: ["C-0032","C-0033","C-0034","C-0035","C-0036"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0032","C-0033","C-0034","C-0035","C-0036"]
+  promotion_blocked: true
+  structural_value: "The batch extends the authority model into scoped authorization, canonical scope identity, version-bound authority, supersession/invalidation distinction, and correction classification."
+  evidence_gap: "All five records explicitly contain evidence: [] and identify formal schema/state-transition gaps."
+  promotion_rule: "No Core eligibility through migration or thematic similarity."
+next:
+  - "continue C-0037 onward"
+  - "then stop claim-only expansion and mine V2 for provenance-backed X/A/D/T"
