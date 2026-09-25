@@ -1,0 +1,36 @@
+version: "0.1"
+kind: "KnowledgeRecord"
+required:
+  - id
+  - type
+  - statement
+  - status
+  - provenance
+fields:
+  id:
+    type: string
+  type:
+    enum:
+      - definition
+      - model
+      - proof
+      - observation
+      - hypothesis
+      - conjecture
+      - counterexample
+      - relationship
+      - open_problem
+  statement:
+    type: string
+  status:
+    enum:
+      - proposed
+      - supported
+      - verified
+      - rejected
+      - unresolved
+  provenance:
+    type: object
+    required:
+      - source
+      - revision
