@@ -1,0 +1,22 @@
+source_id: gnozis-mathematics
+protocol: gnozis-memory-source-v0.1
+domain: mathematics
+status: reference
+trust:
+  authority: none
+  evidence: external
+permissions:
+  read: true
+  annotate: true
+  propose: true
+  publish: false
+  delete: false
+  rewrite_history: false
+sync:
+  mode: pull
+provenance:
+  required: true
+  revision: required
+  content_digest: required
+verification:
+  required_before_consumption: true
