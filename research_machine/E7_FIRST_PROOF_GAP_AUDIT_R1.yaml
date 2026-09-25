@@ -1,0 +1,30 @@
+schema_version: "1.0.0"
+assessment_id: "RM-E7-FIRST-PROOF-GAP-AUDIT-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+checked_at: "2026-09-25"
+
+contracts:
+  E7.107:
+    status: "DESIGNED / NOT_IMPLEMENTED"
+    consequence: "No implementation proof for readiness state machine, preflight, exact-commit enforcement, evidence preflight, stop/retry handling."
+  E7.113:
+    status: "DESIGNED / NOT_IMPLEMENTED"
+    consequence: "No authoritative first proof execution has occurred under this contract."
+  E7.117:
+    status: "DESIGNED / NOT_IMPLEMENTED"
+    consequence: "No authoritative runtime execution record exists under this contract."
+
+minimal_gap:
+  - "implement E7.107 readiness state machine and evidence-capture preflight"
+  - "implement E7.108 execution/evidence record if absent"
+  - "implement E7.113 bounded proof-run executor"
+  - "implement E7.117 authorized runtime record"
+  - "add tests for exact-commit mismatch, unauthorized execution, interruption/retry, duplicate/replay, missing terminal state"
+  - "execute one real bounded proof batch and preserve artifacts"
+  - "perform E7.109-E7.112 acceptance/reconciliation/audit/closure"
+
+autonomy_decision:
+  "Do not enable autonomous mutation. First complete the first-proof evidence chain."
+
+evidence_boundary:
+  "Existing surrounding modules/tests demonstrate substantial implementation, but they cannot be promoted to E7.107/E7.113/E7.117 VERIFIED without the specified runtime evidence."
