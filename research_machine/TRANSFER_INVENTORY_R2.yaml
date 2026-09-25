@@ -1,0 +1,64 @@
+schema_version: "2.0.0"
+inventory_id: "RM-TRANSFER-INVENTORY-R2"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis"
+source_ref: "main"
+target_repository: "Mikhail-Kucheriavyi-23/Gnozis-Research-Memory"
+snapshot_basis: "current tree scan"
+status: "RECONCILED"
+purpose: "current migration control inventory; R1 remains historical"
+
+counts:
+  research_machine_paths: 219
+  canonical_record_files: 185
+  c_records: 183
+  r_records: 2
+  index_records_declared: 185
+  index_reconciled: true
+
+gaps:
+  c_record_ids: ["C-0127", "C-0128"]
+  interpretation: "absent IDs; no corresponding record files found in main history"
+
+migration_priority:
+  P0:
+    - "research_machine/records/*.yaml"
+    - "research_machine/INDEX.yaml"
+    - "research_machine/schema/*"
+    - "research_machine/TRANSFER_MANIFEST_R1.md"
+  P1:
+    - "contracts"
+    - "mathematics/formal"
+    - "counterexamples"
+    - "audits"
+    - "provenance"
+    - "evidence"
+  P2:
+    - "research"
+    - "AI_CONTEXT"
+    - "decisions"
+    - "evolution history"
+  P3:
+    - "raw historical material"
+
+classification:
+  transfer: "machine-readable knowledge/evidence eligible for controlled transfer"
+  transfer_review: "requires normalization, conflict resolution, or provenance repair"
+  keep_core: "operational implementation and executable tests"
+  archive: "historical source retained for traceability but excluded from active retrieval"
+  exclude: "duplicate, obsolete, or unsupported material"
+
+hard_rules:
+  - "Research-Memory is a knowledge provider, not an authority to mutate Core."
+  - "No source deletion before target verification and canonical-owner registration."
+  - "Physical migration does not imply semantic verification."
+
+verification_states:
+  - "PLANNED"
+  - "TRANSFERRED"
+  - "CONTENT-VERIFIED"
+  - "STRUCTURE-VERIFIED"
+  - "TEST-VERIFIED"
+  - "CANONICAL"
+
+next_gate:
+  "produce record-level transfer decisions and verify target content before any source deletion"
