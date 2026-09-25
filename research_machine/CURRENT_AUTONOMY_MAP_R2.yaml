@@ -1,0 +1,35 @@
+schema_version: "1.0.0"
+assessment_id: "RM-CURRENT-AUTONOMY-MAP-R2"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+as_of: "2026-09-25"
+
+autonomous_layers:
+  watcher_5m:
+    workflow: ".github/workflows/autonomous-watcher.yml"
+    function: "heartbeat / repository-state observation"
+    autonomy: "monitoring"
+  observer_1h:
+    workflow: ".github/workflows/autonomous-observer.yml"
+    function: "full regression + self-diagnostic + artifact publication"
+    autonomy: "verification/observation"
+  self_diagnostic:
+    workflow: ".github/workflows/self-diagnostic.yml"
+    function: "reflection/persistence/self-learning test suite + diagnostic generation"
+    autonomy: "triggered verification"
+  contract_database:
+    workflow: ".github/workflows/contract-database.yml"
+    function: "contract database generation on relevant changes"
+    autonomy: "knowledge/contract indexing"
+
+not_autonomous_proven:
+  - "candidate generation without external trigger"
+  - "deterministic selection followed by autonomous commit"
+  - "autonomous code modification"
+  - "complete end-to-end self-learning cycle executed on schedule"
+
+conclusion:
+  "The project has a real autonomous observation/verification fabric, but the reviewed workflows do not by themselves prove autonomous self-improvement."
+
+next:
+  - "inspect learning-cycle entrypoints and whether any scheduled workflow invokes them"
+  - "find current execution receipts for Candidate/Test/Select/Evolve/Verify/Commit"
