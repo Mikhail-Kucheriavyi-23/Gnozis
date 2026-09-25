@@ -1,0 +1,47 @@
+schema_version: "1.0.0"
+matrix_id: "RM-BOUNDED-TRIGGER-PRECONDITION-MATRIX-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+status: "DESIGN_ONLY"
+
+preconditions:
+  evidence_admission:
+    existing_component: "gnosis/self_learning/learning_evidence_admission.py"
+    contract_sources:
+      - "docs/architecture/LEARNING_EVIDENCE_ADMISSION_CONTRACT.md"
+    autonomous_trigger_ready: "PARTIAL"
+  candidate:
+    existing_component: "gnosis/self_learning/candidate_contract.py"
+    tests: ["tests/test_candidate_contract.py"]
+    autonomous_trigger_ready: "PARTIAL"
+  validation:
+    existing_component: "gnosis/self_learning/validation.py"
+    autonomous_trigger_ready: "PARTIAL"
+  governance:
+    existing_component: "gnosis/self_learning/governance.py"
+    tests: ["tests/test_self_learning_governance.py"]
+    autonomous_trigger_ready: "PARTIAL"
+  commit_gate:
+    existing_component: "gnosis/self_learning/learning_commit_gate.py"
+    tests: ["tests/test_learning_commit_gate.py"]
+    autonomous_trigger_ready: "PARTIAL"
+  execution_receipt:
+    existing_component: "gnosis/self_learning/execution_receipt.py"
+    tests: ["tests/test_execution_receipt.py"]
+    autonomous_trigger_ready: "PARTIAL"
+  post_commit_verification:
+    existing_component: "gnosis/self_learning/post_commit_verification.py"
+    tests: ["tests/test_post_commit_verification.py"]
+    autonomous_trigger_ready: "PARTIAL"
+
+critical_missing_for_trigger:
+  - "implemented scheduled production invocation"
+  - "implemented bounded mutation quota enforcement at trigger level"
+  - "implemented end-to-end runtime receipt for a scheduled learning execution"
+  - "shadow-run result proving no unintended mutation"
+  - "independent adversarial verification of the trigger itself"
+
+existing_architecture_warning:
+  "V2 already contains first-proof-run contracts E7.107/E7.113/E7.117 marked DESIGNED/NOT_IMPLEMENTED. Therefore the bounded trigger must not claim readiness merely because the surrounding contracts and modules exist."
+
+decision:
+  "Do not implement autonomous mutation yet. First close the first-proof execution/readiness evidence gaps."
