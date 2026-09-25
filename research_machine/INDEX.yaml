@@ -4,10 +4,10 @@ authority: "NON_AUTHORITATIVE_FOR_CORE_MUTATION"
 record_schema: "research_machine/schema/record.schema.json"
 records_path: "research_machine/records/"
 index_status: "INITIALIZED"
-records_count: 186
+records_count: 185
 records_path_verified: true
-record_count_reconciled: false
-record_count_note: "tree-level record filename scan found 186 typed record files; prior count included one non-record file"
-reconciled_at: "2026-09-25T00:00:00Z"
+record_count_reconciled: true
+record_count_note: "tree-level record filename scan found 185 typed record files: 183 C-records and 2 R-records; C-0127 and C-0128 are absent IDs, not missing files."
+reconciled_at: "2026-09-26T00:00:00Z"
 legacy_archive_path: null
 migration_status: PHYSICAL_RENAME_COMPLETE
