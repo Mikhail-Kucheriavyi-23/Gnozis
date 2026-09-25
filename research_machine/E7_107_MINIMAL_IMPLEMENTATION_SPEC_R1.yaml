@@ -1,0 +1,59 @@
+schema_version: "1.0.0"
+spec_id: "RM-E7-107-MINIMAL-IMPLEMENTATION-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+contract: "E7.107-r1"
+status: "SPEC_READY_NOT_IMPLEMENTED"
+
+state_machine:
+  states: [PREPARING, READY, BLOCKED, INVALIDATED, EXECUTING, COMPLETED, FAILED]
+  allowed_entry_to_EXECUTING: "READY only"
+
+record:
+  batch_id: required
+  target_commit_sha: required
+  repository_ref: required
+  baseline_id: required
+  candidate_selection_id: required
+  evidence_policy_revision: required
+  verification_matrix_revision: required
+  environment_identity: required
+  checks: "13 explicit pass/fail/blocked results"
+  commands: required
+  expected_outcomes: required
+  evidence_capture_mapping: required
+  stop_conditions: required
+  retry_rules: required
+
+hard_invariants:
+  - "ref must resolve to target_commit_sha"
+  - "changed target commit invalidates readiness"
+  - "missing evidence destination blocks READY"
+  - "no manual scope reinterpretation during execution"
+  - "interrupted execution is never VERIFIED"
+  - "readiness does not grant mutation authority"
+  - "partial evidence is preserved"
+
+tests_required:
+  - "state transition validity"
+  - "wrong commit blocks"
+  - "missing test blocks"
+  - "missing evidence path blocks"
+  - "environment mismatch blocks"
+  - "unexpected mutation stops"
+  - "interruption preserves partial evidence"
+  - "retry is deterministic"
+  - "target commit change invalidates batch"
+  - "secrets excluded from environment record"
+
+reuse_candidates:
+  - "existing TrainingExecutionReceipt"
+  - "existing provenance/audit primitives"
+  - "existing contract/progress machinery"
+
+implementation_rule:
+  "Reuse existing primitives only where their semantics exactly satisfy E7.107; otherwise create an explicit E7.107 record/state machine. Do not relabel existing receipts as E7.107."
+
+next:
+  - "implement state machine and record"
+  - "add adversarial tests"
+  - "run static/behavioral verification before any real proof batch"
