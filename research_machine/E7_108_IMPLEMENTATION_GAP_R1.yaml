@@ -1,0 +1,20 @@
+schema_version: "1.0.0"
+assessment_id: "RM-E7-108-IMPLEMENTATION-GAP-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+finding:
+  E7.108: "DESIGNED / NOT_IMPLEMENTED"
+  existing_execution_receipt: "TrainingExecutionReceipt exists, but it is not the E7.108 authoritative first-batch execution record"
+  learning_commit_gate: "exists and explicitly creates no execution authority"
+gap:
+  - "dedicated E7.108 batch/execution state machine"
+  - "durable criterion-level evidence mapping"
+  - "exact-commit execution identity"
+  - "duplicate/conflicting replay handling for first proof batch"
+  - "restart/recovery continuity for E7.108"
+  - "implementation tests proving all E7.108 acceptance criteria"
+decision:
+  "Do not conflate existing TrainingExecutionReceipt with E7.108. Implement the missing first-proof execution record as a separate bounded evidence layer."
+next:
+  - "inspect E7.109/E7.110 dependencies for existing reusable acceptance/reconciliation components"
+  - "design minimal E7.108 record schema"
+  - "implement tests before first real execution"
