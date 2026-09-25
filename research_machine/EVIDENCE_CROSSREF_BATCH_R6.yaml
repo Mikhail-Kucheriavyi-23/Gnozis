@@ -1,0 +1,18 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R6"
+claims: ["C-0022","C-0023","C-0024","C-0025","C-0026"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0022","C-0023","C-0024","C-0025","C-0026"]
+  promotion_blocked: true
+  structural_value: "The batch defines a progression from scoped exhaustive verification to composition, assumption compatibility, shared-dependency correlation, and dependency criticality."
+  findings:
+    C-0022: "bounded proof requires explicit finite domain, sound checker and complete execution; Gnozis-specific admission criteria remain open"
+    C-0023: "local proof composition requires an explicit composition rule"
+    C-0024: "composition requires explicit assumption compatibility"
+    C-0025: "apparently independent proofs can share hidden dependencies"
+    C-0026: "shared dependency criticality determines correlated-cluster risk"
+  evidence_policy: "No promotion from formalized claim to verified knowledge without exact provenance-backed evidence."
+next:
+  - "continue C-0027 onward"
+  - "then mine audits and failure-injection artifacts for X/A/D/T"
