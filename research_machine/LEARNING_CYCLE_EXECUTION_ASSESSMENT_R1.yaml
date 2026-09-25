@@ -1,0 +1,41 @@
+schema_version: "1.0.0"
+assessment_id: "RM-LEARNING-CYCLE-EXECUTION-R1"
+source_repository: "Mikhail-Kucheriavyi-23/Gnozis-V2"
+checked_at: "2026-09-25"
+
+implementation_present:
+  learning_cycle: "gnosis/self_learning/learning_cycle.py"
+  candidate_generation: "gnosis/self_learning/candidate_contract.py"
+  selection: "gnosis/core/select.py"
+  controlled_commit: "gnosis/self_learning/controlled_commit.py"
+  execution_receipt: "gnosis/self_learning/execution_receipt.py"
+  commit_gate: "gnosis/self_learning/learning_commit_gate.py"
+  post_commit_verification: "gnosis/self_learning/post_commit_verification.py"
+
+unit_test_evidence:
+  learning_cycle: "tests/test_learning_cycle.py"
+  result_type: "structural/behavioral unit tests"
+  proven:
+    - "admitted memory is required"
+    - "provenance continuity is checked"
+    - "completed cycles cannot extract"
+    - "learning cycle does not grant execution authority"
+    - "deterministic cycle identity"
+  not_proven:
+    - "autonomous scheduled invocation"
+    - "real end-to-end Candidate→Test→Select→Evolve→Verify→Commit execution"
+    - "current production runtime execution receipt"
+    - "autonomous code-changing commit"
+
+boundary_finding:
+  "The learning cycle is implemented as a guarded state/provenance boundary, not as an autonomous scheduler."
+
+conclusion:
+  implementation: "SUBSTANTIAL"
+  autonomous_execution: "NOT_CURRENTLY_PROVEN"
+  monitoring_automation: "PROVEN ACTIVE"
+
+next:
+  - "trace call graph into learning_cycle/candidate/selection/commit"
+  - "search CI artifacts for actual execution receipts"
+  - "if no invocation path exists, treat autonomous self-learning as not active"
