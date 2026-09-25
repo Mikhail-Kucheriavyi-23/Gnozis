@@ -1,0 +1,13 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R9"
+claims: ["C-0037","C-0038","C-0039","C-0040","C-0041"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0037","C-0038","C-0039","C-0040","C-0041"]
+  promotion_blocked: true
+  structural_value: "This batch defines re-evaluation as a provenance-bearing state transition: scope/assumption change triggers dependent review; review must terminate in an explicit outcome; failed prerequisites cannot be re-used as independent confirmation; remediation and replacement are distinct paths; replacement must satisfy the dependent proof interface or force re-derivation."
+  evidence_gap: "Each record explicitly has evidence: [] and identifies missing formal state-machine/interface semantics."
+  next:
+    - "STOP CLAIM-ONLY EXPANSION AFTER THIS BATCH"
+    - "mine V2 audits, failure injection, rejected transitions and governance decisions for X/A/D/T"
+    - "link those records back to the claim graph"
