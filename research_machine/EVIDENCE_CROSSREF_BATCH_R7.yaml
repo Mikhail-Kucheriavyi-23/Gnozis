@@ -1,0 +1,18 @@
+schema_version: "1.0.0"
+crossref_id: "RM-EVIDENCE-CROSSREF-BATCH-R7"
+claims: ["C-0027","C-0028","C-0029","C-0030","C-0031"]
+result:
+  direct_evidence_confirmed: []
+  research_only: ["C-0027","C-0028","C-0029","C-0030","C-0031"]
+  promotion_blocked: true
+  structural_value: "This batch defines a provenance-governed evidence lifecycle: dependency failure propagation -> immutable historical invalidation -> derived current status -> explicit authority boundary -> provenance-bound authority."
+  findings:
+    C-0027: "selective invalidation state machine remains unspecified"
+    C-0028: "append-only evidence status history is a research requirement, not yet exact evidence for the claim"
+    C-0029: "derived status transition model remains unspecified"
+    C-0030: "authority boundary is required but actor-role matrix remains unspecified"
+    C-0031: "authority provenance schema remains unspecified"
+  evidence_policy: "Existing V2 mechanisms may implement portions of these ideas, but no exact claim-to-property evidence is admitted in this batch."
+next:
+  - "continue C-0032 onward"
+  - "then mine V2 audits for exact implementation/evidence matches and X/A/D/T candidates"
