@@ -1,0 +1,56 @@
+schema_version: "1.0.0"
+contract_id: "BOUNDED-AUTONOMOUS-LEARNING-TRIGGER-R1"
+status: "DESIGN_ONLY"
+purpose: "Connect current autonomous observation to the existing guarded learning pipeline without granting unrestricted autonomous mutation authority."
+
+pipeline:
+  - "Observe"
+  - "AdmitEvidence"
+  - "GenerateCandidate"
+  - "Test"
+  - "DeterministicSelect"
+  - "GovernanceGate"
+  - "BoundedCommit"
+  - "Verify"
+  - "Receipt"
+
+hard_boundaries:
+  mutation_scope: "explicitly allowlisted resources only"
+  max_changes_per_run: 1
+  external_selector: false
+  hidden_clock: false
+  LLM_inside_core: false
+  second_state_model: false
+  git_as_proof: false
+  failed_verification: "fail_closed"
+  provenance: "mandatory"
+  audit_receipt: "mandatory"
+  rollback_or_recovery: "mandatory before commit"
+  no_op: "rejected"
+  duplicate_candidate: "rejected"
+
+trigger_policy:
+  source: "scheduled observation result or explicit bounded event"
+  cadence: "not yet selected"
+  preconditions:
+    - "fresh verified evidence"
+    - "candidate satisfies contract"
+    - "tests pass"
+    - "deterministic selection succeeds"
+    - "governance policy permits mutation"
+    - "commit scope remains within bound"
+
+promotion_rule:
+  "This contract remains DESIGN_ONLY until implemented and independently verified."
+
+success_definition:
+  "A scheduled run may produce at most one bounded, provenance-backed, verified mutation; otherwise it produces a non-mutating receipt explaining why no mutation occurred."
+
+safety_goal:
+  "Autonomy increases by adding a controlled trigger, not by weakening existing authorization boundaries."
+
+next:
+  - "derive exact machine-checkable preconditions from existing V2 APIs"
+  - "implement as separate opt-in workflow"
+  - "shadow-run before any real mutation"
+  - "require runtime receipts and adversarial tests"
