@@ -62,7 +62,7 @@ class Uroboros:
         kernel_version: str = "gnozis-core",
         history: AppendOnlyHistory | None = None,
     ) -> "Uroboros":
-        initial = state or State()
+        initial = state if state is not None else State(values={"x": (), "relations": ()})
         initial.to_psi()
         return cls(
             state=initial,
