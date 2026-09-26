@@ -4,6 +4,7 @@ from core.commit import commit
 from core.admission import Admission
 from core.proof import ProofObligation
 from core.state import Psi, State
+from core.history import AppendOnlyHistory
 
 
 def test_canonical_commit_rejects_unadmitted_candidate():
@@ -23,7 +24,7 @@ def test_canonical_commit_rejects_unadmitted_candidate():
     )
 
     with pytest.raises(ValueError, match="not admitted"):
-        commit(previous, admission).apply()
+        commit(previous, admission, kernel_version="test-kernel").apply(AppendOnlyHistory())
 
 
 def test_canonical_commit_accepts_admitted_psi():
@@ -42,7 +43,7 @@ def test_canonical_commit_accepts_admitted_psi():
         proof=proof,
     )
 
-    assert commit(previous, admission).apply() == candidate
+    assert commit(previous, admission, kernel_version="test-kernel").apply(AppendOnlyHistory())[0] == candidate
 
 
 def test_canonical_commit_rejects_legacy_state_even_if_admitted():
