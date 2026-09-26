@@ -52,3 +52,13 @@ def test_canonical_step_uses_transition_executor_path():
     assert "self.executor.step(" in source
     assert "self.psi_transition" in source
     assert "canonicalize_psi(self.state.to_psi())" in source
+
+
+def test_legacy_uroboros_does_not_construct_canonical_executor():
+    source = _read("core/uroboros.py")
+    start = source.index("    def evolutionary(")
+    end = source.index("    def step(", start)
+    block = source[start:end]
+    assert "LegacyEngine" in block
+    assert "executor=None" in block
+    assert "CanonicalExecutor(" not in block
