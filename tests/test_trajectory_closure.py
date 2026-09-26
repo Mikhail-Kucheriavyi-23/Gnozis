@@ -20,11 +20,11 @@ def test_accepted_trajectory_remains_in_state_space():
         return evolutionary_transition(lambda _s: (nxt,), lambda _c: True)
 
     current = states[0]
-    state_space = {state.values for state in states}
+    state_space = set(states)
 
     for _ in range(len(states) - 1):
         current = make_transition(current)(current)
-        assert current.values in state_space
+        assert current in state_space
 
     assert current == states[-1]
 
