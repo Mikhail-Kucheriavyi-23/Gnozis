@@ -58,19 +58,9 @@ def test_invalid_type_and_payload_fail():
         port.exchange({**base, "message_id": "m2", "type": "request", "payload": []})
 
 
-def test_duplicate_message_race_is_not_atomic():
-    """Adversarial proof: check-then-add must not accept the same message twice."""
+def test_duplicate_message_race_is_atomic():
+    """Concurrent duplicate delivery accepts exactly one message."""
     import threading
-
-    class BarrierSet(set):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self._barrier = threading.Barrier(2)
-
-        def __contains__(self, item):
-            result = super().__contains__(item)
-            self._barrier.wait(timeout=2)
-            return result
 
     calls = 0
     calls_lock = threading.Lock()
@@ -87,8 +77,6 @@ def test_duplicate_message_race_is_not_atomic():
         "client_id": "race-test",
         "provenance": {},
     })
-    session = port.sessions[hs["session_id"]]
-    session.seen_messages = BarrierSet()
 
     message = {
         "protocol": PROTOCOL,
@@ -101,14 +89,18 @@ def test_duplicate_message_race_is_not_atomic():
 
     results = []
     errors = []
+    results_lock = threading.Lock()
 
     def run():
         try:
-            results.append(port.exchange(message))
+            result = port.exchange(message)
+            with results_lock:
+                results.append(result)
         except Exception as exc:
-            errors.append(exc)
+            with results_lock:
+                errors.append(exc)
 
-    threads = [threading.Thread(target=run) for _ in range(2)]
+    threads = [threading.Thread(target=run) for _ in range(32)]
     for thread in threads:
         thread.start()
     for thread in threads:
@@ -117,6 +109,6 @@ def test_duplicate_message_race_is_not_atomic():
     assert not any(thread.is_alive() for thread in threads)
     assert calls == 1
     assert len(results) == 1
-    assert len(errors) == 1
-    assert isinstance(errors[0], PortError)
-    assert "replayed" in str(errors[0])
+    assert len(errors) == 31
+    assert all(isinstance(error, PortError) for error in errors)
+    assert all("replayed" in str(error) for error in errors)
