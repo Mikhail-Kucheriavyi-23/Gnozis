@@ -9,3 +9,5 @@
 - Successful commit creates a new immutable state with incremented version.
 - Persistence rejects state records without an integrity digest.
 - Persisted state can be retrieved by stable state identity.
+- Recovery rejects a state whose integrity digest does not match the expected digest.
+- Material Core operations can carry actor/input/output provenance.
