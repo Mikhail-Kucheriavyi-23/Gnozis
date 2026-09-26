@@ -47,3 +47,9 @@ Issues = "https://github.com/Mikhail-Kucheriaviy-23/Gnozis/issues"
 [tool.setuptools]
 packages = ["core"]
 
+
+
+[tool.pytest.ini_options]
+markers = [
+    "legacy_compatibility: tests for the retained legacy State evolution compatibility surface",
+]
