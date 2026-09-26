@@ -1,4 +1,4 @@
-from core.history import AppendOnlyHistory, TransitionRecord
+import pytest\n\nfrom core.history import AppendOnlyHistory, TransitionRecord
 from core.replay import replay
 from core.state import Psi
 
@@ -26,3 +26,24 @@ def test_empty_history_returns_genesis():
     result = replay(genesis, AppendOnlyHistory(), lambda state, record: state)
     assert result.state == genesis
     assert result.applied == 0
+
+
+def test_replay_never_executes_without_explicit_applier():
+    genesis = Psi(x=("g",), relations=())
+    history = AppendOnlyHistory().append(record(0, "", "s0"))
+    with pytest.raises(TypeError):
+        replay(genesis, history, None)
+
+
+def test_replay_uses_only_supplied_applier():
+    genesis = Psi(x=("g",), relations=())
+    history = AppendOnlyHistory().append(record(0, "", "s0"))
+    calls = []
+
+    def apply(state, transition_record):
+        calls.append(transition_record.state_hash)
+        return state
+
+    result = replay(genesis, history, apply)
+    assert calls == ["s0"]
+    assert result.state == genesis
