@@ -17,3 +17,13 @@ def test_provenance_mismatch_is_rejected():
 def test_incomplete_provenance_is_rejected():
     with pytest.raises(ValueError, match="incomplete"):
         attach_provenance(rec(), Provenance("c0", "", "k1"))
+
+
+def test_candidate_provenance_mismatch_is_rejected():
+    with pytest.raises(ValueError, match="candidate"):
+        attach_provenance(rec(), Provenance("wrong", "e0", "k1"))
+
+
+def test_kernel_provenance_mismatch_is_rejected():
+    with pytest.raises(ValueError, match="kernel"):
+        attach_provenance(rec(), Provenance("c0", "e0", "wrong"))
