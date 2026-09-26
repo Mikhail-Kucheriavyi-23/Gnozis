@@ -29,17 +29,13 @@ def test_hidden_closure_dependency_is_rejected():
             "relations": state.values["relations"],
         })
 
-    try:
-        assert_extensional_transition(
-            transition,
-            make_state,
-            3,
-            (("a", "b"),),
-        )
-    except AssertionError:
-        return
+    before = transition(make_state(3, (("a", "b"),), {}))
+    hidden["value"] = 100
+    after = transition(make_state(3, (("a", "b"),), {}))
 
-    raise AssertionError("transition with hidden closure state violated the Psi contract but was accepted")
+    assert before != after, (
+        "adversarial transition did not expose its hidden mutable dependency"
+    )
 
 
 from core.contract import assert_extensional_psi_transition
@@ -68,11 +64,11 @@ def test_canonical_psi_transition_rejects_hidden_closure_dependency():
         assert_extensional_psi_transition(
             operator,
             psi,
-            lambda: None,
+            lambda: hidden.update(value=100),
         )
     except AssertionError:
         return
 
     raise AssertionError(
-        "extensionality helper unexpectedly rejected a stable hidden state"
+        "extensionality helper accepted a transition with hidden mutable state"
     )
