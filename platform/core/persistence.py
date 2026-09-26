@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from .model import State
+from .digest import state_digest
 
 
 @dataclass(frozen=True)
@@ -14,10 +15,11 @@ class Persistence:
     def __init__(self) -> None:
         self._states: dict[str, StoredState] = {}
 
-    def save(self, state: State, digest: str) -> StoredState:
-        if not digest:
-            raise ValueError("state digest is required")
-        stored = StoredState(state=state, digest=digest)
+    def save(self, state: State, digest: str | None = None) -> StoredState:
+        computed = state_digest(state)
+        if digest is not None and digest != computed:
+            raise ValueError("state digest does not match state")
+        stored = StoredState(state=state, digest=computed)
         self._states[state.state_id] = stored
         return stored
 
@@ -26,6 +28,9 @@ class Persistence:
             stored = self._states[state_id]
         except KeyError as exc:
             raise KeyError("state not found") from exc
+        actual = state_digest(stored.state)
+        if actual != stored.digest:
+            raise ValueError("persisted state integrity check failed")
         if expected_digest is not None and stored.digest != expected_digest:
             raise ValueError("state integrity check failed")
         return stored
