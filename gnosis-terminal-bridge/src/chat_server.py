@@ -107,7 +107,7 @@ class GnozisChatHandler(BaseHTTPRequestHandler):
                 return
 
             result = handle_chat(payload, self.chat)
-        except PortError as exc:
+        except (PortError, PermissionError) as exc:
             self._json(401, {"error": str(exc)})
             return
         except (json.JSONDecodeError, TypeError, ValueError) as exc:
