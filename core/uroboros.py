@@ -1,21 +1,28 @@
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass, field
 from typing import Iterable
 
 from .engine import Engine
 from .execution import CanonicalExecutor, Generator, Tester
+from .execution_contract import execution_input_from_psi
 from .relation import Relation
 from .state import Psi, State
 from .history import AppendOnlyHistory
-from .psi_transition import PsiTransition, make_psi_transition
-from .canonical_boundary import canonicalize_psi, commit_canonical
+from .psi_transition import PsiTransition
+from .canonical_boundary import canonicalize_psi
 
 
 def _unconfigured_transition(state: State) -> State:
     raise RuntimeError(
         "Uroboros has no transition configured; provide an Engine or use Uroboros.evolutionary()."
     )
+
+
+def _transition_content_digest(transition: PsiTransition) -> str:
+    payload = repr(transition.configuration).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -83,9 +90,15 @@ class Uroboros:
     def step(self) -> "Uroboros":
         if self.psi_transition is not None and self.executor is not None:
             canonical_input = canonicalize_psi(self.state.to_psi())
+            execution_input = execution_input_from_psi(
+                canonical_input.psi,
+                input_type="psi_transition",
+                content_digest=_transition_content_digest(self.psi_transition),
+            )
             result = self.executor.step(
                 canonical_input.psi,
                 self.psi_transition,
+                execution_input,
                 test=self.test,
             )
             committed = result.psi
