@@ -1,4 +1,6 @@
-import pytest\n\nfrom core import State, Uroboros, select_next_state, evolutionary_psi_transition
+import pytest
+
+from core import State, Uroboros, select_next_state, evolutionary_psi_transition
 
 
 def test_generate_test_select_is_endogenous():
@@ -69,7 +71,8 @@ def test_canonical_psi_transition_can_run_endogenous_generate_test_select():
     assert evolved.state.values["x"] == 3
 
 
-@pytest.mark.legacy_compatibility\ndef test_rule_set_can_evolve_with_the_state():
+@pytest.mark.legacy_compatibility
+def test_rule_set_can_evolve_with_the_state():
     initial = State(values={"x": 0, "relations": ()})
 
     def generate(state):
@@ -87,7 +90,8 @@ def test_canonical_psi_transition_can_run_endogenous_generate_test_select():
     assert initial.values["relations"] == ()
 
 
-@pytest.mark.legacy_compatibility\ndef test_uroboros_step_can_change_relations_without_external_correction():
+@pytest.mark.legacy_compatibility
+def test_uroboros_step_can_change_relations_without_external_correction():
     initial = State(values={"x": 0, "relations": ("r0",)})
 
     def generate(state):
@@ -106,7 +110,8 @@ def test_canonical_psi_transition_can_run_endogenous_generate_test_select():
     assert core.state.values["relations"] == ("r0",)
 
 
-@pytest.mark.legacy_compatibility\ndef test_rule_change_is_derived_from_current_state_without_external_rule_updater():
+@pytest.mark.legacy_compatibility
+def test_rule_change_is_derived_from_current_state_without_external_rule_updater():
     initial = State(values={"x": 0, "relations": ("r0",)})
 
     def generate(state):
