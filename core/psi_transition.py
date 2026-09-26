@@ -32,8 +32,12 @@ class PsiTransition:
         return Psi(next_x, next_relations)
 
     def on_state(self, state: State) -> State:
-        """Adapt the canonical Psi transition to the State engine boundary."""
-        return State.from_psi(self(state.to_psi()))
+        """Explicit compatibility adapter: State -> Psi -> State."""
+        if not isinstance(state, State):
+            raise TypeError("State adapter requires a State input.")
+        psi = state.to_psi()
+        next_psi = self(psi)
+        return State.from_psi(next_psi)
 
 
 def make_psi_transition(function: PsiFunction) -> PsiTransition:
