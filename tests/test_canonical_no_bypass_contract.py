@@ -38,3 +38,17 @@ def test_admission_gate_is_present_on_canonical_evolution():
 def test_global_bypass_is_not_claimed_without_adversarial_evidence():
     context = _read("AI_CONTEXT.md")
     assert "Do not claim global non-bypass" in context
+
+
+def test_uroboros_canonical_wires_transition_to_executor():
+    source = _read("core/uroboros.py")
+    assert "engine=Engine(transition=transition)" in source
+    assert "executor=CanonicalExecutor(" in source
+    assert "psi_transition=transition" in source
+
+
+def test_canonical_step_uses_transition_executor_path():
+    source = _read("core/uroboros.py")
+    assert "self.executor.step(" in source
+    assert "self.psi_transition" in source
+    assert "canonicalize_psi(self.state.to_psi())" in source
