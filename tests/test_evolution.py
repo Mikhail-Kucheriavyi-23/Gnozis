@@ -86,7 +86,7 @@ def test_rule_set_can_evolve_with_the_state():
 
     evolved = select_next_state(initial, generate, test)
 
-    assert evolved.values["relations"] == ("r0",)
+    assert evolved.values["relations"] == ("r0", "r1")
     assert initial.values["relations"] == ()
 
 
