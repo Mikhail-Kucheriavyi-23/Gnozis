@@ -1,4 +1,4 @@
-from core import State, Uroboros, select_next_state
+from core import State, Uroboros, select_next_state, evolutionary_psi_transition
 
 
 def test_generate_test_select_is_endogenous():
@@ -49,7 +49,7 @@ def test_no_external_selector_is_required():
     assert state.values["score"] == 3
 
 
-def test_uroboros_can_run_endogenous_generate_test_select():
+def test_canonical_psi_transition_can_run_endogenous_generate_test_select():
     def generate(state):
         return [
             State(values={"x": state.values["x"] + 1, "relations": state.values["relations"]}),
@@ -58,9 +58,9 @@ def test_uroboros_can_run_endogenous_generate_test_select():
     def test(state):
         return state.values["x"] >= 0
 
-    core = Uroboros.evolutionary(
-        generate=generate,
-        test=test,
+    transition = evolutionary_psi_transition(generate, test)
+    core = Uroboros.canonical(
+        transition=transition,
         state=State(values={"x": 0, "relations": ()}),
     )
 
