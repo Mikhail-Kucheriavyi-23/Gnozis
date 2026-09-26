@@ -1,13 +1,41 @@
-# Gnozis Architecture — Core Boundary
+# Gnozis Architecture
 
-## Rule
+## Product boundary
 
-The Core is the smallest trusted execution boundary. It owns state transition, verification, persistence integrity, recovery, provenance, and audit primitives.
+Gnozis is a modular infrastructure in which the trusted Core is deliberately small. Knowledge, research, user access, external connectors, discovery, and commercial workflows are separate layers.
 
-## Outside Core
+## Trusted Core
 
-Knowledge, research domains, user interfaces, connectors, commercial contracts, discovery, external models, and integrations are adapters/services. They may propose or consume information but cannot silently alter Core state.
+`gnozis_core/` owns only:
+- immutable state and transitions;
+- transition validation and verification;
+- deterministic state identity;
+- persistence and fail-closed recovery;
+- provenance;
+- append-only audit primitives.
 
-## Migration rule
+The Core does not contain domain knowledge, UI, commercial logic, external integrations, or model-specific code.
 
-gnozis_core is the active clean-room namespace. platform/core is legacy and receives no new runtime features until migration evidence is complete.
+## Knowledge layer
+
+Machine-readable knowledge repositories are external to Core. They can be public, private, or selectively shared. A user or project can attach a knowledge source without changing Core semantics.
+
+## Research layer
+
+Research sources and experiments remain separate from trusted runtime code. They can produce proposals/evidence consumed through explicit interfaces.
+
+## Product layer
+
+User-facing services provide seamless context restoration, project workspaces, connectors, permissions, discovery, and collaboration.
+
+## Commercial layer
+
+Commercial opportunities and contracts are product services above the Core. A discovered value proposition may become a public opportunity or a confidential/commercial workflow without exposing private Core or user data.
+
+## Security boundary
+
+Data access is explicit. Confidential project context, private knowledge, and commercial contracts must not become public merely because the Core can process them.
+
+## Repository rule
+
+Repositories are implementation boundaries, not architectural layers by themselves. The minimum useful number of repositories is preferred. A repository should exist only when it provides a meaningful security, ownership, release, or collaboration boundary.
