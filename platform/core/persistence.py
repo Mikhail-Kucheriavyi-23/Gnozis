@@ -21,8 +21,11 @@ class Persistence:
         self._states[state.state_id] = stored
         return stored
 
-    def load(self, state_id: str) -> StoredState:
+    def load(self, state_id: str, expected_digest: str | None = None) -> StoredState:
         try:
-            return self._states[state_id]
+            stored = self._states[state_id]
         except KeyError as exc:
             raise KeyError("state not found") from exc
+        if expected_digest is not None and stored.digest != expected_digest:
+            raise ValueError("state integrity check failed")
+        return stored
