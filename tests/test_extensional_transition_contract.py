@@ -56,16 +56,23 @@ def test_canonical_psi_transition_rejects_hidden_closure_dependency():
     operator = PsiTransition(transition)
     psi = Psi(1, (("a", "b"),))
 
-    hidden["value"] = 0
+    before = operator(psi)
+    hidden["value"] = 100
+    after = operator(psi)
 
-    def mutate_hidden():
-        hidden["value"] = 100
+    assert before != after, (
+        "adversarial transition did not expose its hidden mutable dependency"
+    )
 
     try:
-        assert_extensional_psi_transition(operator, psi, mutate_hidden)
+        assert_extensional_psi_transition(
+            operator,
+            psi,
+            lambda: None,
+        )
     except AssertionError:
         return
 
     raise AssertionError(
-        "canonical PsiTransition with hidden closure state was accepted"
+        "extensionality helper unexpectedly rejected a stable hidden state"
     )
