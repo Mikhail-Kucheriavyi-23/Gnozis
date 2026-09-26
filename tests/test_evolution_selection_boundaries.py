@@ -17,7 +17,10 @@ def test_generic_selection_does_not_require_psi_fields():
 
 def test_canonical_psi_selection_requires_x_and_relations():
     def generate(_state):
-        return [State(values={"x": 1, "relations": ("r",)})]
+        return [
+            State(values={"x": 1, "relations": ("r",)}),
+            State(values={"x": 2, "relations": ("r",)}),
+        ]
 
     def test(_state):
         return True
