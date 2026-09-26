@@ -1,7 +1,7 @@
 from dataclasses import FrozenInstanceError
 
-from platform.core import AuditChain, Persistence, State, Transition, commit, recover
-from platform.core.digest import state_digest
+from gnozis_core import AuditChain, Persistence, State, Transition, commit, recover
+from gnozis_core.digest import state_digest
 
 
 def test_commit_creates_next_state():
