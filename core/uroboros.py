@@ -9,6 +9,7 @@ from .relation import Relation
 from .state import Psi, State
 from .history import AppendOnlyHistory
 from .psi_transition import PsiTransition
+from .canonical_boundary import canonicalize_psi, commit_canonical
 
 
 def _unconfigured_transition(state: State) -> State:
@@ -43,7 +44,7 @@ class Uroboros:
     ) -> "Uroboros":
         if not isinstance(state, State):
             raise TypeError("canonical Uroboros requires a State adapter input.")
-        initial = state.to_psi()
+        initial = canonicalize_psi(state.to_psi()).psi
         return cls(
             state=State.from_psi(initial),
             engine=Engine(transition=transition),
@@ -81,13 +82,15 @@ class Uroboros:
 
     def step(self) -> "Uroboros":
         if self.psi_transition is not None and self.executor is not None:
+            canonical_input = canonicalize_psi(self.state.to_psi())
             result = self.executor.step(
-                self.state.to_psi(),
+                canonical_input.psi,
                 self.psi_transition,
                 test=self.test,
             )
+            committed = commit_canonical(result.psi)
             return Uroboros(
-                state=State.from_psi(result.psi),
+                state=State.from_psi(committed),
                 engine=self.engine,
                 executor=self.executor,
                 generate=self.generate,
@@ -98,13 +101,15 @@ class Uroboros:
         if self.executor is not None:
             if self.generate is None or self.test is None:
                 raise RuntimeError("Canonical executor requires generate and test.")
+            canonical_input = canonicalize_psi(self.state.to_psi())
             result = self.executor.evolve(
-                self.state.to_psi(),
+                canonical_input.psi,
                 self.generate,
                 self.test,
             )
+            committed = commit_canonical(result.psi)
             return Uroboros(
-                state=State.from_psi(result.psi),
+                state=State.from_psi(committed),
                 engine=self.engine,
                 executor=self.executor,
                 generate=self.generate,
