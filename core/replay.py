@@ -21,6 +21,8 @@ def replay(
     history: AppendOnlyHistory,
     apply: TransitionApplier,
 ) -> ReplayResult:
+    if apply is None or not callable(apply):
+        raise TypeError("replay requires an explicit transition applier.")
     state = genesis
     for record in history.records:
         state = apply(state, record)
