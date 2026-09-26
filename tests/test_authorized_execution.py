@@ -3,6 +3,8 @@ import pytest
 from core.authorized_execution import AuthorizedExecution
 from core.execution import CanonicalExecutor
 from core.execution_contract import ExecutionInput
+from core.external_execution_request import ExternalExecutionRequest
+from core.external_operation import ExternalOperation
 from core.information_contract import Authorization, AuthorizationStatus, Information
 from core.psi_transition import PsiTransition
 from core.state import Psi
@@ -47,7 +49,10 @@ def test_allowed_information_reaches_canonical_executor():
     psi = make_psi()
     bridge = AuthorizedExecution(make_executor())
     transition = PsiTransition(lambda p: Psi(x=p.x + 1, relations=p.relations))
-    result = bridge.step(make_information(AuthorizationStatus.ALLOWED), psi, transition, make_input(psi))
+    info = make_information(AuthorizationStatus.ALLOWED)
+    execution_input = make_input(psi)
+    request = ExternalExecutionRequest.from_information(info, operation=ExternalOperation.REQUEST, content_digest=execution_input.content_digest, purpose="test")
+    result = bridge.step(info, psi, transition, execution_input, request)
     assert result.psi.x == 1
 
 
@@ -61,5 +66,8 @@ def test_unauthorized_information_cannot_reach_canonical_executor(status):
     psi = make_psi()
     bridge = AuthorizedExecution(make_executor())
     transition = PsiTransition(lambda p: (_ for _ in ()).throw(AssertionError("executor was reached")))
+    info = make_information(status)
+    execution_input = make_input(psi)
+    request = ExternalExecutionRequest.from_information
     with pytest.raises(PermissionError):
-        bridge.step(make_information(status), psi, transition, make_input(psi))
+        request(info, operation=ExternalOperation.REQUEST, content_digest=execution_input.content_digest, purpose="test")
