@@ -60,6 +60,8 @@ def test_canonical_psi_transition_rejects_hidden_closure_dependency():
         "adversarial transition did not expose its hidden mutable dependency"
     )
 
+    hidden["value"] = 0
+
     try:
         assert_extensional_psi_transition(
             operator,
