@@ -12,7 +12,7 @@ def test_accepted_step_creates_exactly_one_history_record():
     transition = PsiTransition(lambda x, r: (x + (1,), r))
     executor = CanonicalExecutor(AppendOnlyHistory(), "test-kernel")
 
-    result = executor.step(canonicalize_psi(psi), transition)
+    result = executor.step(psi, transition)
 
     assert result.psi == transition(psi)
     assert len(result.history.records) == 1
@@ -24,7 +24,7 @@ def test_rejected_step_does_not_create_history_record():
     transition = PsiTransition(lambda x, r: (x + (1,), r))
     executor = CanonicalExecutor(AppendOnlyHistory(), "test-kernel")
 
-    result = executor.step(canonical_psi(psi), transition, test=lambda _: False)
+    result = executor.step(psi, transition, test=lambda _: False)
 
     assert result.psi == psi
     assert result.history.records == ()
