@@ -3,6 +3,7 @@
 from .model import State, Transition
 from .transition import validate_transition
 from .verify import verify_transition
+from .digest import state_digest
 
 
 def commit(source: State, transition: Transition, accepted: bool) -> State:
@@ -10,4 +11,7 @@ def commit(source: State, transition: Transition, accepted: bool) -> State:
     validate_transition(source, transition)
     if not verify_transition(source, transition, accepted):
         raise ValueError("transition verification failed")
-    return State(state_id=transition.transition_id, version=source.version + 1, value=transition.candidate)
+    result = State(state_id=transition.transition_id, version=source.version + 1, value=transition.candidate)
+    if not state_digest(result):
+        raise ValueError("committed state integrity identity missing")
+    return result
