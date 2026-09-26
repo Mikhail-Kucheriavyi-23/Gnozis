@@ -77,11 +77,10 @@ class Uroboros:
 
     def step(self) -> "Uroboros":
         if self.psi_transition is not None and self.executor is not None:
-            admission = self._canonical_admission()
             result = self.executor.step(
                 self.state.to_psi(),
                 self.psi_transition,
-                admission,
+                test=self.test,
             )
             return Uroboros(
                 state=State.from_psi(result.psi),
@@ -108,21 +107,6 @@ class Uroboros:
                 test=self.test,
             )
         return Uroboros(state=self.engine.step(self.state), engine=self.engine)
-
-    def _canonical_admission(self):
-        from .admission import admit
-        from .proof import prove_fundamental_transition
-
-        if self.psi_transition is None:
-            raise RuntimeError("canonical transition is not configured.")
-        current = self.state.to_psi()
-        candidate = self.psi_transition(current)
-        proof = prove_fundamental_transition(
-            current=current,
-            candidate=candidate,
-            invariant=lambda _: True,
-        )
-        return admit(candidate, proof)
 
     def with_relations(self, relations: Iterable[Relation]) -> "Uroboros":
         new_relations = tuple(relations)
