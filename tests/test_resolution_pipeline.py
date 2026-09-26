@@ -11,6 +11,7 @@ from core.resolution import (
     resolve,
 )
 from core.state import Psi
+from core.history import AppendOnlyHistory
 
 
 def proof(passed: bool) -> ProofObligation:
@@ -40,10 +41,13 @@ def test_deferred_conflict_preserves_both_branches():
 
 def test_resolution_commit_requires_admitted_matching_candidate():
     c = conflict()
-    resolution = resolve(c, Psi(x=("a", "b"), relations=()), "explicit reconciliation")
+    resolution = resolve(c, Psi(x=("a", "b"), relations=()), "explicit reconciliation", kernel_version="test-kernel")
     admission = admit_resolution(resolution, proof(True))
     committed = commit_resolution(c.left.psi, resolution, admission)
-    assert committed.apply() == resolution.candidate
+    value, history = committed.apply(AppendOnlyHistory())
+    assert value == resolution.candidate
+    assert history.head is not None
+    assert history.head.kernel_version == "test-kernel"
 
 
 def test_rejected_resolution_cannot_commit():
@@ -52,4 +56,4 @@ def test_rejected_resolution_cannot_commit():
     admission = admit_resolution(resolution, proof(False))
     committed = commit_resolution(c.left.psi, resolution, admission)
     with pytest.raises(ValueError, match="not admitted"):
-        committed.apply()
+        committed.apply(AppendOnlyHistory())
