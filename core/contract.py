@@ -3,6 +3,9 @@
 from collections.abc import Callable, Mapping
 from typing import Any
 
+from .state import Psi
+from .psi_transition import PsiTransition
+
 
 PsiProjection = tuple[Any, Any]
 Projection = Callable[[Any], PsiProjection]
@@ -35,6 +38,31 @@ def assert_extensional_transition(
     assert projection(ra) == projection(rb), (
         "Psi extensionality violated: identical (X, R) produced different "
         "fundamental transition results"
+    )
+
+def assert_extensional_psi_transition(
+    transition: PsiTransition,
+    psi: Psi,
+    mutate_hidden: Callable[[], None],
+) -> None:
+    """Require one canonical ΨTransition to be extensional over Ψ.
+
+    The same canonical input is evaluated before and after controlled hidden
+    state mutation. A difference proves that information outside (X, R)
+    influences the fundamental transition.
+    """
+    if not isinstance(transition, PsiTransition):
+        raise TypeError("transition must be a PsiTransition")
+    if not isinstance(psi, Psi):
+        raise TypeError("psi must be a Psi")
+
+    before = transition(psi)
+    mutate_hidden()
+    after = transition(psi)
+
+    assert before == after, (
+        "Psi extensionality violated: identical canonical Ψ produced "
+        "different transition results after hidden-state mutation"
     )
 
 
