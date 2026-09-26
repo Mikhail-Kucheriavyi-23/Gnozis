@@ -1,8 +1,7 @@
-# Core Runtime
+# Legacy Core Boundary
 
-Minimal trusted runtime boundary for state and transition operations.
+This path is retained temporarily during the clean-room migration.
 
-The first implementation is intentionally small. It establishes the contract boundary before adding persistence, evolution plugins, or domain modules.
+The active Core namespace is `gnozis_core`.
 
-## Pipeline
-Candidate → Test → Select → Evolve → Verify → Commit
+Do not add new runtime code here. Remove this boundary only after the new namespace has passing CI evidence and migration review.
