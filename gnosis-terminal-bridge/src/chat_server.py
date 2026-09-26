@@ -9,17 +9,21 @@ from typing import Any
 
 from .chat_api import create_chat, handle_chat
 from .internet_port import InternetPort, PortError, MAX_BODY_BYTES
+from .information_adapter import information_from_exchange
 
 RATE_WINDOW_SECONDS = 60
 RATE_LIMIT = 60
 
 
 def _port_handler(envelope: dict[str, Any]) -> dict[str, Any]:
-    """Minimal transport adapter; core integration stays behind this boundary."""
+    """Convert an exchange into authorized information before acceptance."""
+    information = information_from_exchange(envelope)
     return {
         "accepted": True,
         "message_type": envelope["type"],
         "payload_sha256": envelope["payload_sha256"],
+        "information_id": information.information_id,
+        "authorization_status": information.authorization.status.value,
     }
 
 
