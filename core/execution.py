@@ -7,7 +7,7 @@ from typing import Callable, Iterable
 from .admission import admit
 from .commit import commit
 from .history import AppendOnlyHistory
-from .proof import prove_transition
+from .proof import prove_fundamental_transition, prove_transition
 from .psi_transition import PsiTransition
 from .state import Psi, State
 
@@ -49,10 +49,11 @@ class CanonicalExecutor:
         # Canonical candidate source is exclusively the declared ΨTransition.
         # The proof is bound to this exact candidate; no alternate candidate
         # source may enter the admission path.
-        proof = prove_transition(
+        # A single explicit ΨTransition is a fundamental step, not an
+        # evolutionary candidate pool. It must not require a continuation.
+        proof = prove_fundamental_transition(
             current,
             next_state,
-            [next_state],
             test,
         )
         admission = admit(next_state, proof)
