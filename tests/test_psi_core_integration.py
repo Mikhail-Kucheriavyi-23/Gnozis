@@ -21,9 +21,12 @@ class PsiCoreIntegrationTests(unittest.TestCase):
         def test(_candidate):
             return True
 
-        core = Uroboros.evolutionary(
+        transition = evolutionary_psi_transition(
             generate=generate,
             test=test,
+        )
+        core = Uroboros.canonical(
+            transition=transition,
             state=initial,
         )
 
