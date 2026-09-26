@@ -76,4 +76,4 @@ def commit_resolution(
         raise TypeError("commit_resolution requires ResolutionCandidate.")
     if admission.candidate != resolution.candidate:
         raise ValueError("Admission candidate does not match resolution candidate.")
-    return commit(previous, admission)
+    return commit(previous, admission, kernel_version=resolution.kernel_version)
