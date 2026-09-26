@@ -88,6 +88,8 @@ class CanonicalExecutor:
             for candidate, proof in zip(candidates, proofs)
         ]
         valid = [item for item in admissions if item.accepted]
+        # Rejected candidates are terminal at this boundary: they are never
+        # transformed, repaired, re-admitted, or exposed to selection.
 
         if not valid:
             return ExecutionResult(psi=psi, history=self.history)
