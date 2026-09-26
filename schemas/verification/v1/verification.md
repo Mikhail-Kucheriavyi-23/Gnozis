@@ -2,9 +2,13 @@
 
 Verification determines whether a candidate transition satisfies the applicable invariants and evidence requirements.
 
-Verification output is explicit:
-- accepted
-- rejected
-- insufficient_evidence
+Results: accepted, rejected, insufficient_evidence.
 
-Insufficient evidence is not acceptance. Trusted commit requires an accepted verification result.
+Insufficient evidence is never acceptance. Trusted commit requires accepted verification.
+
+## Required evidence
+- transition identity
+- input/state identity and integrity
+- applicable invariant results
+- verifier identity/version
+- decision and reason
