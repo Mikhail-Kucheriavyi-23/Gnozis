@@ -29,7 +29,7 @@ def test_evolutionary_uroboros_uses_legacy_engine_without_canonical_history():
 def test_rejected_uroboros_step_preserves_state_and_history():
     core = Uroboros.evolutionary(
         generate=generate,
-        test=lambda state: False,
+        test=lambda state: state.values.get("x") == 999,
         history=AppendOnlyHistory(),
         kernel_version="test-kernel",
     )
