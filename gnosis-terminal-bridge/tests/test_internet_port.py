@@ -56,3 +56,59 @@ def test_invalid_type_and_payload_fail():
         port.exchange({**base, "type": "unknown"})
     with pytest.raises(PortError):
         port.exchange({**base, "message_id": "m2", "type": "request", "payload": []})
+
+
+def test_duplicate_message_race_is_atomic():
+    """Concurrent duplicate delivery accepts exactly one message."""
+    import threading
+
+    calls = 0
+    calls_lock = threading.Lock()
+
+    def handler(_envelope):
+        nonlocal calls
+        with calls_lock:
+            calls += 1
+        return {"ok": True}
+
+    port = InternetPort(handler)
+    hs = port.handshake({
+        "protocol": PROTOCOL,
+        "client_id": "race-test",
+        "provenance": {},
+    })
+
+    message = {
+        "protocol": PROTOCOL,
+        "session_id": hs["session_id"],
+        "message_id": "race",
+        "type": "request",
+        "payload": {},
+        "provenance": {},
+    }
+
+    results = []
+    errors = []
+    results_lock = threading.Lock()
+
+    def run():
+        try:
+            result = port.exchange(message)
+            with results_lock:
+                results.append(result)
+        except Exception as exc:
+            with results_lock:
+                errors.append(exc)
+
+    threads = [threading.Thread(target=run) for _ in range(32)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join(timeout=3)
+
+    assert not any(thread.is_alive() for thread in threads)
+    assert calls == 1
+    assert len(results) == 1
+    assert len(errors) == 31
+    assert all(isinstance(error, PortError) for error in errors)
+    assert all("replayed" in str(error) for error in errors)

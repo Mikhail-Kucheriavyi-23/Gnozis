@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import secrets
+import threading
 import time
 from dataclasses import dataclass, field
 from typing import Any
@@ -21,6 +22,7 @@ class PortSession:
     created_at: float
     expires_at: float
     seen_messages: set[str] = field(default_factory=set)
+    replay_lock: threading.Lock = field(default_factory=threading.Lock, repr=False, compare=False)
 
 
 class PortError(ValueError):
@@ -90,13 +92,13 @@ class InternetPort:
         session = self.sessions.get(session_id)
         if session is None:
             raise PortError("unknown session")
-        if time.time() >= session.expires_at:
-            del self.sessions[session_id]
-            raise PortError("session expired")
-        if message_id in session.seen_messages:
-            raise PortError("replayed message_id")
-
-        session.seen_messages.add(message_id)
+        with session.replay_lock:
+            if time.time() >= session.expires_at:
+                del self.sessions[session_id]
+                raise PortError("session expired")
+            if message_id in session.seen_messages:
+                raise PortError("replayed message_id")
+            session.seen_messages.add(message_id)
         body = payload.get("payload")
         if not isinstance(body, dict):
             raise PortError("payload must be an object")
