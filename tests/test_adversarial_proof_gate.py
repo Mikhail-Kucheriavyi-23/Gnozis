@@ -25,6 +25,9 @@ def test_invalid_candidate_is_rejected_when_valid_continuations_exist():
             _valid_candidate("valid-a"),
             _valid_candidate("valid-b"),
         ),
+        test=lambda candidate: isinstance(candidate.values["x"], str)
+        and candidate.values["x"] != "invalid"
+        and isinstance(candidate.values["relations"], tuple),
     )
     result = transition(State(values={"x": "current", "relations": ()}).to_psi())
     assert result.x in {"valid-a", "valid-b"}
