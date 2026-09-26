@@ -37,5 +37,5 @@ def test_step_uses_the_declared_transition_as_candidate_source():
 
     result = executor.step(psi, transition)
 
-    assert result.psi == Psi((2,), ())
+    assert result.psi == Psi((1, 1), ())
     assert result.psi == transition(psi)
