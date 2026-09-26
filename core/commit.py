@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from .admission import Admission, require_admitted
 from .canonical_boundary import canonicalize_psi
 from .commit_contract import CommitResult, commit_once
+from .execution_contract import state_digest
 from .history import AppendOnlyHistory, TransitionRecord
 from .mutation_guard import guard_transition
 from .provenance import Provenance
@@ -68,8 +69,7 @@ class SemanticCommit:
 
 
 def _state_hash(psi: Psi) -> str:
-    payload = repr((psi.x, psi.relations)).encode("utf-8")
-    return hashlib.sha256(payload).hexdigest()
+    return state_digest(psi)
 
 
 def _evidence_hash(admission: Admission) -> str:
