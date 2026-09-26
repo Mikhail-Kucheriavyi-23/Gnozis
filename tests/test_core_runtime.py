@@ -32,6 +32,16 @@ def test_rejected_commit_fails_closed():
     assert False, "rejected transition was committed"
 
 
+def test_wrong_transition_source_fails_closed():
+    source = State("s0", 0, {})
+    transition = Transition("t1", "other", {})
+    try:
+        commit(source, transition, accepted=True)
+    except ValueError:
+        return
+    assert False, "foreign transition source was accepted"
+
+
 def test_recovery_checks_digest():
     persistence = Persistence()
     state = State("s0", 0, {})
@@ -54,6 +64,12 @@ def test_persistence_detects_tampered_stored_digest():
     except ValueError:
         return
     assert False, "tampered persisted record was accepted"
+
+
+def test_digest_is_deterministic():
+    a = State("s0", 1, {"b": 2, "a": 1})
+    b = State("s0", 1, {"a": 1, "b": 2})
+    assert state_digest(a) == state_digest(b)
 
 
 def test_audit_chain_links_records():
