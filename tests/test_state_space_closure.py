@@ -24,7 +24,7 @@ def test_accepted_candidate_remains_inside_state_space():
 
 def test_invalid_candidate_is_not_repaired_into_state_space():
     initial = State(values={"x": ("a",), "relations": ()})
-    invalid = State(values={"x": ["a", "b"], "relations": ()})
+    invalid = State(values={"x": {"a": "b"}, "relations": ()})
 
     result = evolutionary_transition(
         lambda _state: (invalid,),
