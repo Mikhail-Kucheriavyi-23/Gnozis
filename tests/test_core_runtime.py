@@ -14,12 +14,19 @@ def test_commit_creates_next_state():
 
 
 def test_state_is_immutable():
-    state = State("s0", 0, {})
+    state = State("s0", 0, {"nested": {"x": 1}, "items": [1, 2]})
     try:
         state.version = 1
     except FrozenInstanceError:
-        return
-    assert False, "state was mutable"
+        pass
+    else:
+        assert False, "state was mutable"
+    try:
+        state.value["nested"]["x"] = 2
+    except (TypeError, AttributeError):
+        pass
+    else:
+        assert False, "nested state was mutable"
 
 
 def test_rejected_commit_fails_closed():
