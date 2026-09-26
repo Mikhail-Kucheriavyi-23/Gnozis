@@ -63,4 +63,4 @@ def test_canonical_commit_rejects_legacy_state_even_if_admitted():
     )
 
     with pytest.raises(TypeError, match="canonical"):
-        commit(previous, admission).apply()
+        commit(previous, admission, kernel_version="test-kernel").apply(AppendOnlyHistory())
