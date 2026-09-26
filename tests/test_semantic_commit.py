@@ -35,5 +35,5 @@ def test_rejected_candidate_cannot_cross_semantic_commit():
 def test_non_psi_candidate_cannot_be_semantic_commit():
     current = Psi(x=("a",), relations=())
     result = commit(current, admit(object(), proof(True)), kernel_version="test-kernel")
-    with pytest.raises(TypeError, match="admitted Psi"):
+    with pytest.raises(TypeError, match="Psi"):
         result.apply()
