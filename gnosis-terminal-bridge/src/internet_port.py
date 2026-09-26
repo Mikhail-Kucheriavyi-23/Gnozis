@@ -114,6 +114,7 @@ class InternetPort:
             "type": message_type,
             "payload": body,
             "provenance": provenance,
+            "authorization": authorization,
             "payload_sha256": payload_hash,
         }
 
