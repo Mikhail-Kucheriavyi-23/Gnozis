@@ -97,6 +97,10 @@ class InternetPort:
             raise PortError("replayed message_id")
 
         session.seen_messages.add(message_id)
+        authorization = payload.get("authorization")
+        if not isinstance(authorization, dict):
+            raise PortError("authorization required")
+
         body = payload.get("payload")
         if not isinstance(body, dict):
             raise PortError("payload must be an object")
