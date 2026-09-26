@@ -5,6 +5,18 @@ from types import MappingProxyType
 from typing import Any, Mapping
 
 
+def _hashable(value: Any) -> Any:
+    """Return a hashable structural representation without changing State storage."""
+    if isinstance(value, Mapping):
+        return frozenset((_hashable(k), _hashable(v)) for k, v in value.items())
+    if isinstance(value, (list, tuple)):
+        return tuple(_hashable(v) for v in value)
+    if isinstance(value, (set, frozenset)):
+        return frozenset(_hashable(v) for v in value)
+    hash(value)
+    return value
+
+
 def _freeze(value: Any) -> Any:
     """Recursively freeze the built-in container types used by State."""
     if isinstance(value, Mapping):
@@ -50,6 +62,10 @@ class State:
         if "relations" not in self.values:
             raise AttributeError("State has no canonical 'relations' value")
         return self.values["relations"]
+
+    def __hash__(self) -> int:
+        """Hash immutable State structurally, without hashing mappingproxy directly."""
+        return hash(_hashable(self.values))
 
     def evolve(self, *, values: Mapping[str, Any]) -> "State":
         """Create a new state without modifying the current state."""
