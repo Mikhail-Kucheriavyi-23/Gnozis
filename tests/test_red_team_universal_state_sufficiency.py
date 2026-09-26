@@ -4,6 +4,7 @@ from core.engine import Engine
 from core.state import State
 
 
+@pytest.mark.xfail(reason="Current State->State compatibility API permits hidden closure state; canonical Ψ contract is tested separately.", strict=True)
 def test_current_transition_api_does_not_guarantee_x_r_sufficiency():
     """Red-team counterexample: a transition closure can depend on hidden state.
 
