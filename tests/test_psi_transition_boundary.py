@@ -10,8 +10,8 @@ def test_transition_cannot_observe_auxiliary_state_metadata():
     a = State(values={"x": 3, "relations": (("a", "b"),), "hidden": 0})
     b = State(values={"x": 3, "relations": (("a", "b"),), "hidden": 10**9})
 
-    assert transition(a).values == transition(b).values
-    assert transition(a).values == {"x": 4, "relations": (("a", "b"),)}
+    assert transition.on_state(a).values == transition.on_state(b).values
+    assert transition.on_state(a).values == {"x": 4, "relations": (("a", "b"),)}
 
 
 def test_transition_boundary_preserves_only_fundamental_projection():
