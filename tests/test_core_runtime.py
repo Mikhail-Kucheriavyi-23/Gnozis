@@ -86,3 +86,18 @@ def test_audit_chain_links_records():
     assert first.previous_digest == "GENESIS"
     assert second.previous_digest == "d1"
     assert chain.records() == (first, second)
+
+
+def test_digest_changes_when_state_changes():
+    a = State("s0", 1, {"x": 1})
+    b = State("s0", 1, {"x": 2})
+    assert state_digest(a) != state_digest(b)
+
+
+def test_transition_candidate_is_deeply_immutable():
+    transition = Transition("t1", "s0", {"nested": {"x": 1}, "items": [1]})
+    try:
+        transition.candidate["nested"]["x"] = 2
+    except (TypeError, AttributeError):
+        return
+    assert False, "transition candidate was mutable"
