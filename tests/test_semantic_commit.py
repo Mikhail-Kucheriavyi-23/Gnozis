@@ -19,21 +19,21 @@ def test_only_admitted_psi_can_cross_semantic_commit():
     current = Psi(x=("a",), relations=())
     candidate = Psi(x=("b",), relations=())
 
-    result = commit(current, admit(candidate, proof(True)))
-    assert result.apply() == candidate
+    result = commit(current, admit(candidate, proof(True)), kernel_version="test-kernel")
+    assert result.apply(__import__('core.history', fromlist=['AppendOnlyHistory']).AppendOnlyHistory())[0] == candidate
 
 
 def test_rejected_candidate_cannot_cross_semantic_commit():
     current = Psi(x=("a",), relations=())
     candidate = Psi(x=("b",), relations=())
 
-    result = commit(current, admit(candidate, proof(False)))
+    result = commit(current, admit(candidate, proof(False)), kernel_version="test-kernel")
     with pytest.raises(ValueError, match="not admitted"):
-        result.apply()
+        result.apply(__import__('core.history', fromlist=['AppendOnlyHistory']).AppendOnlyHistory())
 
 
 def test_non_psi_candidate_cannot_be_semantic_commit():
     current = Psi(x=("a",), relations=())
-    result = commit(current, admit(object(), proof(True)))
+    result = commit(current, admit(object(), proof(True)), kernel_version="test-kernel")
     with pytest.raises(TypeError, match="admitted Psi"):
         result.apply()
