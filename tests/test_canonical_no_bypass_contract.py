@@ -30,8 +30,9 @@ def test_legacy_engine_is_not_declared_canonical():
 def test_admission_gate_is_present_on_canonical_evolution():
     source = _read("core/evolution.py")
     admission = _read("core/admission.py")
-    assert "Admission" in source
+    assert "admit(" in source
     assert "require_admitted" in admission
+    assert "PsiTransition" in source
 
 
 def test_global_bypass_is_not_claimed_without_adversarial_evidence():
