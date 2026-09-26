@@ -18,5 +18,5 @@ def test_transition_boundary_preserves_only_fundamental_projection():
     transition = make_psi_transition(lambda x, relations: (x, relations))
     state = State(values={"x": 7, "relations": (("a", "b"),), "memory": "aux"})
 
-    result = transition(state)
+    result = transition.on_state(state)
     assert result.values == {"x": 7, "relations": (("a", "b"),)}
