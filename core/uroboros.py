@@ -41,6 +41,8 @@ class Uroboros:
         kernel_version: str = "gnozis-core",
         history: AppendOnlyHistory | None = None,
     ) -> "Uroboros":
+        if not isinstance(state, State):
+            raise TypeError("canonical Uroboros requires a State adapter input.")
         initial = state.to_psi()
         return cls(
             state=State.from_psi(initial),
@@ -63,6 +65,8 @@ class Uroboros:
         history: AppendOnlyHistory | None = None,
     ) -> "Uroboros":
         initial = state if state is not None else State(values={"x": (), "relations": ()})
+        if not isinstance(initial, State):
+            raise TypeError("evolutionary Uroboros requires a State adapter input.")
         initial.to_psi()
         return cls(
             state=initial,
