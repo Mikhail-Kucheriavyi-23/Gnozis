@@ -22,6 +22,7 @@ class ResolutionCandidate:
     conflict: Conflict
     candidate: Psi
     rationale: str
+    kernel_version: str = "resolution"
 
     @property
     def source_branches(self) -> tuple[Branch, Branch]:
@@ -40,14 +41,27 @@ class DeferredConflict:
     reason: str
 
 
-def resolve(conflict: Conflict, candidate: Psi, rationale: str) -> ResolutionCandidate:
+def resolve(
+    conflict: Conflict,
+    candidate: Psi,
+    rationale: str,
+    *,
+    kernel_version: str = "resolution",
+) -> ResolutionCandidate:
     if not isinstance(conflict, Conflict):
         raise TypeError("resolve requires a Conflict.")
     if not isinstance(candidate, Psi):
         raise TypeError("resolution candidate must be Psi.")
     if not isinstance(rationale, str) or not rationale.strip():
         raise ValueError("resolution requires a non-empty rationale.")
-    return ResolutionCandidate(conflict=conflict, candidate=candidate, rationale=rationale)
+    if not kernel_version.strip():
+        raise ValueError("kernel_version is required.")
+    return ResolutionCandidate(
+        conflict=conflict,
+        candidate=candidate,
+        rationale=rationale,
+        kernel_version=kernel_version,
+    )
 
 
 def defer(conflict: Conflict, reason: str) -> DeferredConflict:
