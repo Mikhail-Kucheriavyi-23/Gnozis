@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from core.information_contract import (
+from core.external_operation import parse_external_operation\nfrom core.information_contract import (
     Authorization,
     AuthorizationStatus,
     Information,
@@ -26,7 +26,7 @@ def information_from_exchange(envelope: dict[str, Any]) -> Information:
     except (TypeError, ValueError):
         status = AuthorizationStatus.UNKNOWN
 
-    info = Information(
+    operation = parse_external_operation(str(authorization.get("operation", "")))\n    info = Information(
         information_id=str(envelope["message_id"]),
         source=str(authorization.get("source", "")),
         content_reference=str(envelope["payload_sha256"]),
@@ -34,7 +34,7 @@ def information_from_exchange(envelope: dict[str, Any]) -> Information:
         authorization=Authorization(
             source=str(authorization.get("source", "")),
             purpose=str(authorization.get("purpose", "")),
-            operation=str(authorization.get("operation", "")),
+            operation=operation.value,
             destination=str(authorization.get("destination", "")),
             status=status,
             validity_ref=(
