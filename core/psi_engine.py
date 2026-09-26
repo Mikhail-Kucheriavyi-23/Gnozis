@@ -19,7 +19,10 @@ class PsiEngine:
         """Apply exactly one canonical Psi transition."""
         if not isinstance(psi, Psi):
             raise TypeError("PsiEngine.step requires a Psi instance.")
-        return self.transition(psi)
+        result = self.transition(psi)
+        if not isinstance(result, Psi):
+            raise TypeError("PsiEngine transition must return a Psi instance.")
+        return result
 
     def run(self, psi: Psi, steps: int) -> Psi:
         """Apply the canonical transition repeatedly."""
