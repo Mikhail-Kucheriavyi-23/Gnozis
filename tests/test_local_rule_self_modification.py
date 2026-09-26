@@ -20,7 +20,7 @@ def test_local_rule_evolution_is_independent_of_disconnected_component():
         rules = dict(state.values["rules"])
         nodes["a"] += nodes["b"]
         rules["a"] = "add_neighbor"
-        return (state.evolve(values={"nodes": nodes, "rules": rules}),)
+        return (state.evolve(values={**state.values, "nodes": nodes, "rules": rules}),)
 
     def tester(state):
         return all("->" in r or isinstance(r, tuple) for r in state.values["relations"])
