@@ -18,9 +18,14 @@ PsiFunction = Callable[[Any, Any], tuple[Any, Any]]
 
 @dataclass(frozen=True)
 class PsiTransition:
-    """Canonical fundamental operator F: Psi -> Psi."""
+    """Canonical fundamental operator F_theta: Psi -> Psi.
+
+    ``configuration`` is explicit operator data. Runtime mutable state must
+    not be treated as an undeclared input to ``function``.
+    """
 
     function: PsiFunction
+    configuration: Any = None
 
     def __call__(self, psi: Psi) -> Psi:
         if not isinstance(psi, Psi):
@@ -40,6 +45,10 @@ class PsiTransition:
         return State.from_psi(next_psi)
 
 
-def make_psi_transition(function: PsiFunction) -> PsiTransition:
-    """Construct the canonical F: Psi -> Psi operator."""
-    return PsiTransition(function=function)
+def make_psi_transition(
+    function: PsiFunction,
+    *,
+    configuration: Any = None,
+) -> PsiTransition:
+    """Construct canonical F_theta: Psi -> Psi with explicit operator data."""
+    return PsiTransition(function=function, configuration=configuration)
