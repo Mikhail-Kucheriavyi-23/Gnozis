@@ -46,6 +46,9 @@ class CanonicalExecutor:
         if test is None:
             test = lambda _: True
 
+        # Canonical candidate source is exclusively the declared ΨTransition.
+        # The proof is bound to this exact candidate; no alternate candidate
+        # source may enter the admission path.
         proof = prove_transition(
             current,
             next_state,
