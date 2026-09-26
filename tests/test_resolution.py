@@ -10,7 +10,7 @@ def test_resolution_produces_candidate_without_mutation():
     right = Psi(x=("b",), relations=())
     conflict = Conflict(left=left, right=right, reason="different")
     candidate = Psi(x=("a", "b"), relations=())
-    result = resolve(conflict, candidate, "explicit reconciliation")
+    result = resolve(conflict, candidate, "explicit reconciliation", kernel_version="test-kernel")
     assert isinstance(result, ResolutionCandidate)
     assert result.candidate == candidate
     assert result.source_branches == (left, right)
@@ -21,7 +21,7 @@ def test_resolution_requires_explicit_rationale():
     right = Psi(x=("b",), relations=())
     conflict = Conflict(left=left, right=right, reason="different")
     with pytest.raises(ValueError):
-        resolve(conflict, Psi(x=("a", "b"), relations=()), "")
+        resolve(conflict, Psi(x=("a", "b"), relations=()), "", kernel_version="test-kernel")
 
 
 def test_resolution_does_not_accept_non_psi_candidate():
@@ -29,4 +29,4 @@ def test_resolution_does_not_accept_non_psi_candidate():
     right = Psi(x=("b",), relations=())
     conflict = Conflict(left=left, right=right, reason="different")
     with pytest.raises(TypeError):
-        resolve(conflict, object(), "explicit")
+        resolve(conflict, object(), "explicit", kernel_version="test-kernel")
