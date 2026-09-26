@@ -23,7 +23,12 @@ class PsiTransition:
     function: PsiFunction
 
     def __call__(self, psi: Psi) -> Psi:
-        next_x, next_relations = self.function(psi.x, psi.relations)
+        if not isinstance(psi, Psi):
+            raise TypeError("PsiTransition requires a Psi input.")
+        result = self.function(psi.x, psi.relations)
+        if not isinstance(result, tuple) or len(result) != 2:
+            raise TypeError("PsiTransition function must return exactly (X, R).")
+        next_x, next_relations = result
         return Psi(next_x, next_relations)
 
     def on_state(self, state: State) -> State:
