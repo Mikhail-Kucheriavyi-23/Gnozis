@@ -6,6 +6,7 @@ from typing import Callable, Iterable
 
 from .admission import admit
 from .commit import commit
+from .execution_contract import ExecutionInput, verify_execution_input
 from .history import AppendOnlyHistory
 from .proof import prove_fundamental_transition, prove_transition
 from .psi_transition import PsiTransition
@@ -30,14 +31,20 @@ class CanonicalExecutor:
         self,
         psi: Psi,
         transition: PsiTransition,
+        execution_input: ExecutionInput,
         *,
         test: Tester | None = None,
     ) -> ExecutionResult:
-        """Own a complete canonical Psi execution step."""
+        """Own one canonical Psi execution step with fail-closed input binding."""
         if not isinstance(psi, Psi):
             raise TypeError("psi must be Psi.")
         if not isinstance(transition, PsiTransition):
             raise TypeError("transition must be PsiTransition.")
+
+        # Runtime trust boundary: the declared execution input must identify
+        # exactly the Psi supplied to this execution. A foreign state_id or
+        # state_digest is rejected before transition execution.
+        verify_execution_input(execution_input, psi)
 
         candidate = transition(psi)
         current = State.from_psi(psi)
@@ -49,8 +56,6 @@ class CanonicalExecutor:
         # Canonical candidate source is exclusively the declared ΨTransition.
         # The proof is bound to this exact candidate; no alternate candidate
         # source may enter the admission path.
-        # A single explicit ΨTransition is a fundamental step, not an
-        # evolutionary candidate pool. It must not require a continuation.
         proof = prove_fundamental_transition(
             current,
             next_state,
