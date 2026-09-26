@@ -22,7 +22,7 @@ class ResolutionCandidate:
     conflict: Conflict
     candidate: Psi
     rationale: str
-    kernel_version: str = "resolution"
+    kernel_version: str
 
     @property
     def source_branches(self) -> tuple[Branch, Branch]:
@@ -46,7 +46,7 @@ def resolve(
     candidate: Psi,
     rationale: str,
     *,
-    kernel_version: str = "resolution",
+    kernel_version: str,
 ) -> ResolutionCandidate:
     if not isinstance(conflict, Conflict):
         raise TypeError("resolve requires a Conflict.")
