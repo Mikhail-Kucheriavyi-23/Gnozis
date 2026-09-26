@@ -88,7 +88,7 @@ class Uroboros:
                 self.psi_transition,
                 test=self.test,
             )
-            committed = commit_canonical(result.psi)
+            committed = result.psi
             return Uroboros(
                 state=State.from_psi(committed),
                 engine=self.engine,
@@ -107,7 +107,7 @@ class Uroboros:
                 self.generate,
                 self.test,
             )
-            committed = commit_canonical(result.psi)
+            committed = result.psi
             return Uroboros(
                 state=State.from_psi(committed),
                 engine=self.engine,
