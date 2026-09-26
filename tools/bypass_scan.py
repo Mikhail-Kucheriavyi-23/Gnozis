@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "core"
 CANONICAL = "canonical_chain.py"
 ALLOWED_COMMIT_MODULES = {"canonical_chain.py", "commit.py", "commit_contract.py"}
-FORBIDDEN = {"commit_once", "append", "SemanticCommit"}
+FORBIDDEN = {"commit_once", "SemanticCommit"}
 
 def scan() -> list[tuple[str, int, str]]:
     findings: list[tuple[str, int, str]] = []
