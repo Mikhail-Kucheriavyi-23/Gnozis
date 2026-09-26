@@ -53,6 +53,7 @@ def test_canonical_psi_transition_can_run_endogenous_generate_test_select():
     def generate(state):
         return [
             State(values={"x": state.values["x"] + 1, "relations": state.values["relations"]}),
+            State(values={"x": state.values["x"] + 2, "relations": state.values["relations"]}),
         ]
 
     def test(state):
