@@ -56,7 +56,7 @@ class CanonicalExecutor:
             next_state,
             test,
         )
-        admission = admit(next_state, proof)
+        admission = admit(next_state.to_psi(), proof)
         if not admission.accepted:
             return ExecutionResult(psi=psi, history=self.history)
 
@@ -104,6 +104,11 @@ class CanonicalExecutor:
                 len(item.candidate.to_psi().relations),
                 repr(item.candidate.to_psi()),
             ),
+        )
+        selected = type(selected)(
+            accepted=selected.accepted,
+            candidate=selected.candidate.to_psi(),
+            proof=selected.proof,
         )
 
         committed, history = commit(
