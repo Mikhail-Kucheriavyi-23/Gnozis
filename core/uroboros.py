@@ -8,7 +8,7 @@ from .execution import CanonicalExecutor, Generator, Tester
 from .relation import Relation
 from .state import Psi, State
 from .history import AppendOnlyHistory
-from .psi_transition import PsiTransition
+from .psi_transition import PsiTransition, make_psi_transition
 from .canonical_boundary import canonicalize_psi, commit_canonical
 
 
