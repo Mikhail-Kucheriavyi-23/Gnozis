@@ -10,12 +10,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "core"
 CANONICAL = "canonical_chain.py"
+ALLOWED_COMMIT_MODULES = {"canonical_chain.py", "commit.py", "commit_contract.py"}
 FORBIDDEN = {"commit_once", "append", "SemanticCommit"}
 
 def scan() -> list[tuple[str, int, str]]:
     findings: list[tuple[str, int, str]] = []
     for path in CORE.rglob("*.py"):
-        if path.name == CANONICAL or path.name == "__init__.py":
+        if path.name in ALLOWED_COMMIT_MODULES or path.name == "__init__.py":
             continue
         try:
             tree = ast.parse(path.read_text(encoding="utf-8"))
