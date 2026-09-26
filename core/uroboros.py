@@ -12,6 +12,8 @@ from .state import Psi, State
 from .history import AppendOnlyHistory
 from .psi_transition import PsiTransition
 from .canonical_boundary import canonicalize_psi
+from .legacy_engine import LegacyEngine
+from .evolution import evolutionary_transition
 
 
 def _unconfigured_transition(state: State) -> State:
@@ -78,11 +80,8 @@ class Uroboros:
         initial.to_psi()
         return cls(
             state=initial,
-            engine=Engine(transition=_unconfigured_transition),
-            executor=CanonicalExecutor(
-                history=history or AppendOnlyHistory(),
-                kernel_version=kernel_version,
-            ),
+            engine=LegacyEngine(transition=evolutionary_transition(generate, test)),
+            executor=None,
             generate=generate,
             test=test,
         )
