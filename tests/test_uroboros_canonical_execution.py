@@ -11,7 +11,7 @@ def generate(state):
         yield State(values=values)
 
 
-def test_evolutionary_uroboros_uses_canonical_executor_and_history():
+def test_evolutionary_uroboros_uses_legacy_engine_without_canonical_history():
     core = Uroboros.evolutionary(
         generate=generate,
         test=lambda state: True,
@@ -19,12 +19,11 @@ def test_evolutionary_uroboros_uses_canonical_executor_and_history():
         kernel_version="test-kernel",
     )
 
-    assert core.executor is not None
+    assert core.executor is None
     result = core.step()
 
     assert result.state.to_psi().x == (1,)
-    assert result.executor is core.executor
-    assert len(result.executor.history.records) == 1
+    assert result.executor is None
 
 
 def test_rejected_uroboros_step_preserves_state_and_history():
@@ -38,4 +37,4 @@ def test_rejected_uroboros_step_preserves_state_and_history():
     result = core.step()
 
     assert result.state.to_psi().x == ()
-    assert result.executor.history.records == ()
+    assert result.executor is None
