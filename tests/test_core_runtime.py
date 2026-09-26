@@ -1,4 +1,7 @@
+from dataclasses import FrozenInstanceError
+
 from platform.core import AuditChain, Persistence, State, Transition, commit, recover
+from platform.core.digest import state_digest
 
 
 def test_commit_creates_next_state():
@@ -8,6 +11,15 @@ def test_commit_creates_next_state():
     assert result.state_id == "t1"
     assert result.version == 1
     assert result.value == {"x": 2}
+
+
+def test_state_is_immutable():
+    state = State("s0", 0, {})
+    try:
+        state.version = 1
+    except FrozenInstanceError:
+        return
+    assert False, "state was mutable"
 
 
 def test_rejected_commit_fails_closed():
@@ -23,13 +35,25 @@ def test_rejected_commit_fails_closed():
 def test_recovery_checks_digest():
     persistence = Persistence()
     state = State("s0", 0, {})
-    persistence.save(state, "digest-1")
-    assert recover(persistence, "s0", "digest-1") == state
+    persistence.save(state)
+    assert recover(persistence, "s0", state_digest(state)) == state
     try:
         recover(persistence, "s0", "tampered")
     except ValueError:
         return
     assert False, "tampered state was recovered"
+
+
+def test_persistence_detects_tampered_stored_digest():
+    persistence = Persistence()
+    state = State("s0", 0, {})
+    stored = persistence.save(state)
+    persistence._states["s0"] = type(stored)(state, "tampered")
+    try:
+        persistence.load("s0")
+    except ValueError:
+        return
+    assert False, "tampered persisted record was accepted"
 
 
 def test_audit_chain_links_records():
